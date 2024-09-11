@@ -5,6 +5,7 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 const routes = require('./routes/index');
 
@@ -42,6 +43,7 @@ app.use(
   })
 );
 
+app.use(express.static(path.join(__dirname, '../frontend')));
 app.use(routes);
 
 app.use((_req, _res, next) => {
