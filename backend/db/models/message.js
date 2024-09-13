@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Message extends Model {
     /**
@@ -10,7 +8,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Message.belongsTo(models.User, {
+        foreignKey: 'senderId',
+        onDelete: 'CASCADE',
+      });
+      Message.belongsTo(models.User, {
+        foreignKey: 'receiverId',
+        onDelete: 'CASCADE',
+      });
     }
   }
   Message.init({
@@ -22,10 +27,20 @@ module.exports = (sequelize, DataTypes) => {
     senderId: {
       type: DataTypes.STRING,
       allowNull: false,
+      references: {
+        model: 'Users', 
+        key: 'id', 
+      },
+      onDelete: 'CASCADE',
     },
     receiverId: {
       type: DataTypes.STRING,
       allowNull: false,
+      references: {
+        model: 'Users', 
+        key: 'id', 
+      },
+      onDelete: 'CASCADE',
     },
     content: {
       type: DataTypes.TEXT,

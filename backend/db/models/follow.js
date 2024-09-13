@@ -3,45 +3,36 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Post extends Model {
+  class Follow extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Post.belongsTo(models.User, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE',
-      });
+      
     }
   }
-  Post.init({
-    id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true,
-    },
-    userId: {
+  Follow.init({
+    follower: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: 'Users', 
-        key: 'id', 
-      },
-      onDelete: 'CASCADE', 
+        key: 'id'
+      }
     },
-    caption: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
-    photo: {
-      type: DataTypes.STRING, 
-      allowNull: true,
-    },
+    followed: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      references: {
+        model: 'Users', 
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
-    modelName: 'Post',
+    modelName: 'Follow',
   });
-  return Post;
+  return Follow;
 };

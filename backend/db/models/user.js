@@ -10,7 +10,26 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasMany(models.Post, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      });
+      User.hasMany(models.Comment, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      });
+      User.hasMany(models.Like, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      });
+      User.hasMany(models.Message, {
+        foreignKey: 'senderId',
+        onDelete: 'CASCADE'
+      });
+      User.hasMany(models.Message, {
+        foreignKey: 'receiverId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   User.init({
@@ -44,11 +63,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        len: [4, 254]
+        len: [4, 254],
+        isEmail: true,
       }
     },
     password: {
-      type: DataTypes.STRING.BINARY, 
+      type: DataTypes.STRING, 
       allowNull: false,
       validation: {
         len: [60, 60]
@@ -63,6 +83,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+    defaultScope: {
+      attributes: {
+        exclude: ['password', 'id', 'email', 'createdAt', 'updatedAt']
+      }
+    }
   });
   return User;
 };
