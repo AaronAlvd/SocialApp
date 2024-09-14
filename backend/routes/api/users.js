@@ -1,6 +1,11 @@
 const express = require('express');
 const uuid = require('uuid');
 const { User } = require('../../db/models');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
+const { setTokenCookie, requireAuth } = require('../../utils/auth');
+
+
 const router = express.Router();
 
 const validateSignup = [
@@ -48,6 +53,16 @@ router.post('/', validateSignup, async (req, res, next) => {
       email,
       password: hashedPassword,
     });
+
+    const safeUser = {
+      id: newUser.id,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      username: newUser.username,
+    };
+
+    await setTokenCookie(res, safeUser);
 
     res.status(201);
   } catch(error) {
