@@ -14,21 +14,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Follow.init({
-    follower: {
+    followerId: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: 'Users', 
         key: 'id'
-      }
+      },
+      onDelete: 'CASCADE',
     },
-    followed: {
+    followedId: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: 'Users', 
         key: 'id'
-      }
+      },
+      onDelete: 'CASCADE',
     }
   }, {
     sequelize,
