@@ -1,7 +1,8 @@
 const express = require('express');
-const uuid = require('uuid');
+const { v4: uuid } = require('uuid');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
+const bcrypt = require('bcryptjs');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 
@@ -32,7 +33,7 @@ router.post('/', validateSignup, async (req, res, next) => {
   try {
     const { firstName, lastName, username, email, password } = req.body;
 
-    const usernameExist = await User.findOne({ where: { username }});
+    const usernameExist = await User.findOne({ where: { username: username.toLowerCase() }});
     const emailExist = await User.findOne({ where: { email }});
 
     if (usernameExist || emailExist ) {
@@ -42,14 +43,14 @@ router.post('/', validateSignup, async (req, res, next) => {
       return(err)
     }
 
-    const uniqueId = uuidv4();
+    const uniqueId = uuid();
     const hashedPassword = bcrypt.hashSync(password);
 
     const newUser = await User.create({
       id: uniqueId,
       firstName,
       lastName,
-      username,
+      username: username.toLowerCase(),
       email,
       password: hashedPassword,
     });
@@ -59,12 +60,12 @@ router.post('/', validateSignup, async (req, res, next) => {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       email: newUser.email,
-      username: newUser.username,
+      username: newUser.username.toLowerCase(),
     };
 
     await setTokenCookie(res, safeUser);
 
-    res.status(201);
+    res.status(201).json(safeUser);
   } catch(error) {
     next(error);
   }
