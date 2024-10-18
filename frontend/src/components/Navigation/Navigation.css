@@ -1,0 +1,26 @@
+body {
+  margin: 0
+}
+
+.div-nav {
+  display: flex;
+  height: 60px;
+  border: 1px solid black;
+}
+
+.div-leftNav {
+  width: 50vw;
+}
+
+.div-rightNav {
+  width: 50vw;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#faUser {
+  font-size: 30px;
+  margin: 10px;
+}
+
