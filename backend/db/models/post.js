@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
+      Post.hasMany(models.Comment, {
+        foreignKey: 'postId',
+        onDelete:'CASCADE',
+      })
     }
   }
   Post.init({
@@ -42,6 +46,13 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Post',
+    validate: {
+      captionOrPhotoNotBothNull() {
+        if (this.caption === null && this.photo === null) {
+          throw new Error("Either 'caption' or 'photo' must be provided.");
+        }
+      }
+    }
   });
   return Post;
 };

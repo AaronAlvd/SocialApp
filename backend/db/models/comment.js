@@ -44,6 +44,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: 'CASCADE',
     },
+    comment: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    }
   }, {
     sequelize,
     modelName: 'Comment',
