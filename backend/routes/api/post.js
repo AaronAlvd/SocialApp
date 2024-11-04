@@ -1,10 +1,27 @@
 const express = require('express');
-const { Post, Comment, User } = require('../../db/models');
+const { Post, Comment, User, Follow } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 
-router.get('/current', requireAuth, (req, res, next) => {
+router.get('/following', requireAuth, async (req, res, next) => {
   try {
+    const { id } = req.params;
+    const following = await Follow.findAll(
+      { 
+        where: { followerId: id },
+        include: [
+          {
+            model: User,
+            as: 'Followed',
+            attributes: ['firstName', 'lastName', 'username'],
+            include: [
+              { model: Post, attributes: ['caption', 'photo']}
+            ]
+        }
+      ]
+    })
+
+    res.status(200).json(following)
 
   } catch(error) {
     next(error);

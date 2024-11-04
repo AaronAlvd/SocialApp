@@ -1,15 +1,18 @@
-.ul-userDropdown {
+.UserDropdown-ul {
   position: absolute;
   transform: translate(-10px, 80px);
   list-style-type: none;
+  font-family: Helvetica;
 }
 
-.li-userDropdown {
+.UserDropdown-li{
   display: flex;
   align-items: center;
-  width: 200px;
+  width: 170px;
   height: 40px;
   border: 1px solid black;
+  padding-left: 15px;
+  cursor: pointer;
 }
 
 .UserDropdown-p {

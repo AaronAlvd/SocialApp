@@ -1,22 +1,24 @@
-import LoginForm from '../Modals/LoginForm/LoginForm';
-import SignupForm from '../Modals/SignupForm/SignupForm';
-import OpenModalButton from '../Modals/OpenModalButton/OpenModalButton';
+import { LoginForm, OpenModalButton, SignupForm } from '../Modals';
+import * as sessionActions from '../../store/session';
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './UserDropdown.css';
 
 function UserDropdown () {
+  const user = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
 
+  const handleLogout = () => {
+    dispatch(sessionActions.logout());
+  }
+    
   return (
-    <ul className="ul-userDropdown">
-      <li className="li-userDropdown">
-        <span className="span-modalButton">
-          <OpenModalButton buttonText="Login" modalComponent={<LoginForm />}/>
-        </span>
+    <ul className="UserDropdown-ul">
+      <li className="UserDropdown-li">
+       {user ? <p onClick={handleLogout}>Logout</p> : <OpenModalButton buttonText="Login" modalComponent={<LoginForm />}/>}
       </li>
-      <li className="li-userDropdown">
-        <span className="span-modalButton">
-          <OpenModalButton buttonText="Signup" modalComponent={<SignupForm />}/>
-        </span>
+      <li className="UserDropdown-li">
+       {user ? <p>Blank</p> : <OpenModalButton buttonText="Signup" modalComponent={<SignupForm />}/>}
       </li>
     </ul>
   )

@@ -5,7 +5,6 @@ body {
 .div-nav {
   display: flex;
   height: 60px;
-  border: 1px solid black;
 }
 
 .div-leftNav {

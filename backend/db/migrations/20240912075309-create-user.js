@@ -34,7 +34,7 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       profilePhoto: {
-        type: Sequelize.STRING,
+        type: Sequelize.BLOB,
       },
       createdAt: {
         allowNull: false,

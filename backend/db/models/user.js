@@ -93,7 +93,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT, 
     },
     profilePhoto: {
-      type: DataTypes.STRING, 
+      type: DataTypes.BLOB, 
     },
   }, {
     sequelize,
