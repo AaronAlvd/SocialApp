@@ -16,7 +16,7 @@ export default function LoginForm() {
     return dispatch(sessionActions.login(credential, password))
     .then(() => {
       closeModal
-      window.location.reload()
+      // window.location.reload()
     })
     .catch(() => {
 

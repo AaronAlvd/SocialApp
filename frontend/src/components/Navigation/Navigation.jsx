@@ -9,9 +9,8 @@ function Navigation() {
 
   return(
     <div className="div-nav">
-      <div className='div-leftNav'>
-
-      </div>
+      <div className='div-leftNav'></div>
+      
       <div className='div-rightNav'>
         <FontAwesomeIcon icon={faUserCircle} id="faUser" onClick={() => setUserDrop(!userDrop)}/>
         {userDrop && <UserDropdown />}

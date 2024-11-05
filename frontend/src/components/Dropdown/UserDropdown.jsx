@@ -1,6 +1,7 @@
 import { LoginForm, OpenModalButton, SignupForm } from '../Modals';
 import * as sessionActions from '../../store/session';
 import { useEffect, useState } from 'react';
+import * as postActions from '../../store/post';
 import { useSelector, useDispatch } from 'react-redux';
 import './UserDropdown.css';
 
@@ -11,6 +12,10 @@ function UserDropdown () {
   const handleLogout = () => {
     dispatch(sessionActions.logout());
   }
+
+  const getPost = () => {
+    dispatch(postActions.getPosts());
+  }
     
   return (
     <ul className="UserDropdown-ul">
@@ -18,7 +23,7 @@ function UserDropdown () {
        {user ? <p onClick={handleLogout}>Logout</p> : <OpenModalButton buttonText="Login" modalComponent={<LoginForm />}/>}
       </li>
       <li className="UserDropdown-li">
-       {user ? <p>Blank</p> : <OpenModalButton buttonText="Signup" modalComponent={<SignupForm />}/>}
+       {user ? <p onClick={getPost}>Blank</p> : <OpenModalButton buttonText="Signup" modalComponent={<SignupForm />}/>}
       </li>
     </ul>
   )

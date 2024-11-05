@@ -5,24 +5,10 @@ const router = express.Router();
 
 router.get('/following', requireAuth, async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const following = await Follow.findAll(
-      { 
-        where: { followerId: id },
-        include: [
-          {
-            model: User,
-            as: 'Followed',
-            attributes: ['firstName', 'lastName', 'username'],
-            include: [
-              { model: Post, attributes: ['caption', 'photo']}
-            ]
-        }
-      ]
-    })
+    const userId = req.user.id;
+    const user = await Follow.findByPk(userId);
 
-    res.status(200).json(following)
-
+    res.json(user);
   } catch(error) {
     next(error);
   }
