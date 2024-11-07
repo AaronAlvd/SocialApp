@@ -1,11 +1,10 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation } from './components';
+import { Navigation, SocialFeed } from './components';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 function Layout() {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser());
@@ -13,8 +12,8 @@ function Layout() {
 
   return (
     <>
-     <Navigation isLoaded={isLoaded} />
-     {isLoaded && <Outlet />}
+     <Navigation />
+     <Outlet />
     </>
   )
 }
@@ -24,7 +23,14 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: [
-
+      {
+        path: '/socialfeed',
+        element: <SocialFeed />
+      },
+      {
+        path: '*',
+        element: <h1>404 Page Not Found</h1>
+      }
     ]
   }
 ])
