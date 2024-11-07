@@ -12,6 +12,18 @@ router.get('/following', requireAuth, async (req, res, next) => {
       where: { followerId: userId },
     });
 
+    const myPosts = await Post.findAll({ 
+      where:{ userId: userId },
+      include: [
+        {
+          model: User,
+          attributes: ['firstName', 'lastName', 'username']
+        }
+      ]
+    })
+
+    myPosts.forEach((post) => posts.push(post));
+
     for (let data of following) {
       const post = await Post.findAll({ 
         where: { userId: data.followedId },

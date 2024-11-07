@@ -6,16 +6,19 @@ import './Navigation.css'
 
 function Navigation() {
   const [userDrop, setUserDrop] = useState(false);
+  const sideBarheight = window.innerHeight - 61;
 
   return(
-    <div className="div-nav">
-      <div className='div-leftNav'></div>
-      
-      <div className='div-rightNav'>
-        <FontAwesomeIcon icon={faUserCircle} id="faUser" onClick={() => setUserDrop(!userDrop)}/>
-        {userDrop && <UserDropdown />}
+    <>
+      <div className='Navigation-div-topBar'>
+        <div className='div-leftNav'></div>
+        <div className='div-rightNav'>
+          <FontAwesomeIcon icon={faUserCircle} id="faUser" onClick={() => setUserDrop(!userDrop)}/>
+          {userDrop && <UserDropdown />}
+        </div>
       </div>
-    </div>
+      <div className="Navigation-div-sideBar" style={{ height: `${sideBarheight}px` }}></div>
+    </>
   )
 }
 

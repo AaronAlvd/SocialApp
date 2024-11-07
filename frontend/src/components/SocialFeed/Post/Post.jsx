@@ -16,14 +16,13 @@ export default function Post() {
   }, [dispatch])
 
   return (
-    <div>
+    <div className="Post-div">
       {sortedFeed.map((data) => {
         return (
-          <div className="Post-div">
+          <div className="Post-div-box">
             <p className="Post-name">{data.User.firstName} {data.User.lastName}</p>
             <p className="Post-username"><small>@{data.User.username}</small></p>
-            <p className="Post-caption">{data.caption}</p>
-            {console.log(social.findHashtags(data.caption))}
+            <p className="Post-caption">{social.findHashtags(data.caption)}</p>
             <p><small>{new Date(data.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></p>
           </div>
         )

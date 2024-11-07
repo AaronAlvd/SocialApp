@@ -1,25 +1,25 @@
-body {
-  margin: 0
-}
 
-.div-nav {
+.Navigation-div-topBar {
   display: flex;
   height: 60px;
+  border-bottom: 1px solid grey;
 }
-
 .div-leftNav {
   width: 50vw;
 }
-
 .div-rightNav {
   width: 50vw;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-
 #faUser {
   font-size: 30px;
   margin: 10px;
+  color: white;
 }
-
+.Navigation-div-sideBar{
+  position: absolute;
+  width: 200px;
+  border-right: 1px solid grey;
+}

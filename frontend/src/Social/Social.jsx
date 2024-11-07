@@ -18,6 +18,8 @@ export default class Social {
         array[i - 1] += ' ' + array[i];
         array.splice(i, 1);
         i--;
+      } else {
+        array[i] = <span className="Post-hashtag"> {array[i]}</span>
       }
     };
 

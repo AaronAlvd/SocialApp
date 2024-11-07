@@ -1,13 +1,26 @@
 .Post-div {
-  width: 400px;
-  border: 1px solid black;
-  padding: 5px;
+  overflow-y: auto;
+  height: 700px;
+  margin: 20px;
+  width: 100%;
+}
+.Post-div-box {
+  width: 500px;
+  border-bottom: 1px solid grey;
+  padding: 10px;
 }
 .Post-username {
   margin: 5px;
-  color: rgb(57, 57, 57);
 }
 .Post-name {
   font-weight: bold;
-  margin: 5px;
+  margin-bottom: 5px;
+}
+.Post-caption {
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.Post-hashtag {
+  color: rgb(0, 119, 255);
 }
