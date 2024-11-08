@@ -1,7 +1,7 @@
 import DispatchCalls from "../../../SocialClass/dispatch";
-import Social from "../../../SocialClass/Social";
+import Social from "../../../SocialClass/social";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import './Post.css';
 
 export default function Post() {
@@ -10,13 +10,24 @@ export default function Post() {
   const social = new Social();
   const sortedFeed = social.sortByDate(unsortedFeed);
   const dispatchCall = new DispatchCalls(dispatch);
+  const [height, setHeight] = useState(window.innerHeight - 61);
 
   useEffect(() => {
     dispatchCall.SocialFeed();
+
+    const handleResize = () => {
+      setHeight(window.innerHeight - 61);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [dispatch])
 
   return (
-    <div className="Post-div">
+    <div className="Post-div" style={{height: height}}>
       {sortedFeed.map((data) => {
         return (
           <div className="Post-div-box">

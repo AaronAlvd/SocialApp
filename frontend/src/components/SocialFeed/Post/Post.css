@@ -1,6 +1,6 @@
 .Post-div{
   overflow-y: scroll;
-  height: 700px;
+  width: min-content;
 }
 .Post-div-box{
   width: 50vw;

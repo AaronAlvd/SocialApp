@@ -3,6 +3,8 @@
   transform: translate(-10px, 80px);
   list-style-type: none;
   font-family: Helvetica;
+  z-index: 1;
+  padding: 0;
 }
 
 .UserDropdown-li{
