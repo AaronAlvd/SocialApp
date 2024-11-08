@@ -3,6 +3,21 @@
 const { Op } = require('sequelize');
 const { Post } = require('../models')
 
+const fs = require('fs');
+const path = require('path');
+
+const readImage = (filePath) => {
+  return new Promise((resolve, reject) => {
+      fs.readFile(filePath, (err, data) => {
+          if (err) {
+              reject(err);
+          } else {
+              resolve(data); // Return the binary data of the image
+          }
+      });
+  });
+};
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -11,7 +26,7 @@ module.exports = {
         id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b01',
         userId: 'e0fbe97e-9aa7-4733-a7ea-65a6ddbf53d2', // James Hathaway
         caption: `Finally wrapped up my latest project—a minimalist logo design for a local brand. I loved experimenting with clean lines and earthy tones! 🖌️ #DesignLife #Minimalism`,
-        photo: null
+        photo: await readImage(path.join(__dirname, '../../assets/image01.png'))
       },
       {
         id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b02',

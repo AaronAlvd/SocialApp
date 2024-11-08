@@ -1,3 +1,3 @@
 export { LoginForm } from './LoginForm';
-export { SignupForm } from './SignupForm';
+export { SignUpForm } from './SignupForm';
 export { OpenModalButton } from './OpenModalButton';

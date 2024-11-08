@@ -30,4 +30,12 @@ export default class Social {
 
   }
 
+  convertImageToBase64(data) {
+    const byteArray = new Uint8Array(data.data);
+    const binaryString = Array.from(byteArray)
+      .map(byte => String.fromCharCode(byte))
+      .join('');
+    return `data:image/jpeg;base64,${btoa(binaryString)}` // Ensure you use the correct MIME type
+  }
+
 }

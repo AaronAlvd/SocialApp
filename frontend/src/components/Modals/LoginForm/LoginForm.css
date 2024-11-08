@@ -10,7 +10,7 @@
 .LoginForm-div-formInput {
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid grey;
   margin: 20px;
 }
 
@@ -26,11 +26,15 @@
   font-size: 15px;
 }
 
+.LoginForm-input:focus {
+  outline: none;
+}
+
 .LoginForm-small {
   position: absolute;
   padding: 2px;
   text-align: end;
-  color: purple;
+  color: rgb(118, 142, 202);
   transform: translate(190px, 50px);
 }
 
@@ -44,4 +48,6 @@
 .LoginForm-button {
   width: 120px;
   height: 30px;
+  border: 1px solid grey;
+  border-radius: 5px;
 }

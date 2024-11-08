@@ -36,7 +36,7 @@ function Navigation() {
       <div className="Navigation-div-sideBar" style={{ height: `${height}px` }}>
         <SideBar />
       </div>
-      {user && <div className='Navigation-newPost' onClick={() => navigate('/createpost')}>+</div>}
+      {/* {user && <div className='Navigation-newPost' onClick={() => navigate('/createpost')}>+</div>} */}
     </>
   )
 }

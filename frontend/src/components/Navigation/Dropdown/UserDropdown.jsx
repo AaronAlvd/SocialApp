@@ -1,4 +1,4 @@
-import { LoginForm, OpenModalButton, SignupForm } from '../../Modals';
+import { LoginForm, OpenModalButton, SignUpForm } from '../../Modals';
 import * as sessionActions from '../../../store/session';
 import { useEffect, useState } from 'react';
 import * as postActions from '../../../store/post';
@@ -19,7 +19,7 @@ function UserDropdown () {
        {user ? <p onClick={handleLogout}>Logout</p> : <OpenModalButton buttonText="Login" modalComponent={<LoginForm />}/>}
       </li>
       <li className="UserDropdown-li">
-       {user ? <p>Blank</p> : <OpenModalButton buttonText="Signup" modalComponent={<SignupForm />}/>}
+       {user ? <p>Blank</p> : <OpenModalButton buttonText="Signup" modalComponent={<SignUpForm />}/>}
       </li>
     </ul>
   )

@@ -6,18 +6,32 @@
   width: 50vw;
   border-bottom: 1px solid grey;
   padding: 10px;
+  margin: 0 10px 0 10px;
 }
 .Post-name{
   font-weight: bold;
+}
+.Post-username{
+  font-size: 12px;
+  margin: 5px 0 0 0;
+  color: rgb(173, 173, 173);
 }
 .Post-caption{
   font-size: 14px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.Post-hashtag{
-  color: rgb(0, 119, 255);
+.Post-image{
+  width: 100%;
 }
-.Post-date{
-  text-align: end;
+.Post-hashtag{
+  color: rgb(118, 142, 202);
+}
+.Post-icon{
+  margin-right: 10px; 
+}
+.Post-bottom{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }

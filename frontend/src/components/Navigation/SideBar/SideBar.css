@@ -14,7 +14,7 @@
   padding: 10px 0 10px 0;
   font-weight: 300;
   cursor: pointer;
-  background-color: lightgray;
+  background-color: rgb(121, 121, 121);
   border-radius: 5px;
 }
 .SideBar-icon{
@@ -22,7 +22,7 @@
   margin-left: 10px;
 }
 .SideBar-icon-active{
-  background-color: lightgray;
+  background-color: rgb(121, 121, 121);
   margin-right: 10px;
   margin-left: 10px;
 }
