@@ -15,6 +15,7 @@ export default function Post() {
   const sortedFeed = social.sortByDate(unsortedFeed);
   const dispatchCall = new DispatchCalls(dispatch);
   const [height, setHeight] = useState(window.innerHeight - 61);
+  const [reload, setReload] = useState(true);
 
   useEffect(() => {
     dispatchCall.SocialFeed();
@@ -28,15 +29,15 @@ export default function Post() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [dispatch]);
+  }, [dispatch, reload]);
 
   const handleLike = (postId) => {
     const data = {
       postId: postId,
       commentId: '',
     }
-    console.log('handleLike', JSON.stringify(data))
     dispatchCall.handleLike(data);
+    setReload(!reload);
   };
 
   const handleDislike = (postId) => {
@@ -44,8 +45,8 @@ export default function Post() {
       postId: postId,
       commentId: '',
     }
-    console.log('handleDislike',JSON.stringify(data))
     dispatchCall.handleDislike(data);
+    setReload(!reload);
   }
 
   return (
@@ -66,7 +67,7 @@ export default function Post() {
                     activeLike = data.Likes.find(obj => obj.userId === user.id);
                   }
 
-                  return activeLike ? <FontAwesomeIcon icon={faHeart02} className="Post-activeLike" onClick={() => handleDislike(data.id)}/> :
+                  return activeLike ? <FontAwesomeIcon icon={faHeart02} className="Post-activeLike" onClick={() => handleDislike(data.id)} /> :
                                       <FontAwesomeIcon icon={faHeart} className="Post-like" onClick={() => handleLike(data.id)}/>
     
                 })()}
