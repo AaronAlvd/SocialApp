@@ -11,14 +11,14 @@ export default function SideBar() {
   const navigate = useNavigate();
   const activeUrl = useLocation();
   const [active, setActive] = useState({
-    following: activeUrl.pathname === '/socialfeed',
-    explore: activeUrl.pathname === '/explore',
+    following: activeUrl.pathname === '/posts/following',
+    explore: activeUrl.pathname === '/posts/explore',
   });
 
   useEffect(() => {
     setActive({
-      following: activeUrl.pathname === '/socialfeed',
-      explore: activeUrl.pathname === '/explore',
+      following: activeUrl.pathname === '/posts/following',
+      explore: activeUrl.pathname === '/posts/explore',
     })
 
   }, [activeUrl])
@@ -32,7 +32,7 @@ export default function SideBar() {
         <p className={active.explore ? "SideBar-feed-active" : "SideBar-feed"} onClick={() => user ? navigate('/explore') : alert('You are not logged in')}><FontAwesomeIcon icon={faGlobe} 
            className={active.explore ? "SideBar-icon-active": "SideBar-icon"}/>Explore</p>
            
-        <p className={active.following ? "SideBar-feed-active" : "SideBar-feed"}  onClick={() => user ? navigate('/socialfeed') : alert('You are not logged in')}><FontAwesomeIcon icon={faUsers} 
+        <p className={active.following ? "SideBar-feed-active" : "SideBar-feed"}  onClick={() => user ? navigate('/following') : alert('You are not logged in')}><FontAwesomeIcon icon={faUsers} 
            className={active.following ? "SideBar-icon-active": "SideBar-icon"} />Following</p>
       </div>
     </div>

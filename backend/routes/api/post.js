@@ -22,6 +22,16 @@ router.get('/following', requireAuth, async (req, res, next) => {
         {
           model: Like,
           attributes: ['postId', 'userId']
+        },
+        {
+          model: Comment,
+          attributes: ['userId', 'postId', 'comment'],
+          include: [
+            { 
+              model: User, 
+              attributes: ['username', 'id']
+            }
+          ]
         }
       ]
     })

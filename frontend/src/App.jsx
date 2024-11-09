@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation, SocialFeed, Page404, CreatePost } from './components';
+import { Navigation, SocialFeed, Page404, CreatePost, PostLayout } from './components';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -24,12 +24,26 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '/socialfeed',
+        path: '/posts',
+        element: <PostLayout />,
+        children: [
+          {
+            path: '/posts/following',
+            element: <SocialFeed />
+          }
+        ]
+      },
+      {
+        path: '/following',
         element: <SocialFeed />
       },
       {
-        path: '/createpost',
+        path: '/form',
         element: <CreatePost />
+      },
+      {
+        path: '/:postId',
+        element: <h1>Soon...</h1>
       },
       {
         path: '*',
@@ -37,7 +51,7 @@ const router = createBrowserRouter([
       }
     ]
   }
-])
+]);
 
 function App() {
   return <RouterProvider router={router} />;

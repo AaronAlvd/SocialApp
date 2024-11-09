@@ -1,6 +1,7 @@
 import Post from './Post/Post';
 import { useEffect, useState, useMemo } from "react";
 import './SocialFeed.css'
+import { Outlet } from 'react-router-dom';
 
 export default function SocialFeed() {
   const [width, setWidth] = useState(window.innerWidth - 201);

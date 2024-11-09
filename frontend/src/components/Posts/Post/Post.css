@@ -3,7 +3,7 @@
   width: min-content;
 }
 .Post-div-box{
-  width: 50vw;
+  width: 45vw;
   border-bottom: 1px solid grey;
   padding: 10px;
   margin: 0 10px 0 10px;
@@ -41,4 +41,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+}
+.Post-commentSection{
+  height: 200px;
+  overflow-y: scroll;
 }

@@ -9,7 +9,7 @@ export default class DispatchCalls extends Social {
     this.dispatch = dispatch
   }
   
-  SocialFeed() {
+  socialFeed() {
     this.dispatch(postActions.getPosts());
   }
 

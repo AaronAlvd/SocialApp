@@ -1,5 +1,6 @@
 import DispatchCalls from "../../../SocialClass/dispatch";
 import Social from "../../../SocialClass/social";
+import Comments from '../Comments/Comments';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeart02 } from '@fortawesome/free-solid-svg-icons';
@@ -16,9 +17,10 @@ export default function Post() {
   const dispatchCall = new DispatchCalls(dispatch);
   const [height, setHeight] = useState(window.innerHeight - 61);
   const [reload, setReload] = useState(true);
+  const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
-    dispatchCall.SocialFeed();
+    dispatchCall.socialFeed();
 
     const handleResize = () => {
       setHeight(window.innerHeight - 61);
@@ -71,7 +73,7 @@ export default function Post() {
                                       <FontAwesomeIcon icon={faHeart} className="Post-like" onClick={() => handleLike(data.id)}/>
     
                 })()}
-                <FontAwesomeIcon icon={faComment} className="Post-icon"/>
+                <FontAwesomeIcon icon={faComment} className="Post-icon" onClick={() => setShowComments(!showComments)}/>
               </span>
             <small>{new Date(data.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></p>
           </div>
