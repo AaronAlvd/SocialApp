@@ -30,6 +30,13 @@
 .Post-icon{
   margin-right: 10px; 
 }
+.Post-like{
+  margin-right: 10px;
+}
+.Post-activeLike{
+  margin-right: 10px;
+  color: red;
+}
 .Post-bottom{
   display: flex;
   justify-content: space-between;

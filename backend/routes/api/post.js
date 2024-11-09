@@ -1,5 +1,5 @@
 const express = require('express');
-const { Post, Comment, User, Follow } = require('../../db/models');
+const { Post, Comment, User, Follow, Like } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 
@@ -18,6 +18,10 @@ router.get('/following', requireAuth, async (req, res, next) => {
         {
           model: User,
           attributes: ['firstName', 'lastName', 'username']
+        },
+        {
+          model: Like,
+          attributes: ['postId', 'userId']
         }
       ]
     })
@@ -46,6 +50,7 @@ router.get('/following', requireAuth, async (req, res, next) => {
     next(error);
   }
 })
+
 
 router.get('/:postId', async (req, res, next) => {
   try {

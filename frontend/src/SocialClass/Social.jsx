@@ -38,4 +38,6 @@ export default class Social {
     return `data:image/jpeg;base64,${btoa(binaryString)}` // Ensure you use the correct MIME type
   }
 
+  
+
 }

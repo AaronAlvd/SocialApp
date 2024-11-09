@@ -2,12 +2,14 @@ import DispatchCalls from "../../../SocialClass/dispatch";
 import Social from "../../../SocialClass/social";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faHeart02 } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState, useMemo, useRef } from "react";
 import './Post.css';
 
 export default function Post() {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
   const unsortedFeed = useSelector((state) => state.posts.posts);
   const social = new Social();
   const sortedFeed = social.sortByDate(unsortedFeed);
@@ -26,7 +28,25 @@ export default function Post() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [dispatch])
+  }, [dispatch]);
+
+  const handleLike = (postId) => {
+    const data = {
+      postId: postId,
+      commentId: '',
+    }
+    console.log('handleLike', JSON.stringify(data))
+    dispatchCall.handleLike(data);
+  };
+
+  const handleDislike = (postId) => {
+    const data = {
+      postId: postId,
+      commentId: '',
+    }
+    console.log('handleDislike',JSON.stringify(data))
+    dispatchCall.handleDislike(data);
+  }
 
   return (
     <div className="Post-div" style={{height: height}}>
@@ -39,7 +59,17 @@ export default function Post() {
             {data.photo && <img className="Post-image" src={social.convertImageToBase64(data.photo)}/>}
             <p className="Post-bottom">
               <span>
-                <FontAwesomeIcon icon={faHeart} className="Post-icon"/>
+                {(() => {
+                  let activeLike = false;
+
+                  if (data.Likes && data.Likes.length > 0) {
+                    activeLike = data.Likes.find(obj => obj.userId === user.id);
+                  }
+
+                  return activeLike ? <FontAwesomeIcon icon={faHeart02} className="Post-activeLike" onClick={() => handleDislike(data.id)}/> :
+                                      <FontAwesomeIcon icon={faHeart} className="Post-like" onClick={() => handleLike(data.id)}/>
+    
+                })()}
                 <FontAwesomeIcon icon={faComment} className="Post-icon"/>
               </span>
             <small>{new Date(data.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></p>
