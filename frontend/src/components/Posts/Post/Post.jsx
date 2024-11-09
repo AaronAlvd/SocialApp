@@ -6,6 +6,7 @@ import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeart02 } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState, useMemo, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import './Post.css';
 
 export default function Post() {
@@ -17,7 +18,7 @@ export default function Post() {
   const dispatchCall = new DispatchCalls(dispatch);
   const [height, setHeight] = useState(window.innerHeight - 61);
   const [reload, setReload] = useState(true);
-  const [showComments, setShowComments] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatchCall.socialFeed();
@@ -73,7 +74,7 @@ export default function Post() {
                                       <FontAwesomeIcon icon={faHeart} className="Post-like" onClick={() => handleLike(data.id)}/>
     
                 })()}
-                <FontAwesomeIcon icon={faComment} className="Post-icon" onClick={() => setShowComments(!showComments)}/>
+                <FontAwesomeIcon icon={faComment} className="Post-icon" onClick={() => navigate(`/following/${data.id}`)}/>
               </span>
             <small>{new Date(data.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></p>
           </div>

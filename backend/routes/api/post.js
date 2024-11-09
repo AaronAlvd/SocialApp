@@ -3,6 +3,42 @@ const { Post, Comment, User, Follow, Like } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 
+
+
+router.get('/following/:postId', requireAuth, async (req, res, next) => {
+  try {
+    const { postId } = req.params;
+
+    const post = await Post.findByPk(postId, {
+      include: [
+        {
+          model: User,
+          attributes: ['firstName', 'lastName', 'username']
+        },
+        {
+          model: Like,
+          attributes: ['postId', 'userId']
+        },
+        {
+          model: Comment,
+          attributes: ['userId', 'postId', 'comment'],
+          include: [
+            { 
+              model: User, 
+              attributes: ['username', 'id']
+            }
+          ]
+        }
+      ]
+    });
+
+    res.json(post);
+
+  } catch(error) {
+    next(error);
+  }
+})
+
 router.get('/following', requireAuth, async (req, res, next) => {
   try {
     const posts = [];
@@ -59,7 +95,7 @@ router.get('/following', requireAuth, async (req, res, next) => {
   } catch(error) {
     next(error);
   }
-})
+});
 
 
 router.get('/:postId', async (req, res, next) => {

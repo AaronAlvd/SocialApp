@@ -11,14 +11,14 @@ export default function SideBar() {
   const navigate = useNavigate();
   const activeUrl = useLocation();
   const [active, setActive] = useState({
-    following: activeUrl.pathname === '/posts/following',
-    explore: activeUrl.pathname === '/posts/explore',
+    following: activeUrl.pathname === '/following',
+    explore: activeUrl.pathname === '/explore',
   });
 
   useEffect(() => {
     setActive({
-      following: activeUrl.pathname === '/posts/following',
-      explore: activeUrl.pathname === '/posts/explore',
+      following: activeUrl.pathname === '/following',
+      explore: activeUrl.pathname === '/explore',
     })
 
   }, [activeUrl])

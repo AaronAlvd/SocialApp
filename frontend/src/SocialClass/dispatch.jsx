@@ -21,6 +21,10 @@ export default class DispatchCalls extends Social {
     this.dispatch(likeActions.likePost(data));
   }
 
+  postDetail(postId) {
+    this.dispatch(postActions.getPostDetail(postId))
+  }
+
   handleDislike(data) {
     this.dispatch(likeActions.unlikePost(data));
   }

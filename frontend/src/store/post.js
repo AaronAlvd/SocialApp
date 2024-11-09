@@ -16,6 +16,13 @@ export const getPosts = () => async (dispatch) => {
   dispatch(setPosts(data));
 }
 
+export const getPostDetail = (postId) => async (dispatch) => {
+  const response = await csrfFetch(`api/post/${postId}`);
+  if (!response.ok) throw new Error('Failed to fetch posts');
+  const data = await response.json();
+  dispatch(setPosts(data));
+}
+
 const initialState = {
   posts: []
 }
