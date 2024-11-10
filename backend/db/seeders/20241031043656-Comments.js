@@ -116,11 +116,18 @@ module.exports = {
    await Comment.destroy({
     where: {
       [Op.or]: [
+        { userId: 'e0fbe97e-9aa7-4733-a7ea-65a6ddbf53d2' },
+        { userId: 'd4a7cfdc-49b6-4a82-a9b2-726c3fbb91a2' },
+        { userId: 'c9f6f4a1-4d3f-4aeb-8e32-5c8c3c1d6f34' },
+        { userId: 'f8d8e7b3-4d78-4ab3-9b1a-1c6e5a1d7e8f' },
+        { userId: 'a6b72c2f-3f5e-4b6b-91e4-774c8e5b4d13' },
+        { userId: 'd6f12a4e-549b-42c9-8a8e-47f4c6aefc56' },
+        { userId: 'e7a9eaf2-7dd3-49d5-93f2-1e4f5d2a8c7e' },
+        { userId: 'c2b45d83-1e6c-41f4-9a5e-2f58b9ec27d9' },
         { userId: 'b4d7ae0a-3c91-4b5d-85ab-55d07eecf7c6' },
         { userId: 'f9d6b7e2-4d56-4ab3-b47d-f8a0e8ec9a15' },
-        { userId: 'd4a7cfdc-49b6-4a82-a9b2-726c3fbb91a2' },
-        { userId: 'a1fbc967-1fae-467e-8b56-98b6e7d19df3' },
-        { userId: 'e0fbe97e-9aa7-4733-a7ea-65a6ddbf53d2' }
+        { userId: 'f9d6b7e2-4d56-4ab3-b47d-f8a0e8ec9a15' },
+        { userId: 'a1fbc967-1fae-467e-8b56-98b6e7d19df3' }
       ]
     }
    })

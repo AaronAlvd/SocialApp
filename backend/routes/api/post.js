@@ -9,11 +9,13 @@ router.get('/following/:postId', requireAuth, async (req, res, next) => {
   try {
     const { postId } = req.params;
 
+    console.log(postId)
+
     const post = await Post.findByPk(postId, {
       include: [
         {
           model: User,
-          attributes: ['firstName', 'lastName', 'username']
+          attributes: ['firstName', 'lastName', 'username', 'profilePhoto']
         },
         {
           model: Like,
@@ -25,7 +27,7 @@ router.get('/following/:postId', requireAuth, async (req, res, next) => {
           include: [
             { 
               model: User, 
-              attributes: ['username', 'id']
+              attributes: ['username', 'id', 'profilePhoto']
             }
           ]
         }
@@ -53,7 +55,7 @@ router.get('/following', requireAuth, async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ['firstName', 'lastName', 'username']
+          attributes: ['firstName', 'lastName', 'username', 'profilePhoto']
         },
         {
           model: Like,
@@ -65,7 +67,7 @@ router.get('/following', requireAuth, async (req, res, next) => {
           include: [
             { 
               model: User, 
-              attributes: ['username', 'id']
+              attributes: ['username', 'id', 'profilePhoto']
             }
           ]
         }
@@ -96,7 +98,6 @@ router.get('/following', requireAuth, async (req, res, next) => {
     next(error);
   }
 });
-
 
 router.get('/:postId', async (req, res, next) => {
   try {

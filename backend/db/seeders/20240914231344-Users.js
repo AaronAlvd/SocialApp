@@ -2,6 +2,20 @@
 const { Op } = require('sequelize');
 const { User } = require('../models');
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
+const path = require('path');
+
+const readImage = (filePath) => {
+  return new Promise((resolve, reject) => {
+      fs.readFile(filePath, (err, data) => {
+          if (err) {
+              reject(err);
+          } else {
+              resolve(data); // Return the binary data of the image
+          }
+      });
+  });
+};
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -17,7 +31,7 @@ module.exports = {
       bio: `👋 Hey there! I'm Jamie Peterson—a digital nomad 🌏 and creative enthusiast based in Austin, TX! I’m a graphic designer, part-time photographer 📸, and full-time traveler. After leaving my corporate gig in 2020, I packed my bags and have since been working remotely, exploring new places, and connecting with inspiring creatives worldwide 🌐.
             I’m passionate about minimalist design 🖌️, ethical fashion 👕, and sharing eco-conscious living tips. You’ll find me sipping on artisanal coffee ☕, capturing candid city moments, or planning my next adventure into nature 🌲.
             Always open to collabs, especially if they involve cool visuals or meaningful projects. Let’s make something awesome together! ✌️`,
-      profilePhoto: null,
+      profilePhoto: await readImage(path.join(__dirname, '../../assets/image01.png')),
     },
     {
       id: 'a1fbc967-1fae-467e-8b56-98b6e7d19df3',
