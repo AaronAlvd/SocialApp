@@ -1,0 +1,48 @@
+.PostDetail-div{
+  display: flex;
+  justify-content: center;
+}
+.PostDetail-div-box{
+  box-sizing: border-box;
+  width: 65vw;
+  padding: 10px;
+  overflow-y: scroll;
+}
+.PostDetail-name{
+  font-weight: bold;
+}
+.PostDetail-username{
+  font-size: 12px;
+  margin: 5px 0 0 0;
+  color: rgb(173, 173, 173);
+}
+.PostDetail-caption{
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.PostDetail-image{
+  width: 100%;
+}
+.PostDetail-hashtag{
+  color: rgb(118, 142, 202);
+}
+.PostDetail-icon{
+  margin-right: 10px; 
+}
+.PostDetail-like{
+  margin-right: 10px;
+}
+.PostDetail-activeLike{
+  margin-right: 10px;
+  color: red;
+}
+.PostDetail-bottom{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.PostDetail-commentSection{
+  height: 200px;
+  overflow-y: scroll;
+}

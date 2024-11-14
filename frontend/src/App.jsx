@@ -24,22 +24,12 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '/posts',
-        element: <PostLayout />,
-        children: [
-          {
-            path: '/posts/following',
-            element: <SocialFeed />
-          }
-        ]
-      },
-      {
         path: '/following',
         element: <SocialFeed />
       },
       {
         path: '/following/:postId',
-        element: <PostDetail />
+        element: <SocialFeed />
       },
       {
         path: '/form',

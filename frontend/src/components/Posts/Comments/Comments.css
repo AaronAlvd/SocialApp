@@ -1,0 +1,26 @@
+.Comments-div{
+  display: flex;
+  padding: 10px 0 10px 0;
+}
+.Comments-username{
+  font-size: 12px;
+  font-weight: bold;
+}
+.Comments-comment{
+  font-size: 14px;
+  font-weight: 100;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.Comments-icon{
+  font-size: 25px;
+}
+.Comments-div-photo{
+  margin-right: 10px;
+}
+.Comments-photo{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  object-position: center;
+}

@@ -35,9 +35,17 @@ export default class Social {
     const binaryString = Array.from(byteArray)
       .map(byte => String.fromCharCode(byte))
       .join('');
-    return `data:image/jpeg;base64,${btoa(binaryString)}` // Ensure you use the correct MIME type
+    return `data:image/jpeg;base64,${btoa(binaryString)}`
   }
 
-  
+  profilePhoto(data) {
+    if (data) {
+      const byteArray = new Uint8Array(data.data);
+      const binaryString = Array.from(byteArray)
+        .map(byte => String.fromCharCode(byte))
+        .join('');
+      return `data:image/jpeg;base64,${btoa(binaryString)}` // Ensure you use the correct MIME type
+    } 
+  }
 
 }
