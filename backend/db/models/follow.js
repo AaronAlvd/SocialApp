@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.STRING,
       allowNull: false,
-      autoIncrement: true,
     },
     followerId: {
       type: DataTypes.STRING,

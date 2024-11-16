@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation, SocialFeed, Page404, CreatePost, PostLayout, PostDetail } from './components';
+import { Navigation, SocialFeed, Page404, CreatePost, PostLayout, PostDetail, UserProfile } from './components';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -38,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: '/:postId',
         element: <h1>Soon...</h1>
+      },
+      {
+        path: '/User',
+        element: <UserProfile />
       },
       {
         path: '*',
