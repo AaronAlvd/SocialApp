@@ -8,13 +8,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING
       },
-      senderId: {
-        type: Sequelize.STRING,
+      chatId: {
         allowNull: false,
+        type: Sequelize.STRING,
+        references: {
+          model: 'Chats',
+          key: 'id'
+        },
+        onDelete: 'CASCADE'
       },
-      receiverId: {
-        type: Sequelize.STRING,
+      userId: {
         allowNull: false,
+        type: Sequelize.STRING,
       },
       content: {
         type: Sequelize.TEXT,

@@ -5,12 +5,15 @@ module.exports = {
     await queryInterface.createTable('Groups', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      id: {
         type: Sequelize.STRING
+      },
+      userId: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      role: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

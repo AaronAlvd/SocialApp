@@ -5,7 +5,10 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Group extends Model {
     static associate(models) {
-      // define association here
+      Group.belongsTo(models.User, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+      })
     }
   }
   Group.init({
@@ -14,9 +17,13 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       allowNull: false,
     },
-    memberId: {
+    userId: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'Member'
     }
   }, {
     sequelize,

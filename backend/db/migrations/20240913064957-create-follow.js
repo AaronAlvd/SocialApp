@@ -5,9 +5,8 @@ module.exports = {
     await queryInterface.createTable('Follows', {
       id: {
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
-        autoIncrement: true,
       },
       followerId: {
         type: Sequelize.STRING,

@@ -4,11 +4,11 @@ module.exports = (sequelize, DataTypes) => {
   class Message extends Model {
     static associate(models) {
       Message.belongsTo(models.User, {
-        foreignKey: 'senderId',
+        foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
-      Message.belongsTo(models.User, {
-        foreignKey: 'receiverId',
+      Message.belongsTo(models.Chat, {
+        foreignKey: 'chatId',
         onDelete: 'CASCADE',
       });
     }
@@ -19,16 +19,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true,
     },
-    senderId: {
+    chatId: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {
-        model: 'Users', 
-        key: 'id', 
+        model: 'Chats',
+        key: 'id',
       },
-      onDelete: 'CASCADE',
+      onDelete: 'CASCADE'
     },
-    receiverId: {
+    userId: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {

@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Follow.init({
     id: {
       primaryKey: true,
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       autoIncrement: true,
     },

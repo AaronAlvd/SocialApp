@@ -18,13 +18,13 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       });
       User.hasMany(models.Message, {
-        foreignKey: 'senderId',
+        foreignKey: 'userId',
         onDelete: 'CASCADE'
       });
-      User.hasMany(models.Message, {
-        foreignKey: 'receiverId',
+      User.hasMany(models.Group, {
+        foreignKey: 'userId',
         onDelete: 'CASCADE'
-      });
+      })
       User.belongsToMany(models.User, {
         through: 'Follows',
         as: 'Followers',
