@@ -8,19 +8,36 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Chat.belongsTo(models.User, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Chat.init({
     id: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      unique: true,
     },
     chatType: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'default'
+    },
+    userId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
+      onDelete: 'CASCADE',
+    },
   }, {
     sequelize,
     modelName: 'Chat',

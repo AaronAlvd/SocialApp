@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator');
+const { check } = require('express-validator');
 
 // middleware for formatting errors from express-validator middleware
 // (to customize, see express-validator's documentation)
@@ -20,7 +21,7 @@ const handleValidationErrors = (req, _res, next) => {
   next();
 };
 
-export const validateLogin = [
+const validateLogin = [
   check('credential')
       .exists({ checkFalsy: true })
       .notEmpty()
@@ -31,7 +32,7 @@ export const validateLogin = [
   handleValidationErrors
 ];
 
-export const validateSignup = [
+const validateSignup = [
   check('email')
     .exists({ checkFalsy: true })
     .isEmail()
@@ -50,3 +51,8 @@ export const validateSignup = [
     .withMessage('Password must be 6 characters or more.'),
   handleValidationErrors
 ];
+
+module.exports = {
+  validateLogin,
+  validateSignup
+}

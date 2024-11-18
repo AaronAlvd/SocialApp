@@ -4,23 +4,25 @@ const bcrypt = require('bcryptjs');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const path = require('path');
-const { check } = require('express-validator');
 const { validateLogin } = require('../../utils/validation');
 
 const router = express.Router();
 
 
-router.get('/', async (req, res) => {
-  const { user } = req;
-  if (user) {
-      const data = await User.FindByPk(user.id, {
-        attributes: ['id', 'firstName', 'lastName', 'email', 'username', 'bio', 'profilePhoto']
-      });
-
-      res.json(data);
-  } else {
-      return res.json({ user: null });
-  }
+router.get('/', (req, res) => {
+    const { user } = req;
+    if (user) {
+        const safeUser = {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            username: user.username,
+        };
+        return res.json({ user: safeUser });
+    } else {
+        return res.json({ user: null });
+    }
 });
 
 router.post('/', validateLogin, async (req, res, next) => {

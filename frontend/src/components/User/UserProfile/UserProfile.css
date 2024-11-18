@@ -1,0 +1,16 @@
+.UserProfile-div{
+  transform: translate(201px, 0px);
+  padding: 15px;
+  box-sizing: border-box;
+}
+.UserProfile-img{
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+.UserProfile-bio{
+  font-size: 14px;
+  width: 50vw;
+  border: 1px solid white;
+}

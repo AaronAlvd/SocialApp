@@ -9,6 +9,24 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 
 const router = express.Router();
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+
+    const user = await User.findByPk(id, {
+      attributes: ['firstName', 'lastName', 'username', 'email', 'profilePhoto', 'bio']
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(user);
+
+  } catch(error) {
+    next(error)
+  }
+});
 
 router.post('/', validateSignup, async (req, res, next) => {
   try {

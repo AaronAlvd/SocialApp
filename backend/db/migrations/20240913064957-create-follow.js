@@ -7,6 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
       },
       followerId: {
         type: Sequelize.STRING,

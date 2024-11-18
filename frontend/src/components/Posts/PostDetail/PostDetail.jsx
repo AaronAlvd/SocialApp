@@ -4,7 +4,7 @@ import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeart02 } from '@fortawesome/free-solid-svg-icons';
 import DispatchCalls from '../../../SocialClass/dispatch';
 import Social from '../../../SocialClass/social';
-import { Comments } from '../Comments';
+import { Comments } from '../../Comment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -19,7 +19,6 @@ export default function PostDetail() {
   const [height, setHeight] = useState(window.innerHeight - 61);
   const [width, setWidth] = useState(window.innerWidth - 201);
   const [reload, setReload] = useState(true);
-
 
   useEffect(() => {
 

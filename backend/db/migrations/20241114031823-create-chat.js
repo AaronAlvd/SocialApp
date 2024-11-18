@@ -6,11 +6,20 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true,
       },
       chatType: {
         allowNull: false,
         type: Sequelize.STRING,
+      },
+      userId: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'id',
+        }
       },
       createdAt: {
         allowNull: false,

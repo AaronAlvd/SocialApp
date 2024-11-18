@@ -24,7 +24,11 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Group, {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
-      })
+      });
+      User.hasMany(models.Chat, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      });
       User.belongsToMany(models.User, {
         through: 'Follows',
         as: 'Followers',
@@ -46,6 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
+      unique: true,
     },
     firstName: {
       type: DataTypes.STRING(256), 

@@ -1,6 +1,6 @@
 import DispatchCalls from "../../../SocialClass/dispatch";
 import Social from "../../../SocialClass/social";
-import Comments from '../Comments/Comments';
+import { Comments } from '../../Comment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeart02 } from '@fortawesome/free-solid-svg-icons';

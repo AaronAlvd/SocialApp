@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation, SocialFeed, Page404, CreatePost, PostLayout, PostDetail, UserProfile } from './components';
+import { Navigation, SocialFeed, Page404, CreatePost, PostDetail, UserProfile } from './components';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import './index.css'
 
 function Layout() {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
         element: <h1>Soon...</h1>
       },
       {
-        path: '/User',
+        path: '/user/:userId',
         element: <UserProfile />
       },
       {

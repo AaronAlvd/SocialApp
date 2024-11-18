@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
+      unique: true,
     },
     chatId: {
       type: DataTypes.STRING,

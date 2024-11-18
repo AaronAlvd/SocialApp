@@ -16,14 +16,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       primaryKey: true,
       allowNull: false,
+      unique: true,
     },
     userId: {
       type: DataTypes.STRING,
       allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
+      onDelete: 'CASCADE',
     },
     role: {
       type: DataTypes.STRING,
-      defaultValue: 'Member'
+      defaultValue: 'member'
     }
   }, {
     sequelize,
