@@ -1,1 +1,49 @@
 
+.SignupForm-div{
+  padding: 20px;
+  border: 1px solid grey;
+}
+.SignupForm-title{
+  text-align: center;
+}
+.SignupForm-div-input{
+  margin: 30px;
+  border: 1px solid grey;
+  border-radius: 7px;
+}
+.SignupForm-label{
+  position: absolute;
+  transform: translate(2px, 2px);
+  padding: 5px;
+  transition: all 0.5s ease;
+}
+.SignupForm-label-active{
+  font-size: 13px;
+  position: absolute;
+  transform: translate(7px, -15px);
+  padding: 5px;
+  transition: all 0.5s ease;
+}
+.SignupForm-input{
+  border: none;
+  width: 300px;
+  height: 25px;
+  font-size: 15px;
+  border-radius: 7px;
+  padding: 5px 0 5px 5px;
+}
+.SignupForm-input:focus{
+  outline: none;
+}
+.SignupForm-div-button{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+}
+.SignupForm-button{
+  width: 120px;
+  height: 30px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}

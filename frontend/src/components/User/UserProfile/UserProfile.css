@@ -1,16 +1,41 @@
 .UserProfile-div{
   transform: translate(201px, 0px);
-  padding: 15px;
+  padding: 10px;
   box-sizing: border-box;
 }
-.UserProfile-img{
-  border-radius: 50%;
-  height: 200px;
-  width: 200px;
+.UserProfile-img-background{
+  width: 100%;
+  height: 300px;
   object-fit: cover;
+  object-position: 0 30%;
+}
+.UserProfile-img{
+  position: absolute;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  transform: translate(20px, -90px);
+}
+.UserProfile-div-img{
+  position: absolute;
+}
+.UserProfile-div-infoBar{
+  display: flex;
+  margin: 10px 0 0 0;
+  height: 60px;
+  justify-content: center;
+}
+.UserProfile-div-info{
+  padding: 0 10px 0 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
 }
 .UserProfile-bio{
+  box-sizing: border-box;
   font-size: 14px;
-  width: 50vw;
-  border: 1px solid white;
+  padding: 10px;
+  width: 100%;
 }

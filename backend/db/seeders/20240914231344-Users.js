@@ -32,6 +32,7 @@ module.exports = {
             I’m passionate about minimalist design 🖌️, ethical fashion 👕, and sharing eco-conscious living tips. You’ll find me sipping on artisanal coffee ☕, capturing candid city moments, or planning my next adventure into nature 🌲.
             Always open to collabs, especially if they involve cool visuals or meaningful projects. Let’s make something awesome together! ✌️`,
       profilePhoto: await readImage(path.join(__dirname, '../../assets/image01.png')),
+      backgroundPhoto: await readImage(path.join(__dirname, '../../assets/image02.jpeg')),
     },
     {
       id: 'a1fbc967-1fae-467e-8b56-98b6e7d19df3',

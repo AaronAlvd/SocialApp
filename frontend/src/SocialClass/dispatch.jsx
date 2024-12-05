@@ -33,4 +33,8 @@ export default class DispatchCalls extends Social {
   UserProfile(data) {
     this.dispatch(userActions.getUser(data));
   }
+
+  SignupUser(data) {
+    this.dispatch(sessionActions.signUpUser(data))
+  }
 }

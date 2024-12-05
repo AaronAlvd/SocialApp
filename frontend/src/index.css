@@ -4,7 +4,9 @@
   color: white;
   margin: 0;
 }
-
 .App-Outlet{
   color: red;
+}
+button{
+  cursor: pointer;
 }

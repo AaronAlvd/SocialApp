@@ -1,6 +1,6 @@
 const express = require('express');
 const { v4: uuid } = require('uuid');
-const { User } = require('../../db/models');
+const { User, Follow } = require('../../db/models');
 const { check } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const { validateSignup } = require('../../utils/validation');
@@ -14,14 +14,32 @@ router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
 
     const user = await User.findByPk(id, {
-      attributes: ['firstName', 'lastName', 'username', 'email', 'profilePhoto', 'bio']
+      attributes: ['firstName', 'lastName', 'username', 'email', 'profilePhoto', 'bio', 'backgroundPhoto']
+    });
+
+    const followers = await Follow.findAll({
+      where: {
+        followedId: id
+      },
+      attributes: ['followedId'],
+    });
+
+    const following = await Follow.findAll({
+      where: {
+        followerId: id
+      },
+      attributes: ['followerId'],
     });
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    res.json(user);
+    res.json({
+      ...user.dataValues,
+      followers: followers,
+      following: following,
+    });
 
   } catch(error) {
     next(error)

@@ -1,14 +1,19 @@
 import './LoginForm.css'
 import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle, faLock } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../../store/session';
 import { useModal } from '../../../context/modal';
 
 export default function LoginForm() {
-  const [ credential, setCredential ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [credential, setCredential ] = useState('');
+  const [password, setPassword ] = useState('');
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+  const [isActive01, setIsActive01 ] = useState(false);
+  const [isActive02, setIsActive02 ] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,12 +33,16 @@ export default function LoginForm() {
       <h2 className='LoginForm-title'>Login</h2>
       <form className="LoginForm-form" onSubmit={(e) => handleSubmit(e)}>
         <div className="LoginForm-div-formInput">
-          <label className='LoginForm-label'>Username</label>
-          <input type="text" className='LoginForm-input' name="username" value={credential} onChange={(e) => setCredential(e.target.value)}/>
+          <FontAwesomeIcon icon={faUserCircle} className='LoginForm-icon'/>
+          <label className={ isActive01 ? 'LoginForm-label-active' : 'LoginForm-label'}>Username</label>
+          <input type="text" className='LoginForm-input' name="username" value={credential} onChange={(e) => setCredential(e.target.value)} 
+           onFocus={() => setIsActive01(true)} onBlur={() => setIsActive01(credential !== '')}/>
         </div>
         <div className="LoginForm-div-formInput">
-          <label className='LoginForm-label'>Password</label>
-          <input type="text" className='LoginForm-input' name="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <FontAwesomeIcon icon={faLock} className='LoginForm-icon'/>
+          <label className={ isActive02 ? 'LoginForm-label-active' : 'LoginForm-label'}>Password</label>
+          <input type="text" className='LoginForm-input' name="password" value={password} onChange={(e) => setPassword(e.target.value)}
+           onFocus={() => setIsActive02(true)} onBlur={() => setIsActive02(password !== '')}/>
           <small className='LoginForm-small'>Forgot Password?</small>
         </div>
         <div className="LoginForm-div-formButton">

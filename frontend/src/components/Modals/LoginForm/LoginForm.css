@@ -1,53 +1,60 @@
 .LoginForm-div {
-  font-family: 'Helvetica';
   padding: 20px;
+  border: 1px solid grey;
 }
-
 .LoginForm-title {
   text-align: center;
 }
-
 .LoginForm-div-formInput {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid grey;
-  margin: 20px;
+  margin: 30px;
+  border: 1px solid grey;
+  border-radius: 7px;
 }
-
 .LoginForm-label {
   font-size: 15px;
-  padding: 2px;
+  position: absolute;
+  transform: translate(2px, 2px);
+  padding: 5px;
+  transition: all 0.5s ease;
 }
-
+.LoginForm-label-active{
+  font-size: 13px;
+  position: absolute;
+  transform: translate(7px, -15px);
+  padding: 5px;
+  transition: all 0.5s ease;
+}
 .LoginForm-input {
   border: none;
   width: 300px;
   height: 25px;
   font-size: 15px;
+  border-radius: 7px;
+  padding: 5px 0 5px 5px;
 }
-
 .LoginForm-input:focus {
   outline: none;
 }
-
 .LoginForm-small {
   position: absolute;
-  padding: 2px;
-  text-align: end;
+  width: 110px;
   color: rgb(118, 142, 202);
-  transform: translate(190px, 50px);
+  transform: translate(-110px, 45px);
+  cursor: pointer;
 }
-
 .LoginForm-div-formButton {
   display: flex;
   justify-content: center;
   margin: 20px;
   padding: 20px;
 }
-
 .LoginForm-button {
   width: 120px;
   height: 30px;
   border: 1px solid grey;
   border-radius: 5px;
+}
+.LoginForm-icon{
+  position: absolute;
+  transform: translate(280px, 10px);
 }

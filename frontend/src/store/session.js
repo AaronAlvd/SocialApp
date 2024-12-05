@@ -5,7 +5,7 @@ const SIGN_UP = "session/setUser";
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
 
-const setUser = (user) => {
+export const setUser = (user) => {
   return {
     type: SET_USER,
     payload: user,
@@ -18,13 +18,16 @@ const removeUser = () => {
   };
 };
 
-export const signUpUser = (user) => async (dispatch) => {
-  const { username, firstName, lastName, email, password } = user;
+export const signUpUser = (data) => async (dispatch) => {
+  const { username, firstName, lastName, email, password } = data;
 
   try {
     // Use csrfFetch to perform the signup request
-    const response = await csrfFetch("/api/users", {
+    const response = await csrfFetch("/api/user/", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         firstName,
         lastName,
@@ -32,9 +35,6 @@ export const signUpUser = (user) => async (dispatch) => {
         username,
         password,
       }),
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
 
     if (response.ok) {
