@@ -1,6 +1,7 @@
 .Comments-div{
   display: flex;
   padding: 10px 0 10px 0;
+  width: 65vw;
 }
 .Comments-username{
   font-size: 12px;

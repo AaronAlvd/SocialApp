@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import DispatchCalls from '../../../SocialClass/dispatch';
+import Following from '../Following/Following';
+import { useModal } from '../../../context/modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from "react";
@@ -13,6 +15,7 @@ export default function UserProfile() {
   const dispatch = useDispatch();
   const dispatchCalls = new DispatchCalls(dispatch);
   const social = new Social();
+  const { setModalContent, closeModal } = useModal();
   const userInfo = useSelector(state => state.userProfile.userProfile);
   const [height, setHeight] = useState(window.innerHeight - 61);
   const [width, setWidth] = useState(window.innerWidth - 201);
@@ -36,6 +39,10 @@ export default function UserProfile() {
     dispatchCalls.UserProfile(userId);
   }, [dispatch]);
 
+  function viewFollowers() {
+
+  }
+
   if (!userInfo) {
     return (
       <h1>Loading...</h1>
@@ -50,20 +57,20 @@ export default function UserProfile() {
         </div>
         <div className="UserProfile-div-infoBar">
           <div className="UserProfile-div-info">
-            <p style={{fontWeight: 800, fontSize: 14}}>Following</p>
-            <p style={{fontSize: 18, margin: '5px 0 5px 0'}}>{userInfo.following.length}</p>
+            <p style={{fontWeight: 800, fontSize: 14}} onClick={() => setModalContent(<Following />)}>Following</p>
+            <p style={{fontSize: 17, margin: '5px 0 5px 0'}}>{userInfo.following.length}</p>
           </div>
           <div className="UserProfile-div-info">
             <p style={{fontWeight: 800, fontSize: 14}}>Followers</p>
-            <p style={{fontSize: 18, margin: '5px 0 5px 0'}}>{userInfo.followers.length}</p>
+            <p style={{fontSize: 17, margin: '5px 0 5px 0'}}>{userInfo.followers.length}</p>
           </div>
           <div className="UserProfile-div-info">
             <p style={{fontWeight: 800, fontSize: 14}}>Posts</p>
-            <p style={{fontSize: 18, margin: '5px 0 5px 0'}}>{userInfo.followers.length}</p>
+            <p style={{fontSize: 17, margin: '5px 0 5px 0'}}>{userInfo.posts}</p>
           </div>
           <div className="UserProfile-div-info">
             <p style={{fontWeight: 800, fontSize: 14}}>Likes</p>
-            <p style={{fontSize: 18, margin: '5px 0 5px 0'}}>{userInfo.followers.length}</p>
+            <p style={{fontSize: 17, margin: '5px 0 5px 0'}}>{userInfo.likes}</p>
           </div>
         </div>
         <p className="UserProfile-bio">{userInfo.bio}</p>

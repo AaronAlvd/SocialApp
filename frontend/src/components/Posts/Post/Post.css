@@ -4,17 +4,24 @@
 }
 .Post-div-box{
   width: 45vw;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid rgb(0, 0, 0);
   padding: 10px;
   margin: 0 10px 0 10px;
+}
+.Post-img-profile{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-position: center;
+  margin-right: 10px;
 }
 .Post-name{
   font-weight: bold;
 }
 .Post-username{
-  font-size: 12px;
+  font-size: 14px;
   margin: 5px 0 0 0;
-  color: rgb(173, 173, 173);
+  color: rgb(0, 0, 0);
 }
 .Post-caption{
   font-size: 14px;
@@ -25,7 +32,7 @@
   width: 100%;
 }
 .Post-hashtag{
-  color: rgb(118, 142, 202);
+  color: rgb(60, 102, 208);
 }
 .Post-icon{
   margin-right: 10px; 

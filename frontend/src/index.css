@@ -1,11 +1,8 @@
 * {
   font-family: 'Helvetica';
-  background-color: rgb(34, 33, 33);
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: black;
   margin: 0;
-}
-.App-Outlet{
-  color: red;
 }
 button{
   cursor: pointer;

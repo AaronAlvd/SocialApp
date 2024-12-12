@@ -41,8 +41,13 @@ export default function PostDetail() {
   return (
     <div className='PostDetail-div' style={{width: `${width}px`, height: `${height}px`}}>
           <div className="PostDetail-div-box" style={{height: `${height}px`}}>
-            <p className="PostDetail-name">{post.User.firstName} {post.User.lastName}</p>
-            <p className="PostDetail-username">@{post.User.username}</p>
+          <div style={{display: 'flex', width: '65vw'}}>
+              {post.User.profilePhoto ? <img src={social.convertImageToBase64(post.User.profilePhoto)} className="Post-img-profile" /> : <faUserCircle/>}
+              <div>
+                <p className="Post-name">{post.User.firstName} {post.User.lastName}</p>
+                <p className="Post-username">@{post.User.username}</p>
+              </div>
+            </div>
             <p className="PostDetail-caption">{social.findHashtags(post.caption)}</p>
             {post.photo && <img className="PostDetail-image" src={social.convertImageToBase64(post.photo)}/>}
             <p className="PostDetail-bottom">
@@ -61,7 +66,7 @@ export default function PostDetail() {
                 <FontAwesomeIcon icon={faComment} className="PostDetail-icon" onClick={() => navigate(`/following/${post.id}`)}/>
               </span>
             <small>{new Date(post.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></p>
-            <div><Comments data={post.Comments}/></div>
+            <div style={{width: '65vw'}}><Comments data={post.Comments}/></div>
           </div>
     </div>
   )

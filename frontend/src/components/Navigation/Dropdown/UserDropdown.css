@@ -4,6 +4,7 @@
   list-style-type: none;
   font-family: Helvetica;
   padding: 0;
+  z-index: 1;
 }
 
 .UserDropdown-li{

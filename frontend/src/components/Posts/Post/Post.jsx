@@ -2,7 +2,7 @@ import DispatchCalls from "../../../SocialClass/dispatch";
 import Social from "../../../SocialClass/social";
 import { Comments } from '../../Comment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
+import { faHeart, faComment, faUserCircle } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeart02 } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState, useMemo, useRef } from "react";
@@ -22,6 +22,7 @@ export default function Post() {
 
   useEffect(() => {
     dispatchCall.socialFeed();
+    dispatchCall.UserProfile();
 
     const handleResize = () => {
       setHeight(window.innerHeight - 61);
@@ -57,8 +58,13 @@ export default function Post() {
       {sortedFeed.map((data) => {
         return (
           <div className="Post-div-box">
-            <p className="Post-name">{data.User.firstName} {data.User.lastName}</p>
-            <p className="Post-username">@{data.User.username}</p>
+            <div style={{display: 'flex'}}>
+              {data.User.profilePhoto ? <img src={social.convertImageToBase64(data.User.profilePhoto)} className="Post-img-profile" /> : <faUserCircle/>}
+              <div>
+                <p className="Post-name">{data.User.firstName} {data.User.lastName}</p>
+                <p className="Post-username">@{data.User.username}</p>
+              </div>
+            </div>
             <p className="Post-caption">{social.findHashtags(data.caption)}</p>
             {data.photo && <img className="Post-image" src={social.convertImageToBase64(data.photo)}/>}
             <p className="Post-bottom">
