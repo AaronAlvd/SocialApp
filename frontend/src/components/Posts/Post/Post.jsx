@@ -18,6 +18,7 @@ export default function Post() {
   const dispatchCall = new DispatchCalls(dispatch);
   const [height, setHeight] = useState(window.innerHeight - 61);
   const [reload, setReload] = useState(true);
+  const [showComments, setShowComments] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,6 +54,14 @@ export default function Post() {
     setReload(!reload);
   }
 
+  const heartColor = (data) => {
+    let activeLike = false;
+    if (data.Likes && data.Likes.length > 0) {
+      activeLike = data.Likes.find(obj => obj.userId === user.id);
+    }
+    return activeLike ? <FontAwesomeIcon icon={faHeart02} className="Post-icon" onClick={() => handleDislike(data.id)} /> : <FontAwesomeIcon icon={faHeart} className="Post-icon" onClick={() => handleLike(data.id)}/>
+  }
+
   return (
     <div className="Post-div" style={{height: height}}>
       {sortedFeed.map((data) => {
@@ -68,21 +77,18 @@ export default function Post() {
             <p className="Post-caption">{social.findHashtags(data.caption)}</p>
             {data.photo && <img className="Post-image" src={social.convertImageToBase64(data.photo)}/>}
             <p className="Post-bottom">
-              <span>
-                {(() => {
-                  let activeLike = false;
-
-                  if (data.Likes && data.Likes.length > 0) {
-                    activeLike = data.Likes.find(obj => obj.userId === user.id);
-                  }
-
-                  return activeLike ? <FontAwesomeIcon icon={faHeart02} className="Post-activeLike" onClick={() => handleDislike(data.id)} /> :
-                                      <FontAwesomeIcon icon={faHeart} className="Post-like" onClick={() => handleLike(data.id)}/>
-    
-                })()}
-                <FontAwesomeIcon icon={faComment} className="Post-icon" onClick={() => navigate(`/following/${data.id}`)}/>
-              </span>
+              <div style={{display: 'flex'}}>
+                <div className="Post-div-icon">
+                  {heartColor(data)}
+                  <small style={{margin: '0 5px 0 10px'}}>{data.Likes.length}</small>
+                </div>
+                <div className="Post-div-icon" onClick={() => setShowComments(showComments === data.id ? '' : data.id)} style={{cursor: 'pointer'}}>
+                  <FontAwesomeIcon icon={faComment} className="Post-icon" />
+                  <small style={{margin: '0 5px 0 10px'}}>{data.Comments.length}</small>
+                </div>
+              </div>
             <small>{new Date(data.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></p>
+            {(showComments === data.id) && <div style={{width: '65vw'}}><Comments data={data.Comments}/></div>}
           </div>
         )
       })}

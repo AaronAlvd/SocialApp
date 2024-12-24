@@ -23,9 +23,7 @@ export default function SocialFeed() {
   const loadPage = () => {
     if (url === '/following') {
       return <Post/>
-    } else {
-      return <PostDetail />
-    }
+    } 
   };
 
   return (

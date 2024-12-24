@@ -13,7 +13,7 @@ export default function PostDetail() {
   const { postId } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
-  const dispatchCalls = new DispatchCalls(dispatch);
+  const dispatchCall = new DispatchCalls(dispatch);
   const social = new Social();
   const post = useSelector(state => state.posts.posts)[0];
   const [height, setHeight] = useState(window.innerHeight - 61);
@@ -35,8 +35,37 @@ export default function PostDetail() {
   }, [dispatch, reload]);
 
   useEffect(() => {
-    dispatchCalls.postDetail(postId);
+    dispatchCall.postDetail(postId);
   }, [dispatch])
+
+  const handleLike = (postId) => {
+    const data = {
+      postId: postId,
+      commentId: '',
+    }
+    dispatchCall.handleLike(data);
+    setReload(!reload);
+  };
+
+  const handleDislike = (postId) => {
+    const data = {
+      postId: postId,
+      commentId: '',
+    }
+    dispatchCall.handleDislike(data);
+    setReload(!reload);
+  }
+
+  const heartColor = () => {
+    let activeLike = false;
+    if (post.Likes && post.Likes.length > 0) {
+      activeLike = post.Likes.find(obj => obj.userId === user.id);
+    }
+    return activeLike ? <FontAwesomeIcon icon={faHeart02} className="PostDetail-icon" onClick={() => handleDislike(post.id)} /> :
+                        <FontAwesomeIcon icon={faHeart} className="PostDetail-icon" onClick={() => handleLike(post.id)}/>
+  }
+
+  if (!user) return null
 
   return (
     <div className='PostDetail-div' style={{width: `${width}px`, height: `${height}px`}}>
@@ -52,17 +81,7 @@ export default function PostDetail() {
             {post.photo && <img className="PostDetail-image" src={social.convertImageToBase64(post.photo)}/>}
             <p className="PostDetail-bottom">
               <span>
-                {(() => {
-                  let activeLike = false;
-
-                  if (post.Likes && post.Likes.length > 0) {
-                    activeLike = post.Likes.find(obj => obj.userId === user.id);
-                  }
-
-                  return activeLike ? <FontAwesomeIcon icon={faHeart02} className="PostDetail-activeLike" onClick={() => handleDislike(post.id)} /> :
-                                      <FontAwesomeIcon icon={faHeart} className="PostDetail-like" onClick={() => handleLike(post.id)}/>
-    
-                })()}
+                {heartColor()}
                 <FontAwesomeIcon icon={faComment} className="PostDetail-icon" onClick={() => navigate(`/following/${post.id}`)}/>
               </span>
             <small>{new Date(post.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></p>

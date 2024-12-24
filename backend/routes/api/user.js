@@ -1,10 +1,11 @@
 const express = require('express');
 const { v4: uuid } = require('uuid');
-const { User, Follow } = require('../../db/models');
+const { User, Follow, Post, Like } = require('../../db/models');
 const { check } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const { validateSignup } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { json } = require('sequelize');
 
 
 const router = express.Router();
@@ -31,6 +32,23 @@ router.get('/:id', async (req, res, next) => {
       attributes: ['followerId'],
     });
 
+    const posts = await Post.findAll({
+      where: {
+        userId: id
+      }
+    })
+
+    let likes = 0;
+
+    for (const post of posts) {
+      const postLikes = await Like.findAll({
+        where: {
+          postId: post.id,
+        },
+      });
+      likes += postLikes.length;
+    }
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -39,7 +57,31 @@ router.get('/:id', async (req, res, next) => {
       ...user.dataValues,
       followers: followers,
       following: following,
+      posts: posts.length,
+      likes: likes,
     });
+
+  } catch(error) {
+    next(error)
+  }
+});
+
+router.get('/following', async (req, res, next) => {
+  try{
+    const id = req.params.id;
+
+    const following = await Follow.findAll({
+      where: {
+        followerId: id,
+      },
+      include: [
+        {
+          modal: User,
+          as: 'Following',
+          attributes: ['firstName', 'lastName', 'username', 'id']
+        }
+      ]
+    })
 
   } catch(error) {
     next(error)

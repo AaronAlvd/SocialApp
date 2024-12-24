@@ -2,6 +2,9 @@
   overflow-y: scroll;
   width: min-content;
 }
+.Post-div::-webkit-scrollbar{
+  display: none;
+}
 .Post-div-box{
   width: 45vw;
   border-bottom: 1px solid rgb(0, 0, 0);
@@ -34,20 +37,26 @@
 .Post-hashtag{
   color: rgb(60, 102, 208);
 }
-.Post-icon{
-  margin-right: 10px; 
-}
-.Post-like{
-  margin-right: 10px;
-}
-.Post-activeLike{
-  margin-right: 10px;
-  color: red;
-}
 .Post-bottom{
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  align-items: end;
+  margin-top: 5px;
+}
+.Post-div-icon{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: auto;
+  height: 20px;
+  border-radius: 3px;
+  border: 1px solid black;
+  margin: 0 10px 0 0;
+  cursor: default;
+}
+.Post-icon{
+  margin: 0 0 0 5px;
+  cursor: pointer;
 }
 .Post-commentSection{
   height: 200px;

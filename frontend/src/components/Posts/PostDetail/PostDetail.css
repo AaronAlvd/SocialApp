@@ -33,13 +33,6 @@
 .PostDetail-icon{
   margin-right: 10px; 
 }
-.PostDetail-like{
-  margin-right: 10px;
-}
-.PostDetail-activeLike{
-  margin-right: 10px;
-  color: red;
-}
 .PostDetail-bottom{
   display: flex;
   justify-content: space-between;
