@@ -12,19 +12,20 @@ import './Post.css';
 export default function Post() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
-  const unsortedFeed = useSelector((state) => state.posts.posts);
   const social = new Social();
-  const sortedFeed = social.sortByDate(unsortedFeed);
   const dispatchCall = new DispatchCalls(dispatch);
+  const unsortedFeed = useSelector((state) => state.posts.posts);
+  const sortedFeed = social.sortByDate(unsortedFeed);
   const [height, setHeight] = useState(window.innerHeight - 61);
   const [reload, setReload] = useState(true);
   const [showComments, setShowComments] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
+
     dispatchCall.socialFeed();
     dispatchCall.UserProfile();
-
+    
     const handleResize = () => {
       setHeight(window.innerHeight - 61);
     };
@@ -34,7 +35,7 @@ export default function Post() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [dispatch, reload]);
+  }, [dispatchCall, reload]);
 
   const handleLike = (postId) => {
     const data = {

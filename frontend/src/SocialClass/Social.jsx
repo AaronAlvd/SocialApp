@@ -6,8 +6,19 @@ export default class Social {
 
   sortByDate(data) {
     const dataCopy = [...data];
-
-    return dataCopy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  
+    return dataCopy.sort((a, b) => {
+      const dateA = new Date(a.createdAt);
+      const dateB = new Date(b.createdAt);
+  
+      // If dates are the same, return 0 (no change in order)
+      if (dateA.getTime() === dateB.getTime()) {
+        return 0;
+      }
+  
+      // Sort by date, newest first
+      return dateB - dateA;
+    });
   }
 
   findHashtags(string) {

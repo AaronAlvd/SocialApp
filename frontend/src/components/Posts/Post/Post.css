@@ -36,6 +36,7 @@
 }
 .Post-hashtag{
   color: rgb(60, 102, 208);
+  cursor: pointer;
 }
 .Post-bottom{
   display: flex;

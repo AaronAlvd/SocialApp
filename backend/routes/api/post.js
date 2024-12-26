@@ -43,6 +43,7 @@ router.get('/following/:postId', requireAuth, async (req, res, next) => {
 
 router.get('/following', requireAuth, async (req, res, next) => {
   try {
+    console.time('myTime')
     const posts = [];
     const userId = req.user.id;
 
@@ -82,7 +83,21 @@ router.get('/following', requireAuth, async (req, res, next) => {
         include: [
           {
             model: User,
-            attributes: ['firstName', 'lastName', 'username']
+            attributes: ['firstName', 'lastName', 'username', 'profilePhoto']
+          },
+          {
+            model: Like,
+            attributes: ['postId', 'userId']
+          },
+          {
+            model: Comment,
+            attributes: ['userId', 'postId', 'comment'],
+            include: [
+              { 
+                model: User, 
+                attributes: ['username', 'id', 'profilePhoto']
+              }
+            ]
           }
         ]
       });
@@ -92,8 +107,8 @@ router.get('/following', requireAuth, async (req, res, next) => {
       }
     }
 
+    console.timeEnd('myTime')
     res.send(posts.flat());
-
   } catch(error) {
     next(error);
   }
