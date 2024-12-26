@@ -3,33 +3,31 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Group extends Model {
+  class GroupUser extends Model {
     static associate(models) {
-      Group.belongsTo(models.User, {
+      GroupUser.belongsTo(models.User, {
         foreignKey: 'ownerId',
-        onDelete: 'CASCADE',
-      })
-      Group.belongsToMany(models.User, {
-        through: 'GroupUser',
-        foreignKey: 'groupId',
-        otherKey: 'userId',
         onDelete: 'CASCADE',
       })
     }
   }
-  Group.init({
+  GroupUser.init({
     id: {
       type: DataTypes.STRING,
       primaryKey: true,
       allowNull: false,
       unique: true,
     },
-    groupName: {
+    groupId: {
       allowNull: false,
-      unique: true,
       type: DataTypes.STRING,
+      references: {
+        model: 'Groups',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
     },
-    ownerId: {
+    userId: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {
@@ -42,5 +40,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Group',
   });
-  return Group;
+  return GroupUser;
 };
