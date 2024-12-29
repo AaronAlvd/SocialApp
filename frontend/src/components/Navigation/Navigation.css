@@ -4,16 +4,16 @@
   height: 60px;
   border-bottom: 1px solid rgb(0, 0, 0);
 }
-.div-leftNav {
+.Navigation-div-leftNav {
   width: 50vw;
 }
-.div-rightNav {
+.Navigation-div-rightNav {
   width: 50vw;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-#faUser {
+.Navigation-icon {
   font-size: 30px;
   margin: 10px;
 }

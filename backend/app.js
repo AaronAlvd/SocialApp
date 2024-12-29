@@ -44,6 +44,7 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, '../frontend')));
+
 app.use(routes);
 
 app.use((_req, _res, next) => {
@@ -73,7 +74,7 @@ app.use((err, _req, res, _next) => {
   res.json({
     title: err.title || 'Server Error',
     message: err.message,
-    errors: err.errors,
+    errors: err.errors || null,
     stack: isProduction ? null : err.stack
   });
 });

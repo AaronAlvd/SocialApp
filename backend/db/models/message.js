@@ -55,14 +55,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: true,
     },
-    messageType: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    chatId: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
   }, {
     sequelize,
     modelName: 'Message',

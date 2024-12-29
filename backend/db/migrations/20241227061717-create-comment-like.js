@@ -1,32 +1,31 @@
-'use-strict'
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('GroupUser', {
+    await queryInterface.createTable('CommentLikes', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.STRING,
-        unique: true
-      },
-      groupId: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        references: {
-          model: 'Groups',
-          key: 'id'
-        },
-        onDelete: 'CASCADE'
+        type: Sequelize.INTEGER
       },
       userId: {
-        allowNull: false,
         type: Sequelize.STRING,
+        allowNull: false,
         references: {
           model: 'Users',
-          key: 'id'
+          key: 'id',
         },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+      },
+      commentId: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        references: {
+          model: 'Comments',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('GroupUser');
+    await queryInterface.dropTable('CommentLikes');
   }
 };

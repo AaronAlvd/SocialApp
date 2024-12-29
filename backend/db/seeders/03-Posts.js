@@ -28,71 +28,99 @@ module.exports = {
         photo: await readImage(path.join(__dirname, '../../assets/image01.png'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b02',
+        id: '973010c6-39c4-4aa7-8891-84872b1ff269',
         userId: 'a1fbc967-1fae-467e-8b56-98b6e7d19df3',
         caption: 'Exploring new horizons with this landscape shot. 🌄 #NaturePhotography',
         photo: await readImage(path.join(__dirname, '../../assets/image02.jpeg'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b03',
+        id: 'edd66fcd-9da2-4415-8304-27181ce43010',
         userId: 'd4a7cfdc-49b6-4a82-a9b2-726c3fbb91a2',
         caption: 'Caught this moment of serenity at the park. 🏞️ #PeacefulVibes',
         photo: await readImage(path.join(__dirname, '../../assets/image03.jpeg'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b04',
+        id: '674098a3-e1d4-4884-8219-d4c63151e9e4',
         userId: 'f9d6b7e2-4d56-4ab3-b47d-f8a0e8ec9a15',
         caption: 'Sharing a glimpse of my urban exploration journey. 🏙️ #Cityscape',
         photo: await readImage(path.join(__dirname, '../../assets/image04.jpeg'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b05',
+        id: 'b6fcf9c5-d246-4e66-8406-762932478bf4',
         userId: 'b4d7ae0a-3c91-4b5d-85ab-55d07eecf7c6',
         caption: 'Here’s a throwback to my last beach day. 🏖️ #SunnyTimes',
         photo: await readImage(path.join(__dirname, '../../assets/image05.jpeg'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b06',
+        id: '1b027c1c-7263-4622-8ec9-f5054acf446f',
         userId: 'c2b45d83-1e6c-41f4-9a5e-2f58b9ec27d9',
         caption: 'Diving into some vibrant street art. 🎨 #ColorSplash',
         photo: await readImage(path.join(__dirname, '../../assets/image06.jpeg'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b07',
+        id: '3a984767-2c84-4449-8d46-ee0708275bb1',
         userId: 'e7a9eaf2-7dd3-49d5-93f2-1e4f5d2a8c7e',
         caption: 'Here’s a snapshot from my garden—pure bliss. 🌺 #NatureAtHome',
         photo: await readImage(path.join(__dirname, '../../assets/image07.jpeg'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b08',
+        id: 'd0edcdb0-1a15-47a9-8765-5a66a8506260',
         userId: 'd6f12a4e-549b-42c9-8a8e-47f4c6aefc56',
         caption: 'A perfect day for hiking! 🌲 #TrailLife',
         photo: await readImage(path.join(__dirname, '../../assets/image08.jpeg'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b09',
+        id: '05e26508-5361-4bf3-8982-ce824c91bfa7',
         userId: 'a6b72c2f-3f5e-4b6b-91e4-774c8e5b4d13',
         caption: 'This view took my breath away. 🌅 #EveningMagic',
         photo: await readImage(path.join(__dirname, '../../assets/image09.jpeg'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b10',
+        id: 'c291f56c-db1c-4343-bb4e-819c2431a5c1',
         userId: 'f8d8e7b3-4d78-4ab3-9b1a-1c6e5a1d7e8f',
         caption: 'Capturing the soul of the city through its architecture. 🏛️ #UrbanDreams',
         photo: await readImage(path.join(__dirname, '../../assets/image10.jpeg'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b11',
+        id: 'f4c66bc4-58fe-45dd-a356-3b39628653e9',
         userId: 'c9f6f4a1-4d3f-4aeb-8e32-5c8c3c1d6f34',
         caption: 'Couldn’t resist sharing this cute little critter. 🐿️ #WildlifeLove',
         photo: await readImage(path.join(__dirname, '../../assets/image11.jpeg'))
       },
       {
-        id: 'p1d1c0d8-99e0-4a52-b5ae-78a7e0c00b12',
+        id: '5673525e-0a32-4083-9807-4fc82de9e748',
         userId: 'b3e4d2f1-5c6a-49a4-8bfa-8b9a4e3f7d2a',
         caption: 'Morning dew on flowers is just mesmerizing. 🌸 #SimplePleasures',
         photo: await readImage(path.join(__dirname, '../../assets/image12.jpeg'))
-      }
+      },
+      {
+        id: '90f64eaa-3205-4787-ae53-8cbdcc53084f',
+        userId: 'e0fbe97e-9aa7-4733-a7ea-65a6ddbf53d2', // James Hathaway
+        groupId: 'acd44161-0ce5-44c3-8bb6-b0e983857aac',
+        caption: `Finally wrapped up my latest project—a minimalist logo design for a local brand. I loved experimenting with clean lines and earthy tones! 🖌️ #DesignLife #Minimalism`,
+        photo: await readImage(path.join(__dirname, '../../assets/image01.png'))
+      },
+      {
+        id: '7ac2424d-4ef7-444a-90cc-99163e69f17f',
+        userId: 'a1fbc967-1fae-467e-8b56-98b6e7d19df3',
+        groupId: 'acd44161-0ce5-44c3-8bb6-b0e983857aac',
+        caption: 'Exploring new horizons with this landscape shot. 🌄 #NaturePhotography',
+        photo: await readImage(path.join(__dirname, '../../assets/image02.jpeg'))
+      },
+      {
+        id: '707f45a1-061a-4606-9aab-2462bd07dd63',
+        userId: 'a1fbc967-1fae-467e-8b56-98b6e7d19df3',
+        groupId: 'acd44161-0ce5-44c3-8bb6-b0e983857aac',
+        caption: 'Caught this moment of serenity at the park. 🏞️ #PeacefulVibes',
+        photo: await readImage(path.join(__dirname, '../../assets/image03.jpeg'))
+      },
+      {
+        id: 'e17b2528-bc99-425d-9969-97a97b9f2bcb',
+        userId: 'f9d6b7e2-4d56-4ab3-b47d-f8a0e8ec9a15',
+        groupId: 'acd44161-0ce5-44c3-8bb6-b0e983857aac',
+        caption: 'Sharing a glimpse of my urban exploration journey. 🏙️ #Cityscape',
+        photo: await readImage(path.join(__dirname, '../../assets/image04.jpeg'))
+      },
     ])
   },
 

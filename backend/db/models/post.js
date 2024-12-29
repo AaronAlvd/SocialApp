@@ -18,8 +18,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'postId',
         onDelete:'CASCADE',
       })
-      Post.hasMany(models.Like, {
+      Post.hasMany(models.PostLike, {
+        as: 'Likes',
         foreignKey: 'postId',
+        onDelete: 'CASCADE'
+      })
+      Post.belongsTo(models.Group, {
+        foreignKey: 'groupId',
         onDelete: 'CASCADE'
       })
     }
@@ -30,6 +35,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true,
       unique: true,
+    },
+    groupId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'default',
+      references: {
+        model: 'Groups',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
     },
     userId: {
       type: DataTypes.STRING,

@@ -4,28 +4,30 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class GroupUser extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
     static associate(models) {
-      GroupUser.belongsTo(models.User, {
-        foreignKey: 'ownerId',
-        onDelete: 'CASCADE',
-      })
+      // define association here
     }
   }
   GroupUser.init({
     id: {
       type: DataTypes.STRING,
-      primaryKey: true,
       allowNull: false,
+      primaryKey: true,
       unique: true,
     },
     groupId: {
-      allowNull: false,
       type: DataTypes.STRING,
+      allowNull: false,
       references: {
         model: 'Groups',
-        key: 'id',
+        key: 'id'
       },
-      onDelete: 'CASCADE',
+      onDelete: 'CASCADE'
     },
     userId: {
       type: DataTypes.STRING,
@@ -34,11 +36,15 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Users',
         key: 'id'
       },
-      onDelete: 'CASCADE',
+      onDelete: 'CASCADE'
     },
+    role: {
+      allowNull: false,
+      type: DataTypes.STRING,
+    }
   }, {
     sequelize,
-    modelName: 'Group',
+    modelName: 'GroupUser',
   });
   return GroupUser;
 };

@@ -40,6 +40,10 @@ module.exports = {
       backgroundPhoto: {
         type: Sequelize.BLOB,
       },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

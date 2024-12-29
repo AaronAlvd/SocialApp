@@ -1,11 +1,11 @@
 .Post-div{
   overflow-y: scroll;
-  width: min-content;
 }
 .Post-div::-webkit-scrollbar{
   display: none;
 }
 .Post-div-box{
+  grid-area: col1;
   width: 45vw;
   border-bottom: 1px solid rgb(0, 0, 0);
   padding: 10px;

@@ -1,47 +1,53 @@
 'use strict';
-const { Model } = require('sequelize');
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Chat extends Model {
+  class CommentLike extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Chat.belongsTo(models.User, {
+      CommentLike.belongsTo(models.User, {
         foreignKey: 'userId',
-        onDelete: 'CASCADE'
-      });
+        onDelete: 'CASCADE',
+      })
+      CommentLike.belongsTo(models.Comment, {
+        foreignKey: 'commentId',
+        onDelete: 'CASCADE',
+      })
     }
   }
-  Chat.init({
+  CommentLike.init({
     id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
       unique: true,
     },
-    chatType: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: 'default',
-    },
-    role: {
-      type: DataTypes.STRING,
-      defaultValue: 'default'
-    },
     userId: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {
         model: 'Users',
-        key: 'id'
+        key: 'id',
       },
       onDelete: 'CASCADE',
     },
+    commentId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      references: {
+        model: 'Comments',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+    }
   }, {
     sequelize,
-    modelName: 'Chat',
+    modelName: 'CommentLike',
   });
-  return Chat;
+  return CommentLike;
 };

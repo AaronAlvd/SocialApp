@@ -28,9 +28,9 @@ function Navigation() {
   return(
     <>
       <div className='Navigation-div-topBar'>
-        <div className='div-leftNav'></div>
-        <div className='div-rightNav'>
-          <FontAwesomeIcon icon={faUserCircle} id="faUser" onClick={() => setUserDrop(!userDrop)}/>
+        <div className='Navigation-div-leftNav'></div>
+        <div className='Navigation-div-rightNav'>
+          <FontAwesomeIcon icon={faUserCircle} className="Navigation-icon" onClick={() => setUserDrop(!userDrop)}/>
           {userDrop && <UserDropdown />}
         </div>
       </div>

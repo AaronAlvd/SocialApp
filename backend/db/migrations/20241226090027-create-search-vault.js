@@ -2,36 +2,25 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Posts', {
+    await queryInterface.createTable('SearchVaults', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      search: {
         type: Sequelize.STRING,
-        unique: true,
+        allowNull: false,
       },
       userId: {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
           model: 'Users',
-          key: 'id',
+          key: 'id'
         },
         onDelete: 'CASCADE',
-      },
-      groupId: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        references: {
-          model: 'Groups',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
-      },
-      caption: {
-        type: Sequelize.TEXT,
-      },
-      photo: {
-        type: Sequelize.BLOB,
       },
       createdAt: {
         allowNull: false,
@@ -44,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Posts');
+    await queryInterface.dropTable('SearchVaults');
   }
 };

@@ -1,56 +1,106 @@
 const express = require('express');
 const { v4: uuid } = require('uuid');
 const { User, Follow, Post, Like } = require('../../db/models');
+const { Op } = require('sequelize');
 const { check } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const { validateSignup } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { json } = require('sequelize');
-
-
 const router = express.Router();
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id/posts', requireAuth, async (req, res, next) => {
+  try{
+    const userId = req.user.id;
+    const { id } = req.params;
+    const user = await User.findByPk(id, { attributes: ['status']});
+
+    if (!user) {
+      throw { status: 404, title: 'Resource Not Found', message: 'User not found' };
+    }
+    
+    if (user.status === 'public') {
+      const posts = await Post.findAll({ where: { userId: id }, attributes: ['id', 'userId', 'caption', 'photo']});
+      return res.json(posts)
+    }
+
+    const isFollowing = await Follow.findAll({ where: { followedId: id, followerId: userId }});
+
+    if (isFollowing.length > 0) {
+      const posts = await Post.findOne({ where: { userId: id }, attributes: ['id', 'userId', 'caption', 'photo']});
+      return res.json(posts)
+    }
+
+    throw { status: 403, title:'Forbidden', message: 'This account is private'};
+
+  } catch (error) {
+    next(error)
+  }
+});
+
+router.get('/:id/following', requireAuth, async (req, res, next) => {
+  try{
+    const id = req.params.id;
+
+    const following = await Follow.findAll({where: { followerId: id }, attributes: ['followedId']});
+    let users = new Array(following.length);
+
+    for (let i = 0; i < following.length; i++) {
+      const data = await User.findByPk(following[i].followedId, { attributes: ['id', 'firstName', 'lastName', 'username', 'profilePhoto']})
+      users[i] = data
+    }
+
+    res.json(users)
+  } catch(error) {
+    next(error)
+  }
+});
+
+router.get('/search/:query', requireAuth, async (req, res, next) => {
+  try {
+    const { query } = req.params;
+
+    if (!query) {
+      throw { status: 400, title: 'Invalid Request', message: 'Search query can not be blank'}
+    };
+
+    const users = await User.findAll({
+      where: {
+        username: { [Op.like]: query }
+      }, 
+      attributes: ['id', 'username', 'profilePhoto', 'firstName', 'lastName'],
+      limit: 20,
+    });
+
+    if (users.length === 0) throw { status: 404, title: 'Resource Not Found', message: 'User not found'}
+
+    res.status(200).json(users)
+
+  } catch (error) {
+    next(error)
+  }
+});
+
+router.get('/:id', requireAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
 
     const user = await User.findByPk(id, {
-      attributes: ['firstName', 'lastName', 'username', 'email', 'profilePhoto', 'bio', 'backgroundPhoto']
+      attributes: ['firstName', 'lastName', 'username', 'profilePhoto',  'status', 'backgroundPhoto'],
     });
-
-    const followers = await Follow.findAll({
-      where: {
-        followedId: id
-      },
-      attributes: ['followedId'],
-    });
-
-    const following = await Follow.findAll({
-      where: {
-        followerId: id
-      },
-      attributes: ['followerId'],
-    });
-
-    const posts = await Post.findAll({
-      where: {
-        userId: id
-      }
-    })
-
-    let likes = 0;
-
-    for (const post of posts) {
-      const postLikes = await Like.findAll({
-        where: {
-          postId: post.id,
-        },
-      });
-      likes += postLikes.length;
-    }
 
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      throw { status: 404, title: 'Resource Not Found', message: 'The requested resource was not found'}
+    }
+
+    const followers = await Follow.count({ where: { followedId: id }});
+    const following = await Follow.count({ where: { followerId: id }});
+    const posts = await Post.findAll({ where: { userId: id }});
+
+    let likes;
+    
+    for (const post of posts) {
+      likes += await Like.count({ where: { postId: post.id }});
     }
 
     res.json({
@@ -60,28 +110,6 @@ router.get('/:id', async (req, res, next) => {
       posts: posts.length,
       likes: likes,
     });
-
-  } catch(error) {
-    next(error)
-  }
-});
-
-router.get('/following', async (req, res, next) => {
-  try{
-    const id = req.params.id;
-
-    const following = await Follow.findAll({
-      where: {
-        followerId: id,
-      },
-      include: [
-        {
-          modal: User,
-          as: 'Following',
-          attributes: ['firstName', 'lastName', 'username', 'id']
-        }
-      ]
-    })
 
   } catch(error) {
     next(error)

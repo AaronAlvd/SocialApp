@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
       });
-      User.hasMany(models.Like, {
+      User.hasMany(models.PostLike, {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
       });
@@ -21,14 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
       });
-      User.hasMany(models.Group, {
-        foreignKey: 'ownerId',
-        onDelete: 'CASCADE'
-      });
       User.belongsToMany(models.Group, {
-        through: 'GroupUser',
+        through: 'GroupUsers',
+        as: 'User',
         foreignKey: 'userId',
         otherKey: 'groupId',
+        onDelete: 'CASCADE'
       });
       User.hasMany(models.Chat, {
         foreignKey: 'userId',
@@ -48,6 +46,15 @@ module.exports = (sequelize, DataTypes) => {
         otherKey: 'FollowerId',
         onDelete: 'CASCADE'
       });
+      User.hasMany(models.SearchVault, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+      })
+      User.hasMany(models.CommentLike, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      })
+
     }
   }
   User.init({
@@ -105,6 +112,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BLOB,
       defaultValue: null,
     },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'Public',
+    }
   }, {
     sequelize,
     modelName: 'User',

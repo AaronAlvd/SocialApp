@@ -10,14 +10,21 @@ const setPosts = (data) => {
 }
 
 export const getPosts = () => async (dispatch) => {
-  const response = await csrfFetch('api/post/following');
+  const response = await csrfFetch('/api/posts/following');
+  if (!response.ok) throw new Error('Failed to fetch posts');
+  const data = await response.json();
+  dispatch(setPosts(data));
+}
+
+export const getGroupPosts = () => async (dispatch) => {
+  const response = await csrfFetch('/api/posts/groups');
   if (!response.ok) throw new Error('Failed to fetch posts');
   const data = await response.json();
   dispatch(setPosts(data));
 }
 
 export const getPostDetail = (postId) => async (dispatch) => {
-  const response = await csrfFetch(`api/post/${postId}`);
+  const response = await csrfFetch(`/api/post/${postId}`);
   if (!response.ok) throw new Error('Failed to fetch posts');
   const data = await response.json();
   dispatch(setPosts(data));

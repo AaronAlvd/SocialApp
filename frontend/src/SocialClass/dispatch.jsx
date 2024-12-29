@@ -2,7 +2,6 @@ import Social from "./social";
 import * as postActions from '../store/post';
 import * as sessionActions from '../store/session';
 import * as likeActions from '../store/like';
-import * as userActions from '../store/user';
 
 export default class DispatchCalls extends Social {
   constructor(dispatch) {
@@ -12,6 +11,10 @@ export default class DispatchCalls extends Social {
   
   socialFeed() {
     this.dispatch(postActions.getPosts());
+  }
+
+  socialFeedGroups() {
+    this.dispatch(postActions.getGroupPosts())
   }
 
   RestoreUser() {
@@ -28,10 +31,6 @@ export default class DispatchCalls extends Social {
 
   handleDislike(data) {
     this.dispatch(likeActions.unlikePost(data));
-  }
-
-  UserProfile(data) {
-    this.dispatch(userActions.getUser(data));
   }
 
   SignupUser(data) {

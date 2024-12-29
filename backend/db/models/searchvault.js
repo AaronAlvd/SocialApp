@@ -1,47 +1,45 @@
 'use strict';
-const { Model } = require('sequelize');
+const {
+  Model
+} = require('sequelize');
+const { Sequelize } = require('.');
 module.exports = (sequelize, DataTypes) => {
-  class Chat extends Model {
+  class SearchVault extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Chat.belongsTo(models.User, {
+      SearchVault.belongsTo(models.User, {
         foreignKey: 'userId',
-        onDelete: 'CASCADE'
-      });
+        onDelete: 'CASCADE',
+      })
     }
   }
-  Chat.init({
+  SearchVault.init({
     id: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true,
       unique: true,
+      primaryKey: true,
     },
-    chatType: {
-      type: DataTypes.STRING,
+    search: {
       allowNull: false,
-      defaultValue: 'default',
-    },
-    role: {
       type: DataTypes.STRING,
-      defaultValue: 'default'
     },
     userId: {
-      type: DataTypes.STRING,
       allowNull: false,
+      type: DataTypes.STRING,
       references: {
         model: 'Users',
-        key: 'id'
+        key: 'id',
       },
       onDelete: 'CASCADE',
     },
   }, {
     sequelize,
-    modelName: 'Chat',
+    modelName: 'SearchVault',
   });
-  return Chat;
+  return SearchVault;
 };

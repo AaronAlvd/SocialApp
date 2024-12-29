@@ -2,22 +2,25 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Likes', {
+    await queryInterface.createTable('Groups', {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.STRING,
-        unique: true,
+        type: Sequelize.STRING
       },
-      userId: {
-        type: Sequelize.STRING,
+      groupName: {
         allowNull: false,
-      },
-      postId: {
         type: Sequelize.STRING,
       },
-      commentId: {
+      status: {
+        allowNull: false,
         type: Sequelize.STRING,
+      },
+      profilePhoto: {
+        type: Sequelize.BLOB,
+      },
+      backgroundPhoto: {
+        type: Sequelize.BLOB,
       },
       createdAt: {
         allowNull: false,
@@ -26,10 +29,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Likes');
+    await queryInterface.dropTable('Groups');
   }
 };

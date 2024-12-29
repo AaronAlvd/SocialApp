@@ -1,6 +1,8 @@
 import Post from './Post/Post';
+import GroupPost from './GroupPost/GroupPost';
 import { useEffect, useState, useMemo } from "react";
-import PostDetail from './PostDetail/PostDetail';
+import Stories from '../Stories/Stories';
+import Search from '../Search/Search';
 import './SocialFeed.css'
 import { Outlet } from 'react-router-dom';
 
@@ -10,7 +12,7 @@ export default function SocialFeed() {
 
   useEffect(() => {
     const handleResize = () => {
-      setWidth(window.innerHeight - 61); // Update height on window resize
+      setWidth(window.innerWidth - 61); // Update height on window resize
     };
 
     window.addEventListener('resize', handleResize);
@@ -24,11 +26,16 @@ export default function SocialFeed() {
     if (url === '/following') {
       return <Post/>
     } 
+    else if (url === '/groups') {
+      return <GroupPost />
+    }
   };
 
   return (
     <div className='SocialFeed-div' style={{width: width}}>
       {loadPage()}
+      <Search />
+      <Stories />
     </div>
   )
 }

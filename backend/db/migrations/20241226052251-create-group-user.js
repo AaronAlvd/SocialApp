@@ -2,47 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Messages', {
+    await queryInterface.createTable('GroupUsers', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.STRING,
-        unique: true,
-      },
-      chatId: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        references: {
-          model: 'Chats',
-          key: 'id'
-        },
-        onDelete: 'CASCADE'
       },
       userId: {
         allowNull: false,
         type: Sequelize.STRING,
         references: {
-          model: 'Chats',
-          key: 'id',
+          model: 'Users',
+          key: 'id'
         },
         onDelete: 'CASCADE'
       },
-      content: {
-        type: Sequelize.TEXT,
+      groupId: {
         allowNull: false,
-      },
-      attachment: {
         type: Sequelize.STRING,
-        allowNull: true,
+        references: {
+          model: 'Groups',
+          key: 'id'
+        },
+        onDelete: 'CASCADE'
+      },
+      role: {
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       createdAt: {
-        type: Sequelize.DATE,
         allowNull: false,
-        defaultValue: Sequelize.NOW,
-      },
-      readAt: {
-        type: Sequelize.DATE,
-        allowNull: true,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
@@ -51,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Messages');
+    await queryInterface.dropTable('GroupUsers');
   }
 };
