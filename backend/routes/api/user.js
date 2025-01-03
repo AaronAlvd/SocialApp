@@ -85,7 +85,10 @@ router.get('/:id', requireAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
 
-    const user = await User.findByPk(id, {
+    const user = await User.findOne({
+      where: {
+        [Op.or]: [{ id: id },{ username: id }]
+      }, 
       attributes: ['firstName', 'lastName', 'username', 'profilePhoto',  'status', 'backgroundPhoto'],
     });
 

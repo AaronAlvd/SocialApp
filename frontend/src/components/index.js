@@ -4,3 +4,4 @@ export { SocialFeed, PostDetail, Post } from './Posts';
 export { Page404 } from './Page404';
 export { CreatePost } from './Forms';
 export { UserProfile } from './User';
+export { default as Chats } from './Messages/Chats';

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import './Post.css';
 
 export default function Post() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const social = new Social();
@@ -67,7 +68,7 @@ export default function Post() {
       {sortedFeed.map((data) => {
         return (
           <div className="Post-div-box">
-            <div style={{display: 'flex'}}>
+            <div style={{display: 'flex'}} onClick={() => navigate(`/profile/${data.User.username}`)}>
               {data.User.profilePhoto ? <img src={social.convertImageToBase64(data.User.profilePhoto)} className="Post-img-profile" /> : <FontAwesomeIcon icon={faUserCircle} className="Post-img-profile"/>}
               <div>
                 <p className="Post-name">{data.User.firstName} {data.User.lastName}</p>

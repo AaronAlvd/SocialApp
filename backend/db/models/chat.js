@@ -2,15 +2,20 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Chat extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       Chat.belongsTo(models.User, {
+        as: 'User1',
         foreignKey: 'userId',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+      });
+      Chat.belongsTo(models.User, {
+        as: 'User2',
+        foreignKey: 'user2Id',
+        onDelete: 'CASCADE',
+      });
+      Chat.hasMany(models.Message, {
+        foreignKey: 'chatId',
+        onDelete: 'CASCADE',
       });
     }
   }
@@ -21,16 +26,16 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       unique: true,
     },
-    chatType: {
+    userId: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'default',
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
+      onDelete: 'CASCADE',
     },
-    role: {
-      type: DataTypes.STRING,
-      defaultValue: 'default'
-    },
-    userId: {
+    user2Id: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {

@@ -7,13 +7,16 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.STRING,
-        unique: true,
-      },
-      chatType: {
-        allowNull: false,
-        type: Sequelize.STRING,
       },
       userId: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'id',
+        }
+      },
+      user2Id: {
         allowNull: false,
         type: Sequelize.STRING,
         references: {

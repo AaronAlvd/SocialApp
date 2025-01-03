@@ -8,7 +8,6 @@ export const likePost = (data) => async () => {
     },
     body: JSON.stringify({
       postId: data.postId,
-      commentId: data.commentId,
     })
   });
 
@@ -25,7 +24,6 @@ export const unlikePost = (data) => async () => {
     },
     body: JSON.stringify({
       postId: data.postId,
-      commentId: data.commentId,
     })
   });
 

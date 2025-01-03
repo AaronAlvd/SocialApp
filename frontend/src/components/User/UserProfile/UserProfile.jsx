@@ -35,10 +35,6 @@ export default function UserProfile() {
     };
   }, [dispatch, reload]);
 
-  useEffect(() => {
-    dispatchCalls.UserProfile(userId);
-  }, [dispatch]);
-
   function viewFollowers() {
 
   }

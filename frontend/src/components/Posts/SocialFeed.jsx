@@ -2,7 +2,7 @@ import Post from './Post/Post';
 import GroupPost from './GroupPost/GroupPost';
 import { useEffect, useState, useMemo } from "react";
 import Stories from '../Stories/Stories';
-import Search from '../Search/Search';
+import Ads from '../Ads/Ads';
 import './SocialFeed.css'
 import { Outlet } from 'react-router-dom';
 
@@ -34,7 +34,7 @@ export default function SocialFeed() {
   return (
     <div className='SocialFeed-div' style={{width: width}}>
       {loadPage()}
-      <Search />
+      <Ads/>
       <Stories />
     </div>
   )

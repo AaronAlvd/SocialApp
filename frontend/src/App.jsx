@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation, SocialFeed, Page404, CreatePost, PostDetail, UserProfile, Post } from './components';
+import { Navigation, SocialFeed, Page404, CreatePost, PostDetail, UserProfile, Post, Chats } from './components';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import './index.css'
@@ -37,6 +37,19 @@ const router = createBrowserRouter([
         children: [
 
         ]
+      },
+      {
+        path: 'profile',
+        children: [
+          {
+            path: ':userId',
+            element: <UserProfile />
+          }
+        ]
+      },
+      {
+        path: 'messages',
+        element: <Chats />
       },
       {
         path: '*',

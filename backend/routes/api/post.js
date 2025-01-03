@@ -98,7 +98,7 @@ router.get('/groups', requireAuth, async (req, res, next) => {
         include: [
           {
             model: User,
-            attributes: ['username']
+            attributes: ['username', 'firstName', 'lastName', 'profilePhoto']
           },
           {
             model: PostLike,

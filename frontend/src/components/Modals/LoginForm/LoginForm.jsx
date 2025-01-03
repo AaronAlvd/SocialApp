@@ -23,9 +23,6 @@ export default function LoginForm() {
       closeModal
       window.location.reload();
     })
-    .catch(() => {
-
-    })
   };
 
   return (
@@ -46,7 +43,7 @@ export default function LoginForm() {
           <small className='LoginForm-small'>Forgot Password?</small>
         </div>
         <div className="LoginForm-div-formButton">
-          <button className="LoginForm-button">Login</button>
+          <button className="LoginForm-button" onClick={(e) => handleSubmit(e)}>Login</button>
         </div>
       </form>
     </div>

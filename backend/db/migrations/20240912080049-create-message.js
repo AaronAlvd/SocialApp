@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
         references: {
-          model: 'Chats',
+          model: 'Users',
           key: 'id',
         },
         onDelete: 'CASCADE'

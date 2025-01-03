@@ -29,7 +29,13 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       });
       User.hasMany(models.Chat, {
+        as: 'User1',
         foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      });
+      User.hasMany(models.Chat, {
+        as: 'User2',
+        foreignKey: 'user2Id',
         onDelete: 'CASCADE'
       });
       User.belongsToMany(models.User, {

@@ -2,6 +2,7 @@ import Social from "./social";
 import * as postActions from '../store/post';
 import * as sessionActions from '../store/session';
 import * as likeActions from '../store/like';
+import * as messageActions from '../store/messages';
 
 export default class DispatchCalls extends Social {
   constructor(dispatch) {
@@ -15,6 +16,10 @@ export default class DispatchCalls extends Social {
 
   socialFeedGroups() {
     this.dispatch(postActions.getGroupPosts())
+  }
+
+  chats() {
+    this.dispatch(messageActions.fetchChats())
   }
 
   RestoreUser() {
@@ -35,5 +40,9 @@ export default class DispatchCalls extends Social {
 
   SignupUser(data) {
     this.dispatch(sessionActions.signUpUser(data))
+  }
+
+  UserProfile(data) {
+    this.dispatch()
   }
 }
