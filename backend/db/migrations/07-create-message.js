@@ -59,6 +59,6 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     options.tableName = 'Messages';
-    await queryInterface.dropTable('Messages');
+    await queryInterface.dropTable(options);
   }
 };

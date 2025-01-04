@@ -40,6 +40,6 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     options.tableName = 'CommentLikes';
-    await queryInterface.dropTable('CommentLikes');
+    await queryInterface.dropTable(options);
   }
 };

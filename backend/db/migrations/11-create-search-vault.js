@@ -41,6 +41,6 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     options.tableName = 'SearchVaults';
-    await queryInterface.dropTable('SearchVaults');
+    await queryInterface.dropTable(options);
   }
 };
