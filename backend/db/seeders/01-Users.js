@@ -842,7 +842,7 @@ module.exports = {
       lastName: 'Doe',
       username: 'johndoe',
       email: 'johndoe@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -851,7 +851,7 @@ module.exports = {
       lastName: 'Smith',
       username: 'janesmith',
       email: 'janesmith@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -860,7 +860,7 @@ module.exports = {
       lastName: 'Johnson',
       username: 'alicejohnson',
       email: 'alicejohnson@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -869,7 +869,7 @@ module.exports = {
       lastName: 'Williams',
       username: 'bobwilliams',
       email: 'bobwilliams@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -878,7 +878,7 @@ module.exports = {
       lastName: 'Brown',
       username: 'charliebrown',
       email: 'charliebrown@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -887,7 +887,7 @@ module.exports = {
       lastName: 'Martinez',
       username: 'dianamartinez',
       email: 'dianamartinez@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -896,7 +896,7 @@ module.exports = {
       lastName: 'Davis',
       username: 'evandavis',
       email: 'evandavis@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -905,7 +905,7 @@ module.exports = {
       lastName: 'Miller',
       username: 'fionamiller',
       email: 'fionamiller@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -914,7 +914,7 @@ module.exports = {
       lastName: 'Wilson',
       username: 'georgewilson',
       email: 'georgewilson@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -923,7 +923,7 @@ module.exports = {
       lastName: 'Moore',
       username: 'helenmoore',
       email: 'helenmoore@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -932,7 +932,7 @@ module.exports = {
       lastName: 'Taylor',
       username: 'ivytaylor',
       email: 'ivytaylor@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -941,7 +941,7 @@ module.exports = {
       lastName: 'Anderson',
       username: 'jackanderson',
       email: 'jackanderson@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -950,7 +950,7 @@ module.exports = {
       lastName: 'Thomas',
       username: 'kathythomas',
       email: 'kathythomas@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -959,7 +959,7 @@ module.exports = {
       lastName: 'Jackson',
       username: 'leojackson',
       email: 'leojackson@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -968,7 +968,7 @@ module.exports = {
       lastName: 'White',
       username: 'miawhite',
       email: 'miawhite@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -977,7 +977,7 @@ module.exports = {
       lastName: 'Chavez',
       username: 'zarachavez',
       email: 'zarachavez@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -986,7 +986,7 @@ module.exports = {
       lastName: 'Knight',
       username: 'quentinknight',
       email: 'quentinknight@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -995,7 +995,7 @@ module.exports = {
       lastName: 'Frost',
       username: 'elarafrost',
       email: 'elarafrost@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1004,7 +1004,7 @@ module.exports = {
       lastName: 'Graham',
       username: 'thaddeusgraham',
       email: 'thaddeusgraham@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1013,7 +1013,7 @@ module.exports = {
       lastName: 'Wells',
       username: 'leonawells',
       email: 'leonawells@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1022,7 +1022,7 @@ module.exports = {
       lastName: 'Sharp',
       username: 'milosharp',
       email: 'milosharp@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1031,7 +1031,7 @@ module.exports = {
       lastName: 'Cole',
       username: 'viviennecole',
       email: 'viviennecole@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1040,7 +1040,7 @@ module.exports = {
       lastName: 'Miller',
       username: 'jorikmiller',
       email: 'jorikmiller@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1049,7 +1049,7 @@ module.exports = {
       lastName: 'Barrett',
       username: 'selenebarrett',
       email: 'selenebarrett@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1058,7 +1058,7 @@ module.exports = {
       lastName: 'Ross',
       username: 'xanderross',
       email: 'xanderross@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1067,7 +1067,7 @@ module.exports = {
       lastName: 'Scott',
       username: 'amirascott',
       email: 'amirascott@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1076,7 +1076,7 @@ module.exports = {
       lastName: 'Fox',
       username: 'dorianfox',
       email: 'dorianfox@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1085,7 +1085,7 @@ module.exports = {
       lastName: 'Cross',
       username: 'astridcross',
       email: 'astridcross@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1094,7 +1094,7 @@ module.exports = {
       lastName: 'Stewart',
       username: 'paxstewart',
       email: 'paxstewart@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1103,7 +1103,7 @@ module.exports = {
       lastName: 'Hayes',
       username: 'indirahayes',
       email: 'indirahayes@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1112,7 +1112,7 @@ module.exports = {
       lastName: 'Banks',
       username: 'omarbanks',
       email: 'omarbanks@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1121,7 +1121,7 @@ module.exports = {
       lastName: 'King',
       username: 'helenaking',
       email: 'helenaking@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1130,7 +1130,7 @@ module.exports = {
       lastName: 'Vega',
       username: 'hugovega',
       email: 'hugovega@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1139,7 +1139,7 @@ module.exports = {
       lastName: 'Fletcher',
       username: 'matildafletcher',
       email: 'matildafletcher@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1148,7 +1148,7 @@ module.exports = {
       lastName: 'Gibson',
       username: 'percivalgibson',
       email: 'percivalgibson@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1157,7 +1157,7 @@ module.exports = {
       lastName: 'Marshall',
       username: 'opheliamarshall',
       email: 'opheliamarshall@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1166,7 +1166,7 @@ module.exports = {
       lastName: 'Harrison',
       username: 'larsharrison',
       email: 'larsharrison@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1175,7 +1175,7 @@ module.exports = {
       lastName: 'Parker',
       username: 'leifparker',
       email: 'leifparker@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1184,7 +1184,7 @@ module.exports = {
       lastName: 'Lambert',
       username: 'ivylambert',
       email: 'ivylambert@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1193,7 +1193,7 @@ module.exports = {
       lastName: 'Bailey',
       username: 'zanebailey',
       email: 'zanebailey@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1202,7 +1202,7 @@ module.exports = {
       lastName: 'Roberts',
       username: 'sylviaroberts',
       email: 'sylviaroberts@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1211,7 +1211,7 @@ module.exports = {
       lastName: 'Morris',
       username: 'theomorris',
       email: 'theomorris@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1220,7 +1220,7 @@ module.exports = {
       lastName: 'Bennett',
       username: 'maiabennett',
       email: 'maiabennett@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1229,7 +1229,7 @@ module.exports = {
       lastName: 'Ward',
       username: 'alistairward',
       email: 'alistairward@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1238,7 +1238,7 @@ module.exports = {
       lastName: 'Baker',
       username: 'veronicabaker',
       email: 'veronicabaker@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1247,7 +1247,7 @@ module.exports = {
       lastName: 'Shaw',
       username: 'maximusshaw',
       email: 'maximusshaw@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1256,7 +1256,7 @@ module.exports = {
       lastName: 'Lee',
       username: 'seraphinalee',
       email: 'seraphinalee@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1265,7 +1265,7 @@ module.exports = {
       lastName: 'Davis',
       username: 'luciandavis',
       email: 'luciandavis@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1274,7 +1274,7 @@ module.exports = {
       lastName: 'Martinez',
       username: 'aureliamartinez',
       email: 'aureliamartinez@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1283,7 +1283,7 @@ module.exports = {
       lastName: 'Ramirez',
       username: 'gideonramirez',
       email: 'gideonramirez@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1292,7 +1292,7 @@ module.exports = {
       lastName: 'Brooks',
       username: 'isabellabrooks',
       email: 'isabellabrooks@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1301,7 +1301,7 @@ module.exports = {
       lastName: 'Jenkins',
       username: 'cadenjenkins',
       email: 'cadenjenkins@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1310,7 +1310,7 @@ module.exports = {
       lastName: 'Clark',
       username: 'adelaideclark',
       email: 'adelaideclark@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1319,7 +1319,7 @@ module.exports = {
       lastName: 'Nguyen',
       username: 'rowannguyen',
       email: 'rowannguyen@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1328,7 +1328,7 @@ module.exports = {
       lastName: 'Gomez',
       username: 'thaliagomez',
       email: 'thaliagomez@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1337,7 +1337,7 @@ module.exports = {
       lastName: 'Patterson',
       username: 'jasperpatterson',
       email: 'jasperpatterson@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1346,7 +1346,7 @@ module.exports = {
       lastName: 'Harrison',
       username: 'ninaharrison',
       email: 'ninaharrison@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1355,7 +1355,7 @@ module.exports = {
       lastName: 'Mitchell',
       username: 'zanemitchell',
       email: 'zanemitchell@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1364,7 +1364,7 @@ module.exports = {
       lastName: 'Carter',
       username: 'elaracarter',
       email: 'elaracarter@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1373,7 +1373,7 @@ module.exports = {
       lastName: 'Scott',
       username: 'eliasscott',
       email: 'eliasscott@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1382,7 +1382,7 @@ module.exports = {
       lastName: 'Dunn',
       username: 'lenadunn',
       email: 'lenadunn@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1391,7 +1391,7 @@ module.exports = {
       lastName: 'Watson',
       username: 'calebwatson',
       email: 'calebwatson@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1400,7 +1400,7 @@ module.exports = {
       lastName: 'Roberts',
       username: 'miraroberts',
       email: 'miraroberts@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1409,7 +1409,7 @@ module.exports = {
       lastName: 'King',
       username: 'violetking',
       email: 'violetking@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1418,7 +1418,7 @@ module.exports = {
       lastName: 'Fisher',
       username: 'theofisher',
       email: 'theofisher@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1427,7 +1427,7 @@ module.exports = {
       lastName: 'Gray',
       username: 'liviagray',
       email: 'liviagray@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1436,7 +1436,7 @@ module.exports = {
       lastName: 'Morris',
       username: 'owenmorris',
       email: 'owenmorris@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1445,7 +1445,7 @@ module.exports = {
       lastName: 'Baker',
       username: 'sophiabaker',
       email: 'sophiabaker@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1454,7 +1454,7 @@ module.exports = {
       lastName: 'Griffith',
       username: 'sebastiangriffith',
       email: 'sebastiangriffith@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1463,7 +1463,7 @@ module.exports = {
       lastName: 'Turner',
       username: 'beatrixturner',
       email: 'beatrixturner@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1472,7 +1472,7 @@ module.exports = {
       lastName: 'Meyer',
       username: 'zarameyer',
       email: 'zarameyer@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1481,7 +1481,7 @@ module.exports = {
       lastName: 'Grant',
       username: 'ellisgrant',
       email: 'ellisgrant@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1490,7 +1490,7 @@ module.exports = {
       lastName: 'Stone',
       username: 'siennastone',
       email: 'siennastone@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1499,7 +1499,7 @@ module.exports = {
       lastName: 'Parker',
       username: 'theoparker',
       email: 'theoparker@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1508,7 +1508,7 @@ module.exports = {
       lastName: 'Bennett',
       username: 'junobennett',
       email: 'junobennett@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1517,7 +1517,7 @@ module.exports = {
       lastName: 'Roberts',
       username: 'veraroberts',
       email: 'veraroberts@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1526,7 +1526,7 @@ module.exports = {
       lastName: 'Gray',
       username: 'xandergray',
       email: 'xandergray@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1535,7 +1535,7 @@ module.exports = {
       lastName: 'Cooper',
       username: 'marinacooper',
       email: 'marinacooper@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1544,7 +1544,7 @@ module.exports = {
       lastName: 'Mills',
       username: 'elliemills',
       email: 'elliemills@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1553,7 +1553,7 @@ module.exports = {
       lastName: 'Hughes',
       username: 'dylanhughes',
       email: 'dylanhughes@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1562,7 +1562,7 @@ module.exports = {
       lastName: 'Simmons',
       username: 'lanasimmons',
       email: 'lanasimmons@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1571,7 +1571,7 @@ module.exports = {
       lastName: 'Morris',
       username: 'zekemorris',
       email: 'zekemorris@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1580,7 +1580,7 @@ module.exports = {
       lastName: 'Foster',
       username: 'aidanfoster',
       email: 'aidanfoster@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1589,7 +1589,7 @@ module.exports = {
       lastName: 'Watts',
       username: 'alinawatts',
       email: 'alinawatts@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1598,7 +1598,7 @@ module.exports = {
       lastName: 'Vega',
       username: 'nicovega',
       email: 'nicovega@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1607,7 +1607,7 @@ module.exports = {
       lastName: 'Garcia',
       username: 'amosgarcia',
       email: 'amosgarcia@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1616,7 +1616,7 @@ module.exports = {
       lastName: 'Hawkins',
       username: 'keirahawkins',
       email: 'keirahawkins@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1625,7 +1625,7 @@ module.exports = {
       lastName: 'Kennedy',
       username: 'benjikenedy',
       email: 'benjikenedy@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1634,7 +1634,7 @@ module.exports = {
       lastName: 'Patterson',
       username: 'maxpatterson',
       email: 'maxpatterson@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1643,7 +1643,7 @@ module.exports = {
       lastName: 'Bryant',
       username: 'ivybryant',
       email: 'ivybryant@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1652,7 +1652,7 @@ module.exports = {
       lastName: 'Riley',
       username: 'edenriley',
       email: 'edenriley@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1661,7 +1661,7 @@ module.exports = {
       lastName: 'Cameron',
       username: 'lucacameron',
       email: 'lucacameron@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1670,7 +1670,7 @@ module.exports = {
       lastName: 'Taylor',
       username: 'jadetaylor',
       email: 'jadetaylor@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1679,7 +1679,7 @@ module.exports = {
       lastName: 'King',
       username: 'lucasking',
       email: 'lucasking@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1688,7 +1688,7 @@ module.exports = {
       lastName: 'Manning',
       username: 'leahmanning',
       email: 'leahmanning@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1697,7 +1697,7 @@ module.exports = {
       lastName: 'Caldwell',
       username: 'lydcaldwell',
       email: 'lydcaldwell@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1706,7 +1706,7 @@ module.exports = {
       lastName: 'Montgomery',
       username: 'vicmonty',
       email: 'vicmonty@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1715,7 +1715,7 @@ module.exports = {
       lastName: 'Stewart',
       username: 'miastewart',
       email: 'miastewart@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1724,7 +1724,7 @@ module.exports = {
       lastName: 'Brooks',
       username: 'ethanbrooks',
       email: 'ethanbrooks@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1733,7 +1733,7 @@ module.exports = {
       lastName: 'Nguyen',
       username: 'tessnguyen',
       email: 'tessnguyen@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1742,7 +1742,7 @@ module.exports = {
       lastName: 'Williams',
       username: 'danwilliams',
       email: 'danwilliams@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1751,7 +1751,7 @@ module.exports = {
       lastName: 'Parker',
       username: 'natalieparker',
       email: 'natalieparker@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1760,7 +1760,7 @@ module.exports = {
       lastName: 'Thompson',
       username: 'lucasthomp',
       email: 'lucasthomp@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1769,7 +1769,7 @@ module.exports = {
       lastName: 'Davis',
       username: 'chloedavis',
       email: 'chloedavis@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1778,7 +1778,7 @@ module.exports = {
       lastName: 'Evans',
       username: 'aidenevans',
       email: 'aidenevans@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1787,7 +1787,7 @@ module.exports = {
       lastName: 'Lee',
       username: 'sophialee',
       email: 'sophialee@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1796,7 +1796,7 @@ module.exports = {
       lastName: 'Walker',
       username: 'henrywalker',
       email: 'henrywalker@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1805,7 +1805,7 @@ module.exports = {
       lastName: 'Allen',
       username: 'abigailallen',
       email: 'abigailallen@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1814,7 +1814,7 @@ module.exports = {
       lastName: 'Garcia',
       username: 'sebgarcia',
       email: 'sebgarcia@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1823,7 +1823,7 @@ module.exports = {
       lastName: 'Hernandez',
       username: 'jasminehern',
       email: 'jasminehern@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1832,7 +1832,7 @@ module.exports = {
       lastName: 'Mitchell',
       username: 'masonmitchell',
       email: 'masonmitchell@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1841,7 +1841,7 @@ module.exports = {
       lastName: 'Perez',
       username: 'emilyperez',
       email: 'emilyperez@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1850,7 +1850,7 @@ module.exports = {
       lastName: 'Roberts',
       username: 'jackroberts',
       email: 'jackroberts@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1859,7 +1859,7 @@ module.exports = {
       lastName: 'Johnson',
       username: 'oliviajohnson',
       email: 'oliviajohnson@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1868,7 +1868,7 @@ module.exports = {
       lastName: 'Wilson',
       username: 'ameliawilson',
       email: 'ameliawilson@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1877,7 +1877,7 @@ module.exports = {
       lastName: 'Taylor',
       username: 'lucastaylor',
       email: 'lucastaylor@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1886,7 +1886,7 @@ module.exports = {
       lastName: 'Martin',
       username: 'liammartin',
       email: 'liammartin@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1895,7 +1895,7 @@ module.exports = {
       lastName: 'Brown',
       username: 'zoebrown',
       email: 'zoebrown@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1904,7 +1904,7 @@ module.exports = {
       lastName: 'Green',
       username: 'chasegreen',
       email: 'chasegreen@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1913,7 +1913,7 @@ module.exports = {
       lastName: 'King',
       username: 'mayaking',
       email: 'mayaking@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1922,7 +1922,7 @@ module.exports = {
       lastName: 'Johnson',
       username: 'alicej123',
       email: 'alicej123@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1931,7 +1931,7 @@ module.exports = {
       lastName: 'Smith',
       username: 'bobsmith456',
       email: 'bobsmith456@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1940,7 +1940,7 @@ module.exports = {
       lastName: 'Lee',
       username: 'cathylee789',
       email: 'cathylee789@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1949,7 +1949,7 @@ module.exports = {
       lastName: 'Brown',
       username: 'davidbrown234',
       email: 'davidbrown234@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1958,7 +1958,7 @@ module.exports = {
       lastName: 'Taylor',
       username: 'evataylor567',
       email: 'evataylor567@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1967,7 +1967,7 @@ module.exports = {
       lastName: 'Wilson',
       username: 'frankwilson890',
       email: 'frankwilson890@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1976,7 +1976,7 @@ module.exports = {
       lastName: 'Davis',
       username: 'gracedavis123',
       email: 'gracedavis123@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1985,7 +1985,7 @@ module.exports = {
       lastName: 'Miller',
       username: 'henrymiller234',
       email: 'henrymiller234@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -1994,7 +1994,7 @@ module.exports = {
       lastName: 'Moore',
       username: 'islamoore345',
       email: 'islamoore345@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2003,7 +2003,7 @@ module.exports = {
       lastName: 'Garcia',
       username: 'jackgarcia456',
       email: 'jackgarcia456@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2012,7 +2012,7 @@ module.exports = {
       lastName: 'Martinez',
       username: 'kathymartinez567',
       email: 'kathymartinez567@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2021,7 +2021,7 @@ module.exports = {
       lastName: 'Rodriguez',
       username: 'leorodriguez678',
       email: 'leorodriguez678@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2030,7 +2030,7 @@ module.exports = {
       lastName: 'Lopez',
       username: 'mialopez789',
       email: 'mialopez789@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2039,7 +2039,7 @@ module.exports = {
       lastName: 'Hernandez',
       username: 'ninahernandez890',
       email: 'ninahernandez890@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2048,7 +2048,7 @@ module.exports = {
       lastName: 'Clark',
       username: 'oscarclark234',
       email: 'oscarclark234@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2057,7 +2057,7 @@ module.exports = {
       lastName: 'Lewis',
       username: 'paullewis345',
       email: 'paullewis345@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2066,7 +2066,7 @@ module.exports = {
       lastName: 'Young',
       username: 'quincyyoung456',
       email: 'quincyyoung456@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2075,7 +2075,7 @@ module.exports = {
       lastName: 'King',
       username: 'rachelking567',
       email: 'rachelking567@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2084,7 +2084,7 @@ module.exports = {
       lastName: 'Scott',
       username: 'samuelscott678',
       email: 'samuelscott678@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2093,7 +2093,7 @@ module.exports = {
       lastName: 'Adams',
       username: 'tinaadams789',
       email: 'tinaadams789@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2102,7 +2102,7 @@ module.exports = {
       lastName: 'Baker',
       username: 'ursulabaker234',
       email: 'ursulabaker234@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2111,7 +2111,7 @@ module.exports = {
       lastName: 'Nelson',
       username: 'victornelson345',
       email: 'victornelson345@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2120,7 +2120,7 @@ module.exports = {
       lastName: 'Carter',
       username: 'wendycarter456',
       email: 'wendycarter456@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2129,7 +2129,7 @@ module.exports = {
       lastName: 'Mitchell',
       username: 'xandermitchell567',
       email: 'xandermitchell567@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     },
     {
@@ -2138,7 +2138,7 @@ module.exports = {
       lastName: 'Perez',
       username: 'yaraperez678',
       email: 'yaraperez678@example.com',
-      password: bcrypt.hashSync(''),
+      password: bcrypt.hashSync('password'),
       profilePhoto: null,
     }
    ])
