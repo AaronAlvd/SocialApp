@@ -2,6 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    options.tableName = 'CommentLikes';
     await queryInterface.createTable('CommentLikes', {
       id: {
         allowNull: false,
@@ -35,9 +36,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    }, options);
   },
   async down(queryInterface, Sequelize) {
+    options.tableName = 'CommentLikes';
     await queryInterface.dropTable('CommentLikes');
   }
 };
