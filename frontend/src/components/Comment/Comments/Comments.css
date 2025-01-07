@@ -1,27 +1,63 @@
 .Comments-div{
-  display: flex;
   padding: 10px 0 10px 0;
-  width: 65vw;
+  width: 45vw;
+}
+.Comments-box{
+  display: flex;
+  margin: 13px 0;
+  cursor: default;
+  width: 100%;
+}
+.Comments-box-column-2{
+  margin-left: 5px;
+}
+.Comments-profilePhoto{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 .Comments-username{
   font-size: 12px;
-  font-weight: bold;
-}
-.Comments-comment{
-  font-size: 14px;
-  font-weight: 100;
-  margin-top: 5px;
+  font-weight: 600;
   margin-bottom: 5px;
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
 }
-.Comments-icon{
-  font-size: 25px;
+.Comments-text{
+  font-size: 14px;
 }
-.Comments-div-photo{
+.Comments-reply{
+  margin-top: 5px;
   margin-right: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
-.Comments-photo{
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  object-position: center;
+.Comments-text_input{
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin-left: 5px;
+  font-size: 14px;
+  width: 35vw;
+  border-radius: 10px;
+  padding-left: 15px;
+}
+.Comments-text_input:focus{
+  outline: none;
+}
+.Comments-label{
+  position: relative;
+  height: 0;
+  width: 0;
+  white-space: nowrap;
+  font-size: 14px;
+  transform: translate(21px, 11px);
+  cursor: text;
+}
+.Comments-submit{
+  margin-bottom: 5px;
+  margin-left: 10px;
 }

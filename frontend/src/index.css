@@ -1,8 +1,10 @@
 * {
   font-family: 'Helvetica';
-  background-color: rgb(255, 255, 255);
   color: black;
   margin: 0;
+}
+body, html {
+  background-color: rgb(237, 237, 237);
 }
 button{
   cursor: pointer;

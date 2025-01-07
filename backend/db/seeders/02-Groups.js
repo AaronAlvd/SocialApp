@@ -35,6 +35,7 @@ module.exports = {
       where: {
         [Op.or]: [
           { id: 'acd44161-0ce5-44c3-8bb6-b0e983857aac' },
+          { id: 'default' }
         ]
       }
     })

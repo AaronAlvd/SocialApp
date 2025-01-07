@@ -1,6 +1,0 @@
-.SocialFeed-div {
-  transform: translateX(201px);
-  display: grid;
-  grid-template-columns: min-content auto 46px;
-  grid-template-areas: 'col1 col2 col3';
-}

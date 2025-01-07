@@ -1,8 +1,11 @@
 .Chats-div{
-  transform: translateX(201px);
+  width: 70%;
+  overflow: hidden;
 }
 .Chats-section1{
   display: grid;
+  width: 100%;
+  box-sizing: border-box;
   grid-template-columns: 1fr min-content;
   padding: 10px;
   text-align: center;
@@ -13,23 +16,28 @@
 .Chats-section{
   display: flex;
   margin: 10px;
+  cursor: pointer;
 }
 .Chats-profilePhoto{
-  height: 45px;
-  width: 45px;
+  height: 35px;
+  width: 35px;
   background-position: center;
   border-radius: 50%;
   margin-right: 7px;
+  border: 1px solid black;
 }
 .Chats-column2{
+
 }
 .Chats-name{
-  font-size: 15px;
-  margin-bottom: 3px;
+  font-size: 13px;
+  margin-bottom: 5px;
   font-weight: 600;
 }
 .Chats-text{
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
 }
 

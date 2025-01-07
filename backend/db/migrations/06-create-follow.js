@@ -25,7 +25,7 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
-      followedId: {
+      followingId: {
         type: Sequelize.STRING,
         allowNull: false,
         references: {

@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
       });
       PostLike.belongsTo(models.Post, {
+        as: 'Likes',
         foreignKey: 'postId',
         onDelete: 'CASCADE',
       });

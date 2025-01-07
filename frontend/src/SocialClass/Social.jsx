@@ -5,6 +5,9 @@ export default class Social {
   }
 
   sortByDate(data) {
+
+    if (!data) return null;
+
     const dataCopy = [...data];
   
     return dataCopy.sort((a, b) => {

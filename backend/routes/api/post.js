@@ -1,10 +1,44 @@
 const express = require('express');
-const { Post, Comment, User, Follow, PostLike, GroupUser, Group } = require('../../db/models');
-const { Op } = require('sequelize')
+const { Post, Comment, User, Follow, PostLike, GroupUser, Group, CommentLike } = require('../../db/models');
+const { Op, Sequelize } = require('sequelize')
 const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 
 
+router.get('/comments/:id', requireAuth, async (req, res, next) => {
+  try {
+    const id = req.params.id;
+
+    const post = await Post.findByPk(id, {
+      attributes: [],
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'postId', 'comment'],
+          include: [
+            {
+              model: User,
+              attributes: ['id', 'username', 'profilePhoto']
+            },
+            {
+              model: CommentLike,
+              attributes: ['id'],
+            }
+          ]
+        },
+      ]
+    });
+
+    if (!post) {
+      throw {status: 404, title: 'Resource Not Found', message: 'Post Not Found'}
+    }
+
+    return res.json(post.Comments);
+
+  } catch(error) {
+    next(error)
+  }
+});
 
 router.get('/following', requireAuth, async (req, res, next) => {
   try {
@@ -29,22 +63,16 @@ router.get('/following', requireAuth, async (req, res, next) => {
         },
         {
           model: Comment,
-          attributes: ['userId', 'postId', 'comment'],
-          include: [
-            { 
-              model: User, 
-              attributes: ['username', 'id', 'profilePhoto']
-            }
-          ]
+          attributes: ['id']
         }
-      ]
+      ],
     })
 
     myPosts.forEach((post) => posts.push(post));
 
     for (let data of following) {
       const post = await Post.findAll({ 
-        where: { userId: data.followedId, groupId: 'default' },
+        where: { userId: data.followingId, groupId: 'default' },
         include: [
           {
             model: User,
@@ -57,15 +85,9 @@ router.get('/following', requireAuth, async (req, res, next) => {
           },
           {
             model: Comment,
-            attributes: ['userId', 'postId', 'comment'],
-            include: [
-              { 
-                model: User, 
-                attributes: ['username', 'id', 'profilePhoto']
-              }
-            ]
+            attributes: ['id']
           }
-        ]
+        ],
       });
       
       if (post) {
@@ -107,18 +129,8 @@ router.get('/groups', requireAuth, async (req, res, next) => {
           },
           {
             model: Group,
-            attributes: ['profilePhoto', 'id']
+            attributes: ['groupName','profilePhoto', 'id']
           },
-          {
-            model: Comment,
-            attributes: ['userId', 'postId', 'comment'],
-            include: [
-              { 
-                model: User, 
-                attributes: ['username', 'id', 'profilePhoto']
-              }
-            ]
-          }
         ],
       })
       Posts.push(...data)

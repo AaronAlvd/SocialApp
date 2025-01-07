@@ -1,11 +1,12 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation, SocialFeed, Page404, CreatePost, PostDetail, UserProfile, Post, Chats } from './components';
+import { Navigation, Page404, CreatePost, PostDetail, UserProfile, Post, Chats, GroupPost} from './components';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import './index.css'
 
 function Layout() {
   const dispatch = useDispatch();
+  const [width, setWidth] = useState(window.innerWidth - 201)
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser());
@@ -14,7 +15,9 @@ function Layout() {
   return (
     <>
      <Navigation />
-     <Outlet />
+     <div style={{transform: 'translateX(201px)', width: `${width}px`}} >
+      <Outlet/>
+     </div>
     </>
   )
 }
@@ -26,14 +29,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'following',
-        element: <SocialFeed />,
+        element: <Post />,
         children: [
-        
+          {
+            path: ':postId',
+            element: <Post />
+          },
         ]
       },
       {
         path: 'groups',
-        element: <SocialFeed />,
+        element: <GroupPost />,
         children: [
 
         ]

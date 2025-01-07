@@ -1,6 +1,6 @@
 .UserDropdown-ul {
   position: absolute;
-  transform: translate(-10px, 80px);
+  transform: translate(0, 70px);
   list-style-type: none;
   font-family: Helvetica;
   padding: 0;
@@ -15,6 +15,15 @@
   border: 1px solid grey;
   padding-left: 15px;
   cursor: pointer;
+  background-color: white;
+}
+
+.UserDropdown-li_1{
+  border-radius: 5px 5px 0 0;
+}
+
+.UserDropdown-li_2{
+  border-radius: 0 0 5px 5px;
 }
 
 .UserDropdown-p {

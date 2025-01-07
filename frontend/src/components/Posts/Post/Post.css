@@ -1,30 +1,70 @@
 .Post-div{
   overflow-y: scroll;
+  cursor: default;
+  height: 100vh;
 }
 .Post-div::-webkit-scrollbar{
   display: none;
 }
+.Post-section_1{
+  padding: 10px;
+  margin: 20px 10px;
+  background-color: white;
+  width: 45vw;
+  border-radius: 10px;
+}
+.Post-section_1 > .row_1{
+  display: flex;
+  align-items: center;
+}
+.Post-section_1 > .row_2{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+.Post-text_input{
+  background-color: rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  width: 85%;
+  border: none;
+  border-radius: 10px;
+  padding-left: 15px;
+}
+.Post-text_input:focus{
+  outline: none;
+}
 .Post-div-box{
   grid-area: col1;
   width: 45vw;
-  border-bottom: 1px solid rgb(0, 0, 0);
   padding: 10px;
-  margin: 0 10px 0 10px;
+  margin: 20px 10px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
 }
 .Post-img-profile{
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-position: center;
   margin-right: 10px;
+  cursor: pointer;
+}
+.Post-label{
+  cursor: pointer;
+  width: 90%;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .Post-name{
   font-weight: bold;
+  cursor: pointer;
 }
 .Post-username{
   font-size: 14px;
   margin: 5px 0 0 0;
   color: rgb(0, 0, 0);
+  cursor: pointer;
 }
 .Post-caption{
   font-size: 14px;
@@ -59,7 +99,4 @@
   margin: 0 0 0 5px;
   cursor: pointer;
 }
-.Post-commentSection{
-  height: 200px;
-  overflow-y: scroll;
-}
+

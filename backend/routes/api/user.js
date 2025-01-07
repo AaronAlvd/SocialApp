@@ -1,6 +1,6 @@
 const express = require('express');
 const { v4: uuid } = require('uuid');
-const { User, Follow, Post, Like } = require('../../db/models');
+const { User, Follow, Post, PostLike } = require('../../db/models');
 const { Op } = require('sequelize');
 const { check } = require('express-validator');
 const bcrypt = require('bcryptjs');
@@ -9,7 +9,60 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { json } = require('sequelize');
 const router = express.Router();
 
-router.get('/:id/posts', requireAuth, async (req, res, next) => {
+router.get('/search/following/:query', requireAuth, async (req, res, next) => {
+  try{
+    const id = req.user.id;
+    const { query } = req.params;
+
+    const searchResults = await User.findAll({
+      where: {
+        username: { [Op.like]: `${query}%` }
+      },
+      attributes: ['id', 'firstName', 'lastName', 'profilePhoto', 'username'],
+      include: [
+        {
+          model: Follow,
+          as: 'Followed',
+          where: {
+            followerId: id,
+          },
+          required: true,
+        }
+      ]
+    });
+
+    res.json(searchResults)
+
+  } catch(error) {
+    next(error)
+  }
+});
+
+router.get('/search/:query', requireAuth, async (req, res, next) => {
+  try {
+    const { query } = req.params;
+
+    if (!query) {
+      throw { status: 400, title: 'Invalid Request', message: 'Search query can not be blank'}
+    };
+
+    const users = await User.findAll({
+      where: {
+        username: { [Op.like]: query }
+      }, 
+      attributes: ['id', 'username', 'profilePhoto', 'firstName', 'lastName'],
+    });
+
+    if (users.length === 0) throw { status: 404, title: 'Resource Not Found', message: 'User not found'}
+
+    res.status(200).json(users)
+
+  } catch (error) {
+    next(error)
+  }
+});
+
+router.get('/posts/:id', requireAuth, async (req, res, next) => {
   try{
     const userId = req.user.id;
     const { id } = req.params;
@@ -38,7 +91,7 @@ router.get('/:id/posts', requireAuth, async (req, res, next) => {
   }
 });
 
-router.get('/:id/following', requireAuth, async (req, res, next) => {
+router.get('/following/:id', requireAuth, async (req, res, next) => {
   try{
     const id = req.params.id;
 
@@ -56,27 +109,24 @@ router.get('/:id/following', requireAuth, async (req, res, next) => {
   }
 });
 
-router.get('/search/:query', requireAuth, async (req, res, next) => {
-  try {
-    const { query } = req.params;
+router.get('/following', requireAuth, async (req, res, next) => {
+  try{
+    const id = req.user.id;
 
-    if (!query) {
-      throw { status: 400, title: 'Invalid Request', message: 'Search query can not be blank'}
-    };
-
-    const users = await User.findAll({
-      where: {
-        username: { [Op.like]: query }
-      }, 
-      attributes: ['id', 'username', 'profilePhoto', 'firstName', 'lastName'],
-      limit: 20,
+    const following = await Follow.findAll({ 
+      where: { followerId: id },
+      include: [
+        {
+          model: User,
+          as: 'Follower',
+          attributes: ['id','firstName', 'lastName', 'username', 'profilePhoto']
+        }
+      ]
     });
 
-    if (users.length === 0) throw { status: 404, title: 'Resource Not Found', message: 'User not found'}
+    res.json(following)
 
-    res.status(200).json(users)
-
-  } catch (error) {
+  } catch(error) {
     next(error)
   }
 });
@@ -84,35 +134,60 @@ router.get('/search/:query', requireAuth, async (req, res, next) => {
 router.get('/:id', requireAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
+    const userId = req.user.id;
 
     const user = await User.findOne({
       where: {
         [Op.or]: [{ id: id },{ username: id }]
       }, 
-      attributes: ['firstName', 'lastName', 'username', 'profilePhoto',  'status', 'backgroundPhoto'],
+      attributes: ['id', 'firstName', 'lastName', 'username', 'profilePhoto',  'status', 'backgroundPhoto', 'bio'],
     });
-
     if (!user) {
       throw { status: 404, title: 'Resource Not Found', message: 'The requested resource was not found'}
     }
 
-    const followers = await Follow.count({ where: { followedId: id }});
-    const following = await Follow.count({ where: { followerId: id }});
-    const posts = await Post.findAll({ where: { userId: id }});
+    const isFollower = await Follow.findOne({ where: { followingId: user.id, followerId: userId }});
 
-    let likes;
-    
-    for (const post of posts) {
-      likes += await Like.count({ where: { postId: post.id }});
+    if (isFollower && user.status !== 'Public' && user.id !== userId) {
+      const followers = await Follow.count({ where: { followingId: user.id }});
+      const following = await Follow.count({ where: { followerId: user.id }});
+      const posts = await Post.findAll({ where: { userId: user.id }});
+
+      let likes = 0;
+      
+      for (let i = 0; i < posts.length; i++) {
+        const post = posts[i];
+        const add = await PostLike.count({ where: { postId: post.id }});
+        likes+= add;
+      }
+
+      return res.json({
+              ...user.dataValues,
+              followers: followers,
+              following: following,
+              posts: posts.length,
+              likes: likes,
+             });
     }
 
-    res.json({
-      ...user.dataValues,
-      followers: followers,
-      following: following,
-      posts: posts.length,
-      likes: likes,
-    });
+    const followers = await Follow.count({ where: { followingId: user.id }});
+    const following = await Follow.count({ where: { followerId: user.id }});
+    const posts = await Post.findAll({ where: { userId: user.id, groupId: 'default' }});
+    let likes = 0;
+      
+    for (let i = 0; i < posts.length; i++) {
+      const post = posts[i];
+      const add = await PostLike.count({ where: { postId: post.id }});
+      likes+= add;
+    }
+
+    return res.json({
+              ...user.dataValues,
+              followers: followers,
+              following: following,
+              posts: posts.length,
+              likes: likes,
+            });
 
   } catch(error) {
     next(error)

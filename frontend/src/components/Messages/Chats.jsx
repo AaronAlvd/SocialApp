@@ -3,7 +3,9 @@ import { FaRegPenToSquare } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
+import { useModal } from '../../context/modal';
+import defaultpfp from '../../assets/Default_pfp.jpg';
+import CreateChat from './createChat/createChat';
 import './Chats.css';
 
 export default function Chats() {
@@ -11,20 +13,13 @@ export default function Chats() {
   const dispatchCalls = new DispatchCalls(dispatch);
   const user = useSelector(state => state.session.user);
   const chats = useSelector((state) => state.messages.chats);
+  const following = useSelector((state) => state.users.following);
+  const { setModalContent } = useModal();
   const [width, setWidth] = useState(window.innerWidth - 201);
 
   useEffect(() => {
     dispatchCalls.chats();
-
-    const handleResize = () => {
-      setWidth(window.innerWidth - 61); // Update height on window resize
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    dispatchCalls.following();
 
   }, [dispatch]);
 
@@ -39,7 +34,7 @@ export default function Chats() {
       retVal[i] = (
         <div className='Chats-section'>
           {altUser.profilePhoto ? <img src={dispatchCalls.convertImageToBase64(altUser.profilePhoto)} className="Chats-profilePhoto"/> : 
-                                  <FontAwesomeIcon icon={faUserCircle}/>}
+                                  <img src={defaultpfp} className="Chats-profilePhoto"/>}
           <div className='Chats-column2'>
             <p className='Chats-name'>{altUser.firstName} {altUser.lastName}</p>
             <p className='Chats-text'>{data.Messages[0].content}</p>
@@ -50,10 +45,10 @@ export default function Chats() {
     return retVal;
   }
   return (
-    <div className='Chats-div' style={{width: width}}>
+    <div className='Chats-div'>
       <div className='Chats-section1'>
         <h2>Messages</h2>
-        <FaRegPenToSquare className='Chats-icon'/>
+        <FaRegPenToSquare className='Chats-icon' onClick={() => setModalContent(<CreateChat data={[following, chats]}/>)}/>
       </div>
       {formatChats()}
     </div>

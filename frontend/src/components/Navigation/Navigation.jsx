@@ -1,44 +1,59 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { OpenModalButton } from '../Modals';
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { faGlobe, faUsers, faComments, faUserFriends} from '@fortawesome/free-solid-svg-icons';
+import UserDropdown from './Dropdown/UserDropdown';
+import Social from '../../SocialClass/social';
+import defaultpfp from '../../assets/Default_pfp.jpg';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
-import SideBar from './SideBar/SideBar';
-import { UserDropdown } from './Dropdown'
 import './Navigation.css'
 
-function Navigation() {
-  const navigate = useNavigate();
-  const [userDrop, setUserDrop] = useState(false);
-  const [height, setHeight] = useState(window.innerHeight - 61);
+export default function Navigation() {
   const user = useSelector(state => state.session.user);
+  const navigate = useNavigate();
+  const social = new Social();
+  const activeUrl = useLocation();
+  const [active, setActive] = useState();
+  const [userDrop, setUserDrop] = useState(false);
+
   useEffect(() => {
-    const handleResize = () => {
-      setHeight(window.innerHeight - 61); 
-    };
+    setActive({
+      following: activeUrl.pathname === '/following',
+      explore: activeUrl.pathname === '/explore',
+      groups: activeUrl.pathname === '/groups',
+      messages: activeUrl.pathname === '/messages',
+    })
+  }, [activeUrl])
 
-    window.addEventListener('resize', handleResize);
+  if (!active) return null;
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  return(
-    <>
-      <div className='Navigation-div-topBar'>
-        <div className='Navigation-div-leftNav'></div>
-        <div className='Navigation-div-rightNav'>
-          <FontAwesomeIcon icon={faUserCircle} className="Navigation-icon" onClick={() => setUserDrop(!userDrop)}/>
-          {userDrop && <UserDropdown />}
-        </div>
+  return (
+    <div className='Navigation-div'>
+      <div className='Navigation-div-row Navigation-profile_box'>
+        <img src={(user && user.profilePhoto) ? social.convertImageToBase64(user.profilePhoto) : defaultpfp} className="Navigation-profilePhoto" onClick={() => setUserDrop(!userDrop)}/>
+        {/* <p className='Navigation-name'>{user.firstName}</p> */}
+        {userDrop && <UserDropdown />}
       </div>
-      <div className="Navigation-div-sideBar" style={{ height: `${height}px` }}>
-        <SideBar />
+      <div className="Navigation-div-row">
+        <p className={active.explore ? "Navigation-feed-active" : "Navigation-feed"} onClick={() => user ? navigate('/explore') : 
+           alert('You are not logged in')}><FontAwesomeIcon icon={faGlobe} className={active.explore ? "Navigation-icon-active": 
+           "Navigation-icon"}/>Explore</p>
       </div>
-    </>
+      <div className="Navigation-div-row">    
+        <p className={active.following ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => user ? navigate('/following') : 
+            alert('You are not logged in')}><FontAwesomeIcon icon={faUserFriends} className={active.following ? "Navigation-icon-active": 
+            "Navigation-icon"} />Following</p>
+
+        <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => user ? navigate('/groups') : 
+           alert('You are not logged in')}><FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active": 
+           "Navigation-icon"} />Groups</p>
+      </div>
+      <div className="Navigation-div-row">
+        <p className={active.messages ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => user ? navigate('/messages') : 
+           alert('You are not logged in')}><FontAwesomeIcon icon={faComments} className={active.messages ? "Navigation-icon-active": 
+           "Navigation-icon"} />Messages</p>
+      </div>
+    </div>
   )
 }
-
-export default Navigation;

@@ -28,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.STRING,
-      unique: true,
     },
     groupName: {
       type: DataTypes.STRING,

@@ -38,18 +38,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'user2Id',
         onDelete: 'CASCADE'
       });
-      User.belongsToMany(models.User, {
-        through: 'Follows',
-        as: 'Followers',
+      User.hasMany(models.Follow, {
+        as: 'Follower',
         foreignKey: 'FollowerId',
-        otherKey: 'FollowedId',
         onDelete: 'CASCADE'
       });
-      User.belongsToMany(models.User, {
-        through: 'Follows',
-        as: 'Following',
-        foreignKey: 'FollowedId',
-        otherKey: 'FollowerId',
+      User.hasMany(models.Follow, {
+        as: 'Followed',
+        foreignKey: 'FollowingId',
         onDelete: 'CASCADE'
       });
       User.hasMany(models.SearchVault, {

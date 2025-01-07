@@ -10,7 +10,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      
+      Follow.belongsTo(models.User, {
+        as: 'Follower',
+        foreignKey: 'followerId',
+        onDelete: 'CASCADE'
+      });
+      Follow.belongsTo(models.User, {
+        as: 'Following',
+        foreignKey: 'followingId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Follow.init({
@@ -29,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: 'CASCADE',
     },
-    followedId: {
+    followingId: {
       type: DataTypes.STRING,
       allowNull: false,
       references: {

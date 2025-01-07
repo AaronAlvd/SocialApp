@@ -17,10 +17,10 @@ function UserDropdown () {
     
   return (
     <ul className="UserDropdown-ul">
-      <li className="UserDropdown-li">
+      <li className="UserDropdown-li_1 UserDropdown-li">
        {user ? <p onClick={handleLogout}>Logout</p> : <OpenModalButton buttonText="Login" modalComponent={<LoginForm />}/>}
       </li>
-      <li className="UserDropdown-li">
+      <li className="UserDropdown-li_2 UserDropdown-li">
        {user ? <p onClick={() => navigate(`/profile/${user.username}`)}>Profile</p> : <OpenModalButton buttonText="Signup" modalComponent={<SignUpForm />}/>}
       </li>
     </ul>

@@ -1,13 +1,42 @@
 import { csrfFetch } from './csrf';
 
-const GET_POSTS = 'post/GET_POSTS';
+const FETCH_POSTS = 'FETCH_POSTS';
+const FETCH_GROUP_POSTS = 'FETCH_GROUP_POSTS';
+const FETCH_COMMENTS = 'FETCH_COMMENTS';
+const SET_COMMENT = 'CREATE_COMMENT';
+const DELETE_COMMENT = 'DELETE_COMMENT';
 
 const setPosts = (data) => {
   return {
-    type: GET_POSTS,
+    type: FETCH_POSTS,
     payload: data,
   }
 }
+const setGroupPosts = (data) => {
+  return {
+    type: FETCH_GROUP_POSTS,
+    payload: data,
+  }
+}
+export const setComments = (data) => {
+  return{
+    type: FETCH_COMMENTS,
+    payload: data,
+  }
+}
+export const removeComment = (id) => {
+  return {
+    type: DELETE_COMMENT,
+    payload: id,
+  }
+}
+export const setComment = (data) => {
+  return {
+    type: SET_COMMENT,
+    payload: data
+  }
+}
+
 
 export const getPosts = () => async (dispatch) => {
   const response = await csrfFetch('/api/posts/following');
@@ -15,14 +44,12 @@ export const getPosts = () => async (dispatch) => {
   const data = await response.json();
   dispatch(setPosts(data));
 }
-
 export const getGroupPosts = () => async (dispatch) => {
   const response = await csrfFetch('/api/posts/groups');
   if (!response.ok) throw new Error('Failed to fetch posts');
   const data = await response.json();
-  dispatch(setPosts(data));
+  dispatch(setGroupPosts(data));
 }
-
 export const getPostDetail = (postId) => async (dispatch) => {
   const response = await csrfFetch(`/api/post/${postId}`);
   if (!response.ok) throw new Error('Failed to fetch posts');
@@ -30,17 +57,35 @@ export const getPostDetail = (postId) => async (dispatch) => {
   dispatch(setPosts(data));
 }
 
+
 const initialState = {
-  posts: []
+  posts: null,
+  groupPosts: null,
+  comments: null,
 }
 
-const postReducer = (state = initialState, action) => {
+export default function postReducer(state = initialState, action) {
   switch(action.type) {
-    case GET_POSTS:
+    case FETCH_POSTS:
       return { ...state, posts: action.payload}
+    case FETCH_GROUP_POSTS:
+      return {...state, groupPosts: action.payload}
+    case FETCH_COMMENTS:
+      return {...state, comments: action.payload}
+    case SET_COMMENT: 
+      return {...state, comments:[...state.comments, action.payload]};
+    case DELETE_COMMENT: {
+      const obj = [...state.comments];
+      for (let i = 0; i < obj.length; i++) {
+        const item = obj[i];
+        if (item.id === action.payload) {
+          obj.splice(i, 1)
+          return {...state, comments: obj}
+        }
+      }
+      return {...state, comments: obj}
+    }
     default:
       return state
   }
 }
-
-export default postReducer;

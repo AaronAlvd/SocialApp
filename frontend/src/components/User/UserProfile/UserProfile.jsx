@@ -1,11 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import DispatchCalls from '../../../SocialClass/dispatch';
 import Following from '../Following/Following';
+import defaultpfp from '../../../assets/Default_pfp.jpg';
 import { useModal } from '../../../context/modal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from "react";
-import Social from '../../../SocialClass/social';
 import { useParams } from 'react-router-dom';
 import './UserProfile.css';
 
@@ -14,62 +12,48 @@ export default function UserProfile() {
   const { userId } = useParams();
   const dispatch = useDispatch();
   const dispatchCalls = new DispatchCalls(dispatch);
-  const social = new Social();
   const { setModalContent, closeModal } = useModal();
-  const userInfo = useSelector(state => state.userProfile.userProfile);
-  const [height, setHeight] = useState(window.innerHeight - 61);
-  const [width, setWidth] = useState(window.innerWidth - 201);
-  const [reload, setReload] = useState(true);
+  const userInfo = useSelector(state => state.users.profile);
 
   useEffect(() => {
 
-    const handleResize = () => {
-      setHeight(window.innerHeight - 61);
-      setWidth(window.innerWidth - 201);
-    };
+    dispatchCalls.UserProfile(userId)
 
-    window.addEventListener('resize', handleResize);
+  }, []);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [dispatch, reload]);
 
-  function viewFollowers() {
-
-  }
-
-  if (!userInfo) {
-    return (
-      <h1>Loading...</h1>
-    )
-  }
+  if (!userInfo) return null;
 
   return (
-    <div className='UserProfile-div' style={{width: `${width}px`, height: `${height}px`}}>
-        {userInfo.profilePhoto ? <img src={`${social.convertImageToBase64(userInfo.backgroundPhoto)}`} className="UserProfile-img-background"/> : null}
-        <div className="UserProfile-div-img">
-          {userInfo.profilePhoto ? <img src={`${social.convertImageToBase64(userInfo.profilePhoto)}`} className="UserProfile-img"/> : <FontAwesomeIcon icon={faUserCircle}/>}
+    <div className='UserProfile-div'>
+      <div className='UserProfile-section_1'>
+        <div className='UserProfile-column_1'>
+          <img src={userInfo.profilePhoto ? dispatchCalls.convertImageToBase64(userInfo.profilePhoto) : defaultpfp} 
+               className='UserProfile-profilePhoto'/>
         </div>
-        <div className="UserProfile-div-infoBar">
-          <div className="UserProfile-div-info">
-            <p style={{fontWeight: 800, fontSize: 14}} onClick={() => setModalContent(<Following />)}>Following</p>
-            <p style={{fontSize: 17, margin: '5px 0 5px 0'}}>{userInfo.following.length}</p>
-          </div>
-          <div className="UserProfile-div-info">
-            <p style={{fontWeight: 800, fontSize: 14}}>Followers</p>
-            <p style={{fontSize: 17, margin: '5px 0 5px 0'}}>{userInfo.followers.length}</p>
-          </div>
-          <div className="UserProfile-div-info">
-            <p style={{fontWeight: 800, fontSize: 14}}>Posts</p>
-            <p style={{fontSize: 17, margin: '5px 0 5px 0'}}>{userInfo.posts}</p>
-          </div>
-          <div className="UserProfile-div-info">
-            <p style={{fontWeight: 800, fontSize: 14}}>Likes</p>
-            <p style={{fontSize: 17, margin: '5px 0 5px 0'}}>{userInfo.likes}</p>
-          </div>
+        <div className="UserProfile-column_2">
+          <p className="UserProfile-name">{userInfo.firstName} {userInfo.lastName}</p>
+          <p className="UserProfile-bio">{userInfo.bio}</p>
         </div>
-        <p className="UserProfile-bio">{userInfo.bio}</p>
+      </div>
+      <div className="UserProfile-section_2">
+        <div className="UserProfile-section_2-column">
+          <p className="UserProfile-info">Posts</p>
+          <p className="UserProfile-stats">{userInfo.posts}</p>
+        </div>
+        <div className="UserProfile-section_2-column">
+          <p className="UserProfile-info">Followers</p>
+          <p className="UserProfile-stats">{userInfo.followers}</p>
+        </div>
+        <div className="UserProfile-section_2-column">
+          <p className="UserProfile-info">Following</p>
+          <p className="UserProfile-stats">{userInfo.following}</p>
+        </div>
+        <div className="UserProfile-section_2-column">
+          <p className="UserProfile-info">Likes</p>
+          <p className="UserProfile-stats">{userInfo.likes}</p>
+        </div>
+      </div>
     </div>
   )
 }
