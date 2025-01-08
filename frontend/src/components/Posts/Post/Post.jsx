@@ -1,6 +1,7 @@
 import DispatchCalls from "../../../SocialClass/dispatch";
 import Social from "../../../SocialClass/social";
 import defaultpfp from '../../../assets/Default_pfp.jpg';
+import CreatePost from '../../Modals/CreatePost/CreatePost';
 import { FaImage } from "react-icons/fa6";
 import { MdVideoLibrary } from "react-icons/md";
 import { Comments } from '../../Comment';
@@ -14,7 +15,7 @@ import { useModal } from '../../../context/modal';
 import './Post.css';
 
 export default function Post() {
-  const { setModelContent } = useModal();
+  const { setModalContent } = useModal();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const uploadImgRef = useRef(null);
@@ -75,15 +76,15 @@ export default function Post() {
         <div className="row_1">
           <img src={user.profilePhoto ? dispatchCall.convertImageToBase64(user.profilePhoto) : defaultpfp}
                className="Post-img-profile"/>
-          <label className="Post-label" onClick={() => ''}>Share a post</label>
+          <label className="Post-label" onClick={() => setModalContent(<CreatePost user={user}/>)}>Share a post</label>
         </div>
         <div className="row_2">
-          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => ''}>
+          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => uploadImgRef.current.click()}>
             <input type="file" style={{display: 'none'}} ref={uploadImgRef} accept="image/*"/>
             <FaImage style={{fontSize: '18px'}}/>
             <label style={{marginLeft: '5px', fontWeight: '400', cursor: 'pointer'}}>Photo</label>
           </span>
-          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => uploadVidRef.current.click()}>
             <input type="file" style={{display: 'none'}} ref={uploadVidRef} accept="video/*"/>
             <MdVideoLibrary style={{fontSize: '18px'}}/>
             <label style={{marginLeft: '5px', fontWeight: '400', cursor: 'pointer'}}>Video</label>

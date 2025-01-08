@@ -37,8 +37,8 @@ export default function Navigation() {
       </div>
       <div className="Navigation-div-row">
         <p className={active.explore ? "Navigation-feed-active" : "Navigation-feed"} onClick={() => user ? navigate('/explore') : 
-           alert('You are not logged in')}><FontAwesomeIcon icon={faGlobe} className={active.explore ? "Navigation-icon-active": 
-           "Navigation-icon"}/>Explore</p>
+           alert('You are not logged in')}><FontAwesomeIcon icon={faGlobe} className={active.explore ? 
+            "Navigation-icon-active": "Navigation-icon"}/>Explore</p>
       </div>
       <div className="Navigation-div-row">    
         <p className={active.following ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => user ? navigate('/following') : 
