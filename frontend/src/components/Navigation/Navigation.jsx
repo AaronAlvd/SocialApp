@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGlobe, faUsers, faComments, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import UserDropdown from './Dropdown/UserDropdown';
-import Social from '../../SocialClass/social';
+import Social from '../../StateManagement/social';
 import defaultpfp from '../../assets/Default_pfp.jpg';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -19,11 +19,11 @@ export default function Navigation() {
 
   useEffect(() => {
     setActive({
-      following: activeUrl.pathname === '/following',
-      explore: activeUrl.pathname === '/explore',
-      groups: activeUrl.pathname === '/groups',
-      messages: activeUrl.pathname === '/messages',
-    })
+      following: /^\/following(\/.*)?$/.test(activeUrl.pathname),
+      explore: /^\/explore(\/.*)?$/.test(activeUrl.pathname),
+      groups: /^\/groups(\/.*)?$/.test(activeUrl.pathname),
+      messages: /^\/messages(\/.*)?$/.test(activeUrl.pathname),
+    });
   }, [activeUrl])
 
   if (!active) return null;

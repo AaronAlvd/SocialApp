@@ -1,18 +1,18 @@
 import './Comments.css';
 import defaultpfp from '../../../assets/Default_pfp.jpg';
-import DispatchCalls from '../../../SocialClass/dispatch';
+import DispatchCalls from '../../../StateManagement/dispatch';
 import { IoPaperPlane } from "react-icons/io5";
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // import { useModal } from '../../../context/modal';
 
-export default function Comments({userId}) {
+export default function Comments({ userId }) {
   // const { setModalContent } = useModal();
   const { postId } = useParams();
   const dispatch = useDispatch();
   const dispatchCalls = new DispatchCalls(dispatch);
-  const data = useSelector((state) => state.posts.comments);
+  const [data, setData] = useState(null);
   const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
   const [text, setText] = useState('');
@@ -21,38 +21,41 @@ export default function Comments({userId}) {
   const textAreaRef = useRef(null);
 
   useEffect(() => {
-    dispatchCalls.comments(postId);
+    async function fetchData() {
+      try {
+        const response = await dispatchCalls.comments(postId);
+        console.log(response);
+        setData(response);  // Assuming setData is properly defined
+      } catch (error) {
+        console.error("Failed to fetch comments:", error);
+      }
+    }
+    fetchData();
     const textArea = textAreaRef.current;
+
     if (textArea) {
       textArea.style.height = 'auto';  // Reset height before resizing
       textArea.style.height = `${textArea.scrollHeight}px`;  // Adjust height based on content
     }
-  }, [text]);
-
-  useEffect(() => {
-
-  },[reload])
+  }, [text, reload]);
  
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const response = confirm('Confirm Delete');
-
     if (response) {
-      dispatchCalls.removeComment(id);
-      return setReload(!reload);
+      const complete = dispatchCalls.removeComment(id);
+      const results = await dispatchCalls.comments(postId);
+      setData(results);
     }
-
-    return null;
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const data = {
       post_id: postId,
       text: text,
-    }
-    dispatchCalls.createComment(data);
-    setText('');
-    setActiveText(false);
-    return setReload(!reload);
+    };
+    const complete = await dispatchCalls.createComment(data)
+    const results = await dispatchCalls.comments(postId);
+    setData(results);
   }
 
   const displayComments = () => {
@@ -69,7 +72,7 @@ export default function Comments({userId}) {
             <p className='Comments-text'>{comment.comment}</p>
             <span style={{display: 'flex'}}>
               <p className='Comments-reply'>Reply</p>
-              {( userId === user.id || comment.id === user.id) && <p className='Comments-reply' onClick={() => handleDelete(comment.id)}>delete</p>}
+              {( userId === user.id || comment.userId === user.id) && <p className='Comments-reply' onClick={() => handleDelete(comment.id)}>delete</p>}
             </span>
           </div>
         </div>

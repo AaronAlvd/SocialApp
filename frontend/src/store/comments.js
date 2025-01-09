@@ -47,19 +47,11 @@ export const addComment = async (data) => {
   }
 }
 export const fetchComments = (id) => async (dispatch) => {
-  try {
-    const response = await csrfFetch(`/api/posts/comments/${id}`);
-
-    if (!response) {
-
-    }
-
-    const data = await response.json();
-    dispatch(setComments(data))
-    return data;
-  } catch(error) {
-
-  }
+  const response = await csrfFetch(`/api/posts/comments/${id}`);
+  if (!response) throw new Error('Failed to fetch comments');
+  const data = await response.json();
+  dispatch(setComments(data))
+  return data;
 }
 
 

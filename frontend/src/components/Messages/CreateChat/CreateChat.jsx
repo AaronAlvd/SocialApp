@@ -1,6 +1,6 @@
 import './CreateChat.css';
 import { useSelector, useDispatch } from 'react-redux';
-import DispatchCalls from '../../../SocialClass/dispatch';
+import DispatchCalls from '../../../StateManagement/dispatch';
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import defaultpfp from '../../../assets/Default_pfp.jpg';
 import { useState, useEffect } from 'react';

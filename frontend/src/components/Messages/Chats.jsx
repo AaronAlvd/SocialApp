@@ -1,4 +1,4 @@
-import DispatchCalls from '../../SocialClass/dispatch';
+import DispatchCalls from '../../StateManagement/dispatch';
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +32,7 @@ export default function Chats() {
       const data = chats[i];
       const altUser = (data.User1.id === user.id) ? data.User2 : data.User1
       retVal[i] = (
-        <div className='Chats-section'>
+        <div className='Chats-section' key={data.id}>
           {altUser.profilePhoto ? <img src={dispatchCalls.convertImageToBase64(altUser.profilePhoto)} className="Chats-profilePhoto"/> : 
                                   <img src={defaultpfp} className="Chats-profilePhoto"/>}
           <div className='Chats-column2'>

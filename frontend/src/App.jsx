@@ -41,7 +41,10 @@ const router = createBrowserRouter([
         path: 'groups',
         element: <GroupPost />,
         children: [
-
+          {
+            path: ':postId',
+            element: <GroupPost />
+          }
         ]
       },
       {

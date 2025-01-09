@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import DispatchCalls from '../../../SocialClass/dispatch';
+import DispatchCalls from '../../../StateManagement/dispatch';
 import Following from '../Following/Following';
 import defaultpfp from '../../../assets/Default_pfp.jpg';
 import { useModal } from '../../../context/modal';

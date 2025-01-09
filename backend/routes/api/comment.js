@@ -10,8 +10,6 @@ router.post('/', requireAuth, async (req, res, next) => {
     const { comment, postId } = req.body;
     const id = uuid();
 
-    console.log(`\n\n${postId}\n\n`)
-
     const createComment = await Comment.create({ id, comment, postId, userId});
 
     res.json(createComment);

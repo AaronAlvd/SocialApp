@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import DispatchCalls from '../../../SocialClass/dispatch';
+import DispatchCalls from '../../../StateManagement/dispatch';
 import './SignupForm.css';
 
 export default function SignUpForm() {

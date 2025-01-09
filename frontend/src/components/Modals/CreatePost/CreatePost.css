@@ -8,6 +8,7 @@
 }
 .CreatePost-header{
   display: flex;
+  cursor: default;
 }
 .CreatePost-profilePhoto{
   width: 50px;
@@ -17,15 +18,44 @@
   border-radius: 50%;
 }
 .CreatePost-name{
+  display: inline-block;
   font-size: 20px;
   font-weight: 800;
-  margin-left: 10px;
-  margin-top: 3px;
+  margin: 3px 5px 0 10px
 }
 .CreatePost-username{
   font-size: 16px;
   margin-left: 10px;
   margin-top: 3px;
+}
+.CreatePost-groups{
+  position: absolute;
+  height: min-content;
+  /* border: 1px solid black; */
+  transform: translate(0, 60px);
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.CreatePost-groups:hover{
+  background-color: aliceblue;
+}
+.CreatePost-groups > .group_row {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 240px
+}
+.CreatePost-groupProfilePhoto{
+  width: 30px;
+  margin-left: 10px;
+  height: 30px;
+  border-radius: 50%;
+}
+.CreatePost-groupName{
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 500;
 }
 .CreatePost-body{
   max-height: 500px;

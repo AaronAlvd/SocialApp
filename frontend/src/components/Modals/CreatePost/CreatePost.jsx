@@ -1,19 +1,40 @@
 import './CreatePost.css';
-import DispatchCalls from '../../../SocialClass/dispatch';
+import DispatchCalls from '../../../StateManagement/dispatch';
 import defaultpfp from '../../../assets/Default_pfp.jpg';
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
 import { useState, useRef, useEffect } from 'react';
 import { FaImage } from "react-icons/fa6";
 import { MdVideoLibrary } from "react-icons/md";
 
 export default function CreatePost({ user }) {
-  const dispatchCalls = new DispatchCalls();
-  const [text, setText] = useState('');
-  const [activeText, setActiveText] = useState(false);
+  const dispatch = useDispatch();
+  const dispatchCalls = new DispatchCalls(dispatch);
   const textareaRef = useRef(null);
   const uploadImgRef = useRef(null);
+  const [text, setText] = useState('');
+  const [activeText, setActiveText] = useState();
+  const [groups, setGroups] = useState(null);
+  const [dropdown, setDropdown] = useState(false);
+  const [activeInfo, setActiveInfo] = useState({
+    userId: user.id,
+    name: user.firstName + ' ' + user.lastName,
+    profilePhoto: user.profilePhoto,
+    groupId: 'default'
+  });
   const [imgFile, setImgFile] = useState();
   const [vidFile, setVidFile] = useState();
   const uploadVidRef = useRef(null);
+
+  useEffect(() => {
+    async function fetch() {
+      const response = await dispatchCalls.UserGroups();
+      setGroups(response);
+    }
+
+    fetch()
+  }, [])
 
   const handleFile = (e) => {
     const file = e.target.files[0];
@@ -24,6 +45,59 @@ export default function CreatePost({ user }) {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  const changeSubmit = (data, type) => {
+    if (type === 'group') {
+      setActiveInfo({
+        userId: user.id,
+        name: data.Group.groupName,
+        profilePhoto: data.Group.profilePhoto,
+        groupId: data.Group.id,
+      })
+    } else {
+      setActiveInfo({
+        id: user.id,
+        name: user.firstName + ' ' + user.lastName,
+        profilePhoto: user.profilePhoto,
+        groupId: 'default',
+      })
+    }
+  }
+
+  const displayGroups = () => {
+    const array = Array(groups.length);
+    for (let i = 0; i < groups.length; i++) {
+      const group = groups[i]
+      if (activeInfo.groupId === group.id) {
+        array[i] = (
+          <div className='group_row' onClick={() => changeSubmit(null, 'user')}>
+            <img src={user.profilePhoto ? dispatchCalls.convertImageToBase64(user.profilePhoto) : defaultpfp } 
+                 className='CreatePost-groupProfilePhoto'/>
+            <p className='CreatePost-groupName'>{user.username}</p>
+          </div>
+        )
+      } else {
+        array[i] = (
+          <div className='group_row' onClick={() => changeSubmit(group, 'group')}>
+            <img src={group.Group.profilePhoto ? dispatchCalls.convertImageToBase64(group.Group.profilePhoto) : defaultpfp } 
+                 className='CreatePost-groupProfilePhoto'/>
+            <p className='CreatePost-groupName'>{group.Group.groupName}</p>
+          </div>
+        )
+      }
+      
+    }
+    return array;
+  }
+
+  const handleSubmitPost = () => {
+    const data = {
+      caption: text || null,
+      photo: imgFile || null,
+      groupId: activeInfo.groupId
+    }
+    return dispatchCalls.newPost(data);
   }
 
   useEffect(() => {
@@ -37,15 +111,21 @@ export default function CreatePost({ user }) {
     }
   }, [text])
 
+  if (!groups) return null;
+
   return(
     <div className='CreatePost-div'>
       <div className='CreatePost-header'>
-        <img src={user.profilePhoto ? dispatchCalls.convertImageToBase64(user.profilePhoto) : defaultpfp} 
+        <img src={activeInfo.profilePhoto ? dispatchCalls.convertImageToBase64(activeInfo.profilePhoto) : defaultpfp} 
              className='CreatePost-profilePhoto'/>
         <span>
-          <p className='CreatePost-name'>{user.firstName} {user.lastName}</p>
+          <p className='CreatePost-name'>{activeInfo.name}</p>
+          {dropdown ? <IoIosArrowUp onClick={() => setDropdown(!dropdown)}/> : <IoIosArrowDown onClick={() => setDropdown(!dropdown)}/>}
           <p className='CreatePost-username'>@{user.username}</p>
         </span>
+        <div className='CreatePost-groups'>
+          {dropdown && displayGroups()}
+        </div>
       </div>
       <div className='CreatePost-body'>
         <textarea className={(imgFile || vidFile) ? 'CreatePost-textarea-small' : 'CreatePost-textarea'} value={text} 
@@ -67,7 +147,7 @@ export default function CreatePost({ user }) {
             <label style={{marginLeft: '5px', fontWeight: '400', cursor: 'pointer'}}>Video</label>
           </span>
           <button className={(text !== '' || imgFile) ? 'CreatePost-buttonActive' : 'CreatePost-button'} 
-                  disabled={text === '' && !imgFile} onClick={(e) => handleSubmitPost(e)}>Post</button>
+                  disabled={text === '' && !imgFile} onClick={() => handleSubmitPost()}>Post</button>
       </div>
     </div>
   )

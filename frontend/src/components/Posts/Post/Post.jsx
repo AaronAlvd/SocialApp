@@ -1,7 +1,8 @@
-import DispatchCalls from "../../../SocialClass/dispatch";
-import Social from "../../../SocialClass/social";
+import DispatchCalls from "../../../StateManagement/dispatch";
+import Social from "../../../StateManagement/social";
 import defaultpfp from '../../../assets/Default_pfp.jpg';
 import CreatePost from '../../Modals/CreatePost/CreatePost';
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaImage } from "react-icons/fa6";
 import { MdVideoLibrary } from "react-icons/md";
 import { Comments } from '../../Comment';
@@ -10,7 +11,7 @@ import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeart02 } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useModal } from '../../../context/modal';
 import './Post.css';
 
@@ -18,13 +19,14 @@ export default function Post() {
   const { setModalContent } = useModal();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const params = useParams();
+  const postId = params.postId || null;
   const uploadImgRef = useRef(null);
   const uploadVidRef = useRef(null);
   const user = useSelector(state => state.session.user);
   const social = new Social();
   const dispatchCall = new DispatchCalls(dispatch);
-  const unsortedFeed = useSelector((state) => state.posts.posts);
-  const sortedFeed = social.sortByDate(unsortedFeed);
+  const posts = useSelector((state) => state.posts.posts);
   const [reload, setReload] = useState(false);
   const [text, setText] = useState();
   const [showComments, setShowComments] = useState();
@@ -39,7 +41,7 @@ export default function Post() {
       commentId: '',
     }
     dispatchCall.handleLike(data);
-    setReload(!reload);
+    return setReload(!reload)
   };
 
   const handleDislike = (postId) => {
@@ -48,27 +50,28 @@ export default function Post() {
       commentId: '',
     }
     dispatchCall.handleDislike(data);
-    setReload(!reload);
+    return setReload(!reload)
   }
 
-  const heartColor = (data) => {
-    let activeLike = false;
-    if (data.Likes && data.Likes.length > 0) {
-      activeLike = data.Likes.find(obj => obj.userId === user.id);
+  const handleDropdown = (id) => {
+    const response = confirm('Confirm Delete Post')
+
+    if (response) {
+      return dispatchCall.removePost(id)
     }
-    return activeLike ? <FontAwesomeIcon icon={faHeart02} className="Post-icon" onClick={() => handleDislike(data.id)} /> : <FontAwesomeIcon icon={faHeart} className="Post-icon" onClick={() => handleLike(data.id)}/>
   }
 
   const handleComments = (id) => {
     
     if (showComments === id) {
+      navigate('/following')
       return setShowComments('')
     }
     navigate(`/following/${id}`);
     return setShowComments(id);
   }
 
-  if (!sortedFeed) return null;
+  if (!posts) return null;
 
   return (
     <div className="Post-div">
@@ -91,9 +94,9 @@ export default function Post() {
           </span>
         </div>
       </div>
-      {sortedFeed.map((data) => {
+      {posts.map((data) => {
         return (
-          <div className="Post-div-box">
+          <div className="Post-div-box" >
             <div style={{display: 'flex'}} onClick={() => navigate(`/profile/${data.User.username}`)}>
               <img src={data.User.profilePhoto ? dispatchCall.convertImageToBase64(data.User.profilePhoto) : defaultpfp} 
                    className="Post-img-profile"/>
@@ -101,13 +104,16 @@ export default function Post() {
                 <p className="Post-name">{data.User.firstName} {data.User.lastName}</p>
                 <p className="Post-username">@{data.User.username}</p>
               </div>
+              {/* <BsThreeDotsVertical style={{transform: 'translate(280px, 0)'}} onClick={() => handleDropdown(data.id)}/> */}
             </div>
             <p className="Post-caption">{social.findHashtags(data.caption)}</p>
             {data.photo && <img className="Post-image" src={social.convertImageToBase64(data.photo)}/>}
             <p className="Post-bottom">
               <div style={{display: 'flex'}}>
                 <div className="Post-div-icon">
-                  {heartColor(data)}
+                  {data.Like ? <FontAwesomeIcon icon={faHeart02} className="Post-icon" onClick={() => handleDislike(data.id)} /> 
+                             : <FontAwesomeIcon icon={faHeart} className="Post-icon" onClick={() => handleLike(data.id)} />}
+                             
                   <small style={{margin: '0 5px 0 10px'}}>{data.Likes.length}</small>
                 </div>
                 <div className="Post-div-icon" onClick={() => handleComments(data.id)} style={{cursor: 'pointer'}}>
@@ -116,7 +122,7 @@ export default function Post() {
                 </div>
               </div>
             <small>{new Date(data.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></p>
-            {(showComments === data.id) && <Comments userId={data.userId}/>}
+            {(showComments === data.id || data.id === postId) && <Comments userId={data.userId}/>}
           </div>
         )
       })}

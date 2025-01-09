@@ -1,6 +1,6 @@
 const express = require('express');
 const { v4: uuid } = require('uuid');
-const { User, Follow, Post, PostLike } = require('../../db/models');
+const { User, Follow, Post, PostLike, GroupUser, Group } = require('../../db/models');
 const { Op } = require('sequelize');
 const { check } = require('express-validator');
 const bcrypt = require('bcryptjs');
@@ -107,6 +107,30 @@ router.get('/following/:id', requireAuth, async (req, res, next) => {
   } catch(error) {
     next(error)
   }
+});
+
+router.get('/groups', requireAuth, async (req, res, next) => {
+ try{
+  const userId = req.user.id;
+  const groups = await GroupUser.findAll({
+    where: { userId },
+    include: [
+      {
+        model: Group,
+        attributes: ['id', 'groupName', 'profilePhoto']
+      }
+    ]
+  });
+
+  if (groups.length === 0) {
+    throw {status: 404, title: 'Resource Not Found', message: 'You are not a part of any groups'}
+  }
+
+  return res.json(groups);
+
+ } catch(error) {
+  next(error);
+ }
 });
 
 router.get('/following', requireAuth, async (req, res, next) => {
