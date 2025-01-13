@@ -45,7 +45,10 @@ export default class DispatchCalls extends Social {
     return this.dispatch(userActions.fetchProfile(data))
   }
   UserGroups() {
-    return this.dispatch(userActions.fetchGroups());
+    return this.dispatch(userActions.fetchGroups())
+  }
+  GroupProfile(data) {
+    return this.dispatch(userActions.fetchGroup(data))
   }
 
   chats() {
@@ -53,11 +56,11 @@ export default class DispatchCalls extends Social {
   }
 
   RestoreUser() {
-    return this.dispatch(sessionActions.restoreUser());
+    return this.dispatch(sessionActions.restoreUser())
   }
 
   handleLike(data) {
-    return this.dispatch(likeActions.likePost(data));
+    return this.dispatch(likeActions.likePost(data))
   }
 
   postDetail(postId) {

@@ -5,6 +5,7 @@ const FETCH_USER = 'FETCH_USER';
 const FETCH_FOLLOWING = 'FETCH_FOLLOWING';
 const FETCH_FOLLOWERS = 'FETCH_FOLLOWERS';
 const FETCH_GROUPS = 'FETCH_GROUPS';
+const FETCH_GROUP = 'FETCH_GROUP';
 const QUERY_FOLLOWING =  'QUERY_FOLLOWING';
 
 
@@ -19,15 +20,19 @@ const setUser = (data) => ({
 const setFollowing = (data) => ({
   type: FETCH_FOLLOWING,
   payload: data,
-})
+});
 const setGroups = (data) => ({
   type: FETCH_GROUPS,
   payload: data,
-})
+});
+const setGroup = (data) => ({
+  type: FETCH_GROUP,
+  payload: data,
+});
 const setQueryFollowing = (data) => ({
   type: QUERY_FOLLOWING,
   payload: data,
-})
+});
 
 export const queryFollowing = (query) => async (dispatch) => {
   try {
@@ -95,6 +100,17 @@ export const fetchGroups = () => async (dispatch) => {
     if (!response.ok) {}
     const data = await response.json();
     dispatch(setGroups(data))
+    return data;
+  } catch(error) {
+
+  }
+}
+export const fetchGroup = (id) => async (dispatch) => {
+  try{
+    const response = await csrfFetch(`/api/groups/${id}`);
+    if (!response.ok) {}
+    const data = await response.json();
+    dispatch(setGroup(data));
     return data;
   } catch(error) {
 
