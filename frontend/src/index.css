@@ -9,3 +9,15 @@ body, html {
 button{
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  .Navigation-index{
+    transform: translate(0, 49.5px);
+  }
+}
+
+@media (min-width: 768px)  {
+  .Navigation-index{
+    transform: translate(201px, 0);
+  }
+}

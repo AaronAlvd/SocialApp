@@ -1,10 +1,30 @@
-.CreatePost-div{
-  width: 700px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.33);
-  padding: 15px;
-  overflow-y: scroll;
+@media (max-width: 767px){
+  .CreatePost-div{
+    width: 95vw;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.33);
+    padding: 15px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+  }
+  .CreatePost-img{
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px){
+  .CreatePost-div{
+    width: 700px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.33);
+    padding: 15px;
+    overflow-y: scroll;
+  }
+  .CreatePost-img{
+    width: 100%;
+  }
 }
 .CreatePost-header{
   display: flex;
@@ -109,7 +129,4 @@
   font-weight: 900;
   border-radius: 15px;
   font-size: 18px;
-}
-.CreatePost-img{
-  width: 100%;
 }

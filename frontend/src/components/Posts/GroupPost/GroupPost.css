@@ -1,105 +1,329 @@
-.GroupPost-div{
-  overflow-y: scroll;
-  cursor: default;
-  height: 100vh;
+@media (max-width: 767px) {
+  .GroupPost-div{
+    cursor: default;
+    padding: 10px;
+  }
+  .GroupPost-div::-webkit-scrollbar{
+    display: none;
+  }
+  .GroupPost-section_1{
+    padding: 10px;
+    margin: 0 0 10px 0;
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  .GroupPost-section_1 > .row_1{
+    display: flex;
+    align-items: center;
+  }
+  .GroupPost-section_1 > .row_2{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  .GroupPost-text_input{
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    width: 85%;
+    border: none;
+    border-radius: 10px;
+    padding-left: 15px;
+  }
+  .GroupPost-text_input:focus{
+    outline: none;
+  }
+  .GroupPost-label{
+    cursor: pointer;
+    width: 90%;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .GroupPost-div-box{
+    grid-area: col1;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  .GroupPost-img-profile{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-position: center;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  .GroupPost-name{
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .GroupPost-username{
+    font-size: 14px;
+    margin: 5px 0 0 0;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+  }
+  .GroupPost-caption{
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .GroupPost-image{
+    width: 100%;
+  }
+  .GroupPost-hashtag{
+    color: rgb(60, 102, 208);
+    cursor: pointer;
+  }
+  .GroupPost-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-top: 5px;
+  }
+  .GroupPost-div-icon{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: auto;
+    height: 20px;
+    border-radius: 3px;
+    border: 1px solid black;
+    margin: 0 10px 0 0;
+    cursor: default;
+  }
+  .GroupPost-icon{
+    margin: 0 0 0 5px;
+    cursor: pointer;
+  }
+  .GroupPost-commentSection{
+    height: 200px;
+    overflow-y: scroll;
+  }
 }
-.GroupPost-div::-webkit-scrollbar{
-  display: none;
+
+@media (min-width: 768px) and (max-width: 1024px){
+  .GroupPost-div{
+    overflow-y: scroll;
+    cursor: default;
+    height: 100vh;
+  }
+  .GroupPost-div::-webkit-scrollbar{
+    display: none;
+  }
+  .GroupPost-section_1{
+    padding: 10px;
+    margin: 20px 10px;
+    background-color: white;
+    width: 45vw;
+    border-radius: 10px;
+  }
+  .GroupPost-section_1 > .row_1{
+    display: flex;
+    align-items: center;
+  }
+  .GroupPost-section_1 > .row_2{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  .GroupPost-text_input{
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    width: 85%;
+    border: none;
+    border-radius: 10px;
+    padding-left: 15px;
+  }
+  .GroupPost-text_input:focus{
+    outline: none;
+  }
+  .GroupPost-label{
+    cursor: pointer;
+    width: 90%;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .GroupPost-div-box{
+    grid-area: col1;
+    width: 45vw;
+    padding: 10px;
+    margin: 20px 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+  }
+  .GroupPost-img-profile{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-position: center;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  .GroupPost-name{
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .GroupPost-username{
+    font-size: 14px;
+    margin: 5px 0 0 0;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+  }
+  .GroupPost-caption{
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .GroupPost-image{
+    width: 100%;
+  }
+  .GroupPost-hashtag{
+    color: rgb(60, 102, 208);
+    cursor: pointer;
+  }
+  .GroupPost-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-top: 5px;
+  }
+  .GroupPost-div-icon{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: auto;
+    height: 20px;
+    border-radius: 3px;
+    border: 1px solid black;
+    margin: 0 10px 0 0;
+    cursor: default;
+  }
+  .GroupPost-icon{
+    margin: 0 0 0 5px;
+    cursor: pointer;
+  }
+  .GroupPost-commentSection{
+    height: 200px;
+    overflow-y: scroll;
+  }
 }
-.GroupPost-section_1{
-  padding: 10px;
-  margin: 20px 10px;
-  background-color: white;
-  width: 45vw;
-  border-radius: 10px;
+
+@media (min-width: 1025px){
+  .GroupPost-div{
+    overflow-y: scroll;
+    cursor: default;
+    height: 100vh;
+  }
+  .GroupPost-div::-webkit-scrollbar{
+    display: none;
+  }
+  .GroupPost-section_1{
+    padding: 10px;
+    margin: 20px 10px;
+    background-color: white;
+    width: 45vw;
+    border-radius: 10px;
+  }
+  .GroupPost-section_1 > .row_1{
+    display: flex;
+    align-items: center;
+  }
+  .GroupPost-section_1 > .row_2{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+  .GroupPost-text_input{
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    width: 85%;
+    border: none;
+    border-radius: 10px;
+    padding-left: 15px;
+  }
+  .GroupPost-text_input:focus{
+    outline: none;
+  }
+  .GroupPost-label{
+    cursor: pointer;
+    width: 90%;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .GroupPost-div-box{
+    grid-area: col1;
+    width: 45vw;
+    padding: 10px;
+    margin: 20px 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+  }
+  .GroupPost-img-profile{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-position: center;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  .GroupPost-name{
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .GroupPost-username{
+    font-size: 14px;
+    margin: 5px 0 0 0;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+  }
+  .GroupPost-caption{
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .GroupPost-image{
+    width: 100%;
+  }
+  .GroupPost-hashtag{
+    color: rgb(60, 102, 208);
+    cursor: pointer;
+  }
+  .GroupPost-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-top: 5px;
+  }
+  .GroupPost-div-icon{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: auto;
+    height: 20px;
+    border-radius: 3px;
+    border: 1px solid black;
+    margin: 0 10px 0 0;
+    cursor: default;
+  }
+  .GroupPost-icon{
+    margin: 0 0 0 5px;
+    cursor: pointer;
+  }
+  .GroupPost-commentSection{
+    height: 200px;
+    overflow-y: scroll;
+  }
 }
-.GroupPost-section_1 > .row_1{
-  display: flex;
-  align-items: center;
-}
-.GroupPost-section_1 > .row_2{
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
-}
-.GroupPost-text_input{
-  background-color: rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-  width: 85%;
-  border: none;
-  border-radius: 10px;
-  padding-left: 15px;
-}
-.GroupPost-text_input:focus{
-  outline: none;
-}
-.GroupPost-label{
-  cursor: pointer;
-  width: 90%;
-  padding: 10px 15px;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.GroupPost-div-box{
-  grid-area: col1;
-  width: 45vw;
-  padding: 10px;
-  margin: 20px 10px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-}
-.GroupPost-img-profile{
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-position: center;
-  margin-right: 10px;
-  cursor: pointer;
-}
-.GroupPost-name{
-  font-weight: bold;
-  cursor: pointer;
-}
-.GroupPost-username{
-  font-size: 14px;
-  margin: 5px 0 0 0;
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-}
-.GroupPost-caption{
-  font-size: 14px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.GroupPost-image{
-  width: 100%;
-}
-.GroupPost-hashtag{
-  color: rgb(60, 102, 208);
-  cursor: pointer;
-}
-.GroupPost-bottom{
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  margin-top: 5px;
-}
-.GroupPost-div-icon{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: auto;
-  height: 20px;
-  border-radius: 3px;
-  border: 1px solid black;
-  margin: 0 10px 0 0;
-  cursor: default;
-}
-.GroupPost-icon{
-  margin: 0 0 0 5px;
-  cursor: pointer;
-}
-.GroupPost-commentSection{
-  height: 200px;
-  overflow-y: scroll;
-}
+
+
+
+
+

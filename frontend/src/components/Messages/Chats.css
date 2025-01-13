@@ -1,7 +1,19 @@
-.Chats-div{
-  width: 70%;
-  overflow: hidden;
+@media (max-width: 767px){
+  .Chats-div{
+    width: 100vw;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
 }
+
+@media (min-width: 768px){
+  .Chats-div{
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+}
+
 .Chats-section1{
   display: grid;
   width: 100%;

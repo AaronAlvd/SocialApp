@@ -6,7 +6,7 @@ import './index.css'
 
 function Layout() {
   const dispatch = useDispatch();
-  const [width, setWidth] = useState(window.innerWidth - 201)
+  const [width, setWidth] = useState(window.innerWidth)
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser());
@@ -15,7 +15,7 @@ function Layout() {
   return (
     <>
      <Navigation />
-     <div style={{transform: 'translateX(201px)', width: `${width}px`}} >
+     <div className='Navigation-index' style={{width: `${(width < 768) ? width : (width - 201)}px`}}>
       <Outlet/>
      </div>
     </>

@@ -69,7 +69,7 @@ export const fetchUser = (id) => async (dispatch) => {
 
     const data = await response.json();
     dispatch(setUser(data));
-    
+    return data;
   } catch(error) {
 
   }

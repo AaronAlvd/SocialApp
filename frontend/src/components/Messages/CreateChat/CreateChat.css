@@ -1,12 +1,29 @@
-.CreateChat-div{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 500px;
-  height: 400px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  overflow-y: scroll;
+@media (max-width: 767px) {
+  .CreateChat-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+    height: 400px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+    background-color: white;
+  }
 }
+
+@media (min-width: 768px) {
+  .CreateChat-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 400px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+    background-color: white;
+  }
+}
+
 .CreateChat-inputBox{
   display: flex;
   align-items: center;
