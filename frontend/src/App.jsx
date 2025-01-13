@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation, Page404, UserProfile, Post, Chats, GroupPost} from './components';
+import { Navigation, Page404, UserProfile, Post, Chats, GroupPost, GroupProfile, Explore, Chat} from './components';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import './index.css'
@@ -28,6 +28,10 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
+        path: 'explore',
+        element: <Explore />
+      },
+      {
         path: 'following',
         element: <Post />,
         children: [
@@ -44,21 +48,34 @@ const router = createBrowserRouter([
           {
             path: ':postId',
             element: <GroupPost />
-          }
+          },
         ]
       },
       {
         path: 'profile',
         children: [
           {
-            path: ':userId',
+            path: 'user/:userId',
             element: <UserProfile />
+          },
+          {
+            path: 'group/:groupId',
+            element: <GroupProfile />
           }
         ]
       },
       {
         path: 'messages',
-        element: <Chats />
+        children: [
+          {
+            path: '',
+            element: <Chats />,
+          },
+          {
+            path: ':chatId',
+            element: <Chat />
+          }
+        ]
       },
       {
         path: '*',

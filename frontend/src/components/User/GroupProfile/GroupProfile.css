@@ -1,12 +1,12 @@
 @media  (max-width: 767px){
-  .UserProfile-section_1{
+  .GroupProfile-section_1{
     width: 100%;
     background-color: white;
     padding: 0 10px;
     border-radius: 10px 10px 0 0;
     box-sizing: border-box;
   }
-  .UserProfile-section_2{
+  .GroupProfile-section_2{
     display: flex;
     background-color: white;
     border-radius: 0 0 10px 10px;
@@ -15,35 +15,35 @@
     box-sizing: border-box;
     justify-content: center;
   }
-  .UserProfile-profilePhoto{
+  .GroupProfile-profilePhoto{
     height: 50px;
     width: 50px;
     border-radius: 50%;
     background-position: center;
     object-fit: cover;
   }
-  .UserProfile-column_1{
+  .GroupProfile-column_1{
     padding: 20px 0 0 20px;
     display: flex;
     align-items: center;
   }
-  .UserProfile-column_2{
+  .GroupProfile-column_2{
     padding: 20px;
   }
-  .UserProfile-name{
+  .GroupProfile-name{
     font-size: 25px;
     font-weight: 100;
     height: min-content;
     margin-left: 20px;
   }
-  .UserProfile-bio{
+  .GroupProfile-bio{
     font-size: 14px;
     font-weight: 100;
   }
 }
 
 @media  (min-width: 768px) and (max-width: 1024px){
-  .UserProfile-section_1{
+  .GroupProfile-section_1{
     display: grid;
     grid-template-columns: min-content 1fr;
     grid-template-rows: min-content 1fr;
@@ -56,7 +56,7 @@
     border-radius: 10px;
     box-sizing: border-box;
   }
-  .UserProfile-profilePhoto{
+  .GroupProfile-profilePhoto{
     grid-area: img;
     height: 100px;
     width: 100px;
@@ -65,19 +65,19 @@
     object-fit: cover;
     margin: 0;
   }
-  .UserProfile-top_left{
+  .GroupProfile-top_left{
     grid-area: info;
     width: 100%;
     height: 100%;
   }
-  .UserProfile-name{
+  .GroupProfile-name{
     display: flex;
     justify-content: center;
     font-size: 25px;
     font-weight: 100;
     height: min-content;
   }
-  .UserProfile-bio{
+  .GroupProfile-bio{
     margin-top: 15px;
     grid-area: bio;
     font-size: 14px;
@@ -86,7 +86,7 @@
 }
 
 @media (min-width: 1025px) {
-  .UserProfile-section_1{
+  .GroupProfile-section_1{
     display: grid;
     grid-template-columns: min-content 1fr;
     grid-template-rows: min-content auto;
@@ -99,7 +99,7 @@
     border-radius: 10px;
     box-sizing: border-box;
   }
-  .UserProfile-profilePhoto{
+  .GroupProfile-profilePhoto{
     grid-area: img;
     height: 100px;
     width: 100px;
@@ -108,19 +108,19 @@
     object-fit: cover;
     margin: 0;
   }
-  .UserProfile-top_left{
+  .GroupProfile-top_left{
     grid-area: info;
     width: 100%;
     height: 100%;
   }
-  .UserProfile-name{
+  .GroupProfile-name{
     display: flex;
     justify-content: center;
     font-size: 25px;
     font-weight: 100;
     height: min-content;
   }
-  .UserProfile-bio{
+  .GroupProfile-bio{
     margin-top: 15px;
     grid-area: bio;
     font-size: 14px;
@@ -129,24 +129,24 @@
 }
 
 
-.UserProfile-div{
+.GroupProfile-div{
   height: 100vh;
   overflow: scroll;
   padding: 10px;
   box-sizing: border-box;
 }
-.UserProfile-section_2-column{
+.GroupProfile-section_2-column{
   display: flex;
   flex-direction: column;
   align-items: center;
   width: min-content;
   padding: 10px;
 }
-.UserProfile-info{
+.GroupProfile-info{
   font-size: 14px;
   color: rgba(0, 0, 0, 0.8);
 }
-.UserProfile-stats{
+.GroupProfile-stats{
   font-size: 16px;
   font-weight: 700;
 }

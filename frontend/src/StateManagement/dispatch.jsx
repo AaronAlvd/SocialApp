@@ -24,6 +24,12 @@ export default class DispatchCalls extends Social {
   removePost(data) {
     return this.dispatch(postActions.deletePost(data))
   }
+  GroupPost(data) {
+    return this.dispatch(postActions.fetchGroupPosts(data))
+  }
+  UserPost(data) {
+    return this.dispatch(postActions.fetchUserPosts(data))
+  }
 
   comments(data) {
     return this.dispatch(commentActions.fetchComments(data))
@@ -61,10 +67,6 @@ export default class DispatchCalls extends Social {
 
   handleLike(data) {
     return this.dispatch(likeActions.likePost(data))
-  }
-
-  postDetail(postId) {
-    return this.dispatch(postActions.getPostDetail(postId))
   }
 
   handleDislike(data) {

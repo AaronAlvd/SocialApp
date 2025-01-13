@@ -137,6 +137,8 @@ export default function userReducer(state = initialState, action) {
       return {...state, profile: action.payload};
     case FETCH_GROUPS:
       return {...state, groups: action.payload};
+      case FETCH_GROUP:
+        return {...state, profile: action.payload};
     default:
       return state;
   }

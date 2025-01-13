@@ -15,7 +15,6 @@ export default function Chats() {
   const chats = useSelector((state) => state.messages.chats);
   const following = useSelector((state) => state.users.following);
   const { setModalContent } = useModal();
-  const [width, setWidth] = useState(window.innerWidth - 201);
 
   useEffect(() => {
     dispatchCalls.chats();
@@ -32,7 +31,7 @@ export default function Chats() {
       const data = chats[i];
       const altUser = (data.User1.id === user.id) ? data.User2 : data.User1
       retVal[i] = (
-        <div className='Chats-section' key={data.id}>
+        <div className='Chats-section' key={data.id} onClick={() => navigate(`/messages/${data.id}`)}>
           {altUser.profilePhoto ? <img src={dispatchCalls.convertImageToBase64(altUser.profilePhoto)} className="Chats-profilePhoto"/> : 
                                   <img src={defaultpfp} className="Chats-profilePhoto"/>}
           <div className='Chats-column2'>

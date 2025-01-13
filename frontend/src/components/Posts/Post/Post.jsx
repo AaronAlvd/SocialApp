@@ -97,12 +97,13 @@ export default function Post() {
       {posts.map((data) => {
         return (
           <div className="Post-div-box" >
-            <div style={{display: 'flex'}} onClick={() => navigate(`/profile/${data.User.username}`)}>
+            <div style={{display: 'flex'}}>
               <img src={data.User.profilePhoto ? dispatchCall.convertImageToBase64(data.User.profilePhoto) : defaultpfp} 
-                   className="Post-img-profile"/>
+                   className="Post-img-profile" onClick={() => navigate(`/profile/user/${data.User.username}`)}/>
               <div>
-                <p className="Post-name">{data.User.firstName} {data.User.lastName}</p>
-                <p className="Post-username">@{data.User.username}</p>
+                <p className="Post-name" onClick={() => navigate(`/profile/user/${data.User.username}`)}>
+                  {data.User.firstName} {data.User.lastName}</p>
+                <p className="Post-username" onClick={() => navigate(`/profile/user/${data.User.username}`)}>@{data.User.username}</p>
               </div>
               {/* <BsThreeDotsVertical style={{transform: 'translate(280px, 0)'}} onClick={() => handleDropdown(data.id)}/> */}
             </div>

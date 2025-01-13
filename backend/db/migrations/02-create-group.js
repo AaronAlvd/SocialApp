@@ -29,6 +29,9 @@ module.exports = {
       backgroundPhoto: {
         type: Sequelize.BLOB,
       },
+      bio: {
+        type: Sequelize.TEXT,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

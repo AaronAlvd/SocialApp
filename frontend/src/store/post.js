@@ -64,6 +64,28 @@ export const getPostDetail = (postId) => async (dispatch) => {
   const data = await response.json();
   dispatch(setPosts(data));
 }
+export const fetchGroupPosts = (groupId) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/posts/group/${groupId}`);
+    if (!response) {}
+    const data = await response.json();
+    dispatch(setPosts(data))
+    return data;
+  } catch(error) {
+
+  }
+}
+export const fetchUserPosts = (userId) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/posts/user/${userId}`);
+    if (!response) {}
+    const data = await response.json();
+    dispatch(setPosts(data))
+    return data;
+  } catch(error) {
+
+  }
+}
 export const createPost = (data) => async (dispatch) => {
   try {
     const response = await csrfFetch('/api/posts/', {

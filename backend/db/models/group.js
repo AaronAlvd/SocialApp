@@ -40,7 +40,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     backgroundPhoto: {
       type: DataTypes.BLOB,
-    }
+    },
+    bio: {
+      type: DataTypes.TEXT,
+    },
   }, {
     sequelize,
     modelName: 'Group',

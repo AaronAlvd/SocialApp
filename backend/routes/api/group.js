@@ -28,6 +28,7 @@ router.get('/:id', requireAuth, async (req, res, next) => {
           include: [
             {
               model: PostLike,
+              as: 'Likes',
               attributes: ['id'],
             },
           ],
@@ -41,14 +42,14 @@ router.get('/:id', requireAuth, async (req, res, next) => {
 
     for (let i = 0; i < group.Posts.length; i++) {
       const data = group.Posts[i];
-      likes+= data.PostLikes.length;
+      likes+= data.Likes.length;
     }
 
     return res.json({
      id: group.id,
      groupName: group.groupName,
      profilePhoto: group.profilePhoto,
-     bio: group.bio,
+     bio: group.bio || 'hello',
      GroupUsers: group.GroupUsers.length,
      Posts: group.Posts.length,
      Likes: likes,

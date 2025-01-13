@@ -89,10 +89,10 @@ export default function GroupPost() {
           <div className="GroupPost-div-box">
             <div style={{display: 'flex'}}>
               <img src={data.Group.profilePhoto ? dispatchCall.convertImageToBase64(data.Group.profilePhoto) : defaultpfp} 
-                   className="GroupPost-img-profile" onClick={() => navigate(`/groups/${data.Group.groupName}`)}/>
+                   className="GroupPost-img-profile" onClick={() => navigate(`/profile/group/${data.Group.groupName}`)}/>
               <div>
-                <p className="GroupPost-name" onClick={() => navigate(`/groups/${data.Group.groupName}`)}>{data.Group.groupName}</p>
-                <p className="GroupPost-username" onClick={() => navigate(`/profile/${data.User.username}`)}>@{data.User.username}</p>
+                <p className="GroupPost-name" onClick={() => navigate(`/profile/group/${data.Group.groupName}`)}>{data.Group.groupName}</p>
+                <p className="GroupPost-username" onClick={() => navigate(`/profile/user/${data.User.username}`)}>@{data.User.username}</p>
               </div>
             </div>
             <p className="GroupPost-caption">{dispatchCall.findHashtags(data.caption)}</p>
