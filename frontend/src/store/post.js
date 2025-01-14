@@ -86,6 +86,17 @@ export const fetchUserPosts = (userId) => async (dispatch) => {
 
   }
 }
+export const fetchExlporePosts = () => async (dispatch) => {
+  try {
+    const response = await csrfFetch('/api/posts/explore');
+    if (!response.ok){}
+    const data = await response.json();
+    dispatch(setPosts(data));
+    return data;
+  } catch(error) {
+
+  }
+}
 export const createPost = (data) => async (dispatch) => {
   try {
     const response = await csrfFetch('/api/posts/', {
