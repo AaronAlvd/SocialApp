@@ -1,4 +1,4 @@
-const comments01 = [
+const comments1 = [
   {
     id: 'c1e5d1f1-2c0e-4f37-bae0-67e2e8f28a01',
     userId: 'a1fbc967-1fae-467e-8b56-98b6e7d19df3', // Sophia Chen
@@ -67,4 +67,4 @@ const comments01 = [
   }
 ]
 
-module.exports = { comments01 }
+module.exports = { comments1 }
