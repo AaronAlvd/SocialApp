@@ -37,7 +37,7 @@ export default function UserProfile() {
         <>
         <div className='UserProfile-section_1'>
         <div className='UserProfile-column_1'>
-          <img src={user.profilePhoto ? dispatchCalls.convertImageToBase64(user.profilePhoto) : defaultpfp} 
+          <img src={user.profilePhoto ? user.profilePhoto : defaultpfp} 
                className='UserProfile-profilePhoto'/>
           <p className="UserProfile-name">{user.firstName} {user.lastName}</p>
         </div>
@@ -70,7 +70,7 @@ export default function UserProfile() {
       return (
         <>
         <div className='UserProfile-section_1'>
-          <img src={user.profilePhoto ? dispatchCalls.convertImageToBase64(user.profilePhoto) : defaultpfp}
+          <img src={user.profilePhoto ? user.profilePhoto : defaultpfp}
                className='UserProfile-profilePhoto'/>
 
           <div className="UserProfile-top_left">

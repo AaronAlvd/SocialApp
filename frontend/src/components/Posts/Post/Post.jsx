@@ -77,7 +77,7 @@ export default function Post() {
     <div className="Post-div">
       <div className="Post-section_1">
         <div className="row_1">
-          <img src={user.profilePhoto ? dispatchCall.convertImageToBase64(user.profilePhoto) : defaultpfp}
+          <img src={user.profilePhoto ? user.profilePhoto : defaultpfp}
                className="Post-img-profile"/>
           <label className="Post-label" onClick={() => setModalContent(<CreatePost user={user}/>)}>Share a post</label>
         </div>
@@ -98,7 +98,7 @@ export default function Post() {
         return (
           <div className="Post-div-box" >
             <div style={{display: 'flex'}}>
-              <img src={data.User.profilePhoto ? dispatchCall.convertImageToBase64(data.User.profilePhoto) : defaultpfp} 
+              <img src={data.User.profilePhoto ? data.User.profilePhoto : defaultpfp} 
                    className="Post-img-profile" onClick={() => navigate(`/profile/user/${data.User.username}`)}/>
               <div>
                 <p className="Post-name" onClick={() => navigate(`/profile/user/${data.User.username}`)}>
@@ -108,7 +108,7 @@ export default function Post() {
               {/* <BsThreeDotsVertical style={{transform: 'translate(280px, 0)'}} onClick={() => handleDropdown(data.id)}/> */}
             </div>
             <p className="Post-caption">{social.findHashtags(data.caption)}</p>
-            {data.photo && <img className="Post-image" src={social.convertImageToBase64(data.photo)}/>}
+            {data.photo && <img className="Post-image" src={data.photo}/>}
             <p className="Post-bottom">
               <div style={{display: 'flex'}}>
                 <div className="Post-div-icon">

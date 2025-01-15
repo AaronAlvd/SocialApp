@@ -43,7 +43,7 @@ export default function Posts({ posts }) {
       array[i] = (
         <div className="Post-div-box" >
           <div style={{display: 'flex'}}>
-            <img src={data.User.profilePhoto ? dispatchCall.convertImageToBase64(data.User.profilePhoto) : defaultpfp} 
+            <img src={data.User.profilePhoto ? data.User.profilePhoto : defaultpfp} 
                  className="Post-img-profile" onClick={() => navigate(`/profile/user/${data.User.username}`)}/>
             <div>
               <p className="Post-name" onClick={() => navigate(`/profile/user/${data.User.username}`)}>
@@ -53,7 +53,7 @@ export default function Posts({ posts }) {
             {/* <BsThreeDotsVertical style={{transform: 'translate(280px, 0)'}} onClick={() => handleDropdown(data.id)}/> */}
           </div>
           <p className="Post-caption">{dispatchCall.findHashtags(data.caption)}</p>
-          {data.photo && <img className="Post-image" src={dispatchCall.convertImageToBase64(data.photo)}/>}
+          {data.photo && <img className="Post-image" src={data.photo}/>}
           <p className="Post-bottom">
             <div style={{display: 'flex'}}>
               <div className="Post-div-icon">

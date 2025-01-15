@@ -4,6 +4,7 @@ const { User } = require('../models');
 const bcrypt = require('bcryptjs');
 const { users01, users01_id } = require('./seedData/users/users01');
 const { users02, users02_id } = require('./seedData/users/users02');
+const { users03 } = require('./seedData/users/users03');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -15,7 +16,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
    const users_01 = await users01();
 
-   await User.bulkCreate([...users_01, ...users02])
+   await User.bulkCreate([...users_01, ...users02, ...users03])
   },
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;  // Set a reasonable chunk size to avoid exceeding the depth limit

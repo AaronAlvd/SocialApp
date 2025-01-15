@@ -63,7 +63,7 @@ export default function Navigation() {
   return (
     <div className='Navigation-div'>
       <div className='Navigation-div-row Navigation-profile_box'>
-        <img src={(user && user.profilePhoto) ? social.convertImageToBase64(user.profilePhoto) : defaultpfp} className="Navigation-profilePhoto" onClick={() => setUserDrop(!userDrop)}/>
+        <img src={(user && user.profilePhoto) ? user.profilePhoto : defaultpfp} className="Navigation-profilePhoto" onClick={() => setUserDrop(!userDrop)}/>
         {/* <p className='Navigation-name'>{user.firstName}</p> */}
         {userDrop && <UserDropdown />}
       </div>

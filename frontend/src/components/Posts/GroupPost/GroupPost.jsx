@@ -67,7 +67,7 @@ export default function GroupPost() {
     <div className="GroupPost-div">
       <div className="GroupPost-section_1">
         <div className="row_1">
-          <img src={user.profilePhoto ? dispatchCall.convertImageToBase64(user.profilePhoto) : defaultpfp}
+          <img src={user.profilePhoto ? user.profilePhoto : defaultpfp}
                className="GroupPost-img-profile"/>
           <label className="GroupPost-label" onClick={() => setModalContent(<CreatePost user={user}/>)}>Share a post</label>
         </div>
@@ -88,7 +88,7 @@ export default function GroupPost() {
         return (
           <div className="GroupPost-div-box">
             <div style={{display: 'flex'}}>
-              <img src={data.Group.profilePhoto ? dispatchCall.convertImageToBase64(data.Group.profilePhoto) : defaultpfp} 
+              <img src={data.Group.profilePhoto ? data.Group.profilePhoto : defaultpfp} 
                    className="GroupPost-img-profile" onClick={() => navigate(`/profile/group/${data.Group.groupName}`)}/>
               <div>
                 <p className="GroupPost-name" onClick={() => navigate(`/profile/group/${data.Group.groupName}`)}>{data.Group.groupName}</p>
@@ -96,7 +96,7 @@ export default function GroupPost() {
               </div>
             </div>
             <p className="GroupPost-caption">{dispatchCall.findHashtags(data.caption)}</p>
-            {data.photo && <img className="GroupPost-image" src={dispatchCall.convertImageToBase64(data.photo)}/>}
+            {data.photo && <img className="GroupPost-image" src={data.photo}/>}
             <p className="GroupPost-bottom">
               <div style={{display: 'flex'}}>
                 <div className="GroupPost-div-icon">

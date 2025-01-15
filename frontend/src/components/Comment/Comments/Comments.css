@@ -1,7 +1,27 @@
-.Comments-div{
-  padding: 10px 0 10px 0;
-  width: 45vw;
+@media (max-width: 787px){
+  .Comments-div{
+    padding: 10px 0 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
+
+@media (min-width: 788px) and (max-width: 1024px){
+  .Comments-div{
+    padding: 10px 0 10px 0;
+    width: 507px;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 1025px){
+  .Comments-div{
+    padding: 10px 0 10px 0;
+    width: 547px;
+    box-sizing: border-box;
+  }
+}
+
 .Comments-box{
   display: flex;
   margin: 13px 0;
@@ -41,7 +61,7 @@
   background-color: rgba(0, 0, 0, 0.1);
   margin-left: 5px;
   font-size: 14px;
-  width: 35vw;
+  width: 80%;
   border-radius: 10px;
   padding-left: 15px;
 }

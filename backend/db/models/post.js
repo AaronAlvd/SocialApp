@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
     },
     photo: {
-      type: DataTypes.BLOB, 
+      type: DataTypes.STRING, 
     },
   }, {
     sequelize,

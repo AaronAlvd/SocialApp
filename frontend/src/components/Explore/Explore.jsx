@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useModal } from '../../context/modal';
+import Header from './Header/Header';
 import './Explore.css';
 
 export default function Post() {
@@ -31,7 +32,8 @@ export default function Post() {
 
   useEffect(() => {
     async function fetch() {
-      const response = await dispatchCall
+      const response = await dispatchCall.Explore();
+      setPosts(response);
     }
 
     fetch()
@@ -67,61 +69,43 @@ export default function Post() {
   const handleComments = (id) => {
     
     if (showComments === id) {
-      navigate('/following')
+      navigate('/explore')
       return setShowComments('')
     }
-    navigate(`/following/${id}`);
+    navigate(`/explore/${id}`);
     return setShowComments(id);
   }
 
   if (!posts) return null;
 
   return (
-    <div className="Post-div">
-      <div className="Post-section_1">
-        <div className="row_1">
-          <img src={user.profilePhoto ? dispatchCall.convertImageToBase64(user.profilePhoto) : defaultpfp}
-               className="Post-img-profile"/>
-          <label className="Post-label" onClick={() => setModalContent(<CreatePost user={user}/>)}>Share a post</label>
-        </div>
-        <div className="row_2">
-          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => uploadImgRef.current.click()}>
-            <input type="file" style={{display: 'none'}} ref={uploadImgRef} accept="image/*"/>
-            <FaImage style={{fontSize: '18px'}}/>
-            <label style={{marginLeft: '5px', fontWeight: '400', cursor: 'pointer'}}>Photo</label>
-          </span>
-          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => uploadVidRef.current.click()}>
-            <input type="file" style={{display: 'none'}} ref={uploadVidRef} accept="video/*"/>
-            <MdVideoLibrary style={{fontSize: '18px'}}/>
-            <label style={{marginLeft: '5px', fontWeight: '400', cursor: 'pointer'}}>Video</label>
-          </span>
-        </div>
-      </div>
+    <div className="Explore-div">
+      <Header />
       {posts.map((data) => {
         return (
-          <div className="Post-div-box" >
+          <div className="Explore-div-box" >
             <div style={{display: 'flex'}}>
-              <img src={data.User.profilePhoto ? dispatchCall.convertImageToBase64(data.User.profilePhoto) : defaultpfp} 
-                   className="Post-img-profile" onClick={() => navigate(`/profile/user/${data.User.username}`)}/>
+              <img src={data.User.profilePhoto ? data.User.profilePhoto : defaultpfp} 
+                   className="Explore-img-profile" onClick={() => navigate(`/profile/user/${data.User.username}`)}/>
               <div>
-                <p className="Post-name" onClick={() => navigate(`/profile/user/${data.User.username}`)}>
+                <p className="Explore-name" onClick={() => navigate(`/profile/user/${data.User.username}`)}>
                   {data.User.firstName} {data.User.lastName}</p>
-                <p className="Post-username" onClick={() => navigate(`/profile/user/${data.User.username}`)}>@{data.User.username}</p>
+                <p className="Explore-username" onClick={() => navigate(`/profile/user/${data.User.username}`)}>@{data.User.username}</p>
               </div>
               {/* <BsThreeDotsVertical style={{transform: 'translate(280px, 0)'}} onClick={() => handleDropdown(data.id)}/> */}
             </div>
-            <p className="Post-caption">{dispatchCall.findHashtags(data.caption)}</p>
-            {data.photo && <img className="Post-image" src={dispatchCall.convertImageToBase64(data.photo)}/>}
-            <p className="Post-bottom">
+            <p className="Explore-caption">{dispatchCall.findHashtags(data.caption)}</p>
+            {data.photo && <img className="Explore-image" src={data.photo}/>}
+            <p className="Explore-bottom">
               <div style={{display: 'flex'}}>
-                <div className="Post-div-icon">
-                  {data.Like ? <FontAwesomeIcon icon={faHeart02} className="Post-icon" onClick={() => handleDislike(data.id)} /> 
-                             : <FontAwesomeIcon icon={faHeart} className="Post-icon" onClick={() => handleLike(data.id)} />}
+                <div className="Explore-div-icon">
+                  {data.Like ? <FontAwesomeIcon icon={faHeart02} className="Explore-icon" onClick={() => handleDislike(data.id)} /> 
+                             : <FontAwesomeIcon icon={faHeart} className="Explore-icon" onClick={() => handleLike(data.id)} />}
                              
                   <small style={{margin: '0 5px 0 10px'}}>{data.Likes.length}</small>
                 </div>
-                <div className="Post-div-icon" onClick={() => handleComments(data.id)} style={{cursor: 'pointer'}}>
-                  <FontAwesomeIcon icon={faComment} className="Post-icon" />
+                <div className="Explore-div-icon" onClick={() => handleComments(data.id)} style={{cursor: 'pointer'}}>
+                  <FontAwesomeIcon icon={faComment} className="Explore-icon" />
                   <small style={{margin: '0 5px 0 10px'}}>{data.Comments.length}</small>
                 </div>
               </div>

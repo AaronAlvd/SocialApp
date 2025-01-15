@@ -34,7 +34,7 @@ export default function GroupProfile() {
         <>
         <div className='GroupProfile-section_1'>
         <div className='GroupProfile-column_1'>
-          <img src={group.profilePhoto ? dispatchCalls.convertImageToBase64(group.profilePhoto) : defaultpfp} 
+          <img src={group.profilePhoto ? group.profilePhoto : defaultpfp} 
                className='GroupProfile-profilePhoto'/>
           <p className="GroupProfile-name">{group.groupName}</p>
         </div>
@@ -63,7 +63,7 @@ export default function GroupProfile() {
       return (
         <>
         <div className='GroupProfile-section_1'>
-          <img src={group.profilePhoto ? dispatchCalls.convertImageToBase64(group.profilePhoto) : defaultpfp}
+          <img src={group.profilePhoto ? group.profilePhoto : defaultpfp}
                className='GroupProfile-profilePhoto'/>
 
           <div className="GroupProfile-top_left">

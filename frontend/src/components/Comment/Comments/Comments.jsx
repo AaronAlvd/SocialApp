@@ -65,7 +65,7 @@ export default function Comments({ userId }) {
       const comment = data[i];
       retArr[i] = (
         <div className='Comments-box'>
-          <img src={comment.User.profilePhoto ? dispatchCalls.convertImageToBase64(comment.User.profilePhoto) : defaultpfp} 
+          <img src={comment.User.profilePhoto ? comment.User.profilePhoto : defaultpfp} 
                className='Comments-profilePhoto' onClick={() => navigate(`/profile/${comment.User.username}`)}/>
           <div className='Comments-box-column-2'>
             <p className='Comments-username' onClick={() => navigate(`/profile/${comment.User.username}`)}>{comment.User.username}</p>
@@ -87,7 +87,7 @@ export default function Comments({ userId }) {
   return (
     <div className='Comments-div'>
       <div className='Comments-box'>
-        <img src={user.profilePhoto ? dispatchCalls.convertImageToBase64(user.profilePhoto) : defaultpfp} className='Comments-profilePhoto'/>
+        <img src={user.profilePhoto ? user.profilePhoto : defaultpfp} className='Comments-profilePhoto'/>
         {(!text && !activeText) && <label className='Comments-label' onClick={() => textAreaRef.current.focus()}>Add comment...</label>}
         <textarea id="dynamic-input" value={text} onChange={(e) => setText(e.target.value)} className='Comments-text_input' 
                   ref={textAreaRef} style={{resize: 'none', overflow: 'hidden' }} onFocus={() => setActiveText(true)} onBlur={() => setActiveText(false)}/>

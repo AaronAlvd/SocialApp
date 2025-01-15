@@ -3,11 +3,34 @@ const { v4: uuid } = require('uuid');
 const { User, Follow, Post, PostLike, GroupUser, Group } = require('../../db/models');
 const { Op } = require('sequelize');
 const { check } = require('express-validator');
+const fs = require('fs');
+const path = require('path');
 const bcrypt = require('bcryptjs');
 const { validateSignup } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { json } = require('sequelize');
+const { google } = require('googleapis');
+const { oauth2 } = require('googleapis/build/src/apis/oauth2');
+
 const router = express.Router();
+const CLIENT_ID = '2822231369-grn6271k9djhc5b0t1p21u7j0uhogfoe.apps.googleusercontent.com';
+const CLIENT_SECRET = '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';
+const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
+const REFRESH_TOKEN = '1//04oy2CqANpA97CgYIARAAGAQSNwF-L9Irja2FqPMh5i24mr5tPRZSJROm38V0PNmnkpMjwxHhL8AOn7u58RV_xtyCv4kn2erMSsg';
+
+const oauth2Client = new google.auth.OAuth2(
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REDIRECT_URI
+);
+
+oauth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
+
+const drive = google.drive({
+  version: 'v3',
+  auth: oauth2Client,
+});
+
 
 router.get('/search/following/:query', requireAuth, async (req, res, next) => {
   try{

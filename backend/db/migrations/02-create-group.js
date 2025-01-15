@@ -24,10 +24,10 @@ module.exports = {
         type: Sequelize.STRING,
       },
       profilePhoto: {
-        type: Sequelize.BLOB,
+        type: Sequelize.STRING,
       },
       backgroundPhoto: {
-        type: Sequelize.BLOB,
+        type: Sequelize.STRING,
       },
       bio: {
         type: Sequelize.TEXT,

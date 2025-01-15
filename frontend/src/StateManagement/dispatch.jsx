@@ -30,6 +30,9 @@ export default class DispatchCalls extends Social {
   UserPost(data) {
     return this.dispatch(postActions.fetchUserPosts(data))
   }
+  Explore() {
+    return this.dispatch(postActions.fetchExlporePosts())
+  }
 
   comments(data) {
     return this.dispatch(commentActions.fetchComments(data))

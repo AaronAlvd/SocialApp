@@ -36,10 +36,10 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 'Public',
     },
     profilePhoto: {
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING,
     },
     backgroundPhoto: {
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING,
     },
     bio: {
       type: DataTypes.TEXT,

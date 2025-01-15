@@ -32,7 +32,7 @@ export default function Chats() {
       const altUser = (data.User1.id === user.id) ? data.User2 : data.User1
       retVal[i] = (
         <div className='Chats-section' key={data.id} onClick={() => navigate(`/messages/${data.id}`)}>
-          {altUser.profilePhoto ? <img src={dispatchCalls.convertImageToBase64(altUser.profilePhoto)} className="Chats-profilePhoto"/> : 
+          {altUser.profilePhoto ? <img src={altUser.profilePhoto} className="Chats-profilePhoto"/> : 
                                   <img src={defaultpfp} className="Chats-profilePhoto"/>}
           <div className='Chats-column2'>
             <p className='Chats-name'>{altUser.firstName} {altUser.lastName}</p>

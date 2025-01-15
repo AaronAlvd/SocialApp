@@ -42,10 +42,10 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       profilePhoto: {
-        type: Sequelize.BLOB,
+        type: Sequelize.STRING,
       },
       backgroundPhoto: {
-        type: Sequelize.BLOB,
+        type: Sequelize.STRING,
       },
       status: {
         type: Sequelize.STRING,
