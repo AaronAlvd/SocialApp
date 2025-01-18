@@ -97,7 +97,7 @@ export default function GroupPost() {
             </div>
             <p className="GroupPost-caption">{dispatchCall.findHashtags(data.caption)}</p>
             {data.photo && <img className="GroupPost-image" src={data.photo}/>}
-            <p className="GroupPost-bottom">
+            <div className="GroupPost-bottom">
               <div style={{display: 'flex'}}>
                 <div className="GroupPost-div-icon">
                 {data.Like ? <FontAwesomeIcon icon={faHeart02} className="GroupPost-icon" onClick={() => handleDislike(data.id)} /> 
@@ -109,7 +109,7 @@ export default function GroupPost() {
                   <small style={{margin: '0 5px 0 10px'}}>{data.Comments.length}</small>
                 </div>
               </div>
-            <small>{new Date(data.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></p>
+            <small>{new Date(data.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></div>
             {(showComments === data.id || postId === data.id) && <div style={{width: '65vw'}}><Comments userId={data.userId}/></div>}
           </div>
         )

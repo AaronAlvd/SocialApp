@@ -2,45 +2,41 @@
 const { Op } = require('sequelize');
 const { User } = require('../models');
 const bcrypt = require('bcryptjs');
-const { users01, users01_id } = require('./seedData/users/users01');
-const { users02, users02_id } = require('./seedData/users/users02');
-const { users03 } = require('./seedData/users/users03');
+
+const { users } = require('./seedData/users/users')
+const { users_id } = require('./seedData/users/id/user_id')
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // define your schema in options object
+  options.schema = process.env.SCHEMA;
 }
 
 /** @type {import('sequelize-cli'.Migration)} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-   const users_01 = await users01();
 
-   await User.bulkCreate([...users_01, ...users02, ...users03])
+   await User.bulkCreate([...users])
   },
   async down (queryInterface, Sequelize) {
-    const chunkSize = 1000;  // Set a reasonable chunk size to avoid exceeding the depth limit
+    const chunkSize = 1000;
 
     const allIds = [
-      ...users01_id.map(user => user.id),
-      ...users02_id.map(user => user.id)
+      ...users_id.map((user) => user.userId),
     ];
     
-    // Function to delete users in chunks
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {
-        const chunk = ids.slice(i, i + chunkSize);  // Create chunks of IDs
+        const chunk = ids.slice(i, i + chunkSize);
         await User.destroy({
           where: {
             id: {
-              [Op.in]: chunk  // Use Op.in for each chunk
+              [Op.in]: chunk
             }
           }
         });
       }
     };
     
-    // Call the function to delete users in chunks
     await deleteInChunks(allIds);
   }
 };

@@ -2,14 +2,9 @@
 
 const { Op } = require('sequelize');
 const { Post } = require('../models')
-const { posts01 } = require('./seedData/posts/posts01');
-const { posts02 } = require('./seedData/posts/posts02');
-const { posts03 } = require('./seedData/posts/posts03');
-const { posts04 } = require('./seedData/posts/posts04');
-const { posts05 } = require('./seedData/posts/posts05');
-const { posts06 } = require('./seedData/posts/posts06');
-const { users01_id } = require('./seedData/users/users01');
-const { users02_id } = require('./seedData/users/users02');
+
+const { posts0 } = require('./seedData/posts/posts0');
+const { user0_id } = require('./seedData/users/id/user0_id')
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -20,32 +15,29 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-    await Post.bulkCreate([...posts01, ...posts02, ...posts03, ...posts04, ...posts05, ...posts06])
+    await Post.bulkCreate([...posts0])
   },
 
   async down (queryInterface, Sequelize) {
-    const chunkSize = 1000;  // Set a reasonable chunk size to avoid exceeding the depth limit
+    const chunkSize = 1000;
 
     const allIds = [
-      ...users01_id.map(user => user.id),
-      ...users02_id.map(user => user.id)
+      ...user0_id.map((user) => user.userId),
     ];
     
-    // Function to delete users in chunks
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {
-        const chunk = ids.slice(i, i + chunkSize);  // Create chunks of IDs
+        const chunk = ids.slice(i, i + chunkSize);
         await Post.destroy({
           where: {
             userId: {
-              [Op.in]: chunk  // Use Op.in for each chunk
+              [Op.in]: chunk
             }
           }
         });
       }
     };
     
-    // Call the function to delete users in chunks
     await deleteInChunks(allIds);
   }
 };

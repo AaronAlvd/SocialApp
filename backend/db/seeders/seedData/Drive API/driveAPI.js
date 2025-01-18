@@ -1,7 +1,7 @@
 const { google } = require('googleapis');
 const { oauth2 } = require('googleapis/build/src/apis/oauth2');
 const fs = require('fs');
-const path = require('path');
+const axios = require('axios')
 
 const CLIENT_ID = '2822231369-grn6271k9djhc5b0t1p21u7j0uhogfoe.apps.googleusercontent.com';
 const CLIENT_SECRET = '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';
@@ -21,20 +21,22 @@ const drive = google.drive({
   auth: oauth2Client,
 });
 
-const images = [
- 
-];
-
-async function uploadFile(filePath, fileName, mimeType) {
+async function uploadFile(imageUrl, fileName, mimeType) {
   try {
+    const results = await axios({
+      method: 'get',
+      url: imageUrl,
+      responseType: 'stream',
+    });
+
     const response = await drive.files.create({
       requestBody: {
-        name: fileName, // File name on Google Drive
-        mimeType: mimeType, // MIME type of the file
+        name: fileName,
+        mimeType: mimeType,
       },
       media: {
-        mimeType: mimeType, // MIME type of the file
-        body: fs.createReadStream(filePath) // Stream the file from the local disk
+        mimeType: mimeType,
+        body: results.data
       }
     });
 
@@ -47,74 +49,68 @@ async function uploadFile(filePath, fileName, mimeType) {
   }
 }
 
-async function uploadFiles() {
-  for (let i = 0; i < images.length; i++) {
-    const imagePath = images[i];
-    const fileName = path.basename(imagePath); // Get file name (e.g., image01.png)
-    const mimeType = imagePath.endsWith('.png') ? 'image/png' : 'image/jpeg'; // Set MIME type based on extension
+async function generateImageLink() {
+  try {
+    const response = await drive.files.list({
+      fields: 'files(id)'
+    });
 
-    await uploadFile(imagePath, fileName, mimeType);
+    if (response.error) {
+      throw new Error(response.error.message);
+    };
+
+    const array = response.data.files.map((file) => `https://drive.google.com/thumbnail?id=${file.id}`);
+    const newArray = ['const imageLinks = [ \n'];
+
+    for (let item of array) {
+      newArray.push(`{ photo: '${item}' }, \n`)
+    }
+
+    newArray.push(']')
+
+    fs.writeFile('./backend/db/seeders/seedData/Drive API/imageLinks.js', newArray.join(''), () => {
+
+    });
+
+  } catch (error) {
+    console.log('Error message: ', error.message);
   }
-}
+};
 
-function setFilePermissions(fileId) {
-  const permission = {
-    type: 'anyone',
-    role: 'reader',
-  };
+drive.files.list({
+  fields: 'files(id)', // Only retrieve the file IDs to reduce unnecessary data
+}).then(async (response) => {
+  const array = response.data.files;
 
-  drive.permissions.create(
-    {
-      fileId: fileId,
-      resource: permission,
-    },
-    (err, res) => {
-      if (err) {
-        console.error('Error setting file permissions:', err);
-        return;
-      }
+  if (array.length === 0) {
+    console.log('No files found.');
+    return;
+  }
 
-      console.log('Permissions set. The file is now publicly viewable.');
-
-      // Get the shareable link to the file
-      drive.files.get(
-        {
-          fileId: fileId,
-          fields: 'webViewLink',
-        },
-        (err, res) => {
-          if (err) {
-            console.error('Error getting file link:', err);
-            return;
-          }
-
-          console.log('Shareable link:', res.data.webViewLink);
+  // Iterate over all files and set permissions
+  for (const item of array) {
+    try {
+      // Create permission for "anyone" to read the file
+      await drive.permissions.create({
+        fileId: item.id,
+        requestBody: {
+          role: 'reader',  // Grant read access
+          type: 'anyone'   // Make it public to anyone with the link
         }
-      );
-    }
-  );
-}
-
-function listFiles() {
-
-  drive.files.list({
-    fields: 'files(id, name)',  // We only need 'id' and 'name'
-  }, (err, res) => {
-    if (err) {
-      console.log('The API returned an error: ' + err);
-      return;
-    }
-
-    const files = res.data.files;
-    if (files.length) {
-      console.log('Files:');
-      files.forEach((file) => {
-        console.log(`${file.name} (${file.id})`);
       });
-    } else {
-      console.log('No files found.');
+
+      console.log(`Permission set to 'reader' for anyone on file: ${item.id}`);
+    } catch (err) {
+      console.error(`Error setting permission for file ${item.id}:`, err);
     }
-  });
-}
+  }
+}).catch((err) => {
+  console.error('Error retrieving files:', err);
+});
+
+
+module.exports = { uploadFile }
+
+
 
 

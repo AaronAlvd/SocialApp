@@ -196,7 +196,7 @@ router.get('/user/:userId', requireAuth, async (req, res, next) => {
 
 router.get('/explore', requireAuth, async (req, res, next) => {
   try {
-    const user_id = req.user.id;
+    const userId = req.user.id;
 
     const posts = await Post.findAll({
       where: {
@@ -218,10 +218,37 @@ router.get('/explore', requireAuth, async (req, res, next) => {
         }
       ],
       order: Sequelize.fn('RANDOM'),
-      limit: 100,
+      limit: 30,
     });
 
-    res.json(posts)
+    const newArray = Array(posts.length)
+
+    for (let i = 0; i < posts.length; i++) {
+      const post = posts[i];
+      let userLiked = false;
+    
+      for (let j = 0; j < post.Likes.length; j++) {
+        const like = post.Likes[j];
+        if (userId === like.userId) {
+          userLiked = true;
+          break;
+        }
+      }
+    
+      newArray[i] = {
+        id: post.id,
+        userId: post.userId,
+        caption: post.caption,
+        photo: post.photo,
+        createdAt: post.createdAt,
+        User: post.User,
+        Comments: post.Comments,
+        Likes: post.Likes,
+        Like: userLiked,
+      }
+    }
+
+    res.json(newArray)
 
   } catch(error) {
     next(error)

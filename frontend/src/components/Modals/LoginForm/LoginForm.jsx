@@ -25,6 +25,16 @@ export default function LoginForm() {
     })
   };
 
+  const handleDemoLogin = async (e) => {
+    e.preventDefault();
+
+    return dispatch(sessionActions.login('EvaJohns9515', 'password'))
+    .then(() => {
+      closeModal
+      window.location.reload();
+    })
+  }
+
   return (
     <div className="LoginForm-div">
       <h2 className='LoginForm-title'>Login</h2>
@@ -44,6 +54,7 @@ export default function LoginForm() {
         </div>
         <div className="LoginForm-div-formButton">
           <button className="LoginForm-button" onClick={(e) => handleSubmit(e)}>Login</button>
+          <button className='LoginForm-button' onClick={(e) => handleDemoLogin(e)}>Demo User</button>
         </div>
       </form>
     </div>

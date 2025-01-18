@@ -72,7 +72,7 @@ export default function CreatePost({ user }) {
       if (activeInfo.groupId === group.id) {
         array[i] = (
           <div className='group_row' onClick={() => changeSubmit(null, 'user')}>
-            <img src={user.profilePhoto ? dispatchCalls.convertImageToBase64(user.profilePhoto) : defaultpfp } 
+            <img src={user.profilePhoto ? user.profilePhoto : defaultpfp } 
                  className='CreatePost-groupProfilePhoto'/>
             <p className='CreatePost-groupName'>{user.username}</p>
           </div>
@@ -80,7 +80,7 @@ export default function CreatePost({ user }) {
       } else {
         array[i] = (
           <div className='group_row' onClick={() => changeSubmit(group, 'group')}>
-            <img src={group.Group.profilePhoto ? dispatchCalls.convertImageToBase64(group.Group.profilePhoto) : defaultpfp } 
+            <img src={group.Group.profilePhoto ? group.Group.profilePhoto : defaultpfp } 
                  className='CreatePost-groupProfilePhoto'/>
             <p className='CreatePost-groupName'>{group.Group.groupName}</p>
           </div>
@@ -116,7 +116,7 @@ export default function CreatePost({ user }) {
   return(
     <div className='CreatePost-div'>
       <div className='CreatePost-header'>
-        <img src={activeInfo.profilePhoto ? dispatchCalls.convertImageToBase64(activeInfo.profilePhoto) : defaultpfp} 
+        <img src={activeInfo.profilePhoto ? activeInfo.profilePhoto : defaultpfp} 
              className='CreatePost-profilePhoto'/>
         <span>
           <p className='CreatePost-name'>{activeInfo.name}</p>

@@ -29,7 +29,16 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'explore',
-        element: <Explore />
+        children: [
+          {
+            path: '',
+            element: <Explore />,
+          },
+          {
+            path: ':postId',
+            element: <Explore />,
+          }
+        ]
       },
       {
         path: 'following',
