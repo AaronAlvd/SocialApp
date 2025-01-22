@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useModal } from '../../../context/modal';
+import Header from '../Post/header';
 import './GroupPost.css';
 
 export default function GroupPost() {
@@ -61,29 +62,11 @@ export default function GroupPost() {
     return setShowComments(id);
   }
 
-  if (!unsortedFeed) return null;
+  if (!unsortedFeed || !user) return null;
 
   return (
     <div className="GroupPost-div">
-      <div className="GroupPost-section_1">
-        <div className="row_1">
-          <img src={user.profilePhoto ? user.profilePhoto : defaultpfp}
-               className="GroupPost-img-profile"/>
-          <label className="GroupPost-label" onClick={() => setModalContent(<CreatePost user={user}/>)}>Share a post</label>
-        </div>
-        <div className="row_2">
-          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => uploadImgRef.current.click()}>
-            <input type="file" style={{display: 'none'}} ref={uploadImgRef} accept="image/*"/>
-            <FaImage style={{fontSize: '18px'}}/>
-            <label style={{marginLeft: '5px', fontWeight: '400', cursor: 'pointer'}}>Photo</label>
-          </span>
-          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => uploadVidRef.current.click()}>
-            <input type="file" style={{display: 'none'}} ref={uploadVidRef} accept="video/*"/>
-            <MdVideoLibrary style={{fontSize: '18px'}}/>
-            <label style={{marginLeft: '5px', fontWeight: '400', cursor: 'pointer'}}>Video</label>
-          </span>
-        </div>
-      </div>
+      <Header user={user}/>
       {unsortedFeed.map((data) => {
         return (
           <div className="GroupPost-div-box">

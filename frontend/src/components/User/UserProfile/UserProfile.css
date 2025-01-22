@@ -3,13 +3,12 @@
     width: 100%;
     background-color: white;
     padding: 0 10px;
-    border-radius: 10px 10px 0 0;
+    margin: 10px;
     box-sizing: border-box;
   }
   .UserProfile-section_2{
     display: flex;
     background-color: white;
-    border-radius: 0 0 10px 10px;
     width: 100%;
     padding: 0 10px;
     box-sizing: border-box;
@@ -53,7 +52,7 @@
     width: 507px;
     background-color: white;
     padding: 10px;
-    border-radius: 10px;
+    margin: 10px;
     box-sizing: border-box;
   }
   .UserProfile-profilePhoto{
@@ -96,7 +95,7 @@
     width: 547px;
     background-color: white;
     padding: 10px;
-    border-radius: 10px;
+    margin: 10px;
     box-sizing: border-box;
   }
   .UserProfile-profilePhoto{
@@ -132,8 +131,8 @@
 .UserProfile-div{
   height: 100vh;
   overflow: scroll;
-  padding: 10px;
   box-sizing: border-box;
+  width: 100%;
 }
 .UserProfile-section_2-column{
   display: flex;

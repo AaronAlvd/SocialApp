@@ -3,8 +3,10 @@ const { Post, Comment, User, Follow, PostLike, GroupUser, Group, CommentLike } =
 const { v4: uuid } = require('uuid')
 const { Op, Sequelize } = require('sequelize')
 const { requireAuth } = require('../../utils/auth');
-const router = express.Router();
+const { handleUpload } = require('../../utils/driveAPI');
+// const { upload } = require('../../app')
 
+const router = express.Router();
 
 router.get('/comments/:id', requireAuth, async (req, res, next) => {
   try {
@@ -155,7 +157,7 @@ router.get('/user/:userId', requireAuth, async (req, res, next) => {
              attributes: ['id', 'userId']
            }
          ],
-         order: [['createdAt', 'DESC']]
+         order: [['createdAt', 'ASC']]
        }
      ]
    });
@@ -292,7 +294,8 @@ router.get('/following', requireAuth, async (req, res, next) => {
           attributes: ['id', 'userId']
         }
       ],
-      order: [['createdAt', 'DESC']]
+      order: [['createdAt', 'DESC']],
+      limit: 15,
     });
 
     const newArray = Array(posts.length)
@@ -452,14 +455,16 @@ router.post('/', requireAuth, async (req, res, next) => {
     const id = uuid();
     const groupId = req.body.groupId;
     const caption = req.body.caption || null;
-    const photo = req.body.photo || null;
+    // const photo = req.body.file || null;
+
+    // const response = handleUpload(photo);
 
     const post = await Post.create({
       id: id,
       groupId: groupId,
       userId: user_id,
       caption: caption || null,
-      photo: photo || null,
+    //   photo: photo || null,
     });
 
     res.json(post);

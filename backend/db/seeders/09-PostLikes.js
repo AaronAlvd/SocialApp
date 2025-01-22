@@ -3,6 +3,7 @@
 const { PostLike } = require('../models');
 const { Op } = require('sequelize');
 
+const { users_id } = require('./seedData/users/id/user_id');
 const { likes } = require('./seedData/postLikes/likes');
 
 /** @type {import('sequelize-cli').Migration} */

@@ -148,3 +148,42 @@
   margin: 0 0 0 5px;
   cursor: pointer;
 }
+
+.ExploreHeader-div{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border-bottom: 1px solid black;
+}
+
+.ExploreHeader-input{
+  margin: 0;
+  border: none;
+  font-size: 14px;
+  font-weight: 100;
+  width: 315px;
+  padding-left: 5px;
+  border-radius: 15px;
+  background-color: rgb(222, 219, 219);
+}
+.ExploreHeader-input:focus{
+  outline: none;
+}
+.ExploreHeader-div_input{
+  display: flex;
+  align-items: center;
+  width: 350px;
+  height: 30px;
+  background-color: rgb(222, 219, 219);
+  border-radius: 15px;
+  overflow: hidden;
+}
+.ExpH-act{
+  border: 1.5px solid rgb(64, 118, 255);
+}
+.ExploreHeader-Query{
+ position: absolute;
+ background-color: black;
+}

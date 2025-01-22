@@ -1,0 +1,25 @@
+const groups_id = [
+  { id: 'default' },
+  { id: "4af42174-4a84-4202-b1a8-ebe4a701535b" },
+  { id: "856bc081-fb37-40db-a042-fa19f0938c6a" },
+  { id: "7b8c5015-e7a7-4504-8f8a-b0b5509b8414" },
+  { id: "11ecb6d6-29d8-48be-b912-ae7fda5ae442" },
+  { id: "d8e49de9-a7b6-4166-be56-02aad30d8b2e" },
+  { id: "d0014920-8fbd-4b5b-8e86-f8971f7ddbe1" },
+  { id: "971ad97e-15a9-4b19-be38-9c0e9765b462" },
+  { id: "3f79b54e-bee9-4b25-bd4a-bc2f81a0bcc6" },
+  { id: "5a4cd34d-adc0-45c3-b035-366fc819edd8" },
+  { id: "0d0b734b-b50d-4c7d-99fd-94fd655964a7" },
+  { id: "00cc0aae-86ff-4ea6-bb9c-d956d9fd5cc1" },
+  { id: "8f70e6b9-79ca-42a8-b279-5ee115e1bc22" },
+  { id: "33eb6bfa-cf74-461e-b1c0-5792645daa0e" },
+  { id: "9c420b87-20d3-4f9d-a00f-bf95acd54c97" },
+  { id: "e7113d2a-4259-4879-9097-d58cf1352e37" },
+  { id: "b248d6cb-d25d-4ff2-b793-243324d51b37" },
+  { id: "c5acca48-5e2f-46ba-b05a-83007ff4ec01" },
+  { id: "e7e6b344-d1cc-4050-a05d-238f66b42cb8" },
+  { id: "a8ceb419-6c98-4e1b-81ac-7b20dc094a2b" },
+  { id: "29a176f1-ca7b-43b9-8f3e-d14260e0992d" },
+];
+
+module.exports = { groups_id };

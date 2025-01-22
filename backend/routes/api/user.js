@@ -9,28 +9,8 @@ const bcrypt = require('bcryptjs');
 const { validateSignup } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { json } = require('sequelize');
-const { google } = require('googleapis');
-const { oauth2 } = require('googleapis/build/src/apis/oauth2');
 
 const router = express.Router();
-const CLIENT_ID = '2822231369-grn6271k9djhc5b0t1p21u7j0uhogfoe.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
-const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
-const REFRESH_TOKEN = '1//04oy2CqANpA97CgYIARAAGAQSNwF-L9Irja2FqPMh5i24mr5tPRZSJROm38V0PNmnkpMjwxHhL8AOn7u58RV_xtyCv4kn2erMSsg';
-
-const oauth2Client = new google.auth.OAuth2(
-  CLIENT_ID,
-  CLIENT_SECRET,
-  REDIRECT_URI
-);
-
-oauth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
-
-const drive = google.drive({
-  version: 'v3',
-  auth: oauth2Client,
-});
-
 
 router.get('/search/following/:query', requireAuth, async (req, res, next) => {
   try{
@@ -82,6 +62,48 @@ router.get('/search/:query', requireAuth, async (req, res, next) => {
 
   } catch (error) {
     next(error)
+  }
+});
+
+router.get('/explore/:query', requireAuth, async (req, res, next) => {
+  try {
+    const { query } = req.params;
+
+    const queryResults1 = await User.findAll({
+      where: {
+        [Op.or]: [
+          {
+            username: { [Op.like]: `${query}%` }  // Match usernames starting with `query`
+          },
+          {
+            firstName: { [Op.like]: `${query}%` }  // Match firstName starting with `query`
+          },
+          {
+            lastName: { [Op.like]: `${query}%` }  // Match lastName starting with `query`
+          }
+        ]
+      }
+    });
+
+    const queryResults2 = await Group.findAll({
+      where: {
+        groupName: {
+          [Op.like]: `${query}%`
+        }
+      }
+    });
+
+    if (queryResults1 === 0 && queryResults2.length === 0) {
+      throw {status: 404, title: 'Resource Not Found', message: 'No matches found'}
+    }
+
+    res.json({
+      users: queryResults1,
+      groups: queryResults2,
+    })
+
+  } catch(error) {
+    next(error);
   }
 });
 
@@ -146,7 +168,7 @@ router.get('/groups', requireAuth, async (req, res, next) => {
   });
 
   if (groups.length === 0) {
-    throw {status: 404, title: 'Resource Not Found', message: 'You are not a part of any groups'}
+    res.status(200)
   }
 
   return res.json(groups);

@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import DispatchCalls from '../../../StateManagement/dispatch';
-import Posts from '../Posts';
+import UserPosts from '../UserPosts';
+import Body from '../../Posts/Post/body';
 import defaultpfp from '../../../assets/Default_pfp.jpg';
 import { useModal } from '../../../context/modal';
 import { useState, useEffect } from "react";
@@ -63,6 +64,9 @@ export default function UserProfile() {
           <p className="UserProfile-stats">{user.likes}</p>
         </div>
         </div>
+        <div>
+          Hello
+        </div>
         </>
       )
     } 
@@ -105,7 +109,7 @@ export default function UserProfile() {
     <div className='UserProfile-div'>
       {displayHeader()}
       <div>
-        <Posts posts={userPosts}/>
+        <Body optional={userPosts}/>
       </div>
     </div>
   )

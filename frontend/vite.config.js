@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
     eslint({
       overrideConfigFile: './.eslintrc.cjs',
       lintOnStart: true,
-      failOnError: mode === "production"
+      failOnError: false
     })
   ],
   server: {

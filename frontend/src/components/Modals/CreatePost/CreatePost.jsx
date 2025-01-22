@@ -8,24 +8,25 @@ import { useState, useRef, useEffect } from 'react';
 import { FaImage } from "react-icons/fa6";
 import { MdVideoLibrary } from "react-icons/md";
 
-export default function CreatePost({ user }) {
+export default function CreatePost({ user, event = null}) {
   const dispatch = useDispatch();
   const dispatchCalls = new DispatchCalls(dispatch);
   const textareaRef = useRef(null);
   const uploadImgRef = useRef(null);
+  const uploadVidRef = useRef(null);
   const [text, setText] = useState('');
   const [activeText, setActiveText] = useState();
   const [groups, setGroups] = useState(null);
   const [dropdown, setDropdown] = useState(false);
+  const [file, setFile] = useState();
+  const [imgFile, setImgFile] = useState();
+  const [vidFile, setVidFile] = useState();
   const [activeInfo, setActiveInfo] = useState({
     userId: user.id,
     name: user.firstName + ' ' + user.lastName,
     profilePhoto: user.profilePhoto,
     groupId: 'default'
   });
-  const [imgFile, setImgFile] = useState();
-  const [vidFile, setVidFile] = useState();
-  const uploadVidRef = useRef(null);
 
   useEffect(() => {
     async function fetch() {
@@ -34,10 +35,16 @@ export default function CreatePost({ user }) {
     }
 
     fetch()
+
+    if (event) {
+      handleFile(event)
+    }
+
   }, [])
 
   const handleFile = (e) => {
     const file = e.target.files[0];
+    setFile(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -63,26 +70,29 @@ export default function CreatePost({ user }) {
         groupId: 'default',
       })
     }
+    console.log(activeInfo)
   }
 
   const displayGroups = () => {
+    if (groups.length === 0) return null;
+
     const array = Array(groups.length);
     for (let i = 0; i < groups.length; i++) {
       const group = groups[i]
-      if (activeInfo.groupId === group.id) {
+      if (activeInfo.groupId === group.Group.id) {
         array[i] = (
-          <div className='group_row' onClick={() => changeSubmit(null, 'user')}>
+          <div className='group_row'>
             <img src={user.profilePhoto ? user.profilePhoto : defaultpfp } 
-                 className='CreatePost-groupProfilePhoto'/>
-            <p className='CreatePost-groupName'>{user.username}</p>
+                 className='CreatePost-groupProfilePhoto' onClick={() => changeSubmit(null, 'user')}/>
+            <p className='CreatePost-groupName' onClick={() => changeSubmit(null, 'user')}>{user.username}</p>
           </div>
         )
       } else {
         array[i] = (
-          <div className='group_row' onClick={() => changeSubmit(group, 'group')}>
+          <div className='group_row'>
             <img src={group.Group.profilePhoto ? group.Group.profilePhoto : defaultpfp } 
-                 className='CreatePost-groupProfilePhoto'/>
-            <p className='CreatePost-groupName'>{group.Group.groupName}</p>
+                 className='CreatePost-groupProfilePhoto' onClick={() => changeSubmit(group, 'group')}/>
+            <p className='CreatePost-groupName' onClick={() => changeSubmit(group, 'group')}>{group.Group.groupName}</p>
           </div>
         )
       }
@@ -92,12 +102,13 @@ export default function CreatePost({ user }) {
   }
 
   const handleSubmitPost = () => {
-    const data = {
-      caption: text || null,
-      photo: imgFile || null,
-      groupId: activeInfo.groupId
-    }
-    return dispatchCalls.newPost(data);
+    const formData = new FormData()
+
+    formData.append('caption', text || '');
+    formData.append('file', file || '');
+    formData.append('groupId', activeInfo.groupId || 'default');
+
+    return dispatchCalls.newPost(formData);
   }
 
   useEffect(() => {
@@ -106,8 +117,8 @@ export default function CreatePost({ user }) {
     const textarea = textareaRef.current;
 
     if (textarea && imgFile) {
-      textarea.style.height = 'auto';  // Reset height before resizing
-      textarea.style.height = `${textarea.scrollHeight}px`;  // Adjust height based on content
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight}px`;
     }
   }, [text])
 
@@ -120,7 +131,7 @@ export default function CreatePost({ user }) {
              className='CreatePost-profilePhoto'/>
         <span>
           <p className='CreatePost-name'>{activeInfo.name}</p>
-          {dropdown ? <IoIosArrowUp onClick={() => setDropdown(!dropdown)}/> : <IoIosArrowDown onClick={() => setDropdown(!dropdown)}/>}
+          {groups.length > 0 && (dropdown ? <IoIosArrowUp onClick={() => setDropdown(!dropdown)}/> : <IoIosArrowDown onClick={() => setDropdown(!dropdown)}/>)}
           <p className='CreatePost-username'>@{user.username}</p>
         </span>
         <div className='CreatePost-groups'>

@@ -6,18 +6,32 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-
 const routes = require('./routes/index');
-
 const { ValidationError } = require('sequelize');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
+// const multer = require ('multer');
 
 const app = express();
 
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, 'uploads/');  // Specify the directory where files should be stored
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + path.extname(file.originalname));  // Rename the file
+//   }
+// });
+
+// const upload = multer({ 
+//   storage: storage,
+//   limits: { fileSize: 50 * 1024 * 1024 }, // Set a file size limit (50MB in this case)
+// }).single('file')
+
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Security Middleware
 if (!isProduction) {

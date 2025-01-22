@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import DispatchCalls from '../../../StateManagement/dispatch';
 import Following from '../Following/Following';
-import Posts from "../Posts";
+// import UserPosts from "../Posts";
 import defaultpfp from '../../../assets/Default_pfp.jpg';
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
@@ -96,7 +96,7 @@ export default function GroupProfile() {
     <div className='GroupProfile-div'>
       {displayHeader()}
       <div >
-        <Posts posts={groupPosts}/>
+        {/* <Posts posts={groupPosts}/> */}
       </div>
     </div>
   )

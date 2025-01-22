@@ -5,6 +5,8 @@ export default class Social {
   }
 
   findHashtags(string) {
+    if (string === null) return null;
+
     let array = string.split(' ');
 
     for (let i = 1; i < array.length; i++) {

@@ -2,7 +2,9 @@
 
 const { Group } = require('../models')
 const { Op } = require('sequelize');
-const group = require('../models/group');
+
+const { groups } = require('./seedData/groups/groups');
+const { groups_id } = require('./seedData/groups/groups_id');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -12,35 +14,29 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await Group.bulkCreate([
-      {
-        id: 'acd44161-0ce5-44c3-8bb6-b0e983857aac',
-        groupName: 'TheFirstGroup',
-        status: 'Private',
-        profilePhoto: 'https://pixabay.com/get/gd9a9843f85a7f8a61cf1856594825e8bd724c0f8ba6e312245246e8f6953efbfc0b57f47e446407bd44919b266238fed153ac3b6cf8f50037bdcf97ad8aa53b1_640.jpg',
-        backgroundPhoto: null,
-        bio: `We are a passionate and innovative team of designers, developers, and creatives dedicated to crafting unique digital experiences. With a shared vision of blending functionality with creativity, we specialize in designing cutting-edge websites, apps, and digital solutions that not only look amazing but also perform seamlessly.
-        Our team is built on a foundation of collaboration, where diverse skills and perspectives come together to solve problems and push the boundaries of what's possible in the digital space. Whether it’s designing a visually stunning website or developing an intuitive user experience, we believe that great design is both an art and a science.  
-        With a focus on user-centered design, we aim to create digital experiences that resonate with audiences, enhance engagement, and drive results. From startups to established brands, we’re here to bring your vision to life with innovative, tailored solutions that stand out in a crowded digital world.`,
-      },
-      {
-        id: 'default',
-        groupName: 'default',
-        status: 'Public',
-        profilePhoto: null,
-        backgroundPhoto: null,
-      }
-    ])
+    await Group.bulkCreate([...groups])
   },
 
   async down (queryInterface, Sequelize) {
-    await Group.destroy({
-      where: {
-        [Op.or]: [
-          { id: 'acd44161-0ce5-44c3-8bb6-b0e983857aac' },
-          { id: 'default' }
-        ]
+    const chunkSize = 1000;
+
+    const allIds = [
+      ...groups_id.map((group) => group.id),
+    ];
+    
+    const deleteInChunks = async (ids) => {
+      for (let i = 0; i < ids.length; i += chunkSize) {
+        const chunk = ids.slice(i, i + chunkSize);
+        await Group.destroy({
+          where: {
+            id: {
+              [Op.in]: chunk
+            }
+          }
+        });
       }
-    })
+    };
+    
+    await deleteInChunks(allIds);
   }
 };

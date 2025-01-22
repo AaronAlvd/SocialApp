@@ -4,7 +4,7 @@ const { Op } = require('sequelize');
 const { Post } = require('../models')
 
 const { posts0 } = require('./seedData/posts/posts0');
-const { user0_id } = require('./seedData/users/id/user0_id')
+const { user0_id } = require('./seedData/users/id/user0_id');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {

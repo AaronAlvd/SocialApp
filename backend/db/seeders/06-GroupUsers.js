@@ -3,6 +3,11 @@
 const { GroupUser } = require('../models');
 const { Op } = require('sequelize');
 
+const { groupUsers } = require('./seedData/groups/groupUser');
+const { groupUsers00 } = require('./seedData/groups/users/users');
+const { users_id } = require('./seedData/users/id/user_id');
+
+
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
@@ -11,29 +16,29 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await GroupUser.bulkCreate([])
+    await GroupUser.bulkCreate([...groupUsers,...groupUsers00]);
   },
 
   async down (queryInterface, Sequelize) {
-    const chunkSize = 1000;  // Set a reasonable chunk size to avoid exceeding the depth limit
+    const chunkSize = 1000;
 
-    const allIds = [];
+    const allIds = [
+      ...users_id.map((user) => user.userId)
+    ];
     
-    // Function to delete users in chunks
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {
-        const chunk = ids.slice(i, i + chunkSize);  // Create chunks of IDs
+        const chunk = ids.slice(i, i + chunkSize);
         await GroupUser.destroy({
           where: {
-            id: {
-              [Op.in]: chunk  // Use Op.in for each chunk
+            userId: {
+              [Op.in]: chunk
             }
           }
         });
       }
     };
     
-    // Call the function to delete users in chunks
     await deleteInChunks(allIds);
   }
 };

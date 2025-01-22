@@ -59,6 +59,9 @@ export default class DispatchCalls extends Social {
   GroupProfile(data) {
     return this.dispatch(userActions.fetchGroup(data))
   }
+  ExploreQuery(data) {
+    return this.dispatch(userActions.queryExplore(data))
+  }
 
   chats() {
     return this.dispatch(messageActions.fetchChats())

@@ -23,7 +23,7 @@ export const signUpUser = (data) => async (dispatch) => {
 
   try {
     // Use csrfFetch to perform the signup request
-    const response = await csrfFetch("/api/user/", {
+    const response = await csrfFetch("/api/users/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -48,6 +48,18 @@ export const queryFollowing = (query) => async (dispatch) => {
 
   }
 }
+export const queryExplore = (query) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/users/explore/${query}`);
+    if (!response.ok) {}
+    const data = await response.json();
+    dispatch(setQueryFollowing(data.users))
+    dispatch(setGroups(data.groups))
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+}
 export const fetchProfile = (id) => async (dispatch) => {
   try {
     const response = await csrfFetch(`/api/users/${id}`)

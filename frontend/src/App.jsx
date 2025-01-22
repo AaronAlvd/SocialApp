@@ -28,6 +28,10 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
+        path: '',
+        element: <Explore />,
+      },
+      {
         path: 'explore',
         children: [
           {

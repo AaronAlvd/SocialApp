@@ -3,13 +3,17 @@ import { faGlobe, faUsers, faComments, faUserFriends} from '@fortawesome/free-so
 import UserDropdown from './Dropdown/UserDropdown';
 import Social from '../../StateManagement/social';
 import defaultpfp from '../../assets/Default_pfp.jpg';
+import CreatePost from '../Modals/CreatePost/CreatePost';
+import { FaPlus } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
+import { useModal } from '../../context/modal'
 import './Navigation.css'
 
 export default function Navigation() {
+  const { setModalContent } = useModal();
   const user = useSelector(state => state.session.user);
   const navigate = useNavigate();
   const social = new Social();
@@ -17,6 +21,7 @@ export default function Navigation() {
   const [active, setActive] = useState();
   const [userDrop, setUserDrop] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
 
   useEffect(() => {
     setActive({
@@ -61,6 +66,7 @@ export default function Navigation() {
   if (!active) return null;
 
   return (
+    <>
     <div className='Navigation-div'>
       <div className='Navigation-div-row Navigation-profile_box'>
         <img src={(user && user.profilePhoto) ? user.profilePhoto : defaultpfp} className="Navigation-profilePhoto" onClick={() => setUserDrop(!userDrop)}/>
@@ -79,5 +85,9 @@ export default function Navigation() {
            "Navigation-icon"} />{width > 767 && 'Messages'}</p>
       </div>
     </div>
+    <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 45}px)`}} onClick={() => setModalContent(<CreatePost user={user}/>)}>
+      <FaPlus/>
+    </span>
+    </>
   )
 }

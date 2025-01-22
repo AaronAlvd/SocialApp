@@ -97,18 +97,11 @@ export const fetchExlporePosts = () => async (dispatch) => {
 
   }
 }
-export const createPost = (data) => async (dispatch) => {
+export const createPost = (formData) => async (dispatch) => {
   try {
     const response = await csrfFetch('/api/posts/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }, 
-      body: JSON.stringify({
-        caption: data.caption,
-        photo: data.photo,
-        groupId: data.groupId,
-      })
+      method: 'POST', 
+      body: formData
     })
 
     if (!response.ok) {
