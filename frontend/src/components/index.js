@@ -8,6 +8,7 @@ export { default as UserProfile } from './User/UserProfile/UserProfile';
 export { default as Chats } from './Messages/Chats';
 export { default as GroupPost } from '../components/Posts/GroupPost/GroupPost';
 export { default as GroupProfile } from './User/GroupProfile/GroupProfile';
-export { default as Explore } from './Explore/Explore';
+export { default as Explore } from './Posts/Explore/Explore';
 export { default as Chat } from './Messages/Chat/Chat';
+export { default as Trending } from './Posts/Trending/Trending';
 

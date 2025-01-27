@@ -257,6 +257,69 @@ router.get('/explore', requireAuth, async (req, res, next) => {
   }
 });
 
+router.get('/trending', requireAuth, async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+
+    const posts = await Post.findAll({
+      where: {
+        groupId: 'default',
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'username', 'firstName', 'lastName', 'profilePhoto', 'username']
+        },
+        {
+          model: Comment,
+          attributes: ['id'],
+        },
+        {
+          model: PostLike,
+          as: 'Likes',
+          attributes: ['id', 'userId']
+        }
+      ],
+      order: [
+        [ Sequelize.literal('(SELECT COUNT(*) FROM "PostLikes" WHERE "PostLikes"."postId" = "Post"."id")'), 'DESC' ],
+      ],
+      limit: 30,
+    });
+
+    const newArray = Array(posts.length)
+
+    for (let i = 0; i < posts.length; i++) {
+      const post = posts[i];
+      let userLiked = false;
+    
+      for (let j = 0; j < post.Likes.length; j++) {
+        const like = post.Likes[j];
+        if (userId === like.userId) {
+          userLiked = true;
+          break;
+        }
+      }
+    
+      newArray[i] = {
+        id: post.id,
+        userId: post.userId,
+        caption: post.caption,
+        photo: post.photo,
+        createdAt: post.createdAt,
+        User: post.User,
+        Comments: post.Comments,
+        Likes: post.Likes,
+        Like: userLiked,
+      }
+    }
+
+    res.json(newArray)
+
+  } catch(error) {
+    next(error)
+  }
+});
+
 router.get('/following', requireAuth, async (req, res, next) => {
   try {
     const userId = req.user.id;

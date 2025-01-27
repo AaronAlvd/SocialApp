@@ -1,7 +1,7 @@
 import Body from './body';
 import Header from './header';
 import { useSelector } from 'react-redux';
-import { default as Header2 }from '../../Explore/Header/Header';
+import { default as Header2 }from '../Explore/Header/Header';
 
 export default function Post() {
   const user = useSelector((state) => state.session.user)

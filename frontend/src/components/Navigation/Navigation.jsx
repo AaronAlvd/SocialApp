@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGlobe, faUsers, faComments, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import UserDropdown from './Dropdown/UserDropdown';
+import { IoMdTrendingUp } from "react-icons/io";
 import Social from '../../StateManagement/social';
 import defaultpfp from '../../assets/Default_pfp.jpg';
 import CreatePost from '../Modals/CreatePost/CreatePost';
@@ -29,6 +30,7 @@ export default function Navigation() {
       explore: /^\/explore(\/.*)?$/.test(activeUrl.pathname),
       groups: /^\/groups(\/.*)?$/.test(activeUrl.pathname),
       messages: /^\/messages(\/.*)?$/.test(activeUrl.pathname),
+      trending: /^\/trending(\/.*)?$/.test(activeUrl.pathname),
     });
   }, [activeUrl])
 
@@ -63,6 +65,15 @@ export default function Navigation() {
     }
   }
 
+  const displayRow5 = () => {
+    return (
+      <div className="Navigation-div-row">
+        <p className={active.trending ? "Navigation-feed-active" : "Navigation-feed"} onClick={() => user ? navigate('/trending') : 
+           alert('You are not logged in')}><IoMdTrendingUp className='Navigation-icon'/>Trending</p>
+      </div>
+    )
+  }
+
   if (!active) return null;
 
   return (
@@ -84,6 +95,7 @@ export default function Navigation() {
            alert('You are not logged in')}><FontAwesomeIcon icon={faComments} className={active.messages ? "Navigation-icon-active": 
            "Navigation-icon"} />{width > 767 && 'Messages'}</p>
       </div>
+      {width > 767 && displayRow5()}
     </div>
     <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 45}px)`}} onClick={() => setModalContent(<CreatePost user={user}/>)}>
       <FaPlus/>

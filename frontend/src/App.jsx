@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation, Page404, UserProfile, Post, Chats, GroupPost, GroupProfile, Explore, Chat} from './components';
+import { Navigation, Page404, UserProfile, Post, Chats, GroupPost, GroupProfile, Explore, Chat, Trending} from './components';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import './index.css'
@@ -76,6 +76,10 @@ const router = createBrowserRouter([
             element: <GroupProfile />
           }
         ]
+      },
+      {
+        path: 'trending',
+        element: <Trending />
       },
       {
         path: 'messages',

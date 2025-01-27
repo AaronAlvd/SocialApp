@@ -33,6 +33,9 @@ export default class DispatchCalls extends Social {
   Explore() {
     return this.dispatch(postActions.fetchExlporePosts())
   }
+  Trending() {
+    return this.dispatch(postActions.fetchTrendingPosts())
+  }
 
   comments(data) {
     return this.dispatch(commentActions.fetchComments(data))

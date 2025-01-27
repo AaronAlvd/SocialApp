@@ -97,6 +97,17 @@ export const fetchExlporePosts = () => async (dispatch) => {
 
   }
 }
+export const fetchTrendingPosts = () => async (dispatch) => {
+  try {
+    const response = await csrfFetch('/api/posts/trending');
+    if (!response.ok){}
+    const data = await response.json();
+    dispatch(setPosts(data));
+    return data;
+  } catch(error) {
+
+  }
+}
 export const createPost = (formData) => async (dispatch) => {
   try {
     const response = await csrfFetch('/api/posts/', {

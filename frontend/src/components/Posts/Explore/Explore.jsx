@@ -1,7 +1,7 @@
-import DispatchCalls from "../../StateManagement/dispatch";
+import DispatchCalls from "../../../StateManagement/dispatch";
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from "react";
-import Body from '../Posts/Post/body';
+import Body from '../Post/body';
 import Header from './Header/Header';
 import './Explore.css';
 
