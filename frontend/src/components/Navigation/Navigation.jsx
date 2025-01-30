@@ -25,6 +25,22 @@ export default function Navigation() {
   const [height, setHeight] = useState(window.innerHeight);
 
   useEffect(() => {
+    // Define the resize handler
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    };
+
+    // Add event listener on component mount
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); 
+
+  useEffect(() => {
     setActive({
       following: /^\/following(\/.*)?$/.test(activeUrl.pathname),
       explore: /^\/explore(\/.*)?$/.test(activeUrl.pathname),
@@ -44,8 +60,7 @@ export default function Navigation() {
               "Navigation-icon"} />{width > 767 && 'Explore'}</p>
         </div>
           <div className="Navigation-div-row">
-            <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => user ? navigate('/groups') :
-               alert('You are not logged in')}><FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active":
+            <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}><FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active":
                "Navigation-icon"} />{width > 767 && 'Groups'}</p>
           </div>
         </>
@@ -55,10 +70,9 @@ export default function Navigation() {
         <div className="Navigation-div-row">    
           <p className={active.following ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => user ? navigate('/following') : 
               alert('You are not logged in')}><FontAwesomeIcon icon={faUserFriends} className={active.following ? "Navigation-icon-active": 
-              "Navigation-icon"} />{width > 767 && 'Following'}</p>
+              "Navigation-icon"}/>{width > 767 && 'Following'}</p>
 
-          <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => user ? navigate('/groups') : 
-             alert('You are not logged in')}><FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active": 
+          <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}><FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active": 
              "Navigation-icon"} />{width > 767 && 'Groups'}</p>
         </div>
       )
@@ -68,13 +82,40 @@ export default function Navigation() {
   const displayRow5 = () => {
     return (
       <div className="Navigation-div-row">
-        <p className={active.trending ? "Navigation-feed-active" : "Navigation-feed"} onClick={() => user ? navigate('/trending') : 
-           alert('You are not logged in')}><IoMdTrendingUp className='Navigation-icon'/>Trending</p>
+        <p className={active.trending ? "Navigation-feed-active" : "Navigation-feed"} onClick={() => alert('Feature Coming Soon...')}>
+          <IoMdTrendingUp className='Navigation-icon'/>Trending</p>
       </div>
     )
   }
 
   if (!active) return null;
+
+  if (width < 1040) return (
+    <>
+    <div className='Navigation-div'>
+      <div className='Navigation-div-row Navigation-profile_box'>
+        <img src={(user && user.profilePhoto) ? user.profilePhoto : defaultpfp} className="Navigation-profilePhoto" onClick={() => setUserDrop(!userDrop)}/>
+        {/* <p className='Navigation-name'>{user.firstName}</p> */}
+        {userDrop && <UserDropdown />}
+      </div>
+        <p className={active.explore ? "Navigation-feed-active" : "Navigation-feed"} onClick={() => user ? navigate('/explore') : 
+           alert('You are not logged in')}><FontAwesomeIcon icon={faGlobe} className={active.explore ? 
+            "Navigation-icon-active": "Navigation-icon"}/>{width > 767 && 'Explore'}</p>
+
+        <p className={active.following ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Comming Soon...')}><FontAwesomeIcon icon={faUserFriends} className={active.following ? "Navigation-icon-active": 
+          "Navigation-icon"}/>{width > 767 && 'Following'}</p>
+
+        <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}>
+          <FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active" : "Navigation-icon"} />{width > 767 && 'Groups'}</p>
+
+        <p className={active.messages ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}><FontAwesomeIcon icon={faComments} className={active.messages ? "Navigation-icon-active": 
+           "Navigation-icon"} />{width > 767 && 'Messages'}</p>
+      </div>
+    <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 45}px)`}} onClick={() => setModalContent(<CreatePost user={user}/>)}>
+      <FaPlus/>
+    </span>
+    </>
+  )
 
   return (
     <>
@@ -91,11 +132,11 @@ export default function Navigation() {
       </div>
       {displayRow3()}
       <div className="Navigation-div-row">
-        <p className={active.messages ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => user ? navigate('/messages') : 
-           alert('You are not logged in')}><FontAwesomeIcon icon={faComments} className={active.messages ? "Navigation-icon-active": 
+        <p className={active.messages ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}>
+          <FontAwesomeIcon icon={faComments} className={active.messages ? "Navigation-icon-active": 
            "Navigation-icon"} />{width > 767 && 'Messages'}</p>
       </div>
-      {width > 767 && displayRow5()}
+      {displayRow5()}
     </div>
     <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 45}px)`}} onClick={() => setModalContent(<CreatePost user={user}/>)}>
       <FaPlus/>

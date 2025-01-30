@@ -1,4 +1,4 @@
-# Social Media App
+# Social Media App 
 
 Welcome to **SocialApp**, a web application designed for users to connect, share, and engage with each other. Users can create posts, follow friends, comment, like posts, and manage their profiles.
 

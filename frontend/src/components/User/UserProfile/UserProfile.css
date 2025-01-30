@@ -2,17 +2,14 @@
   .UserProfile-section_1{
     width: 100%;
     background-color: white;
-    padding: 0 10px;
-    margin: 10px;
     box-sizing: border-box;
   }
   .UserProfile-section_2{
     display: flex;
-    background-color: white;
     width: 100%;
     padding: 0 10px;
     box-sizing: border-box;
-    justify-content: center;
+    justify-content: space-around;
   }
   .UserProfile-profilePhoto{
     height: 50px;
@@ -22,20 +19,22 @@
     object-fit: cover;
   }
   .UserProfile-column_1{
-    padding: 20px 0 0 20px;
-    display: flex;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: min-content 1fr;
     align-items: center;
   }
   .UserProfile-column_2{
-    padding: 20px;
+    padding: 10px 5px;
   }
   .UserProfile-name{
+    text-align: center;
     font-size: 25px;
-    font-weight: 100;
+    font-weight: 400;
     height: min-content;
-    margin-left: 20px;
   }
   .UserProfile-bio{
+    text-align: center;
     font-size: 14px;
     font-weight: 100;
   }

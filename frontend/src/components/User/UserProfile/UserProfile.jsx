@@ -64,9 +64,6 @@ export default function UserProfile() {
           <p className="UserProfile-stats">{user.likes}</p>
         </div>
         </div>
-        <div>
-          Hello
-        </div>
         </>
       )
     } 

@@ -6,11 +6,35 @@ import './index.css'
 
 function Layout() {
   const dispatch = useDispatch();
-  const [width, setWidth] = useState(window.innerWidth)
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser());
   }, [dispatch]);
+
+  useEffect(() => {
+    // Define the resize handler
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    };
+
+    // Add event listener on component mount
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  if (width < 1040) return (
+    <>
+     <Navigation />
+     <Outlet/>
+    </>
+  )
 
   return (
     <>
@@ -55,16 +79,6 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: 'groups',
-        element: <GroupPost />,
-        children: [
-          {
-            path: ':postId',
-            element: <GroupPost />
-          },
-        ]
-      },
-      {
         path: 'profile',
         children: [
           {
@@ -74,23 +88,6 @@ const router = createBrowserRouter([
           {
             path: 'group/:groupId',
             element: <GroupProfile />
-          }
-        ]
-      },
-      {
-        path: 'trending',
-        element: <Trending />
-      },
-      {
-        path: 'messages',
-        children: [
-          {
-            path: '',
-            element: <Chats />,
-          },
-          {
-            path: ':chatId',
-            element: <Chat />
           }
         ]
       },

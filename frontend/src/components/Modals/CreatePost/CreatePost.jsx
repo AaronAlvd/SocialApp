@@ -147,12 +147,12 @@ export default function CreatePost({ user, event = null}) {
       </div>
       <hr/>
       <div className='CreatePost-footer'>
-          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => uploadImgRef.current.click()}>
+          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => alert('Feature Coming Soon..')}>
             <input type="file" style={{display: 'none'}} ref={uploadImgRef} accept="image/*" name='image' onChange={(e) => handleFile(e)}/>
             <FaImage style={{fontSize: '18px'}}/>
             <label style={{marginLeft: '5px', fontWeight: '400', cursor: 'pointer'}}>Photo</label>
           </span>
-          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => uploadVidRef.current.click()}>
+          <span style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}} onClick={() => alert('Feature Coming Soon..')}>
             <input type="file" style={{display: 'none'}} ref={uploadVidRef} accept="video/*" name='video' onChange={(e) => handleFile(e)}/>
             <MdVideoLibrary style={{fontSize: '18px'}}/>
             <label style={{marginLeft: '5px', fontWeight: '400', cursor: 'pointer'}}>Video</label>

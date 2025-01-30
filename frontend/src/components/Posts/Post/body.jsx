@@ -159,6 +159,12 @@ export default function Body({ optional = null}) {
     const obj = {...showMenu}
     obj[id] = !showMenu[id]
     return setShowMenu(obj)
+  };
+
+  const displayPhoto = (photo) => {
+    return (
+      <img className="Post-image" src={photo} alt="Post" />
+    )
   }
 
   if (!posts) return null;
@@ -186,7 +192,7 @@ export default function Body({ optional = null}) {
               {showMenu[data.id] && displayDropdown(data)}
             </div>
             <p className="Post-caption">{social.findHashtags(data.caption)}</p>
-            {data.photo && <img className="Post-image" src={data.photo}/>}
+            {data.photo && displayPhoto(data.photo)}
             <div className="Post-bottom">
               <div style={{display: 'flex'}}>
                 <div className="Post-div-icon">

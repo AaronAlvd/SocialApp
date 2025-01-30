@@ -10,6 +10,8 @@ export default function Header({ type }) {
   const [showQuery, setShowQuery] = useState(false);
   const [userResults, setUserResults] = useState();
   const [groupResults, setGroupResults] = useState();
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
   const [active, setActive] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -23,6 +25,22 @@ export default function Header({ type }) {
     fetch()
   }, [query])
 
+  useEffect(() => {
+    // Define the resize handler
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    };
+
+    // Add event listener on component mount
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); 
+
   const displayUserResults = async () => {
     const users = userResults.map((user) => {
       
@@ -30,7 +48,7 @@ export default function Header({ type }) {
   }
 
   return (
-    <div className="ExploreHeader-div">
+    <div className="ExploreHeader-div" style={{width: `${width - 201}px`}}>
       <div className={ active ? 'ExploreHeader-div_input ExpH-act' : 'ExploreHeader-div_input'}>
         <FaMagnifyingGlass style={{margin: '0px 0 0 10px', fontSize: '14'}} onClick={() => handleQuery}/>
         <input type="text" className='ExploreHeader-input' onFocus={() => setActive(true)} onBlur={() => setActive(false)}
