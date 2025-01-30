@@ -31,15 +31,15 @@ function Layout() {
 
   if (width < 1040) return (
     <>
-     <Navigation />
      <Outlet/>
+     <Navigation />
     </>
   )
 
   return (
     <>
      <Navigation />
-     <div className='Navigation-index' style={{width: `${(width < 768) ? width : (width - 201)}px`}}>
+     <div className='Navigation-index' style={{width: `${width - 201}px`}}>
       <Outlet/>
      </div>
     </>
@@ -54,6 +54,12 @@ const router = createBrowserRouter([
       {
         path: '',
         element: <Explore />,
+        children: [
+          {
+            path: ':postId',
+            element: <Explore />,
+          }
+        ]
       },
       {
         path: 'explore',

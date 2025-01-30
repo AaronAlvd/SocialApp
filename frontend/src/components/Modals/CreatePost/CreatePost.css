@@ -1,4 +1,4 @@
-@media (max-width: 767px){
+@media (max-width: 1039px){
   .CreatePost-div{
     width: 95vw;
     background-color: white;
@@ -12,7 +12,7 @@
     width: 100%;
   }
 }
-@media (min-width: 768px){
+@media (min-width: 1040px){
   .CreatePost-div{
     width: 700px;
     background-color: white;
@@ -25,6 +25,7 @@
     width: 100%;
   }
 }
+
 .CreatePost-header{
   display: flex;
   cursor: default;

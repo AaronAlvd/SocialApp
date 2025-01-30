@@ -1,6 +1,6 @@
 .UserDropdown-ul {
   position: absolute;
-  transform: translate(0, 70px);
+  transform: translate(-140px, 75px);
   list-style-type: none;
   font-family: Helvetica;
   padding: 0;

@@ -8,12 +8,13 @@ import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeart02 } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import './Post.css';
 
 export default function Body({ optional = null}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const params = useParams();
   const postId = params.postId || null;
   const user = useSelector(state => state.session.user);
@@ -134,10 +135,14 @@ export default function Body({ optional = null}) {
 
   const handleComments = (id) => {
     if (showComments === id) {
-      navigate('/following')
+      navigate(`/${location.pathname}`)
       return setShowComments('')
     }
-    navigate(`/following/${id}`);
+    if (location.pathname === '/') {
+      navigate(`/${id}`);
+      return setShowComments(id);
+    }
+    navigate(`/${location.pathname}/${id}`);
     return setShowComments(id);
   };
 
