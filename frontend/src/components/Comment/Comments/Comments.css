@@ -1,20 +1,11 @@
-@media (max-width: 787px){
+@media (max-width: 1039px){
   .Comments-div{
     padding: 10px 0 10px 0;
     width: 100%;
-    box-sizing: border-box;
   }
 }
 
-@media (min-width: 788px) and (max-width: 1024px){
-  .Comments-div{
-    padding: 10px 0 10px 0;
-    width: 507px;
-    box-sizing: border-box;
-  }
-}
-
-@media (min-width: 1025px){
+@media (min-width: 1040px){
   .Comments-div{
     padding: 10px 0 10px 0;
     width: 547px;
@@ -61,7 +52,7 @@
   background-color: rgba(0, 0, 0, 0.1);
   margin-left: 5px;
   font-size: 14px;
-  width: 80%;
+  width: 90%;
   border-radius: 10px;
   padding-left: 15px;
 }

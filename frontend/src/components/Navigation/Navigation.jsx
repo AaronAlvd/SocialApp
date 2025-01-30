@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGlobe, faUsers, faComments, faUserFriends} from '@fortawesome/free-solid-svg-icons';
-import UserDropdown from './Dropdown/UserDropdown';
+import Header from './Header/Header';
 import { IoMdTrendingUp } from "react-icons/io";
 import Social from '../../StateManagement/social';
-import defaultpfp from '../../assets/Default_pfp.jpg';
 import CreatePost from '../Modals/CreatePost/CreatePost';
 import { FaPlus } from "react-icons/fa6";
+import { FaRegPlusSquare } from "react-icons/fa";
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router';
@@ -20,7 +20,6 @@ export default function Navigation() {
   const social = new Social();
   const activeUrl = useLocation();
   const [active, setActive] = useState();
-  const [userDrop, setUserDrop] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
 
@@ -93,17 +92,17 @@ export default function Navigation() {
   if (width < 1040) return (
     <>
     <div className='Navigation-div'>
-      <div className='Navigation-div-row Navigation-profile_box'>
-        <img src={(user && user.profilePhoto) ? user.profilePhoto : defaultpfp} className="Navigation-profilePhoto" onClick={() => setUserDrop(!userDrop)}/>
-        {/* <p className='Navigation-name'>{user.firstName}</p> */}
-        {userDrop && <UserDropdown />}
-      </div>
         <p className={active.explore ? "Navigation-feed-active" : "Navigation-feed"} onClick={() => user ? navigate('/explore') : 
            alert('You are not logged in')}><FontAwesomeIcon icon={faGlobe} className={active.explore ? 
             "Navigation-icon-active": "Navigation-icon"}/>{width > 767 && 'Explore'}</p>
 
-        <p className={active.following ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Comming Soon...')}><FontAwesomeIcon icon={faUserFriends} className={active.following ? "Navigation-icon-active": 
+        <p className={active.following ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => user ? navigate('/following') : 
+           alert('You are not logged in.')}><FontAwesomeIcon icon={faUserFriends} className={active.following ? "Navigation-icon-active": 
           "Navigation-icon"}/>{width > 767 && 'Following'}</p>
+
+        <div className='Navigation-upload_post' >
+          <FaRegPlusSquare style={{fontSize: '25px'}} onClick={() => setModalContent(<CreatePost user={user}/>)}/>
+        </div>
 
         <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}>
           <FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active" : "Navigation-icon"} />{width > 767 && 'Groups'}</p>
@@ -111,20 +110,13 @@ export default function Navigation() {
         <p className={active.messages ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}><FontAwesomeIcon icon={faComments} className={active.messages ? "Navigation-icon-active": 
            "Navigation-icon"} />{width > 767 && 'Messages'}</p>
       </div>
-    <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 45}px)`}} onClick={() => setModalContent(<CreatePost user={user}/>)}>
-      <FaPlus/>
-    </span>
     </>
   )
 
   return (
     <>
-    <div className='Navigation-div'>
-      <div className='Navigation-div-row Navigation-profile_box'>
-        <img src={(user && user.profilePhoto) ? user.profilePhoto : defaultpfp} className="Navigation-profilePhoto" onClick={() => setUserDrop(!userDrop)}/>
-        {/* <p className='Navigation-name'>{user.firstName}</p> */}
-        {userDrop && <UserDropdown />}
-      </div>
+    <Header />
+    <div className='Navigation-div' style={{height: `${height - 60}px`}}>
       <div className="Navigation-div-row">
         <p className={active.explore ? "Navigation-feed-active" : "Navigation-feed"} onClick={() => user ? navigate('/explore') : 
            alert('You are not logged in')}><FontAwesomeIcon icon={faGlobe} className={active.explore ? 
@@ -138,7 +130,7 @@ export default function Navigation() {
       </div>
       {displayRow5()}
     </div>
-    <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 45}px)`}} onClick={() => setModalContent(<CreatePost user={user}/>)}>
+    <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 105}px)`}} onClick={() => setModalContent(<CreatePost user={user}/>)}>
       <FaPlus/>
     </span>
     </>

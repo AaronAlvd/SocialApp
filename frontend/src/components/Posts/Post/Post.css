@@ -1,44 +1,40 @@
-@media (max-width: 767px){
+@media (max-width: 1039px){
+  .Post-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .Post-div-box{
     grid-area: col1;
     width: 100%;
-    padding: 10px;
-    background-color: rgb(255, 255, 255);
-    box-sizing: border-box;
-  }
-  .Post-line{
-    height: 1px;
-    width: 100%;
-    background-color: black;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px){
-  .Post-div-box{
-    grid-area: col1;
-    width: 507px;
-    padding: 10px;
-    margin: 10px;
+    padding: 10px 20px;
+    margin: 10px 0;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
     box-sizing: border-box;
   }
   .Post-line{
     height: 1px;
-    width: 487px;
+    width: 98%;
     margin: 0 20px;
     background-color: black;
   }
   .Post-menu{
     position: absolute;
-    background-color: white;
+    background-color: rgb(49, 9, 9);
     transform: translate(410px, 25px);
     font-size: 12px;
     font-weight: 600;
   }
+  .Post-image{
+    width: 100%;
+    max-height: 65vh;
+    background-position: center;
+    object-fit: cover;
+  }
 }
 
-@media (min-width: 1025px){
+@media (min-width: 1040px) and (max-width: 1439px){
   .Post-div-box{
     grid-area: col1;
     width: 547px;
@@ -61,7 +57,45 @@
     font-size: 12px;
     font-weight: 600;
   }
+  .Post-image{
+    width: 100%;
+    max-height: 400px;
+    background-position: center;
+    object-fit: contain;
+  }
 }
+
+@media (min-width: 1440px) {
+  .Post-div-box{
+    grid-area: col1;
+    width: 547px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+  }
+  .Post-line{
+    height: 1px;
+    width: 547px;
+    margin: 0 10px;
+    background-color: black;
+  }
+  .Post-menu{
+    position: absolute;
+    background-color: white;
+    transform: translate(450px, 25px);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .Post-image{
+    width: 100%;
+    max-height: 400px;
+    background-position: center;
+    object-fit: contain;
+  }
+}
+
 .Post-div{
   cursor: default;
 }
@@ -108,12 +142,6 @@
   font-size: 14px;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-.Post-image{
-  width: 100%;
-  max-height: 400px;
-  background-position: center;
-  object-fit: contain;
 }
 .Post-hashtag{
   color: rgb(60, 102, 208);

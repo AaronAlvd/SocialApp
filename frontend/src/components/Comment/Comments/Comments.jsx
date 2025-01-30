@@ -5,10 +5,8 @@ import { IoPaperPlane } from "react-icons/io5";
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { useModal } from '../../../context/modal';
 
 export default function Comments({ userId }) {
-  // const { setModalContent } = useModal();
   const { postId } = useParams();
   const dispatch = useDispatch();
   const dispatchCalls = new DispatchCalls(dispatch);
