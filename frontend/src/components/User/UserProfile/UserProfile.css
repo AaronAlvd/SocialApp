@@ -1,128 +1,182 @@
-@media  (max-width: 767px){
-  .UserProfile-section_1{
-    width: 100%;
-    background-color: white;
-    box-sizing: border-box;
+@media(max-width: 480px){
+  .UserProfile-header{
+    height: auto;
   }
-  .UserProfile-section_2{
-    display: flex;
-    width: 100%;
-    padding: 0 10px;
-    box-sizing: border-box;
-    justify-content: space-around;
+  .UserProfile-row1{
+    display: grid;
+    grid-template-columns: min-content 1fr;
   }
-  .UserProfile-profilePhoto{
-    height: 50px;
-    width: 50px;
+  .UserProfile-div_photo{
+    padding: 10px;
+  }
+  .UserProfile-photo{
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-position: center;
     object-fit: cover;
   }
-  .UserProfile-column_1{
-    padding: 5px;
-    display: grid;
-    grid-template-columns: min-content 1fr;
+  .UserProfile-row1_column2{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .UserProfile-div_stats{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
   }
-  .UserProfile-column_2{
-    padding: 10px 5px;
+  .UserProfile-stats{
+    font-size: 18px;
+    font-weight: 700;
   }
-  .UserProfile-name{
-    text-align: center;
-    font-size: 25px;
-    font-weight: 400;
-    height: min-content;
+  .UserProfile-stats_label{
+    font-size: 14px;
+  }
+  .UserProfile-div_bio{
+    padding: 0 10px;
   }
   .UserProfile-bio{
-    text-align: center;
     font-size: 14px;
-    font-weight: 100;
+  }
+  .UserProfile-div_button{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  .UserProfile-button{
+    color: white;
+    height: 30px;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(64, 75, 182);
   }
 }
 
-@media  (min-width: 768px) and (max-width: 1024px){
-  .UserProfile-section_1{
+@media (min-width: 481px) and (max-width: 1039px){
+  .UserProfile-header{
+
+  }
+  .UserProfile-row1{
     display: grid;
     grid-template-columns: min-content 1fr;
-    grid-template-rows: min-content 1fr;
-    grid-template-areas: 
-    'img info'
-    'bio bio';
-    width: 507px;
-    background-color: white;
-    padding: 10px;
-    margin: 10px;
-    box-sizing: border-box;
   }
-  .UserProfile-profilePhoto{
-    grid-area: img;
-    height: 100px;
-    width: 100px;
+  .UserProfile-div_photo{
+    padding: 10px 0 0 10px;
+  }
+  .UserProfile-photo{
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-position: center;
     object-fit: cover;
-    margin: 0;
   }
-  .UserProfile-top_left{
-    grid-area: info;
-    width: 100%;
-    height: 100%;
-  }
-  .UserProfile-name{
+  .UserProfile-row1_column2{
     display: flex;
+    justify-content: space-around;
+    width: 360px;
+  }
+  .UserProfile-div_stats{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    font-size: 25px;
-    font-weight: 100;
-    height: min-content;
+    align-items: center;
+  }
+  .UserProfile-stats{
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .UserProfile-stats_label{
+    font-size: 14px;
+  }
+  .UserProfile-div_bio{
+    padding: 10px;
   }
   .UserProfile-bio{
-    margin-top: 15px;
-    grid-area: bio;
     font-size: 14px;
-    font-weight: 100;
+  }
+  .UserProfile-div_button{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  .UserProfile-button{
+    color: white;
+    height: 30px;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(64, 75, 182);
+  }
+  .UserProfile-button:hover{
+    background-color: rgb(80, 127, 215);
   }
 }
 
-@media (min-width: 1025px) {
-  .UserProfile-section_1{
-    display: grid;
-    grid-template-columns: min-content 1fr;
-    grid-template-rows: min-content auto;
-    grid-template-areas: 
-    'img info'
-    'bio bio';
+@media (min-width: 1040px) {
+  .UserProfile-header{
     width: 547px;
-    background-color: white;
-    padding: 10px;
-    margin: 10px;
-    box-sizing: border-box;
   }
-  .UserProfile-profilePhoto{
-    grid-area: img;
-    height: 100px;
-    width: 100px;
+  .UserProfile-row1{
+    display: grid;
+    grid-template-columns: min-content 1fr;
+  }
+  .UserProfile-div_photo{
+    padding: 10px 0 0 10px;
+  }
+  .UserProfile-photo{
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background-position: center;
     object-fit: cover;
-    margin: 0;
   }
-  .UserProfile-top_left{
-    grid-area: info;
-    width: 100%;
-    height: 100%;
-  }
-  .UserProfile-name{
+  .UserProfile-row1_column2{
     display: flex;
+    justify-content: space-around;
+    width: 360px;
+  }
+  .UserProfile-username{
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  .UserProfile-div_stats{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    font-size: 25px;
-    font-weight: 100;
-    height: min-content;
+    align-items: center;
+  }
+  .UserProfile-stats{
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .UserProfile-stats_label{
+    font-size: 14px;
+  }
+  .UserProfile-div_bio{
+    padding: 10px;
   }
   .UserProfile-bio{
-    margin-top: 15px;
-    grid-area: bio;
     font-size: 14px;
-    font-weight: 100;
+  }
+  .UserProfile-div_button{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  .UserProfile-button{
+    color: white;
+    height: 30px;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(64, 75, 182);
+  }
+  .UserProfile-button:hover{
+    background-color: rgb(80, 127, 215);
   }
 }
 
@@ -132,19 +186,4 @@
   overflow: scroll;
   box-sizing: border-box;
   width: 100%;
-}
-.UserProfile-section_2-column{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: min-content;
-  padding: 10px;
-}
-.UserProfile-info{
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.8);
-}
-.UserProfile-stats{
-  font-size: 16px;
-  font-weight: 700;
 }

@@ -27,8 +27,16 @@ export default function Post() {
 
   if (!user) return null
 
+  if (width < 1040) {
+    return (
+      <div style={{height: `${height - 49.5}px`, overflow: 'scroll'}}>
+      <Body />
+      </div>
+    )
+  }
+
   return (
-    <div style={{height: `${height - 49.5}px`, overflow: 'scroll'}}>
+    <div style={{height: `${height - 60}px`, overflow: 'scroll'}}>
     <Body />
     </div>
   )

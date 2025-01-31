@@ -1,0 +1,56 @@
+.UpdateProfile{
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, .5);
+  overflow: hidden;
+  padding: 20px;
+}
+.UpdateProfile-div_photo{
+  display: flex;
+  justify-content: center;
+}
+.UpdateProfile-photo{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-position: center;
+  object-fit: cover;
+}
+.UpdateProfile-form{
+  margin: 20px 0;
+}
+.UpdateProfile-div_input{
+  display: flex;
+  margin: 20px 0;
+}
+.UpdateProfile-input{
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  margin: 0 0 0 20px;
+}
+.UpdateProfile-input:focus{
+  outline: none;
+}
+.UpdateProfile-label{
+  font-size: 14px;
+  width: 70px;
+}
+.UpdateProfile-bio{
+  font-size: 16px;
+  resize: none;
+  margin: 0 20px;
+  border: none;
+  width: 300px;
+}
+.UpdateProfile-bio:focus{
+  outline: none;
+}
+.UpdateProfile-button{
+  background-color: rgb(25, 61, 169);
+  color: white;
+  border-radius: 5px;
+  width: 100px;
+  height: 25px;
+  border: none;
+}
