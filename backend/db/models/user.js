@@ -37,12 +37,12 @@ module.exports = (sequelize, DataTypes) => {
       });
       User.hasMany(models.Follow, {
         as: 'Follower',
-        foreignKey: 'followerId',
+        foreignKey: 'FollowerId',
         onDelete: 'CASCADE'
       });
       User.hasMany(models.Follow, {
         as: 'Followed',
-        foreignKey: 'followingId',
+        foreignKey: 'FollowingId',
         onDelete: 'CASCADE'
       });
       User.hasMany(models.SearchVault, {
