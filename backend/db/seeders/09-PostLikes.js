@@ -9,7 +9,7 @@ const { likes } = require('./seedData/postLikes/likes');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await PostLike.bulkCreate([...likes])
+    await PostLike.bulkCreate([])
   },
 
   async down (queryInterface, Sequelize) {
