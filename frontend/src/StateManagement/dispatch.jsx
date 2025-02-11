@@ -65,6 +65,12 @@ export default class DispatchCalls extends Social {
   ExploreQuery(data) {
     return this.dispatch(userActions.queryExplore(data))
   }
+  FollowRequest(data) {
+    return this.dispatch(userActions.followRequest(data))
+  }
+  UnfollowRequest(data) {
+    return this.dispatch(userActions.unfollowRequest(data))
+  }
 
   chats() {
     return this.dispatch(messageActions.fetchChats())

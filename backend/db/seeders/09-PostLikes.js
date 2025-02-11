@@ -3,8 +3,6 @@
 const { PostLike } = require('../models');
 const { Op } = require('sequelize');
 
-const { users_id } = require('./seedData/users/id/user_id');
-const { likes } = require('./seedData/postLikes/likes');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -16,7 +14,7 @@ module.exports = {
     const chunkSize = 1000;
 
     const allIds = [
-      ...users_id.map((user) => user.userId),
+      '1',
     ];
     
     const deleteInChunks = async (ids) => {

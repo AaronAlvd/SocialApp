@@ -187,7 +187,11 @@ export default function Body({ optional }) {
     )
   }
 
-  if (!posts || !showMenu ) return <h1>Loading...</h1>;
+  if (!posts || !showMenu ) return null;
+
+if (posts.length === 0 && optional === 'following') {
+  return <h2>Follow More People!</h2>
+}
 
   return (
     <div className="Post-div">

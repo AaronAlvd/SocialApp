@@ -8,6 +8,15 @@ router.get('/:chatId', async (req, res, next) => {
 
 });
 
+// router.get('/suggested', async (req, res, next) => {
+//   try {
+
+//     });
+//   } catch {
+//     next(error)
+//   }
+// });
+
 router.get('/', requireAuth, async (req, res, next) => {
   try {
     const id = req.user.id;

@@ -4,7 +4,7 @@ const { User } = require('../models');
 const bcrypt = require('bcryptjs');
 
 const { users } = require('./seedData/users/users');
-const { users_id } = require('./seedData/users/id/user_id');
+const { users_id } = require('./seedData/users/id/users_id');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {

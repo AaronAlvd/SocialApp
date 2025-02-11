@@ -129,6 +129,30 @@ export const fetchGroup = (id) => async (dispatch) => {
 
   }
 }
+export const followRequest = (id) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/users/follow/${id}`, {
+      method: 'POST',
+    });
+    if (!response.ok){}
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const unfollowRequest = (id) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/users/follow/${id}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok){}
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 const initialState = {
   users: null,

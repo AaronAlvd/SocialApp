@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useMemo } from "react"; 
-import { useLocation, useNavigate } from "react-router-dom"; 
+import { useLocation, useNavigate, useParams } from "react-router-dom"; 
 import { useDispatch, useSelector } from "react-redux"; 
 import { useModal } from '../../../context/modal.jsx';
 
@@ -11,6 +11,8 @@ export default function ProfileModal() {
   const location = useLocation(); 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const params = useParams();
+  const username = params.userId;
   const dispatchCall = new DispatchCalls(dispatch);
   const { setModalContent } = useModal();
   const user = useSelector(state => state.session.user);
@@ -21,6 +23,7 @@ export default function ProfileModal() {
   useEffect(() => {
     async function fetch () {
       const response = await dispatchCall.following();
+      const response02 = await dispatchCall.UserProfile(username);
 
       for (let item of response) {
         if (item.followingId === userProfile.id) {
@@ -33,7 +36,21 @@ export default function ProfileModal() {
     }
 
     fetch()
-  }, []);
+  }, [activeFollower]);
+
+  const handleFollowRequest = async () => {
+    const response = await dispatchCall.FollowRequest(userProfile.id);
+    if (response.title === 'Successful') {
+      setActiveFollower(true);
+    }
+  };
+
+  const handleUnfollowRequest = async () => {
+    const response = await dispatchCall.UnfollowRequest(userProfile.id);
+    if (response.title === 'Successful') {
+      setActiveFollower(false);
+    }
+  };
 
   const displayButton = () => {
     if (user.id === userProfile.id) {
@@ -43,11 +60,18 @@ export default function ProfileModal() {
         </button>
       )
     } else if (activeFollower) {
-      return <button className="ProfileModal-button2">Following</button>
+      return (
+      <button className="ProfileModal-button2" onClick={() => handleUnfollowRequest()}>
+        Following
+      </button>)
     } else {
-      return <button className="ProfileModal-button1">Follow</button>
+      return (
+      <button className="ProfileModal-button1" onClick={() => handleFollowRequest()}>
+        Follow
+      </button>
+      )
     }
-  }
+  };
 
   if (!userProfile && loading) return null;
 

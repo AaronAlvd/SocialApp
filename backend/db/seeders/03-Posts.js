@@ -1,10 +1,11 @@
 'use strict';
 
 const { Op } = require('sequelize');
-const { Post } = require('../models')
+const { Post } = require('../models');
 
-const { posts0 } = require('./seedData/posts/posts0');
-const { user0_id } = require('./seedData/users/id/user0_id');
+const { posts } = require('./seedData/posts/posts');
+const { posts_id } = require('./seedData/posts/posts_id');
+
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -15,15 +16,13 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-    await Post.bulkCreate([...posts0])
+    await Post.bulkCreate([...posts])
   },
 
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;
 
-    const allIds = [
-      ...user0_id.map((user) => user.userId),
-    ];
+    const allIds = posts_id.map((data) => data.postId);
     
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {

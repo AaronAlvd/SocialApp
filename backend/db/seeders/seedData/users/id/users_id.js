@@ -1,4 +1,4 @@
-const user0_id = [
+const users_id = [
   { userId: "fffbd13b-428a-4d50-a03e-2f65c1f20b0a" },
   { userId: "4121f09f-6854-4914-81c2-9a5ce7493180" },
   { userId: "b22d58d6-4c03-4ef6-8c8f-e4a311e5e670" },
@@ -175,4 +175,4 @@ const user0_id = [
   { userId: "138222ed-48c2-405d-8533-660a79475ba0" },
 ];
 
-module.exports = { user0_id }
+module.exports = { users_id }

@@ -3,8 +3,6 @@
 const { Follow } = require('../models');
 const { Op } = require('sequelize');
 
-const { following } = require('./seedData/following/following');
-const { user0_id } = require('./seedData/users/id/user0_id');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -14,14 +12,14 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await Follow.bulkCreate([...following])
+    await Follow.bulkCreate([])
   },
 
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;
 
     const allIds = [
-      ...user0_id.map((user) => user.userId),
+      'default',
     ];
     
     const deleteInChunks = async (ids) => {

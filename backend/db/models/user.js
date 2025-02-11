@@ -48,12 +48,19 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.SearchVault, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
-      })
+      });
       User.hasMany(models.CommentLike, {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
-      })
-
+      });
+      User.hasMany(models.FollowingQueue, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE',
+      });
+      User.hasMany(models.FollowingQueue, {
+        foreignKey: 'requestFrom',
+        onDelete: 'CASCADE',
+      });
     }
   }
   User.init({

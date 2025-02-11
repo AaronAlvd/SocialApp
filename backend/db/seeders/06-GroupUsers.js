@@ -3,11 +3,6 @@
 const { GroupUser } = require('../models');
 const { Op } = require('sequelize');
 
-const { groupUsers } = require('./seedData/groups/groupUser');
-const { groupUsers00 } = require('./seedData/groups/users/users');
-const { users_id } = require('./seedData/users/id/user_id');
-
-
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
@@ -16,14 +11,14 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await GroupUser.bulkCreate([...groupUsers,...groupUsers00]);
+    await GroupUser.bulkCreate([]);
   },
 
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;
 
     const allIds = [
-      ...users_id.map((user) => user.userId)
+      '1'
     ];
     
     const deleteInChunks = async (ids) => {

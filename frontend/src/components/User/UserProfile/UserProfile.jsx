@@ -62,7 +62,21 @@ export default function UserProfile() {
 
     fetch()
 
-  }, []);
+  }, [activeFollower]);
+
+  const handleFollowRequest = async () => {
+    const response = await dispatchCalls.FollowRequest(userProfile.id);
+    if (response.title === 'Successful') {
+      setActiveFollower(true);
+    }
+  };
+
+  const handleUnfollowRequest = async () => {
+    const response = await dispatchCalls.UnfollowRequest(userProfile.id);
+    if (response.title === 'Successful') {
+      setActiveFollower(false);
+    }
+  };
 
   if (!userProfile || loading) return null;
 
@@ -70,9 +84,16 @@ export default function UserProfile() {
     if (userProfile.id === user.id) {
       return <button className="UserProfile-button" onClick={() => setModalContent(<UpdateProfile />)}>Edit Profile</button>
     } else if (activeFollower) {
-      return <button className="UserProfile-button2">Following</button>
+      return (
+        <button className="UserProfile-button2" onClick={() => handleUnfollowRequest()}>
+          Following
+        </button>)
     } else {
-      return <button className="UserProfile-button">Follow</button>
+      return(
+      <button className="UserProfile-button" onClick={() => handleFollowRequest()}>
+        Follow
+      </button>
+      )
     }
   }
 

@@ -3,8 +3,6 @@
 const { Op } = require('sequelize');
 const { Comment } = require('../models');
 
-const { comments1 } = require('./seedData/comments/comments1');
-const { user0_id } = require('./seedData/users/id/user0_id')
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -21,7 +19,7 @@ module.exports = {
     const chunkSize = 1000;
 
     const allIds = [
-      ...user0_id.map((user) => user.userId),
+      '1',
     ];
     
     const deleteInChunks = async (ids) => {

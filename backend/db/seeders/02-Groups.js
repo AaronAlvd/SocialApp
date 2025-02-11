@@ -3,8 +3,6 @@
 const { Group } = require('../models')
 const { Op } = require('sequelize');
 
-const { groups } = require('./seedData/groups/groups');
-const { groups_id } = require('./seedData/groups/groups_id');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -14,14 +12,19 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await Group.bulkCreate([...groups])
+    await Group.bulkCreate([
+      {
+        id: 'public',
+        groupName: 'public',
+      }
+    ])
   },
 
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;
 
     const allIds = [
-      ...groups_id.map((group) => group.id),
+      'public',
     ];
     
     const deleteInChunks = async (ids) => {

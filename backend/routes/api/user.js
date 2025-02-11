@@ -1,6 +1,6 @@
 const express = require('express');
 const { v4: uuid } = require('uuid');
-const { User, Follow, Post, PostLike, GroupUser, Group } = require('../../db/models');
+const { User, Follow, Post, PostLike, GroupUser, Group, FollowingQueue } = require('../../db/models');
 const { Op } = require('sequelize');
 const { check } = require('express-validator');
 const fs = require('fs');
@@ -211,13 +211,14 @@ router.get('/:id', requireAuth, async (req, res, next) => {
       }, 
       attributes: ['id', 'firstName', 'lastName', 'username', 'profilePhoto',  'status', 'backgroundPhoto', 'bio'],
     });
+
     if (!user) {
       throw { status: 404, title: 'Resource Not Found', message: 'The requested resource was not found'}
     }
 
     const isFollower = await Follow.findOne({ where: { followingId: user.id, followerId: userId }});
 
-    if (isFollower && user.status !== 'Public' && user.id !== userId) {
+    if (isFollower && user.status !== 'public' && user.id !== userId) {
       const followers = await Follow.count({ where: { followingId: user.id }});
       const following = await Follow.count({ where: { followerId: user.id }});
       const posts = await Post.findAll({ where: { userId: user.id }});
@@ -241,7 +242,7 @@ router.get('/:id', requireAuth, async (req, res, next) => {
 
     const followers = await Follow.count({ where: { followingId: user.id }});
     const following = await Follow.count({ where: { followerId: user.id }});
-    const posts = await Post.findAll({ where: { userId: user.id, groupId: 'default' }});
+    const posts = await Post.findAll({ where: { userId: user.id, groupId: 'public' }});
     let likes = 0;
       
     for (let i = 0; i < posts.length; i++) {
@@ -257,6 +258,48 @@ router.get('/:id', requireAuth, async (req, res, next) => {
               posts: posts.length,
               likes: likes,
             });
+
+  } catch(error) {
+    next(error)
+  }
+});
+
+router.post('/follow/:userId', requireAuth, async (req, res, next) => {
+  try {
+    const id = uuid()
+    const userId = req.user.id;
+    const followingId = req.params.userId;
+
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      throw {status: 404, title: 'Resource Not Found', error: 'User could not be found.'}
+    }
+
+    if (user.status === 'public') {
+      const followUser = Follow.create({
+        id: id,
+        followingId: followingId,
+        followerId: userId,
+      });
+
+      res.json({
+        title: 'Successful',
+        message: `You are now follwing ${user.username}`
+      });
+
+    } else {
+      const followQueue = FollowingQueue.create({
+        id: id,
+        userId: followingId,
+        requestFrom: userId
+      });
+
+      res.status().json({
+        title: 'Pending',
+        message: `Request to follow ${user.username} pending.`
+      });
+    }
 
   } catch(error) {
     next(error)
@@ -304,5 +347,24 @@ router.post('/', validateSignup, async (req, res, next) => {
     next(error);
   }
 });
+
+router.delete('/follow/:userId', requireAuth, async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const followingId = req.params.userId;
+
+    const data = await Follow.destroy({
+      where: {
+        followingId: followingId,
+        followerId: userId,
+      }
+    });
+
+    res.json({ title: 'Successful' })
+
+  } catch (error) {
+    next(error)
+  }
+})
 
 module.exports = router;

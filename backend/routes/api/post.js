@@ -204,7 +204,7 @@ router.get('/explore', requireAuth, async (req, res, next) => {
 
     const posts = await Post.findAll({
       where: {
-        groupId: 'default',
+        groupId: 'public',
       },
       include: [
         {
