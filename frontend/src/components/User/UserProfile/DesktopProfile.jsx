@@ -1,9 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import DispatchCalls from '../../../StateManagement/dispatch';
-import UpdateProfile from "../../Modals/UpdateProfile/Updateprofile";
-import { useModal } from '../../../context/modal';
-import UserPosts from '../UserPosts';
-import Body from '../../Posts/Post/body';
+import { useModal } from '../../../context/modal.jsx';
 import defaultpfp from '../../../assets/Default_pfp.jpg';
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';

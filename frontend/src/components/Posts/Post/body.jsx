@@ -1,8 +1,8 @@
-import DispatchCalls from "../../../StateManagement/dispatch";
-import Social from "../../../StateManagement/social";
+import DispatchCalls from "../../../StateManagement/dispatch.jsx";
+import Social from "../../../StateManagement/social.jsx";
 import defaultpfp from '../../../assets/Default_pfp.jpg';
 import { BsThreeDots } from "react-icons/bs";
-import { Comments } from '../../Comment';
+import Comments from '../../Comment/Comments/Comments.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeart02 } from '@fortawesome/free-solid-svg-icons';

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import DispatchCalls from '../../../../StateManagement/dispatch';
+import DispatchCalls from '../../../../StateManagement/dispatch.jsx';
 
 export default function Header({ type }) {
   const dispatch = useDispatch();

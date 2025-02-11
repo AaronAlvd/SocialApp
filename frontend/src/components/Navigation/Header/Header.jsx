@@ -3,10 +3,10 @@ import './Header.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useRef, useEffect } from 'react';
 
-import UserDropdown from '../Dropdown/UserDropdown';
+import UserDropdown from '../Dropdown/UserDropdown.jsx';
 import defaultpfp from '../../../assets/Default_pfp.jpg';
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
-import DispatchCalls from '../../../StateManagement/dispatch';
+import DispatchCalls from '../../../StateManagement/dispatch.jsx';
 
 
 export default function Header() {

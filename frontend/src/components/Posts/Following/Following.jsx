@@ -2,8 +2,8 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import FollowingModal from './FollowingModal/FollowingModal';
-import Body from '../Post/body';
+import FollowingModal from './FollowingModal/FollowingModal.jsx';
+import Body from '../Post/body.jsx';
 
 import "./Following.css" 
 

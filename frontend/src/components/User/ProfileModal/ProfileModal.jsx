@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef, useMemo } from "react"; 
 import { useLocation, useNavigate } from "react-router-dom"; 
 import { useDispatch, useSelector } from "react-redux"; 
-import { useModal } from '../../../context/modal';
+import { useModal } from '../../../context/modal.jsx';
 
-import DispatchCalls from '../../../StateManagement/dispatch';
+import DispatchCalls from '../../../StateManagement/dispatch.jsx';
 
 import "./ProfileModal.css" 
 

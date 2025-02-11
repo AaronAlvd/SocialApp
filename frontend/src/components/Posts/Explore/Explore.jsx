@@ -1,8 +1,8 @@
 import DispatchCalls from "../../../StateManagement/dispatch";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
-import Body from '../Post/body';
-import ExploreModal from "./ExploreModal/ExploreModal";
+import Body from '../Post/body.jsx';
+import ExploreModal from "./ExploreModal/ExploreModal.jsx";
 import './Explore.css';
 
 export default function Post() {

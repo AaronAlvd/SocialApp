@@ -1,7 +1,7 @@
-import Header from './Header/Header';
-import Social from '../../StateManagement/social';
-import CreatePost from '../Modals/CreatePost/CreatePost';
-import DisplayMessage from '../Modals/DisplayMessage/DisplayMessage';
+import Header from './Header/Header.jsx';
+import Social from '../../StateManagement/social.jsx';
+import CreatePost from '../Modals/CreatePost/CreatePost.jsx';
+import DisplayMessage from '../Modals/DisplayMessage/DisplayMessage.jsx';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGlobe, faUsers, faComments, faUserFriends} from '@fortawesome/free-solid-svg-icons';

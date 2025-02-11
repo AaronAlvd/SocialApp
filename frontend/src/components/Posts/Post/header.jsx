@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
-import { useModal } from '../../../context/modal';
-import CreatePost from '../../Modals/CreatePost/CreatePost';
+import { useModal } from '../../../context/modal.jsx';
+import CreatePost from '../../Modals/CreatePost/CreatePost.jsx';
 import defaultpfp from '../../../assets/Default_pfp.jpg';
 import { FaImage } from "react-icons/fa6";
 import { MdVideoLibrary } from "react-icons/md";

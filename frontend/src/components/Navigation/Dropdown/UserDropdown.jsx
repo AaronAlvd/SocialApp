@@ -1,8 +1,10 @@
-import { LoginForm, OpenModalButton, SignUpForm } from '../../Modals';
-import * as sessionActions from '../../../store/session';
+import LoginForm from '../../Modals/LoginForm/LoginForm.jsx';
+import OpenModalButton from '../../Modals/OpenModalButton/OpenModalButton.jsx';
+import SignUpForm from '../../Modals/SignupForm/SignUpForm.jsx';
+import * as sessionActions from '../../../store/session.js';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as postActions from '../../../store/post';
+// import * as postActions from '../../../store/post.js';
 import { useSelector, useDispatch } from 'react-redux';
 import './UserDropdown.css';
 
