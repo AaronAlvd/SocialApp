@@ -26,6 +26,7 @@ module.exports = {
       password: 'admin_password',
     }
   ])
+  
   },
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;

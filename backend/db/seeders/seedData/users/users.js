@@ -8,6 +8,8 @@ const { users6 } = require('./users6');
 const { users7 } = require('./users7');
 const { users8 } = require('./users8');
 
-const users = [...users0, ...users1, ...users2, ...users3, ...users4, ...users5, ...users6, ...users7, ...users8];
+const users = [...users0, 
+  // ...users1, ...users2, ...users3, ...users4, ...users5, ...users6, ...users7, ...users8
+];
 
 module.exports = { users };
