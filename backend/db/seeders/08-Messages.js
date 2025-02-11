@@ -11,11 +11,14 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await Message.bulkCreate()
+    await Message.bulkCreate([])
   },
 
   async down (queryInterface, Sequelize) {
     await Message.destroy({
+      where: {
+        id: '1'
+      }
     })
   }
 };
