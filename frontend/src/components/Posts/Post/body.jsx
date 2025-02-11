@@ -11,82 +11,85 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import './Post.css';
 
-export default function Body({ optional = null}) {
+export default function Body({ optional }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const params = useParams();
+  const social = new Social();
   const postId = params.postId || null;
   const user = useSelector(state => state.session.user);
-  const social = new Social();
+  const posts = useSelector(state => state.posts.posts) || null;
   const dispatchCall = new DispatchCalls(dispatch);
-  const [posts, setPosts] = useState();
   const [reload, setReload] = useState(false);
   const [showMenu, setShowMenu] = useState();
   const [like, setLike] = useState();
   const [likeCount, setLikeCount] = useState();
-  const [showComments, setShowComments] = useState();
-  const [isVisible, setIsVisible] = useState({});
+  const [showComments, setShowComments] = useState('');
+  // const [isVisible, setIsVisible] = useState({});
   const divRefs = useRef([]);
 
   useEffect(() => {
-    async function fetch() {
-      let response;
 
-      if (optional) {
-        response = optional
-      } else {
-        response = await dispatchCall.socialFeed();
-      }
+    function afterResponse(data) {
+      let obj1 = {};
+      let obj2 = {};
+      let obj3 = {};
 
-      const obj = {};
-      const obj2 = {};
-      const obj3 = {};
-
-      for (let item of response) {
-        obj[item.id] = item.Like;
-        obj2[item.id] = item.Likes.length;
+      for (let item of data) {
+        obj1[item.id] = item.Likes.length;
+        obj2[item.id] = item.Like;
         obj3[item.id] = false;
       }
 
-      setLike(obj);
-      setLikeCount(obj2);
+      setLikeCount(obj1);
+      setLike(obj2);
       setShowMenu(obj3);
-      setPosts(response);
-    }
+    } 
 
-    if (!posts) {
-      fetch()
-    }
-
-  }, []);
-
-  useEffect(() => {
-    console.log('Hello I ran')
-    if (posts) {
-      if (divRefs.current.length === posts.length) {
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach((entry) => {
-            console.log(entry.target.id)
-            setIsVisible((prev) => ({
-              ...prev,
-              [entry.target.id]: entry.intersectionRatio,
-            }));
-          })
-        })
-
-        divRefs.current.forEach((item) => {
-          if (item) {
-            observer.observe(item);
-          }
-        });
-
-        return () => {
-          observer.disconnect();
-        };
+    async function fetch() {
+      if (optional === 'explore') {
+        const response = await dispatchCall.Explore();
+        return afterResponse(response);
+      } else if (optional === 'following') {
+        const response = await dispatchCall.socialFeed();
+        return afterResponse(response);
+      } else if (optional === 'profile') {
+        const response = await dispatchCall.UserPost(params.userId);
+        console.log(response);
+        return afterResponse(response);
       }
     }
-  }, []);
+
+    fetch()
+
+  }, [reload]);
+
+  // useEffect(() => {
+  //   if (posts) {
+  //     if (divRefs.current.length === posts.length) {
+  //       const observer = new IntersectionObserver(entries => {
+  //         entries.forEach((entry) => {
+  //           console.log(entry.target.id)
+  //           setIsVisible((prev) => ({
+  //             ...prev,
+  //             [entry.target.id]: entry.intersectionRatio,
+  //           }));
+  //         })
+  //       })
+
+  //       divRefs.current.forEach((item) => {
+  //         if (item) {
+  //           observer.observe(item);
+  //         }
+  //       });
+
+  //       return () => {
+  //         observer.disconnect();
+  //       };
+  //     }
+  //   }
+  // }, []);
 
   const handleLike = (postId) => {
     setLike((prev) => {
@@ -135,20 +138,32 @@ export default function Body({ optional = null}) {
 
   const handleComments = (id) => {
     if (showComments === id) {
-      navigate(`/${location.pathname}`)
-      return setShowComments('')
+      if (/^\/following(\/.*)?$/.test(location.pathname)) {
+        navigate('/following');
+        setShowComments('');
+      } else if (/^\/explore(\/.*)?$/.test(location.pathname)) { // Matches root or top-level paths
+        navigate('/explore');
+        setShowComments('');
+      } else if (/^\/profile\/user(\/.*)?$/.test(location.pathname)){
+        navigate(`/profile/user/${params.userId}`);
+        setShowComments('');
+      }
+    } else {
+      if (location.pathname === '/explore') {
+        navigate(`/explore/${id}`);
+      } else if (location.pathname === '/following') {
+        navigate(`/following/${id}`);
+      } else if (/^\/profile\/user(\/.*)?$/.test(location.pathname)) {
+        navigate(`/profile/user/${params.userId}/${id}`);
+      }
+      setShowComments(id);
     }
-    if (location.pathname === '/') {
-      navigate(`/${id}`);
-      return setShowComments(id);
-    }
-    navigate(`/${location.pathname}/${id}`);
-    return setShowComments(id);
   };
 
   const handleDelete = (id) => {
     const response = dispatchCall.removePost(id)
-    handleMenuChange(id)
+    handleMenuChange(id);
+    setReload(prev => !prev)
   };
 
   const displayDropdown = (data) => {
@@ -172,13 +187,13 @@ export default function Body({ optional = null}) {
     )
   }
 
-  if (!posts) return null;
+  if (!posts || !showMenu ) return <h1>Loading...</h1>;
 
   return (
     <div className="Post-div">
       {posts.map((data, index) => {
-        const ratio = isVisible[data.id];
-        if (ratio === 0) return null
+        // const ratio = isVisible[data.id];
+        // if (ratio === 0) return null
         return (
           <>
           {index !== 0 && <div className="Post-line"/>}
@@ -186,11 +201,11 @@ export default function Body({ optional = null}) {
             <div style={{display: 'flex', justifyContent: 'space-between', position:'relative'}}>
               <div style={{display: 'flex'}}>
                 <img src={data.User.profilePhoto ? data.User.profilePhoto : defaultpfp}
-                     className="Post-img-profile" onClick={() => navigate(`/profile/user/${data.User.username}`)}/>
+                     className="Post-img-profile" onClick={() => navigate(`/user/${data.User.username}`)}/>
                 <div>
-                  <p className="Post-name" onClick={() => navigate(`/profile/user/${data.User.username}`)}>
+                  <p className="Post-name" onClick={() => navigate(`/user/${data.User.username}`)}>
                     {data.User.firstName} {data.User.lastName}</p>
-                  <p className="Post-username" onClick={() => navigate(`/profile/user/${data.User.username}`)}>@{data.User.username}</p>
+                  <p className="Post-username" onClick={() => navigate(`/user/${data.User.username}`)}>@{data.User.username}</p>
                 </div>
               </div>
               {data.userId === user.id && <BsThreeDots className="Post-threeDots" onClick={() => handleMenuChange(data.id)}/>}
@@ -208,7 +223,7 @@ export default function Body({ optional = null}) {
                 </div>
                 <div className="Post-div-icon" onClick={() => handleComments(data.id)} style={{cursor: 'pointer'}}>
                   <FontAwesomeIcon icon={faComment} className="Post-icon" />
-                  <small style={{margin: '0 5px 0 10px'}}>{data.Comments.length}</small>
+                  <small style={{margin: '0 5px 0 10px'}}>{data.Comments}</small>
                 </div>
               </div>
             <small>{new Date(data.createdAt).toLocaleTimeString('en-US', { year:'numeric', day:'numeric', month:'numeric', hour: '2-digit', minute: '2-digit' })}</small></div>

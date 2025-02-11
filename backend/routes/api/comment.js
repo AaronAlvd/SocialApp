@@ -4,6 +4,35 @@ const { v4: uuid } = require('uuid');
 const { requireAuth } = require('../../utils/auth')
 const router = express.Router();
 
+router.get('/post/:postId', requireAuth, async (req, res, next) => {
+  try {
+    const postId = req.params.postId;
+    const userId = req.user.id;
+
+    const comments = await Comment.findAll({
+      where: {
+        postId: postId
+      },
+      attributes: ['id', 'postId', 'comment', 'createdAt', 'userId'],
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'username', 'profilePhoto']
+        }
+      ],
+      order: [['createdAt', 'DESC']]
+    });
+
+    if (!comments) {
+      throw {status: 404, title: 'Resource Not Found', message: 'Post Not Found'}
+    }
+
+    res.json(comments);
+  } catch(error) {
+    next(error)
+  }
+})
+
 router.post('/', requireAuth, async (req, res, next) => {
   try {
     const userId = req.user.id;
@@ -12,7 +41,7 @@ router.post('/', requireAuth, async (req, res, next) => {
 
     const createComment = await Comment.create({ id, comment, postId, userId});
 
-    res.json(createComment);
+    res.status(201).json(createComment);
 
   } catch(error) {
     next(error)

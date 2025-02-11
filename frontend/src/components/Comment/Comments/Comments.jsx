@@ -1,29 +1,32 @@
 import './Comments.css';
+
 import defaultpfp from '../../../assets/Default_pfp.jpg';
 import DispatchCalls from '../../../StateManagement/dispatch';
+import DisplayMessage from '../../Modals/DisplayMessage/DisplayMessage';
+
 import { IoPaperPlane } from "react-icons/io5";
+
+import { useModal } from '../../../context/modal';
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Comments({ userId }) {
+  const { setMessageContent, closeModal } = useModal();
   const { postId } = useParams();
   const dispatch = useDispatch();
   const dispatchCalls = new DispatchCalls(dispatch);
-  const [data, setData] = useState(null);
+  const data = useSelector(state => state.posts.comments);
   const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
   const [text, setText] = useState('');
   const [activeText, setActiveText] = useState(false);
-  const [reload, setReload] = useState(false);
   const textAreaRef = useRef(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await dispatchCalls.comments(postId);
-        console.log(response);
-        setData(response);  // Assuming setData is properly defined
       } catch (error) {
         console.error("Failed to fetch comments:", error);
       }
@@ -35,50 +38,36 @@ export default function Comments({ userId }) {
       textArea.style.height = 'auto';  // Reset height before resizing
       textArea.style.height = `${textArea.scrollHeight}px`;  // Adjust height based on content
     }
-  }, [text, reload]);
+  }, [text]);
+
+  useEffect(() => {
+    
+  }, [data])
  
   const handleDelete = async (id) => {
     const response = confirm('Confirm Delete');
     if (response) {
-      const complete = dispatchCalls.removeComment(id);
-      const results = await dispatchCalls.comments(postId);
-      setData(results);
+      const response02 = await dispatchCalls.removeComment(id, postId);
+      // setMessageContent(<DisplayMessage message={response02.message}/>)
+      // alert(`${response02.message}`)
+      setTimeout(async () => {
+        const results = await dispatchCalls.comments(postId);
+      }, 100);
     }
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setText('');
+    setActiveText();
     const data = {
       post_id: postId,
       text: text,
     };
-    const complete = await dispatchCalls.createComment(data)
-    const results = await dispatchCalls.comments(postId);
-    setData(results);
+    const complete = await dispatchCalls.createComment(data);
+    const response = await dispatchCalls.comments(postId);
   }
 
-  const displayComments = () => {
-    const retArr = Array(data.length);
-
-    for (let i = 0; i < data.length; i++) {
-      const comment = data[i];
-      retArr[i] = (
-        <div className='Comments-box'>
-          <img src={comment.User.profilePhoto ? comment.User.profilePhoto : defaultpfp} 
-               className='Comments-profilePhoto' onClick={() => navigate(`/profile/${comment.User.username}`)}/>
-          <div className='Comments-box-column-2'>
-            <p className='Comments-username' onClick={() => navigate(`/profile/${comment.User.username}`)}>{comment.User.username}</p>
-            <p className='Comments-text'>{comment.comment}</p>
-            <span style={{display: 'flex'}}>
-              <p className='Comments-reply'>Reply</p>
-              {( userId === user.id || comment.userId === user.id) && <p className='Comments-reply' onClick={() => handleDelete(comment.id)}>delete</p>}
-            </span>
-          </div>
-        </div>
-      )
-
-    }
-    return retArr;
-  }
 
   if (!data) return null;
 
@@ -90,10 +79,25 @@ export default function Comments({ userId }) {
         <textarea id="dynamic-input" value={text} onChange={(e) => setText(e.target.value)} className='Comments-text_input' 
                   ref={textAreaRef} style={{resize: 'none', overflow: 'hidden' }} onFocus={() => setActiveText(true)} onBlur={() => setActiveText(false)}/>
         <div style={{display: 'flex', alignItems: 'flex-end'}}>
-          <IoPaperPlane className='Comments-submit' onClick={() => handleSubmit()}/>  
+          <IoPaperPlane className='Comments-submit' onClick={(e) => handleSubmit(e)}/>  
         </div>        
       </div>
-      {displayComments()}
+      {data.map((comment, index) => {
+        return (
+          <div className='Comments-box' key={comment.id}>
+          <img src={comment.User.profilePhoto ? comment.User.profilePhoto : defaultpfp} 
+               className='Comments-profilePhoto' onClick={() => navigate(`/profile/user/${comment.User.username}`)}/>
+          <div className='Comments-box-column-2'>
+            <p className='Comments-username' onClick={() => navigate(`/profile/user/${comment.User.username}`)}>{comment.User.username}</p>
+            <p className='Comments-text'>{comment.comment}</p>
+            <span style={{display: 'flex'}}>
+              <p className='Comments-reply' onClick={() => alert('Feature Coming Soon...')}>Reply</p>
+              {( userId === user.id || comment.userId === user.id) && <p className='Comments-reply' onClick={() => handleDelete(comment.id)}>delete</p>}
+            </span>
+          </div>
+        </div>
+        )
+      })}
     </div>
   )
 };

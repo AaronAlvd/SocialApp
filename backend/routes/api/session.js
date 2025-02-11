@@ -60,6 +60,44 @@ router.post('/', validateLogin, async (req, res, next) => {
   return res.json({ user: safeUser });
 });
 
+router.put('/', requireAuth, async (req, res, next) => {
+  try {
+    const id = req.user.id;
+    const { username, firstName, lastName, email, bio } = req.body;
+
+    const user = await User.findByPk(id);
+
+    if (user) {
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.username = username;
+      user.email = email;
+      user.bio = bio;
+    }
+
+    await user.save();
+
+    res.json(user);
+
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete('/delete', requireAuth, async (req, res, next) => {
+  try {
+    const id = req.user.id;
+
+    const deleteAccount = User.destroy({ where: { id }});
+
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+
+  } catch (error) {
+    next(error)
+  }
+});
+
 router.delete('/', (_req, res) => {
     res.clearCookie('token');
     return res.json({ message: 'success' });

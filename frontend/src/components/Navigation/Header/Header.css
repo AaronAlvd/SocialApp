@@ -57,3 +57,34 @@
   margin: 0;
   cursor: pointer;
 }
+.Navigation-div_results {
+  position: absolute;
+  top: 48px;
+  width: 520px;
+  max-height: 200px;
+  overflow-y: scroll;
+  background-color: white;
+  border: 1px solid black;
+  z-index: 1;
+}
+.NavigationHeader-div_resultsBox {
+  display: flex;
+  margin: 5px;
+}
+.NavigationHeader-profilePhoto {
+  margin-right: 5px;
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-position: center;
+}
+.NavigationHeader-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+.NavigationHeader-username {
+  margin: 3px 0;
+  font-size: 14px;
+  font-weight: 400;
+}

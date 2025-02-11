@@ -40,8 +40,8 @@ export default class DispatchCalls extends Social {
   comments(data) {
     return this.dispatch(commentActions.fetchComments(data))
   }
-  removeComment(data) {
-    return this.dispatch(commentActions.deleteComment(data))
+  removeComment(data, data2) {
+    return this.dispatch(commentActions.deleteComment(data, data2))
   }
   createComment(data) {
     return this.dispatch(commentActions.addComment(data))
@@ -73,17 +73,20 @@ export default class DispatchCalls extends Social {
   RestoreUser() {
     return this.dispatch(sessionActions.restoreUser())
   }
+  UpdateUser(data) {
+    return this.dispatch(sessionActions.updateUser(data))
+  }
+  SignupUser(data) {
+    return this.dispatch(sessionActions.signUpUser(data))
+  }
+  DeleteUser() {
+    return this.dispatch(sessionActions.deleteAccount())
+  }
 
   handleLike(data) {
     return this.dispatch(likeActions.likePost(data))
   }
-
   handleDislike(data) {
-    return this.dispatch(likeActions.unlikePost(data));
+    return this.dispatch(likeActions.unlikePost(data))
   }
-
-  SignupUser(data) {
-    return this.dispatch(sessionActions.signUpUser(data))
-  }
-
 }

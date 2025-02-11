@@ -11,8 +11,10 @@ function UserDropdown () {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(sessionActions.logout());
+  const handleLogout = async () => {
+    const response = await dispatch(sessionActions.logout());
+    navigate('/');
+    alert(`${response.message}`);
   }
     
   return (

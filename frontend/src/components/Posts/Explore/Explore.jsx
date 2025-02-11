@@ -1,14 +1,14 @@
 import DispatchCalls from "../../../StateManagement/dispatch";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import Body from '../Post/body';
-import Header from './Header/Header';
+import ExploreModal from "./ExploreModal/ExploreModal";
 import './Explore.css';
 
 export default function Post() {
   const dispatch = useDispatch();
   const dispatchCall = new DispatchCalls(dispatch);
-  const [posts, setPosts] = useState();
+  const posts = useSelector(state => state.posts.posts);
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
 
@@ -31,7 +31,6 @@ export default function Post() {
   useEffect(() => {
     async function fetch() {
       const response = await dispatchCall.Explore();
-      setPosts(response);
     }
 
     if (!posts) {
@@ -45,15 +44,17 @@ export default function Post() {
   if (width < 1040) {
     return (
       <div style={{height: `${height - 49.5}px`, overflow: 'scroll'}}>
-        <Body optional={posts}/>
+        <Body optional={'explore'}/>
       </div>
     )
   }
 
   return (
     <div style={{height: `${height - 60}px`, overflow: 'scroll'}}>
-      <Body optional={posts}/>
+      <div style={{display: 'grid', gridTemplateColumns: '567px 1fr'}}>
+        <Body optional={'explore'}/>
+        {width > 1439 && <ExploreModal />}
+      </div>
     </div>
   )
-
 }

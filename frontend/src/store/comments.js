@@ -2,7 +2,7 @@ import { csrfFetch } from './csrf';
 import { removeComment, setComments, setComment } from './post';
 
 
-export const deleteComment = (id) => async (dispatch) => {
+export const deleteComment = (id, postId) => async (dispatch) => {
   try {
     const response = await csrfFetch(`/api/comments/${id}`, {
       method: 'DELETE',
@@ -47,7 +47,7 @@ export const addComment = async (data) => {
   }
 }
 export const fetchComments = (id) => async (dispatch) => {
-  const response = await csrfFetch(`/api/posts/comments/${id}`);
+  const response = await csrfFetch(`/api/comments/post/${id}`);
   if (!response) throw new Error('Failed to fetch comments');
   const data = await response.json();
   dispatch(setComments(data))

@@ -1,6 +1,7 @@
 import './CreatePost.css';
 import DispatchCalls from '../../../StateManagement/dispatch';
 import defaultpfp from '../../../assets/Default_pfp.jpg';
+import { useModal } from '../../../context/modal';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +10,7 @@ import { FaImage } from "react-icons/fa6";
 import { MdVideoLibrary } from "react-icons/md";
 
 export default function CreatePost({ user, event = null}) {
+  const { closeModal } = useModal();
   const dispatch = useDispatch();
   const dispatchCalls = new DispatchCalls(dispatch);
   const textareaRef = useRef(null);
@@ -101,14 +103,17 @@ export default function CreatePost({ user, event = null}) {
     return array;
   }
 
-  const handleSubmitPost = () => {
-    const formData = new FormData()
-
-    formData.append('caption', text || '');
-    formData.append('file', file || '');
-    formData.append('groupId', activeInfo.groupId || 'default');
-
-    return dispatchCalls.newPost(formData);
+  const handleSubmitPost = async () => {
+    const data = {
+      caption: text || null,
+      photo: file || null,
+      groupId: activeInfo.groupId || 'default',
+    }
+    
+    const response = await dispatchCalls.newPost(data);
+    closeModal();
+    alert(response.message);
+    window.location.reload();
   }
 
   useEffect(() => {

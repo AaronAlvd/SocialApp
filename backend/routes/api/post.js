@@ -11,6 +11,7 @@ const router = express.Router();
 router.get('/comments/:id', requireAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
+    const userId = req.user.id;
 
     const post = await Post.findByPk(id, {
       attributes: [],
@@ -133,39 +134,40 @@ router.get('/user/:userId', requireAuth, async (req, res, next) => {
          { id: userId },
        ]
      }, 
-     attributes: ['id'],
-     include: [
-       {
-         model: Post,
-         attributes: ['id','userId', 'caption', 'photo', 'createdAt'],
-         include: [
-           {
-             model: User,
-             attributes: ['id', 'username', 'firstName', 'lastName', 'profilePhoto', 'username']
-           },
-           {
-             model: Group,
-             attributes: ['id', 'groupName', 'profilePhoto']
-           },
-           {
-             model: Comment,
-             attributes: ['id'],
-           },
-           {
-             model: PostLike,
-             as: 'Likes',
-             attributes: ['id', 'userId']
-           }
-         ],
-         order: [['createdAt', 'ASC']]
-       }
-     ]
+     attributes: ['id']
    });
+
+   const posts = await Post.findAll({
+    where: {
+      userId: user.id
+    },
+    attributes: ['id','userId', 'caption', 'photo', 'createdAt'],
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'username', 'firstName', 'lastName', 'profilePhoto', 'username']
+      },
+      {
+        model: Group,
+        attributes: ['id', 'groupName', 'profilePhoto']
+      },
+      {
+        model: Comment,
+        attributes: ['id'],
+      },
+      {
+        model: PostLike,
+        as: 'Likes',
+        attributes: ['id', 'userId']
+      }
+    ],
+    order: [['createdAt', 'DESC']]
+   })
  
-   const newArray = Array(user.Posts.length)
+   const newArray = Array(posts.length)
  
-   for (let i = 0; i < user.Posts.length; i++) {
-     const post = user.Posts[i];
+   for (let i = 0; i < posts.length; i++) {
+     const post = posts[i];
      let userLiked = false; // Flag to check if the user has liked this post
    
      for (let j = 0; j < post.Likes.length; j++) {
@@ -184,7 +186,7 @@ router.get('/user/:userId', requireAuth, async (req, res, next) => {
        createdAt: post.createdAt,
        Group: post.Group,
        User: post.User,
-       Comments: post.Comments,
+       Comments: post.Comments.length,
        Likes: post.Likes,
        Like: userLiked,
      }
@@ -244,7 +246,7 @@ router.get('/explore', requireAuth, async (req, res, next) => {
         photo: post.photo,
         createdAt: post.createdAt,
         User: post.User,
-        Comments: post.Comments,
+        Comments: post.Comments.length,
         Likes: post.Likes,
         Like: userLiked,
       }
@@ -382,7 +384,7 @@ router.get('/following', requireAuth, async (req, res, next) => {
         photo: post.photo,
         createdAt: post.createdAt,
         User: post.User,
-        Comments: post.Comments,
+        Comments: post.Comments.length,
         Likes: post.Likes,
         Like: userLiked,
       }
@@ -518,7 +520,7 @@ router.post('/', requireAuth, async (req, res, next) => {
     const id = uuid();
     const groupId = req.body.groupId;
     const caption = req.body.caption || null;
-    // const photo = req.body.file || null;
+    const photo = req.body.photo || null;
 
     // const response = handleUpload(photo);
 
@@ -527,10 +529,13 @@ router.post('/', requireAuth, async (req, res, next) => {
       groupId: groupId,
       userId: user_id,
       caption: caption || null,
-    //   photo: photo || null,
+      photo: photo || null,
     });
 
-    res.json(post);
+    res.status(201).json({
+      ...post,
+      message: 'Post Succesfully Created!'
+    });
 
   } catch(error) {
     next(error);

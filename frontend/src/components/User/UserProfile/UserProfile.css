@@ -54,7 +54,6 @@
     background-color: rgb(64, 75, 182);
   }
 }
-
 @media (min-width: 481px) and (max-width: 1039px){
   .UserProfile-header{
 
@@ -114,8 +113,7 @@
     background-color: rgb(80, 127, 215);
   }
 }
-
-@media (min-width: 1040px) {
+@media (min-width: 1040px) and (max-width: 1439px) {
   .UserProfile-header{
     width: 547px;
   }
@@ -175,11 +173,55 @@
     border: none;
     background-color: rgb(64, 75, 182);
   }
+  .UserProfile-button2{
+    color: black;
+    font-size: 14px;
+    font-weight: 700;
+    height: 30px;
+    width: 150px;
+    border-radius: 10px;
+    border: 1px solid black;
+  }
   .UserProfile-button:hover{
     background-color: rgb(80, 127, 215);
   }
 }
-
+@media (min-width: 1440px) {
+  .UserProfile-inner_div {
+    display: flex;
+  }
+  .UserProfile-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    height: 170px;
+  }
+  .UserProfile-background_photo {
+    background-color: rgb(187, 142, 142);
+    min-height: 120px;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .UserProfile-photo {
+    position: absolute;
+    transform: translate(30px, 70px);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    background-position: center;
+  }
+  .UserProfile-row2 {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    height: 50px;
+  }
+  .UserProfile-username {
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
 
 .UserProfile-div{
   height: 100vh;

@@ -22,7 +22,6 @@ export const signUpUser = (data) => async (dispatch) => {
   const { username, firstName, lastName, email, password } = data;
 
   try {
-    // Use csrfFetch to perform the signup request
     const response = await csrfFetch("/api/users/", {
       method: "POST",
       headers: {
@@ -39,17 +38,8 @@ export const signUpUser = (data) => async (dispatch) => {
 
     if (response.ok) {
       const data = await response.json();
-
-      // Dispatch the user data to the Redux store
       dispatch(setUser(data.user));
-
-      // Store minimal user info in session storage
-      window.sessionStorage.setItem(
-        "users",
-        JSON.stringify({ username, firstName, lastName, email })
-      );
-
-      return response;
+      return data;
     } else {
       const errorData = await response.json();
       throw new Error(errorData.message || "Sign-up failed");
@@ -73,7 +63,6 @@ export const login = (credential, password) => async (dispatch) => {
   dispatch(setUser(data.user));
   return data;
 };
-
 export const restoreUser = () => {
   return async (dispatch) => {
     {
@@ -84,14 +73,43 @@ export const restoreUser = () => {
     }
   };
 };
-
 export const logout = () => async (dispatch) => {
   const response = await csrfFetch('/api/session', {
     method: 'DELETE'
   });
 
+  const data = await response.json();
+
   dispatch(removeUser());
-  return response;
+  return data
+};
+export const updateUser = (formData) => async (dispatch) => {
+  try {
+    const response = await csrfFetch('/api/session/', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (!response.ok) {}
+
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.log(error)
+  }
+};
+export const deleteAccount = () => async () => {
+  try {
+    const response = await csrfFetch('/api/session/delete', {
+      method: 'DELETE',
+    })
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 const initialState = { user: null };

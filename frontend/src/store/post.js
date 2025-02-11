@@ -31,10 +31,10 @@ export const setComments = (data) => {
     payload: data,
   }
 }
-export const removeComment = (id) => {
+export const removeComment = (id, postId) => {
   return {
     type: DELETE_COMMENT,
-    payload: id,
+    payload: [id, postId],
   }
 }
 export const setComment = (data) => {
@@ -108,11 +108,18 @@ export const fetchTrendingPosts = () => async (dispatch) => {
 
   }
 }
-export const createPost = (formData) => async (dispatch) => {
+export const createPost = (data) => async (dispatch) => {
   try {
     const response = await csrfFetch('/api/posts/', {
-      method: 'POST', 
-      body: formData
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        caption: data.caption,
+        photo: data.file,
+        groupId: data.groupId,
+      })
     })
 
     if (!response.ok) {
@@ -159,17 +166,19 @@ export default function postReducer(state = initialState, action) {
       return {...state, comments: action.payload}
     case SET_COMMENT: 
       return {...state, comments:[...state.comments, action.payload]};
-    case DELETE_COMMENT: {
-      const obj = [...state.comments];
-      for (let i = 0; i < obj.length; i++) {
-        const item = obj[i];
-        if (item.id === action.payload) {
-          obj.splice(i, 1)
-          return {...state, comments: obj}
-        }
+      case DELETE_COMMENT: {
+        const [commentId, postId] = action.payload;
+      
+        // Create a new comments array without the deleted comment
+        const updatedComments = state.comments.filter(comment => comment.id !== commentId);
+      
+        // Create a new posts array with the updated comment count
+        const updatedPosts = state.posts.map(post => 
+          post.id === postId ? { ...post, Comments: post.Comments - 1 } : post
+        );
+      
+        return { ...state, posts: updatedPosts, comments: updatedComments };
       }
-      return {...state, comments: obj}
-    }
     default:
       return state
   }

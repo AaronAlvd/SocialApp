@@ -53,8 +53,8 @@ export const queryExplore = (query) => async (dispatch) => {
     const response = await csrfFetch(`/api/users/explore/${query}`);
     if (!response.ok) {}
     const data = await response.json();
-    dispatch(setQueryFollowing(data.users))
-    dispatch(setGroups(data.groups))
+    dispatch(setQueryFollowing(data.users));
+    dispatch(setGroups(data.groups));
     return data;
   } catch (error) {
     console.log(error)
@@ -101,6 +101,7 @@ export const fetchFollowing = () => async (dispatch) => {
 
     const data = await response.json();
     dispatch(setFollowing(data));
+    return data;
     
   } catch(error) {
 

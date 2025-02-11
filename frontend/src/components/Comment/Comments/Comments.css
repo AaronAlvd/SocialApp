@@ -15,7 +15,7 @@
 
 .Comments-box{
   display: flex;
-  margin: 13px 0;
+  margin: 13px 0 0 0;
   cursor: default;
   width: 100%;
 }

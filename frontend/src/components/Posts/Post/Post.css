@@ -10,7 +10,6 @@
     padding: 10px 20px;
     margin: 10px 0;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
     box-sizing: border-box;
   }
   .Post-line{
@@ -41,7 +40,6 @@
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
     box-sizing: border-box;
   }
   .Post-line{
@@ -72,7 +70,6 @@
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
-    background-color: rgb(255, 255, 255);
     box-sizing: border-box;
   }
   .Post-line{
@@ -83,7 +80,7 @@
   }
   .Post-menu{
     position: absolute;
-    background-color: white;
+    background-color: rgb(26, 26, 26);
     transform: translate(450px, 25px);
     font-size: 12px;
     font-weight: 600;
@@ -135,7 +132,6 @@
 .Post-username{
   font-size: 14px;
   margin: 5px 0 0 0;
-  color: rgb(0, 0, 0);
   cursor: pointer;
 }
 .Post-caption{

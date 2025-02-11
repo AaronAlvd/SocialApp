@@ -50,14 +50,16 @@ export default function SignUpForm() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validatePassword()) {
       return;
     }
 
-    dispatchCalls.SignupUser(formData);
+    const response = await dispatchCalls.SignupUser(formData);
+    window.location.reload();
+    alert(`${response.message}`);
 
     console.log('Form submitted', formData);
   };

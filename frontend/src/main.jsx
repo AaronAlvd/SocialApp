@@ -5,7 +5,7 @@ import App from './App';
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session';
-import { ModalProvider, Modal } from './context/modal';
+import { ModalProvider, Modal, Modal2 } from './context/modal';
 import './index.css';
 
 (async () => {
@@ -29,6 +29,7 @@ import './index.css';
         <Provider store={store}>
           <App/>
           <Modal />
+          <Modal2 />
         </Provider>
       </ModalProvider>
     </React.StrictMode>

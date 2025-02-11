@@ -1,20 +1,24 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobe, faUsers, faComments, faUserFriends} from '@fortawesome/free-solid-svg-icons';
 import Header from './Header/Header';
-import { IoMdTrendingUp } from "react-icons/io";
 import Social from '../../StateManagement/social';
 import CreatePost from '../Modals/CreatePost/CreatePost';
+import DisplayMessage from '../Modals/DisplayMessage/DisplayMessage';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe, faUsers, faComments, faUserFriends} from '@fortawesome/free-solid-svg-icons';
+import { IoMdTrendingUp } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
 import { FaRegPlusSquare } from "react-icons/fa";
+
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
-import { useModal } from '../../context/modal'
-import './Navigation.css'
+import { useModal } from '../../context/modal';
+
+import './Navigation.css';
 
 export default function Navigation() {
-  const { setModalContent } = useModal();
+  const { setModalContent, setMessageContent, closeModal } = useModal();
   const user = useSelector(state => state.session.user);
   const navigate = useNavigate();
   const social = new Social();
@@ -59,7 +63,8 @@ export default function Navigation() {
               "Navigation-icon"} />{width > 767 && 'Explore'}</p>
         </div>
           <div className="Navigation-div-row">
-            <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}><FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active":
+            <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}>
+              <FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active":
                "Navigation-icon"} />{width > 767 && 'Groups'}</p>
           </div>
         </>
@@ -71,7 +76,8 @@ export default function Navigation() {
               alert('You are not logged in')}><FontAwesomeIcon icon={faUserFriends} className={active.following ? "Navigation-icon-active": 
               "Navigation-icon"}/>{width > 767 && 'Following'}</p>
 
-          <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}><FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active": 
+          <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}>
+            <FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active": 
              "Navigation-icon"} />{width > 767 && 'Groups'}</p>
         </div>
       )
@@ -107,7 +113,7 @@ export default function Navigation() {
         <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}>
           <FontAwesomeIcon icon={faUsers} className={active.groups ? "Navigation-icon-active" : "Navigation-icon"} />{width > 767 && 'Groups'}</p>
 
-        <p className={active.messages ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}><FontAwesomeIcon icon={faComments} className={active.messages ? "Navigation-icon-active": 
+        <p className={active.messages ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => navigate('/messages')}><FontAwesomeIcon icon={faComments} className={active.messages ? "Navigation-icon-active": 
            "Navigation-icon"} />{width > 767 && 'Messages'}</p>
       </div>
     </>
@@ -124,13 +130,14 @@ export default function Navigation() {
       </div>
       {displayRow3()}
       <div className="Navigation-div-row">
-        <p className={active.messages ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}>
+        <p className={active.messages ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => navigate('/messages')}>
           <FontAwesomeIcon icon={faComments} className={active.messages ? "Navigation-icon-active": 
            "Navigation-icon"} />{width > 767 && 'Messages'}</p>
       </div>
       {displayRow5()}
     </div>
-    <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 105}px)`}} onClick={() => setModalContent(<CreatePost user={user}/>)}>
+    <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 105}px)`}} 
+          onClick={() => setModalContent(<CreatePost user={user}/>)}>
       <FaPlus/>
     </span>
     </>

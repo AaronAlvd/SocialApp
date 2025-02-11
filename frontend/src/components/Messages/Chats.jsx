@@ -17,8 +17,12 @@ export default function Chats() {
   const { setModalContent } = useModal();
 
   useEffect(() => {
-    dispatchCalls.chats();
-    dispatchCalls.following();
+    async function fetch() {
+      const response = await dispatchCalls.chats();
+      const response02 = await dispatchCalls.following();
+    };
+
+    fetch()
 
   }, [dispatch]);
 
@@ -50,6 +54,12 @@ export default function Chats() {
         <FaRegPenToSquare className='Chats-icon' onClick={() => setModalContent(<CreateChat data={[following, chats]}/>)}/>
       </div>
       {formatChats()}
+      <div>
+        <h4>Suggested</h4>
+        <div className='Chats-div_suggested'>
+          
+        </div>
+      </div>
     </div>
   )
 }

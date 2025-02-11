@@ -28,7 +28,7 @@ export default function CreateChat() {
       const user = results[i]
       retArr[i] = (
         <div className='CreateChat-userBox'>
-          <img src={user.profilePhoto ? dispatchCalls.convertImageToBase64(user.profilePhoto) : defaultpfp} className='CreateChat-profilePhoto'/>
+          <img src={user.profilePhoto ? user.profilePhoto : defaultpfp} className='CreateChat-profilePhoto'/>
           <div className='CreateChat-userBox-row'>
             <p className='CreateChat-username'>{user.username}</p>
             <p className='CreateChat-name'>{user.firstName} {user.lastName}</p>

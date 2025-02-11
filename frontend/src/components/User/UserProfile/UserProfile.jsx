@@ -1,12 +1,17 @@
 import { useSelector, useDispatch } from "react-redux";
-import DispatchCalls from '../../../StateManagement/dispatch';
-import UpdateProfile from "../../Modals/UpdateProfile/Updateprofile";
-import { useModal } from '../../../context/modal';
-import UserPosts from '../UserPosts';
-import Body from '../../Posts/Post/body';
-import defaultpfp from '../../../assets/Default_pfp.jpg';
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
+import { useModal } from '../../../context/modal';
+
+
+import DispatchCalls from '../../../StateManagement/dispatch';
+import defaultpfp from '../../../assets/Default_pfp.jpg';
+import UserPosts from '../UserPosts';
+import Body from '../../Posts/Post/body';
+import DesktopProfile from "./DesktopProfile";
+import UpdateProfile from "../../Modals/UpdateProfile/Updateprofile";
+import ProfileModal from "../ProfileModal/ProfileModal";
+
 import './UserProfile.css';
 
 
@@ -17,9 +22,11 @@ export default function UserProfile() {
   const dispatchCalls = new DispatchCalls(dispatch);
   const [width, setWidth] = useState(window.innerWidth);
   const user = useSelector(state => state.session.user);
-  const [userProfile, setUserProfile] = useState();
+  const userProfile = useSelector(state => state.users.profile);
   const [userPosts, setUserPosts] = useState();
   const [height, setHeight] = useState(window.innerHeight);
+  const [activeFollower, setActiveFollower] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Define the resize handler
@@ -41,16 +48,42 @@ export default function UserProfile() {
     async function fetch() {
       const response = await dispatchCalls.UserProfile(userId);
       const response02 = await dispatchCalls.UserPost(userId);
-      setUserProfile(response);
+      const response03 = await dispatchCalls.following();
+
+      for (let item of response03) {
+        if (item.followingId === response.id) {
+          setActiveFollower(true);
+          break
+        }
+      }
+
       setUserPosts(response02);
+      setLoading(false);
     }
 
     fetch()
 
   }, []);
 
+  if (!userProfile || loading) return null;
 
-  if (!userProfile && !userPosts) return null;
+  const displayButton = () => {
+    if (userProfile.id === user.id) {
+      return <button className="UserProfile-button" onClick={() => setModalContent(<UpdateProfile />)}>Edit Profile</button>
+    } else if (activeFollower) {
+      return <button className="UserProfile-button2">Following</button>
+    } else {
+      return <button className="UserProfile-button">Follow</button>
+    }
+  }
+
+  const handleProfile = () => {
+    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a') {
+      return alert('This feature has been disabled for the demo account')
+    } else {
+      return setModalContent(<EditProfile />)
+    }
+  }
 
   const displayHeader = () => {
     if (width < 1040 && width > 480) {
@@ -86,9 +119,7 @@ export default function UserProfile() {
             <p className="UserProfile-bio">{userProfile.bio}</p>
           </div>
           <div className="UserProfile-div_button">
-          {user.id === userProfile.id ? 
-          <button className="UserProfile-button" onClick={() => setModalContent(<UpdateProfile />)}>Edit Profile</button> : 
-          <button className="UserProfile-button">Follow</button>}
+          {displayButton()}
           </div>
         </div>
       )
@@ -119,14 +150,13 @@ export default function UserProfile() {
             <p className="UserProfile-bio">{userProfile.bio}</p>
           </div>
           <div className="UserProfile-div_button">
-            {user.id === userProfile.id ? 
-            <button className="UserProfile-button" onClick={() => setModalContent(<UpdateProfile />)}>Edit Profile</button> : 
-            <button className="UserProfile-button">Follow</button>}
+            {displayButton()}
           </div>
         </div>
       )
-    }
-    else {
+    } else if (width > 1439) {
+      return <DesktopProfile/>
+    } else {
       return (
         <div className="UserProfile-header">
           <div className="UserProfile-row1">
@@ -159,9 +189,7 @@ export default function UserProfile() {
             <p className="UserProfile-bio">{userProfile.bio}</p>
           </div>
           <div className="UserProfile-div_button">
-          {user.id === userProfile.id ? 
-          <button className="UserProfile-button" onClick={() => setModalContent(<UpdateProfile />)}>Edit Profile</button> : 
-          <button className="UserProfile-button">Follow</button>}
+          {displayButton()}
           </div>
         </div>
       )
@@ -171,8 +199,9 @@ export default function UserProfile() {
   return (
     <div className='UserProfile-div' style={{height: `${height - 49.5}px`}}>
       {displayHeader()}
-      <div>
-        <Body optional={userPosts}/>
+      <div className="UserProfile-inner_div">
+        <Body optional={'profile'}/>
+        {width > 1439 && <ProfileModal />}
       </div>
     </div>
   )

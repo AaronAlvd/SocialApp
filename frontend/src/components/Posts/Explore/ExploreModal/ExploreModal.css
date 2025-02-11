@@ -1,0 +1,24 @@
+.ExploreModal {
+  position: relative;
+  width: 100%;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+}
+.ExploreModal-div {
+  position: sticky;
+  top: 8vh;
+  display: grid;
+  grid-template-rows: 50% 50%;
+  align-self: self-start;
+  width: 350px;
+  height: 600px;
+  border-radius: 10px;
+  background-color: rgb(222, 222, 222);
+}
+.ExploreModal-div_top {
+  
+}
+.ExploreModal-div_bottom {
+
+}

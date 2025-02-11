@@ -1,12 +1,17 @@
 import './UpdateProfile.css'
 
 import defaultpfp from '../../../assets/Default_pfp.jpg';
+import DispatchCalls from '../../../StateManagement/dispatch';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
 
+import { useModal } from '../../../context/modal';
+
 export default function UpdateProfile() {
+  const { closeModal } = useModal();
   const dispatch = useDispatch();
+  const dispatchCall = new DispatchCalls(dispatch);
   const user = useSelector(state => state.session.user);
   const textareaRef = useRef();
   const [firstName, setFirstName] = useState();
@@ -31,6 +36,29 @@ export default function UpdateProfile() {
       textareaRef.current.style.height = textareaRef.current.scrollHeight + "px"; // Set new height
     }
   }, [bio]);
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+
+    const formData = {
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      email: email,
+      bio: bio,
+    };
+
+    return dispatchCall.UpdateUser(formData);
+  };
+
+  const handleDelete = async (e) => {
+    const confirmDelete = await confirm('Press "OK" to Confirm Delete');
+    
+    if (confirmDelete) {
+      const response = await dispatchCall.DeleteUser();
+      navigate('/');
+    }
+  }
 
   if (!user) return null;
 
@@ -65,8 +93,13 @@ export default function UpdateProfile() {
           <textarea value={bio} className='UpdateProfile-bio' ref={textareaRef} onChange={(e) => setBio(e.target.value)}/>
         </div>
 
-        <div>
-          <button className='UpdateProfile-button'>Save</button>
+        <div className='UpdateProfile-div_button'>
+          <button className='UpdateProfile-button' onClick={(e) => handleUpdate(e)}>Save</button>
+          <button className='UpdateProfile-button' onClick={() => closeModal()}>Exit</button>
+        </div>
+
+        <div className='UpdateProfile-div_delete'>
+          <button className='UpdateProfile-delete' onClick={(e) => handleDelete(e)}>Delete Account</button>
         </div>
       </form>
     </div>

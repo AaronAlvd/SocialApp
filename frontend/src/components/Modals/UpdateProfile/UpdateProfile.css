@@ -46,11 +46,28 @@
 .UpdateProfile-bio:focus{
   outline: none;
 }
+.UpdateProfile-div_button{
+  display: flex;
+  justify-content: space-around;
+}
 .UpdateProfile-button{
   background-color: rgb(25, 61, 169);
   color: white;
   border-radius: 5px;
   width: 100px;
+  height: 25px;
+  border: none;
+}
+.UpdateProfile-div_delete {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+.UpdateProfile-delete {
+  background-color: rgb(191, 36, 36);
+  color: white;
+  border-radius: 5px;
+  width: 130px;
   height: 25px;
   border: none;
 }

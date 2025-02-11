@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation, Page404, UserProfile, Post, Chats, GroupPost, GroupProfile, Explore, Chat, Trending} from './components';
+import { Navigation, Page404, UserProfile, Following, Chats, GroupPost, GroupProfile, Explore, Chat, Trending} from './components';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import './index.css'
@@ -52,16 +52,6 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '',
-        element: <Explore />,
-        children: [
-          {
-            path: ':postId',
-            element: <Explore />,
-          }
-        ]
-      },
-      {
         path: 'explore',
         children: [
           {
@@ -76,11 +66,29 @@ const router = createBrowserRouter([
       },
       {
         path: 'following',
-        element: <Post />,
+        element: <Following />,
         children: [
           {
             path: ':postId',
-            element: <Post />
+            element: <Following />
+          },
+        ]
+      },
+      {
+        path: 'user',
+        children: [
+          {
+            path: ':userId',
+            children: [
+              {
+                path: '',
+                element: <UserProfile />
+              },
+              {
+                path: ':postId',
+                element: <UserProfile />
+              }
+            ]
           },
         ]
       },
@@ -89,11 +97,26 @@ const router = createBrowserRouter([
         children: [
           {
             path: 'user/:userId',
-            element: <UserProfile />
+            element: <UserProfile />,
+            children: [
+              {
+                path: ':postId',
+                element: <UserProfile />
+              }
+            ]
           },
           {
             path: 'group/:groupId',
             element: <GroupProfile />
+          }
+        ]
+      },
+      {
+        path: 'messages',
+        children: [
+          {
+            path: '',
+            element: <Chats />
           }
         ]
       },
