@@ -17,7 +17,7 @@ module.exports = {
   async down (queryInterface, Sequelize) {
     await Chat.destroy({
       where: {
-        id: 1
+        id: '1'
       }
     })
   }
