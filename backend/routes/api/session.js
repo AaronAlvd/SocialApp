@@ -27,6 +27,46 @@ router.get('/', (req, res) => {
     }
 });
 
+router.get('/notifications', requireAuth, async (req, res, next) => {
+  try {
+    const id = req.user.id;
+
+    const posts = await Post.findAll({ 
+      where: {
+        userId: id,
+      },
+      attributes: ['id']
+    });
+
+    let postLikes = [];
+
+    for (let i = 0; i < posts.length; i++) {
+      let currPost = posts[i];
+      let postId = currPost.id;
+
+      let likes = await PostLike.findAll({
+        where: {
+          postId: postId
+        },
+        attributes: ['id', 'userId', 'postId'],
+        includes: [
+          {
+            model: User,
+            attributes: ['id', 'username', 'firstName', 'lastName', 'profilePhoto']
+          }
+        ]
+      });
+
+      postLikes.concat(likes);
+    }
+
+    res.json({ postLikes });
+
+  } catch(error) {
+    next(error);
+  }
+});
+
 router.post('/', validateLogin, async (req, res, next) => {
   const { credential, password } = req.body;
 

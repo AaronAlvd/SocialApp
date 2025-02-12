@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const SIGN_UP = "session/setUser";
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
+const SET_NOTIFICATIONS = "SET_NOTIFICATIONS"
 
 export const setUser = (user) => {
   return {
@@ -11,12 +12,17 @@ export const setUser = (user) => {
     payload: user,
   };
 };
-
 const removeUser = () => {
   return {
     type: REMOVE_USER
   };
 };
+const setNotifications = (data) => {
+  return {
+    type: SET_NOTIFICATIONS,
+    payload: data
+  }
+}
 
 export const signUpUser = (data) => async (dispatch) => {
   const { username, firstName, lastName, email, password } = data;
@@ -49,7 +55,6 @@ export const signUpUser = (data) => async (dispatch) => {
     throw new Error("An unexpected error occurred. Please try again.");
   }
 };
-
 export const login = (credential, password) => async (dispatch) => {
   console.log('Hello from login')
   const response = await csrfFetch("/api/session", {
@@ -111,8 +116,22 @@ export const deleteAccount = () => async () => {
     console.log(error)
   }
 };
+export const fetchNotifications = () => async (dispatch) => {
+  try {
+    const response = csrfFetch('/api/session/notifications');
+    if (!response.ok){}
+    const data = await response.json();
+    dispatch(setNotifications(data));
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-const initialState = { user: null };
+const initialState = { 
+  user: null,
+  notifications: null
+};
 
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -122,10 +141,11 @@ const sessionReducer = (state = initialState, action) => {
       return { ...state, user: action.payload, token: action.token };
     case REMOVE_USER:
       return { ...state, user: null };
+    case SET_NOTIFICATIONS: 
+      return { ...state, notifications: action.payload}
     default:
       return state;
   }
 };
-
 
 export default sessionReducer;

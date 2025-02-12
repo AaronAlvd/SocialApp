@@ -341,7 +341,7 @@ router.get('/following', requireAuth, async (req, res, next) => {
     const posts = await Post.findAll({
       where: {
         userId: {[Op.in]: followedIds },
-        groupId: 'default',
+        groupId: 'public',
       },
       attributes: ['id', 'userId', 'caption', 'photo', 'createdAt'],
       include: [
