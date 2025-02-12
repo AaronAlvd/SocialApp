@@ -7,8 +7,10 @@
     "dev:backend": "npm install --prefix backend start",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
-    "start": "npm start --prefix backend",
-    "build": "npm run build --prefix backend build"
+    "start": "npm run start --prefix backend",
+    "build": "npm run build --prefix backend",
+    "build-frontend": "npm run build --prefix frontend",
+    "reset-db": "npm run sequelize --prefix backend db:seed:undo:all && npm run sequelize --prefix backend db:migrate:undo:all && npm run sequelize --prefix backend db:migrate && npm run sequelize --prefix backend db:seed:all"
   },
   "keywords": [],
   "author": "",

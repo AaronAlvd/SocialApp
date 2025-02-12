@@ -19,4 +19,4 @@ export default defineConfig(({ mode }) => ({
   },
 }));
 
-// npm install &&  npm run build &&  npm run sequelize --prefix backend db:seed:undo:all &&  npm run sequelize --prefix backend db:migrate:undo:all &&  npm run sequelize --prefix backend db:migrate &&  npm run sequelize --prefix backend db:seed:all
+// npm install &&  npm run build && npm run build-frontend && npm run sequelize --prefix backend db:seed:undo:all &&  npm run sequelize --prefix backend db:migrate:undo:all &&  npm run sequelize --prefix backend db:migrate &&  npm run sequelize --prefix backend db:seed:all
