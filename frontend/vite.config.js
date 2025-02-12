@@ -17,8 +17,8 @@ export default defineConfig(({ mode }) => ({
       '/api': 'http://localhost:8000'
     }
   },
-  base: mode === 'production' ? '/' : './', // ✅ Fix base path
-  build: {
-    outDir: 'dist', // ✅ Ensure output is in 'dist'
-  },
+  // base: mode === 'production' ? '/' : './', // ✅ Fix base path
+  // build: {
+  //   outDir: 'dist', // ✅ Ensure output is in 'dist'
+  // },
 }));
