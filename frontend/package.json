@@ -16,6 +16,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@testing-library/user-event": "^14.5.2",
+    "@vitejs/plugin-react": "^4.3.2",
     "chart.js": "^4.4.7",
     "js-cookie": "^3.0.5",
     "react": "^18.3.1",
@@ -27,7 +28,9 @@
     "react-router-dom": "^6.27.0",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
-    "thunk": "^0.0.1"
+    "thunk": "^0.0.1",
+    "vite": "^5.4.14",
+    "vite-plugin-eslint": "^1.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
@@ -40,7 +43,7 @@
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",
     "redux-logger": "^3.0.6",
-    "vite": "^5.4.8",
+    "vite": "^5.4.14",
     "vite-plugin-eslint": "^1.8.1"
   }
 }
