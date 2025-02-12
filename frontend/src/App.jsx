@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { Navigation, Page404, UserProfile, Following, Chats, GroupPost, GroupProfile, Explore, Chat, Trending} from './components';
 import { useState, useEffect } from 'react';
-import * as sessionActions from './store/session';
+import * as sessionActions from './store/session.js';
 import { useDispatch } from 'react-redux';
 import './index.css'
 
