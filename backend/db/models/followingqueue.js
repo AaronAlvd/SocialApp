@@ -21,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   FollowingQueue.init({
+    id: {
+      primaryKey: true,
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
     userId: {
       type: DataTypes.STRING,
       allowNull: false,

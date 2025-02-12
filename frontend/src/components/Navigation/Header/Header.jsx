@@ -2,6 +2,7 @@ import './Header.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import UserDropdown from '../Dropdown/UserDropdown.jsx';
 import defaultpfp from '../../../assets/Default_pfp.jpg';
@@ -11,6 +12,7 @@ import DispatchCalls from '../../../StateManagement/dispatch.jsx';
 
 export default function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const dispatchCalls = new DispatchCalls(dispatch);
   const user = useSelector(state => state.session.user);
   const [userDrop, setUserDrop] = useState(false);
@@ -50,7 +52,7 @@ export default function Header() {
 
     return users.map((data) => {
       return (
-        <div className='NavigationHeader-div_resultsBox'>
+        <div className='NavigationHeader-div_resultsBox' onClick={() => navigate(`/profile/user/${data.username}`)}>
           <img src={data.profilePhoto} className='NavigationHeader-profilePhoto'/>
           <div>
             <p className='NavigationHeader-name'>{data.firstName} {data.lastName}</p>

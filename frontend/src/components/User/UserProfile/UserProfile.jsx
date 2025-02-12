@@ -83,12 +83,17 @@ export default function UserProfile() {
   const displayButton = () => {
     if (userProfile.id === user.id) {
       return <button className="UserProfile-button" onClick={() => setModalContent(<UpdateProfile />)}>Edit Profile</button>
-    } else if (activeFollower) {
+    } else if (userProfile.followStatus === 'following') {
       return (
         <button className="UserProfile-button2" onClick={() => handleUnfollowRequest()}>
           Following
         </button>)
-    } else {
+    } else if (userProfile.followStatus === 'pending') {
+      return (
+        <button className="UserProfile-button2" onClick={() => handleUnfollowRequest()}>
+          Pending
+        </button>)
+    } else if (userProfile.followStatus === 'none'){
       return(
       <button className="UserProfile-button" onClick={() => handleFollowRequest()}>
         Follow

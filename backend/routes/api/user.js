@@ -217,32 +217,28 @@ router.get('/:id', requireAuth, async (req, res, next) => {
     }
 
     const isFollower = await Follow.findOne({ where: { followingId: user.id, followerId: userId }});
-
-    if (isFollower && user.status !== 'public' && user.id !== userId) {
-      const followers = await Follow.count({ where: { followingId: user.id }});
-      const following = await Follow.count({ where: { followerId: user.id }});
-      const posts = await Post.findAll({ where: { userId: user.id }});
-
-      let likes = 0;
-      
-      for (let i = 0; i < posts.length; i++) {
-        const post = posts[i];
-        const add = await PostLike.count({ where: { postId: post.id }});
-        likes+= add;
+    const followPending = await FollowingQueue.findOne({ 
+      where: { 
+        userId: user.id, 
+        requestFrom: userId,
       }
+    });
 
-      return res.json({
-              ...user.dataValues,
-              followers: followers,
-              following: following,
-              posts: posts.length,
-              likes: likes,
-             });
-    }
 
     const followers = await Follow.count({ where: { followingId: user.id }});
     const following = await Follow.count({ where: { followerId: user.id }});
+
+    let followStatus = 'none'
+
+    if (isFollower) {
+      followStatus = 'following'
+    } 
+    if (followPending) {
+      followStatus = 'pending'
+    }
+
     const posts = await Post.findAll({ where: { userId: user.id, groupId: 'public' }});
+
     let likes = 0;
       
     for (let i = 0; i < posts.length; i++) {
@@ -252,12 +248,13 @@ router.get('/:id', requireAuth, async (req, res, next) => {
     }
 
     return res.json({
-              ...user.dataValues,
-              followers: followers,
-              following: following,
-              posts: posts.length,
-              likes: likes,
-            });
+        ...user.dataValues,
+        followers: followers,
+        following: following,
+        posts: posts.length,
+        likes: likes,
+        followStatus: followStatus,
+      });
 
   } catch(error) {
     next(error)
@@ -266,16 +263,29 @@ router.get('/:id', requireAuth, async (req, res, next) => {
 
 router.post('/follow/:userId', requireAuth, async (req, res, next) => {
   try {
-    const id = uuid()
+    const id = uuid();
     const userId = req.user.id;
     const followingId = req.params.userId;
 
-    const user = await User.findByPk(userId);
+    const user = await User.findByPk(followingId);
 
     if (!user) {
       throw {status: 404, title: 'Resource Not Found', error: 'User could not be found.'}
     }
 
+    if (user.status === 'private') {
+      const followQueue = FollowingQueue.create({
+        id: id,
+        userId: followingId,
+        requestFrom: userId
+      });
+
+      res.json({
+        title: 'Pending',
+        message: `Request to follow ${user.username} pending.`
+      });
+    } 
+    
     if (user.status === 'public') {
       const followUser = Follow.create({
         id: id,
@@ -286,18 +296,6 @@ router.post('/follow/:userId', requireAuth, async (req, res, next) => {
       res.json({
         title: 'Successful',
         message: `You are now follwing ${user.username}`
-      });
-
-    } else {
-      const followQueue = FollowingQueue.create({
-        id: id,
-        userId: followingId,
-        requestFrom: userId
-      });
-
-      res.status().json({
-        title: 'Pending',
-        message: `Request to follow ${user.username} pending.`
       });
     }
 

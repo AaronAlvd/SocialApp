@@ -2085,7 +2085,7 @@ const users = [
     bio: "Always learning, always growing. Focused on growth and excellence. Collecting memories and experiences. Living authentically, no filters needed. Pushing boundaries, setting new goals every day.",
     profilePhoto:
       "https://drive.google.com/thumbnail?id=15yQpj7UFuNSTrCOfeS1EU9vl2KujXr_Q",
-    status: "public",
+    status: "private",
   },
 ];
 
