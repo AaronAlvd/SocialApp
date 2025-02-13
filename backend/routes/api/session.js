@@ -2,7 +2,7 @@ const express = require('express');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Post, PostLike } = require('../../db/models');
 const path = require('path');
 const { validateLogin } = require('../../utils/validation');
 
@@ -35,32 +35,39 @@ router.get('/notifications', requireAuth, async (req, res, next) => {
       where: {
         userId: id,
       },
-      attributes: ['id']
+      attributes: [],
+      include: [
+        {
+          model: PostLike,
+          as: 'Likes',
+          attributes: ['id'],
+          include: [
+            {
+              model: User,
+              attributes: ['id', 'firstName', 'lastName', 'username', 'profilePhoto']
+            }
+          ]
+        }
+      ]
     });
 
+    if (posts.length === 0) {
+       return res.json({
+        message: 'No new notifications'
+      })
+    }
+    
     let postLikes = [];
 
     for (let i = 0; i < posts.length; i++) {
-      let currPost = posts[i];
-      let postId = currPost.id;
-
-      let likes = await PostLike.findAll({
-        where: {
-          postId: postId
-        },
-        attributes: ['id', 'userId', 'postId'],
-        includes: [
-          {
-            model: User,
-            attributes: ['id', 'username', 'firstName', 'lastName', 'profilePhoto']
-          }
-        ]
-      });
-
-      postLikes.concat(likes);
+      const post = posts[i];
+      for (let j = 0; j < post.Likes.length; j++) { // Ensure Likes is an array
+        const user = post.Likes[j].User; // Fix property name
+        postLikes.push(user);
+      }
     }
 
-    res.json({ postLikes });
+    res.json({postLikes})
 
   } catch(error) {
     next(error);

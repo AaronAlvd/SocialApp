@@ -118,7 +118,7 @@ export const deleteAccount = () => async () => {
 };
 export const fetchNotifications = () => async (dispatch) => {
   try {
-    const response = csrfFetch('/api/session/notifications');
+    const response = await csrfFetch('/api/session/notifications');
     if (!response.ok){}
     const data = await response.json();
     dispatch(setNotifications(data));

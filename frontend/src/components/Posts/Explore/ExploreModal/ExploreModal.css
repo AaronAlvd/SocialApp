@@ -8,17 +8,36 @@
 .ExploreModal-div {
   position: sticky;
   top: 8vh;
-  display: grid;
-  grid-template-rows: 50% 50%;
   align-self: self-start;
   width: 350px;
   height: 600px;
   border-radius: 10px;
   background-color: rgb(222, 222, 222);
+  overflow: scroll;
+  padding: 10px;
 }
-.ExploreModal-div_top {
-  
+.ExploreModal-div_notification {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
 }
-.ExploreModal-div_bottom {
-
+.ExploreModal-profilePhoto {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.ExploreModal-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.ExploreModal-notif_label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.75);
+}
+.ExploreModal-time {
+  transform: translate(3px, -8px);
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
 }

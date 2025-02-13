@@ -89,7 +89,7 @@ export default class DispatchCalls extends Social {
     return this.dispatch(sessionActions.deleteAccount())
   }
   FetchNotifications() {
-    return this.dispatch(sesstionActions.fetchNotifications())
+    return this.dispatch(sessionActions.fetchNotifications())
   }
 
   handleLike(data) {
