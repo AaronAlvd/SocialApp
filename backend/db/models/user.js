@@ -54,10 +54,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       });
       User.hasMany(models.FollowingQueue, {
+        as: 'primary',
         foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
       User.hasMany(models.FollowingQueue, {
+        as: 'secondary',
         foreignKey: 'requestFrom',
         onDelete: 'CASCADE',
       });

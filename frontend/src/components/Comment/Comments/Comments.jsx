@@ -45,6 +45,9 @@ export default function Comments({ userId }) {
   }, [data])
  
   const handleDelete = async (id) => {
+    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
+      alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
+    }
     const response = confirm('Confirm Delete');
     if (response) {
       const response02 = await dispatchCalls.removeComment(id, postId);
@@ -57,6 +60,9 @@ export default function Comments({ userId }) {
   }
 
   const handleSubmit = async (e) => {
+    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
+      alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
+    }
     e.preventDefault();
     setText('');
     setActiveText();

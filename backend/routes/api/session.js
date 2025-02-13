@@ -2,7 +2,7 @@ const express = require('express');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Post, PostLike } = require('../../db/models');
+const { User, Post, PostLike, Follow, FollowingQueue } = require('../../db/models');
 const path = require('path');
 const { validateLogin } = require('../../utils/validation');
 
@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
             username: user.username,
             profilePhoto: user.profilePhoto,
             bio: user.bio,
+            status: user.status,
         };
         return res.json({ user: safeUser });
     } else {
@@ -40,34 +41,88 @@ router.get('/notifications', requireAuth, async (req, res, next) => {
         {
           model: PostLike,
           as: 'Likes',
-          attributes: ['id'],
+          attributes: ['id', 'createdAt'],
           include: [
             {
               model: User,
               attributes: ['id', 'firstName', 'lastName', 'username', 'profilePhoto']
+            },
+            {
+              model: Post,
+              as: 'Likes',
+              attributes: ['id']
             }
           ]
         }
       ]
     });
 
-    if (posts.length === 0) {
+    let followNotifications;
+
+    if (req.user.status === 'public') {
+      followNotifications = await Follow.findAll({
+        where: {
+          followingId: id,
+        },
+        attributes: ['id','createdAt'],
+        include: [
+          {
+            model: User,
+            as: 'Follower',
+            attributes: ['id', 'username', 'firstName', 'lastName', 'profilePhoto'],
+          },
+        ]
+      });
+    } else {
+      followNotifications = await FollowingQueue.findAll({ 
+        where: {
+          userId: id,
+        },
+        attributes: ['id', 'createdAt'],
+        include: [
+          {
+            model: User,
+            as: 'secondary',
+            attributes: ['id', 'username', 'firstName', 'lastName', 'profilePhoto']
+          }
+        ]
+      })
+    }
+
+    if (posts.length === 0 && followNotifications.length === 0) {
        return res.json({
         message: 'No new notifications'
       })
-    }
-    
-    let postLikes = [];
+    } 
 
-    for (let i = 0; i < posts.length; i++) {
-      const post = posts[i];
-      for (let j = 0; j < post.Likes.length; j++) { // Ensure Likes is an array
-        const user = post.Likes[j].User; // Fix property name
-        postLikes.push(user);
-      }
+    let notifs1 = [];
+    let notifs2 = [];
+
+    posts.forEach(post => {
+      const likes = post.Likes
+      likes.forEach(like => {
+        notifs1.push({
+          id: like.id,
+          createdAt: like.createdAt,
+          User: like.User,
+          Post: like.Likes,
+        })
+      })
+    })
+
+    if (followNotifications.length > 1) {
+      followNotifications.forEach(data => {
+        notifs2.push({
+          id: data.id,
+          createdAt: data.createdAt,
+          User: data.User,
+        })
+      })
     }
 
-    res.json({postLikes})
+    const orderedNotifs = [...notifs1, ...notifs2].sort((a, b) => b.createdAt - a.createdAt);
+
+    res.json(orderedNotifs);
 
   } catch(error) {
     next(error);

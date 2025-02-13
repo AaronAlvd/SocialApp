@@ -21,27 +21,19 @@ export default class Social {
 
     return array;
   }
-
   findMentions(data) {
 
   }
-
-  convertImageToBase64(data) {
-    const byteArray = new Uint8Array(data.data);
-    const binaryString = Array.from(byteArray)
-      .map(byte => String.fromCharCode(byte))
-      .join('');
-    return `data:image/jpeg;base64,${btoa(binaryString)}`
-  }
-
-  profilePhoto(data) {
-    if (data) {
-      const byteArray = new Uint8Array(data.data);
-      const binaryString = Array.from(byteArray)
-        .map(byte => String.fromCharCode(byte))
-        .join('');
-      return `data:image/jpeg;base64,${btoa(binaryString)}` // Ensure you use the correct MIME type
-    } 
+  NotificationsDateFormat(timestamp) {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - new Date(timestamp)) / 1000);
+    
+    if (diffInSeconds < 60) return 'now';
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m`;
+    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h`;
+    if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)}d`;
+    if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 604800)}w`;
+    return `${Math.floor(diffInSeconds / 31536000)}y`;
   }
 
 }

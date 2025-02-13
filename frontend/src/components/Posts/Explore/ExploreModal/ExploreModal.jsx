@@ -24,19 +24,18 @@ export default function ExploreModal() {
   }, []);
 
   const displayNotifications = () => {
-    const notifs = notifications.postLikes
     return (
       <div>
         <h4>Notifications</h4>
-        {notifs.map((data, index) => (
+        {notifications.map((data, index) => (
           <div key={index} className="ExploreModal-div_notification">
-            <img src={data.profilePhoto} className="ExploreModal-profilePhoto"/>
+            <img src={data.User.profilePhoto} className="ExploreModal-profilePhoto"/>
             <div>
-              <p className="ExploreModal-name">{data.firstName} {data.lastName}</p>
+              <p className="ExploreModal-name">{data.User.firstName} {data.User.lastName}</p>
               <p className="ExploreModal-notif_label">Liked your post</p>
             </div>
             <p className="ExploreModal-time">
-              {index < 9 ? '1h' : '2h'}
+              {dispatchCall.NotificationsDateFormat(data.createdAt)}
             </p>
           </div>
         ))}
@@ -44,7 +43,7 @@ export default function ExploreModal() {
     );
   };
 
-  if (!notifications) return null;
+  if (notifications === null) return null;
 
   return ( 
     <div className="ExploreModal">

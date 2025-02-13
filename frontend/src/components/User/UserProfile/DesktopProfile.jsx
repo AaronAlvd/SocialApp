@@ -12,8 +12,8 @@ export default function DesktopProfile() {
   const userProfile = useSelector(state => state.users.profile);
 
   const handleProfile = () => {
-    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a') {
-      return alert('This feature has been disabled for the demo account')
+    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
+      alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
     } else {
       return setModalContent(<EditProfile />)
     }
