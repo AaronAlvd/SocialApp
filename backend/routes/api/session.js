@@ -2,7 +2,7 @@ const express = require('express');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Post, PostLike, Follow, FollowingQueue } = require('../../db/models');
+const { User, Post, PostLike, Follow, FollowingQueue, Comment } = require('../../db/models');
 const path = require('path');
 const { validateLogin } = require('../../utils/validation');
 
@@ -53,6 +53,16 @@ router.get('/notifications', requireAuth, async (req, res, next) => {
               attributes: ['id']
             }
           ]
+        },
+        {
+          model: Comment,
+          attributes: ['id', 'userId', 'postId', 'comment', 'createdAt'],
+          include: [
+            {
+              model: User,
+              attributes: ['id', 'firstName', 'lastName', 'username', 'profilePhoto']
+            },
+          ]
         }
       ]
     });
@@ -100,12 +110,25 @@ router.get('/notifications', requireAuth, async (req, res, next) => {
 
     posts.forEach(post => {
       const likes = post.Likes
+      const comments = post.Comments
       likes.forEach(like => {
         notifs1.push({
           id: like.id,
           createdAt: like.createdAt,
           User: like.User,
           Post: like.Likes,
+          type: 'like'
+        })
+      })
+      comments.forEach(comment => {
+        notifs1.push({
+          id: comment.id,
+          createdAt: comment.createdAt,
+          userId: comment.userId,
+          postId: comment.postId,
+          comment: comment.comment,
+          User: comment.User,
+          type: 'comment'
         })
       })
     })

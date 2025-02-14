@@ -39,7 +39,18 @@ export default function Post() {
 
   }, []);
 
-  if (!posts) return null;
+  if (!posts) {
+    return (
+      <div style={{height: `${height - 60}px`, overflow: 'scroll'}}>
+        <div style={{display: 'grid', gridTemplateColumns: '567px 1fr'}}>
+          <div>
+            <h1>Loadding...</h1>
+          </div>
+          {width > 1039 && <ExploreModal />}
+        </div>
+      </div>
+    )
+  };
 
   if (width < 1040) {
     return (
@@ -53,7 +64,7 @@ export default function Post() {
     <div style={{height: `${height - 60}px`, overflow: 'scroll'}}>
       <div style={{display: 'grid', gridTemplateColumns: '567px 1fr'}}>
         <Body optional={'explore'}/>
-        {width > 1439 && <ExploreModal />}
+        {width > 1039 && <ExploreModal />}
       </div>
     </div>
   )

@@ -47,7 +47,7 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       allIds = ['1']
     } else {
-      allIds = allLikes.map(data => data.id);
+      allIds = allLikes.map(like => data.userId);
     }
     
     const deleteInChunks = async (ids) => {

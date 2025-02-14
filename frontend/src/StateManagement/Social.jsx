@@ -35,5 +35,67 @@ export default class Social {
     if (diffInSeconds < 31536000) return `${Math.floor(diffInSeconds / 604800)}w`;
     return `${Math.floor(diffInSeconds / 31536000)}y`;
   }
-
+  NotificationsFormat(array) {
+    return array.map((data, index) => {
+      if (data.type === 'comment') {
+        return (
+          <div key={index} className="ExploreModal-div_notification">
+            <img src={data.User.profilePhoto} className="ExploreModal-profilePhoto"/>
+            <div>
+              <p className="ExploreModal-name">{data.User.firstName} {data.User.lastName}</p>
+              <p className="ExploreModal-notif_label">Commented on your post</p>
+            </div>
+            <p className="ExploreModal-time">
+              {this.NotificationsDateFormat(data.createdAt)}
+            </p>
+          </div>
+        )
+      } 
+      else if (data.type === 'like') {
+        return (
+          <div key={index} className="ExploreModal-div_notification">
+            <img src={data.User.profilePhoto} className="ExploreModal-profilePhoto"/>
+            <div>
+              <p className="ExploreModal-name">{data.User.firstName} {data.User.lastName}</p>
+              <p className="ExploreModal-notif_label">Liked your post</p>
+            </div>
+            <p className="ExploreModal-time">
+              {this.NotificationsDateFormat(data.createdAt)}
+            </p>
+          </div>
+        )
+      }
+    })
+  }
+  NotificationsFilter(array, filter) {
+    return array.map((data, index) => {
+      if (data.type === filter && filter === 'comment') {
+        return (
+          <div key={index} className="ExploreModal-div_notification">
+            <img src={data.User.profilePhoto} className="ExploreModal-profilePhoto"/>
+            <div>
+              <p className="ExploreModal-name">{data.User.firstName} {data.User.lastName}</p>
+              <p className="ExploreModal-notif_label">Commented on your post</p>
+            </div>
+            <p className="ExploreModal-time">
+              {this.NotificationsDateFormat(data.createdAt)}
+            </p>
+          </div>
+        )
+      } else if (data.type === filter && filter === 'like') {
+        return (
+          <div key={index} className="ExploreModal-div_notification">
+            <img src={data.User.profilePhoto} className="ExploreModal-profilePhoto"/>
+            <div>
+              <p className="ExploreModal-name">{data.User.firstName} {data.User.lastName}</p>
+              <p className="ExploreModal-notif_label">Liked your post</p>
+            </div>
+            <p className="ExploreModal-time">
+              {this.NotificationsDateFormat(data.createdAt)}
+            </p>
+          </div>
+        )
+      }
+    })
+  }
 }

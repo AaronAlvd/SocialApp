@@ -217,12 +217,12 @@ router.get('/:id', requireAuth, async (req, res, next) => {
     }
 
     const isFollower = await Follow.findOne({ where: { followingId: user.id, followerId: userId }});
-    const followPending = await FollowingQueue.findOne({ 
-      where: { 
-        userId: user.id, 
-        requestFrom: userId,
-      }
-    });
+    // const followPending = await FollowingQueue.findOne({ 
+    //   where: { 
+    //     userId: user.id, 
+    //     requestFrom: userId,
+    //   }
+    // });
 
 
     const followers = await Follow.count({ where: { followingId: user.id }});

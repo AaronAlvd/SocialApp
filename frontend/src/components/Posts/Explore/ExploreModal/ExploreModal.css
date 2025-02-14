@@ -1,43 +1,113 @@
-.ExploreModal {
-  position: relative;
-  width: 100%;
-  padding: 5px 10px;
-  display: flex;
-  justify-content: center;
+@media (max-width: 1439px) {
+  .ExploreModal {
+    position: relative;
+    width: 100%;
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+  }
+  .ExploreModal-div {
+    position: sticky;
+    top: 4vh;
+    align-self: self-start;
+    width: 240px;
+    height: 80vh;
+    border-radius: 10px;
+    background-color: rgb(222, 222, 222);
+    overflow: scroll;
+    padding: 10px;
+  }
+  .ExploreModal-div_notification {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+  }
+  .ExploreModal-profilePhoto {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .ExploreModal-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .ExploreModal-notif_label {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.75);
+  }
+  .ExploreModal-time {
+    transform: translate(3px, -8px);
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+  }
 }
-.ExploreModal-div {
-  position: sticky;
-  top: 8vh;
-  align-self: self-start;
-  width: 350px;
-  height: 600px;
-  border-radius: 10px;
-  background-color: rgb(222, 222, 222);
-  overflow: scroll;
-  padding: 10px;
+
+@media (min-width: 1440px) {
+  .ExploreModal {
+    position: relative;
+    width: 100%;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+  }
+  .ExploreModal-div {
+    position: sticky;
+    top: 4vh;
+    align-self: self-start;
+    width: 270px;
+    height: 75vh;
+    border-radius: 10px;
+    background-color: rgb(222, 222, 222);
+    overflow: scroll;
+    padding: 10px;
+  }
+  .ExploreModal-div_notification {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+  }
+  .ExploreModal-profilePhoto {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .ExploreModal-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .ExploreModal-notif_label {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.75);
+  }
+  .ExploreModal-time {
+    transform: translate(3px, -8px);
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+  }
 }
-.ExploreModal-div_notification {
-  margin: 10px 0;
+
+.ExploreModal-dropdown {
+  position: absolute;
+  background-color: white;
+  border-radius: 3px;
+  z-index: 1;
+  transform: translate(130px, 25px);
+}
+.ExploreModal-dropdown_label {
   display: flex;
   align-items: center;
-}
-.ExploreModal-profilePhoto {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 5px;
-}
-.ExploreModal-name {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 2px;
-}
-.ExploreModal-notif_label {
+  height: 30px;
+  width: 100px;
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.75);
+  padding-left: 10px;
+  border-radius: 3px;
+  margin: 3px;
+  cursor: pointer;
 }
-.ExploreModal-time {
-  transform: translate(3px, -8px);
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.5);
+.ExploreModal-dropdown_label:hover {
+  background-color: rgb(239, 239, 239);
 }

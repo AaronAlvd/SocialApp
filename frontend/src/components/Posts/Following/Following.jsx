@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import FollowingModal from './FollowingModal/FollowingModal.jsx';
+import ExploreModal from '../Explore/ExploreModal/ExploreModal.jsx';
 import Body from '../Post/body.jsx';
 
 import "./Following.css" 
@@ -39,7 +39,7 @@ export default function Following() {
     <div style={{height: `${height - 60}px`, overflow: 'scroll'}}>
       <div style={{display: 'grid', gridTemplateColumns: '567px 1fr'}}>
         <Body optional={'following'}/>
-        {width > 1439 && <FollowingModal />}
+        {width > 1039 && <ExploreModal />}
       </div>
     </div>
   )
