@@ -233,9 +233,9 @@ router.get('/:id', requireAuth, async (req, res, next) => {
     if (isFollower) {
       followStatus = 'following'
     } 
-    if (followPending) {
-      followStatus = 'pending'
-    }
+    // if (followPending) {
+    //   followStatus = 'pending'
+    // }
 
     const posts = await Post.findAll({ where: { userId: user.id, groupId: 'public' }});
 

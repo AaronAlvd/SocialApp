@@ -30,7 +30,7 @@ const allLikes = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    const chunkSize = 500; // Adjust this number based on your DB limits
+    const chunkSize = 2000; // Adjust this number based on your DB limits
 
     for (let i = 0; i < allLikes.length; i += chunkSize) {
       const batch = allLikes.slice(i, i + chunkSize);
