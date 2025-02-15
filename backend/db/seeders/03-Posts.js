@@ -32,11 +32,11 @@ const allPosts = [
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-    if (process.NODE_ENV === 'production') {
-      await Post.bulkCreate([...posts])
-    } else {
+    // if (process.NODE_ENV === 'production') {
+    //   await Post.bulkCreate([...posts])
+    // } else {
       await Post.bulkCreate(allPosts)
-    }
+    // }
   },
 
   async down (queryInterface, Sequelize) {
@@ -44,11 +44,11 @@ module.exports = {
 
     let allIds;
 
-    if (process.NODE_ENV === 'production') {
-      allIds = posts_id.map((data) => data.postId);
-    } else {
+    // if (process.NODE_ENV === 'production') {
+    //   allIds = posts_id.map((data) => data.postId);
+    // } else {
       allIds = allPosts.map((data) => data.id);
-    }
+    // }
     
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {

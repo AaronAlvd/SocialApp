@@ -40,19 +40,19 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-    if (process.env.NODE_ENV === 'production') {
-      await User.bulkCreate([
-        ...users,
-        {
-          id: 'admin',
-          firstName: 'admin',
-          lastName: 'admin',
-          username: 'admin',
-          email: 'admin@admin.com',
-          password: 'admin_password',
-        }
-      ])
-    } else {
+    // if (process.env.NODE_ENV === 'production') {
+    //   await User.bulkCreate([
+    //     ...users,
+    //     {
+    //       id: 'admin',
+    //       firstName: 'admin',
+    //       lastName: 'admin',
+    //       username: 'admin',
+    //       email: 'admin@admin.com',
+    //       password: 'admin_password',
+    //     }
+    //   ])
+    // } else {
       await User.bulkCreate([
         ...allUsers,
         {
@@ -64,7 +64,7 @@ module.exports = {
           password: 'admin_password',
         }
       ])
-    }
+    // }
   
   },
   async down (queryInterface, Sequelize) {
@@ -72,17 +72,17 @@ module.exports = {
 
     let allIds;
 
-    if (process.env.NODE_ENV === 'production') {
-      allIds = [
-        ...users_id.map((user) => user.userId),
-        'admin'
-      ];
-    } else {
+    // if (process.env.NODE_ENV === 'production') {
+    //   allIds = [
+    //     ...users_id.map((user) => user.userId),
+    //     'admin'
+    //   ];
+    // } else {
       allIds = [
         ...allUsers.map((user) => user.id),
         'admin'
       ];
-    }
+    // }
     
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {

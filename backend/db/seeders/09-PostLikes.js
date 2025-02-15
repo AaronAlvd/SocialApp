@@ -30,13 +30,12 @@ const allLikes = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await PostLike.bulkCreate([])
 
-    if (process.env.NODE_ENV === 'production') {
-      await PostLike.bulkCreate([])
-    } else {
+    // if (process.env.NODE_ENV === 'production') {
+    //   await PostLike.bulkCreate([])
+    // } else {
       await PostLike.bulkCreate(allLikes)
-    }
+    // }
   },
 
   async down (queryInterface, Sequelize) {
@@ -44,11 +43,11 @@ module.exports = {
 
     let allIds;
 
-    if (process.env.NODE_ENV === 'production') {
-      allIds = ['1']
-    } else {
+    // if (process.env.NODE_ENV === 'production') {
+    //   allIds = ['1']
+    // } else {
       allIds = allLikes.map(like => data.userId);
-    }
+    // }
     
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {
