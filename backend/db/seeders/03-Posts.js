@@ -31,24 +31,18 @@ const allPosts = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
+    const chunkSize = 500; // Adjust this number based on your DB limits
 
-    // if (process.NODE_ENV === 'production') {
-    //   await Post.bulkCreate([...posts])
-    // } else {
-      await Post.bulkCreate(allPosts)
-    // }
+    for (let i = 0; i < allPosts.length; i += chunkSize) {
+      const batch = allPosts.slice(i, i + chunkSize);
+      await Post.bulkCreate(batch);
+    }
   },
 
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;
 
-    let allIds;
-
-    // if (process.NODE_ENV === 'production') {
-    //   allIds = posts_id.map((data) => data.postId);
-    // } else {
-      allIds = allPosts.map((data) => data.id);
-    // }
+    let allIds = allPosts.map((data) => data.id);
     
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {

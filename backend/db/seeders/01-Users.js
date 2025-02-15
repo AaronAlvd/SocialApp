@@ -29,6 +29,14 @@ const allUsers = [
   ...users8,
   ...users9,
   ...users10,
+  {
+    id: 'admin',
+    firstName: 'admin',
+    lastName: 'admin',
+    username: 'admin',
+    email: 'admin@admin.com',
+    password: 'admin_password',
+  }
 ]
 
 let options = {};
@@ -39,50 +47,20 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli'.Migration)} */
 module.exports = {
   async up (queryInterface, Sequelize) {
+    const chunkSize = 500; // Adjust this number based on your DB limits
 
-    // if (process.env.NODE_ENV === 'production') {
-    //   await User.bulkCreate([
-    //     ...users,
-    //     {
-    //       id: 'admin',
-    //       firstName: 'admin',
-    //       lastName: 'admin',
-    //       username: 'admin',
-    //       email: 'admin@admin.com',
-    //       password: 'admin_password',
-    //     }
-    //   ])
-    // } else {
-      await User.bulkCreate([
-        ...allUsers,
-        {
-          id: 'admin',
-          firstName: 'admin',
-          lastName: 'admin',
-          username: 'admin',
-          email: 'admin@admin.com',
-          password: 'admin_password',
-        }
-      ])
-    // }
-  
+    for (let i = 0; i < allUsers.length; i += chunkSize) {
+      const batch = allUsers.slice(i, i + chunkSize);
+      await User.bulkCreate(batch);
+    }
   },
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;
 
-    let allIds;
-
-    // if (process.env.NODE_ENV === 'production') {
-    //   allIds = [
-    //     ...users_id.map((user) => user.userId),
-    //     'admin'
-    //   ];
-    // } else {
-      allIds = [
-        ...allUsers.map((user) => user.id),
-        'admin'
-      ];
-    // }
+    let allIds = [
+      ...allUsers.map((user) => user.id),
+      'admin'
+    ];
     
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {

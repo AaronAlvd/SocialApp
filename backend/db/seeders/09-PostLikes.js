@@ -30,24 +30,18 @@ const allLikes = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
+    const chunkSize = 500; // Adjust this number based on your DB limits
 
-    // if (process.env.NODE_ENV === 'production') {
-    //   await PostLike.bulkCreate([])
-    // } else {
-      await PostLike.bulkCreate(allLikes)
-    // }
+    for (let i = 0; i < allLikes.length; i += chunkSize) {
+      const batch = allLikes.slice(i, i + chunkSize);
+      await PostLike.bulkCreate(batch);
+    }
   },
 
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;
 
-    let allIds;
-
-    // if (process.env.NODE_ENV === 'production') {
-    //   allIds = ['1']
-    // } else {
-      allIds = allLikes.map(like => data.userId);
-    // }
+    let allIds = allLikes.map(like => data.userId);
     
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {

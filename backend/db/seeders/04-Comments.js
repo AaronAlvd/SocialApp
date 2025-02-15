@@ -19,23 +19,18 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-  //  if (process.env.NODE_ENV === 'production') {
-  //   await Comment.bulkCreate([])
-  //  } else {
-    await Comment.bulkCreate(allComments)
-  //  }
+    const chunkSize = 500; // Adjust this number based on your DB limits
+
+    for (let i = 0; i < allComments.length; i += chunkSize) {
+      const batch = allComments.slice(i, i + chunkSize);
+      await Comment.bulkCreate(batch);
+    }
   },
 
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;
 
-    let allIds;
-
-    // if (process.env.NODE_ENV === 'production') {
-    //   allIds = ['1']
-    // } else {
-      allIds = allComments.map(comment => comment.userId)
-    // }
+    let allIds = allComments.map(comment => comment.userId)
     
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {
