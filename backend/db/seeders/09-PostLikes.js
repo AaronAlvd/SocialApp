@@ -41,7 +41,7 @@ module.exports = {
   async down (queryInterface, Sequelize) {
     const chunkSize = 1000;
 
-    let allIds = allLikes.map(like => data.userId);
+    let allIds = allLikes.map(like => like.userId);
     
     const deleteInChunks = async (ids) => {
       for (let i = 0; i < ids.length; i += chunkSize) {
