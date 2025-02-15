@@ -95,6 +95,19 @@ export default class Social {
             </p>
           </div>
         )
+      } else if (data.type === filter && filter === 'follow') {
+        return (
+          <div key={index} className="ExploreModal-div_notification">
+            <img src={data.User.profilePhoto} className="ExploreModal-profilePhoto"/>
+            <div>
+              <p className="ExploreModal-name">{data.User.firstName} {data.User.lastName}</p>
+              <p className="ExploreModal-notif_label">Started following you</p>
+            </div>
+            <p className="ExploreModal-time">
+              {this.NotificationsDateFormat(data.createdAt)}
+            </p>
+          </div>
+        )
       }
     })
   }

@@ -138,7 +138,8 @@ router.get('/notifications', requireAuth, async (req, res, next) => {
         notifs2.push({
           id: data.id,
           createdAt: data.createdAt,
-          User: data.User,
+          User: data.Follower,
+          type: 'follow'
         })
       })
     }
