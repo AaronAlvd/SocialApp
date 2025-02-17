@@ -15,4 +15,5 @@ export { default as Page404 } from './Page404/Page404.jsx';
 export { default as Chat } from './Messages/Chat/Chat.jsx';
 export { default as Events } from './Events/Events.jsx';
 export { default as Chats } from './Messages/Chats.jsx';
+export { default as Inbox } from './Inbox/Inbox.jsx';
 export { default as Home } from './Home/Home.jsx';

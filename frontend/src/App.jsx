@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation, Page404, UserProfile, Following, Chats, Explore, Chat, Trending, Profile, Events, Home } from './components';
+import { Navigation, Page404, UserProfile, Following, Chats, Explore, Chat, Trending, Profile, Events, Home, Inbox } from './components';
 import { useState, useEffect } from 'react';
 import * as sessionActions from './store/session.js';
 import { useDispatch } from 'react-redux';
@@ -70,6 +70,10 @@ const router = createBrowserRouter([
             element: <Explore />,
           }
         ]
+      },
+      {
+        path: 'inbox',
+        element: <Inbox />
       },
       {
         path: 'following',

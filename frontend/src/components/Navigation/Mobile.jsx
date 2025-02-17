@@ -43,7 +43,7 @@ export default function Mobile() {
         <p className="Navigation-label">Home</p>
       </div>
 
-      <div className="Navigation-box">
+      <div className="Navigation-box" onClick={() => user ? navigate('/events') : alert('You are not logged in')}>
         <MdEvent className="Navigation-icon-1"/>
         <p className="Navigation-label">Events</p>
       </div>
@@ -52,7 +52,7 @@ export default function Mobile() {
         <FaRegPlusSquare style={{fontSize: '25px'}} onClick={() => setModalContent(<CreatePost user={user}/>)}/>
       </div>
 
-      <div className="Navigation-box" onClick={() => navigate('/messages')}>
+      <div className="Navigation-box" onClick={() => user ? navigate('/inbox') : alert('You are not logged in')}>
         <FaInbox className="Navigation-icon"/>
         <p className="Navigation-label">Inbox</p>
       </div>

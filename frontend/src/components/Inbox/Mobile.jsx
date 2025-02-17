@@ -1,12 +1,10 @@
 import { useEffect, useState, useRef, useMemo } from "react"; 
 import { useLocation, useNavigate } from "react-router-dom"; 
-import { useDispatch, useSelector } from "react-redux"; 
+import { useDispatch, useSelector } from "react-redux";
 
-import Construction from '../Construction';
+import Construction from "../Construction";
 
-import "./Events.css" 
-
-export default function Events() {
+export default function Mobile() {
   const location = useLocation(); 
   const navigate = useNavigate(); 
   const [width, setWidth] = useState(window.innerWidth); 
