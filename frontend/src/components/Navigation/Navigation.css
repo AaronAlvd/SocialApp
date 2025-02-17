@@ -1,9 +1,11 @@
 @media (max-width: 1039px) {
   .Navigation-div{
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 22% 22% 12% 22% 22%;
     width: 100vw;
+    height: 60px;
     border-top: 1px solid black;
+    box-sizing: border-box;
   }
   .Navigation-profile_box{
     display: flex;
@@ -26,34 +28,34 @@
     font-weight: 100;
     margin-left: 5px;
   }
-  .Navigation-feed{
-    font-weight: 300;
-    cursor: pointer;
-    margin: 5px 0;
-    padding: 10px;
+  .Navigation-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-  .Navigation-feed-active{
-    padding: 10px;
-    margin: 5px 0;
-    font-weight: 300;
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
+  .Navigation-label{
+    margin-top: 2px;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.7);
   }
   .Navigation-icon{
     margin-right: 10px;
     margin-left: 10px;
+    font-size: 27px;
+    height: 30px;
   }
-  .Navigation-icon-active{
-    background-color: rgba(0, 0, 0, 0);
+  .Navigation-icon-1{
     margin-right: 10px;
     margin-left: 10px;
+    font-size: 30px;
+    height: 30px;
   }
   .Navigation-upload_post{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
+    width: 100%;
   }
 }
 
@@ -75,7 +77,9 @@
   .Navigation-div-row{
     border-bottom: 1px solid black;
   }
-  .Navigation-feed{
+  .Navigation-feed {
+    display: flex;
+    align-items: center;
     font-weight: 300;
     cursor: pointer;
     margin: 5px 0;
@@ -90,10 +94,12 @@
     border-radius: 5px;
   }
   .Navigation-icon{
+    font-size: 18px;
     margin-right: 10px;
     margin-left: 10px;
   }
   .Navigation-icon-active{
+    font-size: 18px;
     background-color: rgba(0, 0, 0, 0);
     margin-right: 10px;
     margin-left: 10px;

@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { Navigation, Page404, UserProfile, Following, Chats, GroupPost, GroupProfile, Explore, Chat, Trending} from './components';
+import { Navigation, Page404, UserProfile, Following, Chats, Explore, Chat, Trending, Profile, Events, Home } from './components';
 import { useState, useEffect } from 'react';
 import * as sessionActions from './store/session.js';
 import { useDispatch } from 'react-redux';
@@ -28,11 +28,13 @@ function Layout() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [width]);
 
   if (width < 1040) return (
     <>
-     <Outlet/>
+     <div style={{minHeight: `${height - 60}px`, boxSizing: 'border-box'}}>
+      <Outlet/>
+    </div>
      <Navigation />
     </>
   )
@@ -52,6 +54,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: [
+      {
+        path: '/',
+        element: <Home />
+      },
       {
         path: 'explore',
         children: [
@@ -76,6 +82,10 @@ const router = createBrowserRouter([
         ]
       },
       {
+        path: 'events',
+        element: <Events />
+      },
+      {
         path: 'user',
         children: [
           {
@@ -97,7 +107,11 @@ const router = createBrowserRouter([
         path: 'profile',
         children: [
           {
-            path: 'user/:userId',
+            path: '',
+            element: <Profile />
+          },
+          {
+            path: ':userId',
             element: <UserProfile />,
             children: [
               {
@@ -106,10 +120,6 @@ const router = createBrowserRouter([
               }
             ]
           },
-          {
-            path: 'group/:groupId',
-            element: <GroupProfile />
-          }
         ]
       },
       {

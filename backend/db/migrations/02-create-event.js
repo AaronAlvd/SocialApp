@@ -1,41 +1,44 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
-
-let options = {};
-if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  
-}
-
 module.exports = {
   async up(queryInterface, Sequelize) {
-    options.tableName = 'GroupUsers';
-    await queryInterface.createTable('GroupUsers', {
+    await queryInterface.createTable('Events', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.STRING,
       },
-      userId: {
-        allowNull: false,
+      name: {
         type: Sequelize.STRING,
-        references: {
-          model: 'Users',
-          key: 'id'
-        },
-        onDelete: 'CASCADE'
+        allowNull: false,
       },
-      groupId: {
-        allowNull: false,
+      host_id: {
         type: Sequelize.STRING,
-        references: {
-          model: 'Groups',
-          key: 'id'
-        },
-        onDelete: 'CASCADE'
+        allowNull: false,
       },
-      role: {
-        allowNull: false,
+      address: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      state: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      zip_code: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      date: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      time: {
+        type: Sequelize.TIME,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -45,10 +48,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }, options);
+    });
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = 'GroupUsers';
-    await queryInterface.dropTable(options);
+    await queryInterface.dropTable('Events');
   }
 };

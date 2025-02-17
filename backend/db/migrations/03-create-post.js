@@ -25,20 +25,15 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
-      groupId: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        references: {
-          model: 'Groups',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
-      },
       caption: {
         type: Sequelize.TEXT,
       },
       photo: {
         type: Sequelize.STRING,
+      },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

@@ -23,10 +23,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'postId',
         onDelete: 'CASCADE'
       })
-      Post.belongsTo(models.Group, {
-        foreignKey: 'groupId',
-        onDelete: 'CASCADE'
-      })
     }
   }
   Post.init({
@@ -35,16 +31,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true,
       unique: true,
-    },
-    groupId: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: 'default',
-      references: {
-        model: 'Groups',
-        key: 'id',
-      },
-      onDelete: 'CASCADE',
     },
     userId: {
       type: DataTypes.STRING,
@@ -61,6 +47,11 @@ module.exports = (sequelize, DataTypes) => {
     photo: {
       type: DataTypes.STRING, 
     },
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'public'
+    }
   }, {
     sequelize,
     modelName: 'Post',

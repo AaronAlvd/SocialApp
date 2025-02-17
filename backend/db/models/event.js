@@ -3,50 +3,58 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Group extends Model {
+  class Event extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Group.hasMany(models.GroupUser, {
-        foreignKey: 'groupId',
-        onDelete: 'CASCADE'
-      })
-      Group.hasMany(models.Post, {
-        foreignKey: 'groupId',
-        onDelete: 'CASCADE'
-      })
+      // define association here
     }
   }
-  Group.init({
+  Event.init({
     id: {
+      type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       primaryKey: true,
-      type: DataTypes.STRING,
     },
-    groupName: {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    host_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    status: {
+    address: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'public',
     },
-    profilePhoto: {
+    city: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
-    backgroundPhoto: {
+    state: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
-    bio: {
-      type: DataTypes.TEXT,
+    zip_code: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    time: {
+      type: DataTypes.TIME,
+      allowNull: false,
+    }
   }, {
     sequelize,
-    modelName: 'Group',
+    modelName: 'Event',
   });
-  return Group;
+  return Event;
 };
