@@ -237,7 +237,7 @@ router.get('/:id', requireAuth, async (req, res, next) => {
     //   followStatus = 'pending'
     // }
 
-    const posts = await Post.findAll({ where: { userId: user.id, groupId: 'public' }});
+    const posts = await Post.findAll({ where: { userId: user.id }});
 
     let likes = 0;
       

@@ -111,4 +111,19 @@ export default class Social {
       }
     })
   }
+  FormatNumbers(num) {
+    if (num < 1000) return num.toString(); // Less than 1000, return as is
+    if (num < 10000) return num.toString(); // Less than 10,000, return as is
+
+    const units = ["K", "M", "B", "T"];
+    let unitIndex = -1;
+    let formattedNum = num;
+    
+    while (formattedNum >= 1000 && unitIndex < units.length - 1) {
+      formattedNum /= 1000;
+      unitIndex++;
+    }
+  
+    return `${Math.round(formattedNum * 10) / 10}${units[unitIndex]}`;
+  }
 }
