@@ -38,7 +38,8 @@
     color: rgba(0, 0, 0, 0.75);
   }
   .ExploreModal-time {
-    transform: translate(3px, -8px);
+    margin: 0;
+    transform: translate(3px, -12px);
     font-size: 12px;
     color: rgba(0, 0, 0, 0.5);
   }
@@ -84,6 +85,7 @@
     color: rgba(0, 0, 0, 0.75);
   }
   .ExploreModal-time {
+    margin: 0;
     transform: translate(3px, -8px);
     font-size: 12px;
     color: rgba(0, 0, 0, 0.5);

@@ -25,7 +25,7 @@ function UserDropdown () {
        {user ? <p onClick={handleLogout}>Logout</p> : <OpenModalButton buttonText="Login" modalComponent={<LoginForm />}/>}
       </li>
       <li className="UserDropdown-li_2 UserDropdown-li">
-       {user ? <p onClick={() => navigate(`/profile/user/${user.username}`)}>Profile</p> : <OpenModalButton buttonText="Signup" modalComponent={<SignUpForm />}/>}
+       {user ? <p onClick={() => navigate(`/profile`)}>Profile</p> : <OpenModalButton buttonText="Signup" modalComponent={<SignUpForm />}/>}
       </li>
     </ul>
   )

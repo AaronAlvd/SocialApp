@@ -12,10 +12,10 @@ export default function ProfileModal() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
-  const username = params.userId;
+  const user = useSelector(state => state.session.user);
+  const username = params.userId || user.id;
   const dispatchCall = new DispatchCalls(dispatch);
   const { setModalContent } = useModal();
-  const user = useSelector(state => state.session.user);
   const userProfile = useSelector(state => state.users.profile);
   const [activeFollower, setActiveFollower] = useState(null);
   const [loading, setLoading] = useState(true);

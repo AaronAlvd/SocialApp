@@ -45,83 +45,6 @@ router.get('/comments/:id', requireAuth, async (req, res, next) => {
   }
 });
 
-router.get('/group/:groupId', requireAuth, async (req, res, next) => {
-  try {
-    const user_id = req.user.id;
-    const group_id = req.params.groupId;
-  
-    const group = await Group.findOne({
-      where: {
-        [Op.or]: [
-          { groupName: group_id },
-          { id: group_id },
-        ]
-      }, 
-      attributes: ['id'],
-      include: [
-        {
-          model: Post,
-          attributes: ['id', 'groupId', 'userId', 'caption', 'photo', 'createdAt'],
-          include: [
-            {
-              model: User,
-              attributes: ['id', 'username', 'firstName', 'lastName', 'profilePhoto', 'username']
-            },
-            {
-              model: Group,
-              attributes: ['id', 'groupName', 'profilePhoto']
-            },
-            {
-              model: Comment,
-              attributes: ['id'],
-            },
-            {
-              model: PostLike,
-              as: 'Likes',
-              attributes: ['id', 'userId']
-            }
-          ],
-          order: [['createdAt', 'DESC']]
-        }
-      ]
-    });
-
-    if (group.posts.length === 0) throw {status: 404, title: 'Resource Not Found', message: 'Group has no posts'}
-  
-    const newArray = Array(group.Posts.length)
-  
-    for (let i = 0; i < group.Posts.length; i++) {
-      const post = group.Posts[i];
-      let userLiked = false; // Flag to check if the user has liked this post
-    
-      for (let j = 0; j < post.Likes.length; j++) {
-        const like = post.Likes[j];
-        if (user_id === like.userId) {
-          userLiked = true; // If the user has liked the post, set flag to true
-          break; // No need to continue checking after the first match
-        }
-      }
-  
-      newArray[i] = {
-        id: post.id,
-        userId: post.userId,
-        caption: post.caption,
-        photo: post.photo,
-        createdAt: post.createdAt,
-        User: post.User,
-        Group: post.Group,
-        Comments: post.Comments,
-        Likes: post.Likes,
-        Like: userLiked,
-      }
-    }
-    
-    res.json(newArray);
-   } catch(error) {
-    next(error);
-   }
-});
-
 router.get('/user/:userId', requireAuth, async (req, res, next) => {
   try {
    const user_id = req.user.id;
@@ -146,10 +69,6 @@ router.get('/user/:userId', requireAuth, async (req, res, next) => {
       {
         model: User,
         attributes: ['id', 'username', 'firstName', 'lastName', 'profilePhoto', 'username']
-      },
-      {
-        model: Group,
-        attributes: ['id', 'groupName', 'profilePhoto']
       },
       {
         model: Comment,
@@ -184,7 +103,6 @@ router.get('/user/:userId', requireAuth, async (req, res, next) => {
        caption: post.caption,
        photo: post.photo,
        createdAt: post.createdAt,
-       Group: post.Group,
        User: post.User,
        Comments: post.Comments.length,
        Likes: post.Likes,

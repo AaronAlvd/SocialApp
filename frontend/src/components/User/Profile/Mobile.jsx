@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"; 
 
 import DispatchCalls from "../../../StateManagement/dispatch";
+import UpdateProfile from '../../Modals/UpdateProfile/UpdateProfile';
+import Body from '../../Posts/Post/body';
 
 export default function Mobile({ user }) {
   const location = useLocation(); 
@@ -24,31 +26,48 @@ export default function Mobile({ user }) {
   if (!userProfile) return null;
 
   return ( 
-    <div>
-      <div className="grid  p-[5px] grid-cols-[45px_1fr]">
-       <img src={user.profilePhoto} className="w-[45px] h-[45px] rounded-[50%] bg-center object-cover"/>
-       <div className="grid w-[100%] grid-cols-4">
-        <div className="w-[100%] flex items-center flex-col">
-          <p className="text-[18px] font-bold">{dispatchCalls.FormatNumbers(userProfile.posts)}</p>
-          <p className="text-[12px]">Posts</p>
+    <div style={{maxHeight: `${height - 60}px`}}>
+      <div className="border-b-1 border-b-gray-300">
+        <div className="flex justify-center">
+          <p className="text-[18px] font-bold h-[20px]">
+            {user.firstName} {user.lastName}
+          </p>
         </div>
 
-        <div className="w-[100%] flex items-center flex-col">
-          <p className="text-[18px] font-bold">{dispatchCalls.FormatNumbers(userProfile.followers)}</p>
-          <p className="text-[12px]">Followers</p>
+        <div className="flex justify-center my-[10px]">
+         <img src={user.profilePhoto} className="w-[80px] h-[80px] rounded-[50%] bg-center object-cover"/>
         </div>
 
-        <div className="w-[100%] flex items-center flex-col">
-          <p className="text-[18px] font-bold">{dispatchCalls.FormatNumbers(userProfile.following)}</p>
-          <p className="text-[12px]">Following</p>
+        <p className="font-semibold text-[14px] flex justify-center mb-[5px]">
+          @{userProfile.username.toLowerCase()}
+        </p>
+
+        <div className="flex justify-center gap-[20px]">
+          <div className="flex items-center flex-col">
+            <p className="text-[16px] font-bold">{dispatchCalls.FormatNumbers(userProfile.following)}</p>
+            <p className="text-[12px] h-[13px]">Following</p>
+          </div>
+          <div className="flex items-center flex-col">
+            <p className="text-[16px] font-bold">{dispatchCalls.FormatNumbers(userProfile.followers)}</p>
+            <p className="text-[12px] h-[13px]">Followers</p>
+          </div>
+          <div className="flex items-center flex-col">
+            <p className="text-[16px] font-bold">{dispatchCalls.FormatNumbers(userProfile.posts)}</p>
+            <p className="text-[12px] h-[13px]">Posts</p>
+          </div>
+          <div className="flex items-center flex-col">
+            <p className="text-[16px] font-bold">{dispatchCalls.FormatNumbers(userProfile.likes)}</p>
+            <p className="text-[12px] h-[13px]">Likes</p>
+          </div>
         </div>
 
-        <div className="w-[100%] flex items-center flex-col">
-          <p className="text-[18px] font-bold">{dispatchCalls.FormatNumbers(userProfile.likes)}</p>
-          <p className="text-[12px]">Likes</p>
+        <div className="flex justify-center my-[20px]">
+          <button className="text-[14px] font-semibold bg-[rgb(215,215,215)] w-[150px] h-[30px] rounded-[7px]">
+            Edit Profile
+          </button>
         </div>
-       </div>
       </div>
+      <Body optional="profile"/>
     </div> 
   ) 
 }

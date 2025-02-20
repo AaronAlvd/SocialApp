@@ -1,15 +1,16 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 * {
   font-family: 'Helvetica';
-  margin: 0;
 }
 body, html {
   background-color: white;
+  margin: 0;
 }
 button{
   cursor: pointer;
 }
+
 
 @media (min-width: 1040px){
   .Navigation-index{

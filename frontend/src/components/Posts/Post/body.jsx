@@ -55,8 +55,11 @@ export default function Body({ optional }) {
         const response = await dispatchCall.socialFeed();
         return afterResponse(response);
       } else if (optional === 'profile') {
+        if (location.pathname === '/profile') {
+          const response = await dispatchCall.UserPost(user.id);
+          return afterResponse(response);
+        }
         const response = await dispatchCall.UserPost(params.userId);
-        console.log(response);
         return afterResponse(response);
       }
     }
@@ -115,7 +118,6 @@ export default function Body({ optional }) {
     dispatchCall.handleLike(data);
     return setReload(!reload)
   };
-
   const handleDislike = (postId) => {
     if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
       alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
@@ -141,7 +143,6 @@ export default function Body({ optional }) {
     dispatchCall.handleDislike(data);
     return setReload(!reload)
   };
-
   const handleComments = (id) => {
     if (showComments === id) {
       if (/^\/following(\/.*)?$/.test(location.pathname)) {
@@ -165,7 +166,6 @@ export default function Body({ optional }) {
       setShowComments(id);
     }
   };
-
   const handleDelete = (id) => {
     if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
       alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
@@ -174,7 +174,6 @@ export default function Body({ optional }) {
     handleMenuChange(id);
     setReload(prev => !prev)
   };
-
   const displayDropdown = (data) => {
     return (
       <div className="Post-menu">
@@ -183,24 +182,22 @@ export default function Body({ optional }) {
       </div>
     )
   };
-
   const handleMenuChange = (id) => {
     const obj = {...showMenu}
     obj[id] = !showMenu[id]
     return setShowMenu(obj)
   };
-
   const displayPhoto = (photo) => {
     return (
       <img className="Post-image" src={photo} alt="Post" />
     )
-  }
+  };
 
   if (!posts || !showMenu ) return null;
 
-if (posts.length === 0 && optional === 'following') {
-  return <h2>Follow More People!</h2>
-}
+  if (posts.length === 0 && optional === 'following') {
+    return <h2>Follow More People!</h2>
+  }
 
   return (
     <div className="Post-div">
@@ -211,23 +208,28 @@ if (posts.length === 0 && optional === 'following') {
           <>
           {index !== 0 && <div className="Post-line"/>}
           <div className="Post-div-box" key={data.id} id={data.id} ref={(el) => divRefs.current[index] = el}>
-            <div style={{display: 'flex', justifyContent: 'space-between', position:'relative'}}>
-              <div style={{display: 'flex'}}>
+            <div className="relative flex justify-between px-[5px]">
+              <div className="flex">
                 <img src={data.User.profilePhoto ? data.User.profilePhoto : defaultpfp}
                      className="Post-img-profile" onClick={() => navigate(`/user/${data.User.username}`)}/>
+
                 <div>
                   <p className="Post-name" onClick={() => navigate(`/user/${data.User.username}`)}>
                     {data.User.firstName} {data.User.lastName}</p>
                   <p className="Post-username" onClick={() => navigate(`/user/${data.User.username}`)}>@{data.User.username}</p>
                 </div>
               </div>
+
               {data.userId === user.id && <BsThreeDots className="Post-threeDots" onClick={() => handleMenuChange(data.id)}/>}
               {showMenu[data.id] && displayDropdown(data)}
             </div>
+
             <p className="Post-caption">{social.findHashtags(data.caption)}</p>
+
             {data.photo && displayPhoto(data.photo)}
+
             <div className="Post-bottom">
-              <div style={{display: 'flex'}}>
+              <div className="flex">
                 <div className="Post-div-icon">
                   {like[data.id] ? <FontAwesomeIcon icon={faHeart02} className="Post-icon" onClick={() => handleDislike(data.id)} /> 
                              : <FontAwesomeIcon icon={faHeart} className="Post-icon" onClick={() => handleLike(data.id)} />}

@@ -3,9 +3,11 @@
     display: grid;
     grid-template-columns: 22% 22% 12% 22% 22%;
     width: 100vw;
-    height: 60px;
-    border-top: 1px solid black;
+    height: 50px;
     box-sizing: border-box;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
   }
   .Navigation-profile_box{
     display: flex;
@@ -42,14 +44,14 @@
   .Navigation-icon{
     margin-right: 10px;
     margin-left: 10px;
-    font-size: 27px;
-    height: 30px;
+    font-size: 23px;
+    height: 23px;
   }
   .Navigation-icon-1{
     margin-right: 10px;
     margin-left: 10px;
-    font-size: 30px;
-    height: 30px;
+    font-size: 23px;
+    height: 23xpx;
   }
   .Navigation-upload_post{
     display: flex;
@@ -58,7 +60,6 @@
     width: 100%;
   }
 }
-
 @media (min-width: 1040px) {
   .Navigation-div{
     position: absolute;
@@ -86,10 +87,12 @@
     padding: 10px;
   }
   .Navigation-feed-active{
-    padding: 10px;
-    margin: 5px 0;
+    display: flex;
+    align-items: center;
     font-weight: 300;
     cursor: pointer;
+    margin: 5px 0;
+    padding: 10px;
     background-color: rgba(0, 0, 0, 0.15);
     border-radius: 5px;
   }

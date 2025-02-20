@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"; 
 
 import Mobile from './Mobile'
+import Desktop from "./Desktop";
 
 export default function Profile() {
   const location = useLocation(); 
@@ -14,4 +15,6 @@ export default function Profile() {
   if (!user) return null;
 
   if (width < 1040) return <Mobile user={user}/>
+
+  if (width > 1039) return <Desktop user={user}/>
 }
