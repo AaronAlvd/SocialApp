@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { useModal } from '../../context/modal';
 
 import Header from "./Header/Header";
+import CreatePost from '../Modals/CreatePost/CreatePost';
 
 export default function Desktop() {
   const { setModalContent, setMessageContent, closeModal } = useModal();
@@ -39,7 +40,7 @@ export default function Desktop() {
     setActive({
       following: /^\/following(\/.*)?$/.test(activeUrl.pathname),
       explore: /^\/explore(\/.*)?$/.test(activeUrl.pathname),
-      groups: /^\/groups(\/.*)?$/.test(activeUrl.pathname),
+      events: /^\/events(\/.*)?$/.test(activeUrl.pathname),
       messages: /^\/messages(\/.*)?$/.test(activeUrl.pathname),
       trending: /^\/trending(\/.*)?$/.test(activeUrl.pathname),
     });
@@ -63,8 +64,8 @@ export default function Desktop() {
             "Navigation-icon"}/>
           {width > 767 && 'Following'}
         </p>
-        <p className={active.groups ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}>
-          <FaRegCalendarAlt className={active.groups ? "Navigation-icon-active": "Navigation-icon"} />
+        <p className={active.events ? "Navigation-feed-active" : "Navigation-feed"}  onClick={() => alert('Feature Coming Soon...')}>
+          <FaRegCalendarAlt className={active.events ? "Navigation-icon-active": "Navigation-icon"} />
           {width > 767 && 'Events'}
         </p>
       </div>
@@ -83,10 +84,10 @@ export default function Desktop() {
       </div>
     </div>
 
-    <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 105}px)`}} 
+    {!active.messages && <span className='Create-Post' style={{transform: `translate(${width - 45}px, ${height - 105}px)`}} 
           onClick={() => setModalContent(<CreatePost user={user}/>)}>
       <FaPlus/>
-    </span>
+    </span>}
     </>
   )
 }

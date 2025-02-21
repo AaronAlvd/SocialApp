@@ -5,7 +5,7 @@ const fs = require('fs');
 const CLIENT_ID = process.env.DRIVE_CLIENT_ID;
 const CLIENT_SECRET = process.env.DRIVE_CLIENT_SECRET;
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
-const REFRESH_TOKEN = process.env.DRIVE_RERESH_TOKEN;
+const REFRESH_TOKEN = process.env.DRIVE_REFRESH_TOKEN;
 
 const oauth2Client = new google.auth.OAuth2(
   CLIENT_ID,

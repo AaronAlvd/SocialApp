@@ -41,12 +41,14 @@
   display: inline-block;
   font-size: 20px;
   font-weight: 800;
-  margin: 3px 5px 0 10px
+  margin: 0 5px 0 10px;
+  height: 21px;
 }
 .CreatePost-username{
-  font-size: 16px;
+  font-size: 15px;
   margin-left: 10px;
-  margin-top: 3px;
+  margin-top: 5px;
+  height: 17px;
 }
 .CreatePost-groups{
   position: absolute;

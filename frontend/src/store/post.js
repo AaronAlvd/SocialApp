@@ -52,28 +52,11 @@ export const getPosts = () => async (dispatch) => {
   dispatch(setPosts(data));
   return data;
 }
-export const getGroupPosts = () => async (dispatch) => {
-  const response = await csrfFetch('/api/posts/groups');
-  if (!response.ok) throw new Error('Failed to fetch posts');
-  const data = await response.json();
-  dispatch(setGroupPosts(data));
-}
 export const getPostDetail = (postId) => async (dispatch) => {
   const response = await csrfFetch(`/api/post/${postId}`);
   if (!response.ok) throw new Error('Failed to fetch posts');
   const data = await response.json();
   dispatch(setPosts(data));
-}
-export const fetchGroupPosts = (groupId) => async (dispatch) => {
-  try {
-    const response = await csrfFetch(`/api/posts/group/${groupId}`);
-    if (!response) {}
-    const data = await response.json();
-    dispatch(setPosts(data))
-    return data;
-  } catch(error) {
-
-  }
 }
 export const fetchUserPosts = (userId) => async (dispatch) => {
   try {
@@ -108,18 +91,16 @@ export const fetchTrendingPosts = () => async (dispatch) => {
 
   }
 }
-export const createPost = (data) => async (dispatch) => {
+export const createPost = (formData) => async (dispatch) => {
   try {
+    const data = new FormData()
+
+    data.append('caption', formData.caption)
+    data.append('photo', formData.photo)
+
     const response = await csrfFetch('/api/posts/', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        caption: data.caption,
-        photo: data.file,
-        groupId: data.groupId,
-      })
+      body: data
     })
 
     if (!response.ok) {

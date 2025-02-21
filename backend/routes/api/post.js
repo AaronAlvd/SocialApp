@@ -4,7 +4,22 @@ const { v4: uuid } = require('uuid')
 const { Op, Sequelize } = require('sequelize')
 const { requireAuth } = require('../../utils/auth');
 const { handleUpload } = require('../../utils/driveAPI');
-// const { upload } = require('../../app')
+const path = require('path');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ 
+  storage: storage,
+  limits: { fileSize: 10 * 1024 * 1024 }  
+})
 
 const router = express.Router();
 
@@ -259,7 +274,6 @@ router.get('/following', requireAuth, async (req, res, next) => {
     const posts = await Post.findAll({
       where: {
         userId: {[Op.in]: followedIds },
-        groupId: 'public',
       },
       attributes: ['id', 'userId', 'caption', 'photo', 'createdAt'],
       include: [
@@ -349,26 +363,25 @@ router.get('/:postId', requireAuth, async (req, res, next) => {
   }
 });
 
-router.post('/', requireAuth, async (req, res, next) => {
+router.post('/', requireAuth, upload.single('photo'), async (req, res, next) => {
   try {
     const user_id = req.user.id;
     const id = uuid();
-    const status = req.body.status || 'public';
     const caption = req.body.caption || null;
-    const photo = req.body.photo || null;
+    const photo = req.file ? req.file.path : null;
 
-    // const response = handleUpload(photo);
+    const response = handleUpload(photo);
 
-    const post = await Post.create({
-      id: id,
-      userId: user_id,
-      caption: caption,
-      photo: photo,
-      status: status,
-    });
+    // const post = await Post.create({
+    //   id: id,
+    //   userId: user_id,
+    //   caption: caption,
+    //   photo: photo,
+    //   status: status,
+    // });
 
     res.status(201).json({
-      ...post,
+      // ...post,
       message: 'Post Succesfully Created!'
     });
 

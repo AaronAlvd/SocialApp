@@ -172,6 +172,7 @@
     border-radius: 10px;
     border: none;
     background-color: rgb(64, 75, 182);
+    margin: 0 15px;
   }
   .UserProfile-button2{
     color: black;
@@ -181,6 +182,7 @@
     width: 150px;
     border-radius: 10px;
     border: 1px solid black;
+    margin: 0 15px;
   }
   .UserProfile-button:hover{
     background-color: rgb(80, 127, 215);

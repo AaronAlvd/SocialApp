@@ -132,6 +132,10 @@ const router = createBrowserRouter([
           {
             path: '',
             element: <Chats />
+          },
+          {
+            path: ':userId',
+            element: <Chat />
           }
         ]
       },

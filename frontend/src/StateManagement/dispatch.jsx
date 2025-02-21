@@ -15,9 +15,6 @@ export default class DispatchCalls extends Social {
   socialFeed() {
    return this.dispatch(postActions.getPosts())
   }
-  socialFeedGroups() {
-    return this.dispatch(postActions.getGroupPosts())
-  }
   newPost(data) {
     return this.dispatch(postActions.createPost(data))
   }
@@ -74,6 +71,15 @@ export default class DispatchCalls extends Social {
 
   chats() {
     return this.dispatch(messageActions.fetchChats())
+  }
+  SendMessage(data) {
+    return this.dispatch(messageActions.sendMessage(data))
+  }
+  FetchMessages(data) {
+    return this.dispatch(messageActions.fetchChat(data))
+  }
+  DeleteMessage(data) {
+    return this.dispatch(messageActions.removeMessage(data))
   }
 
   RestoreUser() {

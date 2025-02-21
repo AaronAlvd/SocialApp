@@ -11,12 +11,15 @@ export default function Desktop({ user }) {
   const { setModalContent } = useModal();
   const dispatch = useDispatch();
   const [width, setWidth] = useState(window.innerWidth)
+  const [height, setHeight] = useState(window.innerHeight);
   const userProfile = useSelector(state => state.users.profile);
 
-  const class01 = width > 1439 ? 'relative flex flex-col p-[5px] h-[170px]' : 'w-[100%] px-[5px] pt-[5px]'
-  const class02 = 'bg-[rgb(187,142,142)] min-h-[120px] w-[100%] rounded-[10px]'
+  const class01 = width > 1439 ? 'relative flex flex-col p-[5px] h-[170px]' : 'relative w-[100%] px-[5px] pt-[5px]'
+  const class02 = 'border-1 min-h-[120px] w-[100%] rounded-[10px]'
   const class03 = width > 1439 ? `absolute transform translate-x-[30px] translate-y-[70px] rounded-[50%] w-[80px] h-[80px] object-cover bg-center` 
   : `absolute transform translate-x-[30px] translate-y-[-50px] rounded-[50%] w-[80px] h-[80px] object-cover bg-center`
+  const class04 = 'grid grid-cols-[120px_1fr]'
+  const class05 = 'text-[18px] font-bold'
 
   useEffect(() => {
     async function fetch() {
@@ -35,20 +38,20 @@ export default function Desktop({ user }) {
   }
 
   return (
-    <div >
+    <div style={{height: `${height - 55}px`}} className="overflow-scroll">
       <div className={class01}>
         <div className={class02}></div>
 
         <img src={user.profilePhoto ? user.profilePhoto : defaultpfp} className={class03}/>
 
-        <div className="UserProfile-row2">
+        <div className={class04}>
           <div></div>
           <div>
-            <p className="UserProfile-username">@{user.username.toLowerCase()}</p>
+            <p className={class05}>@{user.username.toLowerCase()}</p>
           </div>
         </div>
       </div>
-      <div className="flex">
+      <div className="grid grid-cols-[547px_1fr]">
         <Body optional="profile"/>
         <ProfileModal />
       </div>

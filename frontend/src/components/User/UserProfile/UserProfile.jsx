@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useModal } from '../../../context/modal.jsx';
 
 
@@ -17,6 +17,7 @@ import './UserProfile.css';
 export default function UserProfile() {
   const { userId } = useParams();
   const { setModalContent } = useModal();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const dispatchCalls = new DispatchCalls(dispatch);
   const [width, setWidth] = useState(window.innerWidth);
@@ -100,9 +101,14 @@ export default function UserProfile() {
       </button>)
     } else if (userProfile.followStatus === 'following') {
       return(
+        <>
         <button className="UserProfile-button2" onClick={() => handleUnfollowRequest()}>
           Following
-        </button>)
+        </button>
+        <button className="UserProfile-button2" onClick={() => navigate(`/messages/${userProfile.username}`)}>
+          Message
+        </button>
+        </>)
     } else if (userProfile.followStatus === 'pending') {
       return (
         <button className="UserProfile-button2" onClick={() => handleUnfollowRequest()}>
@@ -110,10 +116,14 @@ export default function UserProfile() {
         </button>)
     } else if (userProfile.followStatus === 'none'){
       return(
-      <button className="UserProfile-button" onClick={() => handleFollowRequest()}>
-        Follow
-      </button>
-      )
+      <>
+        <button className="UserProfile-button" onClick={() => handleFollowRequest()}>
+          Follow
+        </button>
+        <button className="UserProfile-button2" onClick={() => navigate(`/messages/${userProfile.username}`)}>
+          Message
+        </button>
+      </>)
     }
   }
 

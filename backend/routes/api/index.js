@@ -4,7 +4,6 @@ const userRouter = require('./user.js');
 const postRouter = require('./post.js');
 const likeRouter = require('./like.js');
 const messageRouter = require('./message.js');
-const groupRouter = require('./group.js');
 const commentRouter = require('./comment.js');
 const { restoreUser, requireAuth } = require('../../utils/auth.js');
 const path = require('path');
@@ -15,7 +14,6 @@ router.use('/users', userRouter);
 router.use('/posts', postRouter);
 router.use('/likes', likeRouter);
 router.use('/messages', messageRouter);
-router.use('/groups', groupRouter);
 router.use('/comments', commentRouter);
 
 module.exports = router;

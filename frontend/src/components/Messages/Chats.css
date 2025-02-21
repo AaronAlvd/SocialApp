@@ -42,14 +42,17 @@
 
 }
 .Chats-name{
-  font-size: 13px;
-  margin-bottom: 5px;
+  font-size: 15px;
+  margin: 0;
   font-weight: 600;
+  transform: translate(0, -5px);
 }
 .Chats-text{
   font-size: 13px;
   font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
+  margin: 0;
+  transform: translate(0, -5px);
 }
 

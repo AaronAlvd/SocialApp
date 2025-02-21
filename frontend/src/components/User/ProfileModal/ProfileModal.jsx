@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from '../../../context/modal.jsx';
 
 import DispatchCalls from '../../../StateManagement/dispatch.jsx';
+import UpdateProfile from '../../Modals/UpdateProfile/UpdateProfile.jsx';
 
 import "./ProfileModal.css" 
 

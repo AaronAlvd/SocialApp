@@ -9,17 +9,14 @@ const addMessage = (data) => ({
   type: ADD_MESSAGE,
   payload: data,
 });
-
 const deleteMessage = (id) => ({
   type: DELETE_MESSAGE,
   payload: id,
 });
-
 const setMessages = (data) => ({
   type: FETCH_MESSAGES,
   payload: data,
 });
-
 const setChats = (data) => ({
   type: FETCH_CHATS,
   payload: data,
@@ -34,6 +31,52 @@ export const fetchChats = () => async (dispatch) => {
 
   } catch (error) {
 
+  }
+}
+export const sendMessage = async (obj) => {
+  try {
+    console.log(typeof obj.userId)
+    const response = await csrfFetch(`/api/messages/${obj.userId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        content: obj.content
+      })
+    })
+    if (!response.ok) {}
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const fetchChat = (userId) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/messages/${userId}`)
+    if (!response.ok){}
+    const data = await response.json()
+    dispatch(setMessages(data))
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const removeMessage = (id) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/messages/${id}`, {
+      method: 'DELETE',
+    })
+
+    if (!response.ok){}
+
+    const data = await response.json()
+
+    return data
+    
+  } catch (error) {
+    console.log(error)
   }
 }
 

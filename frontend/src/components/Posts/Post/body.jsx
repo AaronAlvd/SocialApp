@@ -193,7 +193,13 @@ export default function Body({ optional }) {
     )
   };
 
-  if (!posts || !showMenu ) return null;
+  if (!posts || !showMenu ) {
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
 
   if (posts.length === 0 && optional === 'following') {
     return <h2>Follow More People!</h2>

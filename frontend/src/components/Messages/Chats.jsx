@@ -1,15 +1,19 @@
-import DispatchCalls from '../../StateManagement/dispatch';
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useModal } from '../../context/modal';
+
+import DispatchCalls from '../../StateManagement/dispatch';
 import defaultpfp from '../../assets/Default_pfp.jpg';
 import CreateChat from './createChat/createChat';
+
 import './Chats.css';
 
 export default function Chats() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const dispatchCalls = new DispatchCalls(dispatch);
   const user = useSelector(state => state.session.user);
   const chats = useSelector((state) => state.messages.chats);
@@ -35,7 +39,7 @@ export default function Chats() {
       const data = chats[i];
       const altUser = (data.User1.id === user.id) ? data.User2 : data.User1
       retVal[i] = (
-        <div className='Chats-section' key={data.id} onClick={() => navigate(`/messages/${data.id}`)}>
+        <div className='Chats-section' key={data.id} onClick={() => navigate(`/messages/${altUser.id}`)}>
           {altUser.profilePhoto ? <img src={altUser.profilePhoto} className="Chats-profilePhoto"/> : 
                                   <img src={defaultpfp} className="Chats-profilePhoto"/>}
           <div className='Chats-column2'>

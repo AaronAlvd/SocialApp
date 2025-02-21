@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     content: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
     },
     attachment: {
       type: DataTypes.STRING,
