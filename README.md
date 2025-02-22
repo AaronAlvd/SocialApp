@@ -2,7 +2,7 @@
 
 Welcome to **SocialApp**, a web application designed for users to connect, share, and engage with each other. Users can create posts, follow friends, comment, like posts, and manage their profiles.
 
-[Social App Live](https://socialapp-sabg.onrender.com/)
+[Social App Live](https://socialapp-1-leom.onrender.com)
 
 ![Web App Screenshot](./frontend/src/assets/social.png)
 
