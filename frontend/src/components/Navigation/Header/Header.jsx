@@ -65,7 +65,7 @@ export default function Header() {
 
   return (
     <div className='Navigation-header_nav'>
-      <h2 style={{marginLeft: '10px'}}>The Social App</h2>
+      <p className='ml-[10px] text-[25px] font-bold'>The Social App</p>
       <div className={active ? 'Navigation-div_input01' : 'Navigation-div_input'}>
         <HiMiniMagnifyingGlass style={{transform: 'translate(-5px, 0)'}} onClick={() => handleSearch()}/>
         <input type="input" className='Navigation-input' onFocus={() => setActive(true)} onBlur={() => setActive(false)}

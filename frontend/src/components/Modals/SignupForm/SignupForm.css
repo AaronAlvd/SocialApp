@@ -2,9 +2,12 @@
 .SignupForm-div{
   padding: 20px;
   border: 1px solid grey;
+  border-radius: 10px;
 }
 .SignupForm-title{
   text-align: center;
+  font-size: 25px;
+  font-weight: bold;
 }
 .SignupForm-div-input{
   margin: 30px;
@@ -13,7 +16,7 @@
 }
 .SignupForm-label{
   position: absolute;
-  transform: translate(2px, 2px);
+  transform: translate(2px, -4px);
   padding: 5px;
   transition: all 0.5s ease;
   cursor: text;

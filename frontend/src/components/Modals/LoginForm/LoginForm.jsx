@@ -38,7 +38,7 @@ export default function LoginForm() {
 
   return (
     <div className="LoginForm-div">
-      <h2 className='LoginForm-title'>Login</h2>
+      <p className='LoginForm-title'>Login</p>
       <form className="LoginForm-form" onSubmit={(e) => handleSubmit(e)}>
         <div className="LoginForm-div-formInput">
           <FontAwesomeIcon icon={faUserCircle} className='LoginForm-icon'/>
@@ -51,7 +51,7 @@ export default function LoginForm() {
           <label className={ isActive02 ? 'LoginForm-label-active' : 'LoginForm-label'} onClick={() => passwordRef.current.focus()}>Password</label>
           <input type="text" className='LoginForm-input' name="password" value={password} onChange={(e) => setPassword(e.target.value)}
            onFocus={() => setIsActive02(true)} onBlur={() => setIsActive02(password !== '')} ref={passwordRef}/>
-          <small className='LoginForm-small'>Forgot Password?</small>
+          <small className='LoginForm-small' onClick={() => alert('Feature Coming Soon...')}>Forgot Password?</small>
         </div>
         <div className="LoginForm-div-formButton">
           <button className="LoginForm-button" onClick={(e) => handleSubmit(e)}>Login</button>
