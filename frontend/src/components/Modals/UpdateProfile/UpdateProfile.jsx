@@ -99,7 +99,7 @@ export default function UpdateProfile() {
         </div>
 
         <div className='UpdateProfile-div_delete'>
-          <button className='UpdateProfile-delete' onClick={(e) => handleDelete(e)}>Delete Account</button>
+          <button className='UpdateProfile-delete' onClick={() => alert('This button has been deactivated for obvious reasons.')}>Delete Account</button>
         </div>
       </form>
     </div>

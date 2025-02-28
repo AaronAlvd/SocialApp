@@ -95,9 +95,6 @@ export default function Body({ optional }) {
   // }, []);
 
   const handleLike = (postId) => {
-    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
-      alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
-    }
     setLike((prev) => {
       const obj = {...prev}
       obj[postId] = true
@@ -119,9 +116,6 @@ export default function Body({ optional }) {
     return setReload(!reload)
   };
   const handleDislike = (postId) => {
-    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
-      alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
-    }
     setLike((prev) => {
       const obj = {...prev}
       obj[postId] = false
@@ -167,9 +161,6 @@ export default function Body({ optional }) {
     }
   };
   const handleDelete = (id) => {
-    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
-      alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
-    }
     const response = dispatchCall.removePost(id)
     handleMenuChange(id);
     setReload(prev => !prev)

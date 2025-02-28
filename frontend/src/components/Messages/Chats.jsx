@@ -33,24 +33,28 @@ export default function Chats() {
   if (!chats) return null;
 
   const formatChats = () => {
-    const retVal = new Array(chats.length);
+    const retVal = []
 
     for (let i = 0; i < chats.length; i++) {
       const data = chats[i];
       const altUser = (data.User1.id === user.id) ? data.User2 : data.User1
-      retVal[i] = (
-        <div className='Chats-section' key={data.id} onClick={() => navigate(`/messages/${altUser.id}`)}>
-          {altUser.profilePhoto ? <img src={altUser.profilePhoto} className="Chats-profilePhoto"/> : 
-                                  <img src={defaultpfp} className="Chats-profilePhoto"/>}
-          <div className='Chats-column2'>
-            <p className='Chats-name'>{altUser.firstName} {altUser.lastName}</p>
-            <p className='Chats-text'>{data.Messages[0].content}</p>
+
+      if (data.Messages.length !== 0) {
+        retVal.push(
+          <div className='Chats-section' key={data.id} onClick={() => navigate(`/messages/${altUser.id}`)}>
+            {altUser.profilePhoto ? <img src={altUser.profilePhoto} className="Chats-profilePhoto"/> : 
+                                    <img src={defaultpfp} className="Chats-profilePhoto"/>}
+            <div className='Chats-column2'>
+              <p className='Chats-name'>{altUser.firstName} {altUser.lastName}</p>
+              <p className='Chats-text'>{data.Messages[0].content}</p>
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
     }
     return retVal;
   }
+  
   return (
     <div className='Chats-div'>
       <div className='Chats-section1'>
