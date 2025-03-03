@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Body from '../Post/body.jsx';
 import ExploreModal from "./ExploreModal/ExploreModal.jsx";
 import Header from '../../Navigation/Header/Header.jsx';
+import Navigation from '../../Home/Navigation.jsx';
 import './Explore.css';
 
 export default function Post() {
@@ -45,6 +46,7 @@ export default function Post() {
   if (width < 1040) {
     return (
       <div style={{height: `${height - 49.5}px`, overflow: 'scroll'}}>
+        <Navigation />
         <Body optional={'explore'}/>
       </div>
     )

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import ExploreModal from '../Explore/ExploreModal/ExploreModal.jsx';
+import Navigation from "../../Home/Navigation.jsx";
 import Body from '../Post/body.jsx';
 
 import "./Following.css" 
@@ -30,6 +31,7 @@ export default function Following() {
   if (width < 1040) {
     return (
       <div style={{height: `${height - 49.5}px`, overflow: 'scroll'}}>
+        <Navigation />
         <Body optional={'following'}/>
       </div>
     )
