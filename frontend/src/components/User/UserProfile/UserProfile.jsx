@@ -66,9 +66,6 @@ export default function UserProfile() {
   }, [activeFollower]);
 
   const handleFollowRequest = async () => {
-    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
-      alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
-    }
     const response = await dispatchCalls.FollowRequest(userProfile.id);
     if (response.title === 'Successful') {
       setActiveFollower(true);
@@ -76,9 +73,6 @@ export default function UserProfile() {
   };
 
   const handleUnfollowRequest = async () => {
-    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
-      alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
-    }
     const response = await dispatchCalls.UnfollowRequest(userProfile.id);
     if (response.title === 'Successful') {
       setActiveFollower(false);
@@ -87,16 +81,12 @@ export default function UserProfile() {
 
   if (!userProfile || loading) return null;
 
-  const handleEditProfile = () => {
-    if (user.id === 'fffbd13b-428a-4d50-a03e-2f65c1f20b0a' && process.env.NODE_ENV === 'production') {
-      alert('CREATE, UPDATE, and DELETE features have been disabled for the demo account.')
-    }
-  }
+
 
   const displayButton = () => {
     if (userProfile.id === user.id) {
       return(
-      <button className="UserProfile-button" onClick={() => handleEditProfile()}>
+      <button className="UserProfile-button" onClick={() => setModalContent(<UpdateProfile />)}>
         Edit Profile
       </button>)
     } else if (userProfile.followStatus === 'following') {
