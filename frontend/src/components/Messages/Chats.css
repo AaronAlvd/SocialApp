@@ -9,7 +9,7 @@
 @media (min-width: 768px){
   .Chats-div{
     width: 100%;
-    overflow: hidden;
+    overflow: scroll;
     box-sizing: border-box;
   }
 }

@@ -126,4 +126,12 @@ export default class Social {
   
     return `${Math.round(formattedNum * 10) / 10}${units[unitIndex]}`;
   }
+  FormatMessages(message) {
+    let retVal = message;
+    if (message.length > 28) {
+      retVal = message.substring(0, 28);
+      retVal = retVal + '...'
+    }
+    return retVal;
+  }
 }

@@ -13,4 +13,10 @@ export default function Home() {
   const [height, setHeight] = useState(window.innerHeight); 
 
   if (width < 1040) return <Mobile />
+
+  return (
+    <div>
+      
+    </div>
+  )
 }
