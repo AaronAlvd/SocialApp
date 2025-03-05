@@ -3,12 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FaArrowCircleUp } from "react-icons/fa";
 import { TbTrash } from "react-icons/tb";
+import { IoIosArrowBack } from "react-icons/io";
 
 import DispatchCalls from '../../../StateManagement/dispatch'
 
 export default function Chat() {
   const params = useParams()
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const dispatchCall = new DispatchCalls(dispatch);
   const user = useSelector(state => state.session.user)
   const userProfile = useSelector(state => state.users.profile)
@@ -80,7 +82,8 @@ export default function Chat() {
             -
             <p>{dispatchCall.FormatNumbers(userProfile.posts)} posts</p>
           </div>
-          <button className='mt-[15px] rounded-[10px] bg-[rgb(230,230,230)] h-[30px] w-[130px] font-bold text-[14px]'>
+          <button className='mt-[15px] rounded-[10px] bg-[rgb(230,230,230)] h-[30px] w-[130px] font-bold text-[14px]' 
+            onClick={() => navigate(`/user/${userProfile.username}`)}>
             View Profile
           </button>
         </div>
@@ -107,6 +110,7 @@ export default function Chat() {
   return (
     <div style={{height: `${height - 55}px`, overflow: 'scroll'}} onClick={() => setMessageDropdown(null)}>
       <div className='h-[45px] border-b-1 border-b-gray-200 flex items-center box-border'>
+        <IoIosArrowBack className='text-[20px] cursor-pointer' onClick={() => navigate('/messages')}/>
         <img src={userProfile.profilePhoto} className='rounded-[50%] w-[35px] h-[35px]'/>
         <div className='h-[45px] ml-[10px]'>
           <p className='text-[18px] font-bold h-[19px] mb-[3px]'>
@@ -118,7 +122,7 @@ export default function Chat() {
         </div>
       </div>
 
-      <div style={{height: `${height - 60 - 45 - 55}px`, overflow: 'scroll'}}>
+      <div style={{height: `${height - 60 - 45 - 55}px`, overflow: 'scroll'}} >
         {displayProfile()}
         <div className='h-[280px] overflow-scroll'>
           {messages.map((data) => {
@@ -134,7 +138,7 @@ export default function Chat() {
               )
             } else {
               <div className='h-[minHeight] flex px-[10px]'>
-                <p className='bg-gray-200 w-[min-content] px-[15px] py-[3px] rounded-[10px]'>{data.content}</p>
+                <p className='w-[min-content] px-[15px] py-[3px] rounded-[10px]'>{data.content}</p>
               </div>
             }
           })}

@@ -42,7 +42,7 @@ function Layout() {
   return (
     <>
      <Navigation />
-     <div className='Navigation-index' style={{width: `${width - 201}px`}}>
+     <div className='Navigation-index' style={{width: `${width - 201}px`, height: `${height - 60}px`, overflow: 'hidden'}}>
       <Outlet/>
      </div>
     </>
@@ -135,7 +135,7 @@ const router = createBrowserRouter([
           },
           {
             path: ':userId',
-            element: <Chats />
+            element: <Chat />
           }
         ]
       },
